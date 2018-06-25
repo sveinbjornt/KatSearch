@@ -1,0 +1,393 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A25E20E111CF0062B230 /* AppDelegate.m */; };
+		F462A26120E111D10062B230 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F462A26020E111D10062B230 /* Assets.xcassets */; };
+		F462A26420E111D10062B230 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A26220E111D10062B230 /* MainMenu.xib */; };
+		F462A26720E111D10062B230 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A26620E111D10062B230 /* main.m */; };
+		F462A27320E1122A0062B230 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27120E1122A0062B230 /* WindowController.m */; };
+		F462A27420E1122A0062B230 /* SearchWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A27220E1122A0062B230 /* SearchWindow.xib */; };
+		F462A27720E117760062B230 /* SearchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27620E117760062B230 /* SearchTask.m */; };
+		F462A27A20E134EA0062B230 /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27920E134EA0062B230 /* SearchItem.m */; };
+		F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */; };
+		F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F471DF5F20F4DAE70057E667 /* Credits.rtf */; };
+		F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */ = {isa = PBXBuildFile; fileRef = F4A5CF0020ED7E15008D0A06 /* searchfs */; };
+		F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */; };
+		F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F462A25A20E111CF0062B230 /* KatSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KatSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F462A25D20E111CF0062B230 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F462A25E20E111CF0062B230 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F462A26020E111D10062B230 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F462A26320E111D10062B230 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F462A26520E111D10062B230 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F462A26620E111D10062B230 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F462A27020E1122A0062B230 /* WindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
+		F462A27120E1122A0062B230 /* WindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
+		F462A27220E1122A0062B230 /* SearchWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchWindow.xib; sourceTree = "<group>"; };
+		F462A27520E117760062B230 /* SearchTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchTask.h; sourceTree = "<group>"; };
+		F462A27620E117760062B230 /* SearchTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchTask.m; sourceTree = "<group>"; };
+		F462A27820E134EA0062B230 /* SearchItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchItem.h; sourceTree = "<group>"; };
+		F462A27920E134EA0062B230 /* SearchItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchItem.m; sourceTree = "<group>"; };
+		F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace+Additions.m"; sourceTree = "<group>"; };
+		F471DF5D20F4D7060057E667 /* NSWorkspace+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWorkspace+Additions.h"; sourceTree = "<group>"; };
+		F471DF5F20F4DAE70057E667 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		F471DF6520F7AF6D0057E667 /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
+		F471DF6620F7AF6D0057E667 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F4A5CF0020ED7E15008D0A06 /* searchfs */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = searchfs; sourceTree = "<group>"; };
+		F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STVolumesPopupButton.h; sourceTree = "<group>"; };
+		F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STVolumesPopupButton.m; sourceTree = "<group>"; };
+		F4A7BA8320EC208F00083B48 /* NSTableView+PreserveSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+PreserveSelection.h"; sourceTree = "<group>"; };
+		F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+PreserveSelection.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F462A25720E111CF0062B230 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F462A25120E111CF0062B230 = {
+			isa = PBXGroup;
+			children = (
+				F471DF6620F7AF6D0057E667 /* README.md */,
+				F471DF6520F7AF6D0057E667 /* License.txt */,
+				F462A25C20E111CF0062B230 /* KatSearch */,
+				F462A25B20E111CF0062B230 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F462A25B20E111CF0062B230 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F462A25A20E111CF0062B230 /* KatSearch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F462A25C20E111CF0062B230 /* KatSearch */ = {
+			isa = PBXGroup;
+			children = (
+				F462A26620E111D10062B230 /* main.m */,
+				F462A25D20E111CF0062B230 /* AppDelegate.h */,
+				F462A25E20E111CF0062B230 /* AppDelegate.m */,
+				F462A27020E1122A0062B230 /* WindowController.h */,
+				F462A27120E1122A0062B230 /* WindowController.m */,
+				F462A27520E117760062B230 /* SearchTask.h */,
+				F462A27620E117760062B230 /* SearchTask.m */,
+				F462A27820E134EA0062B230 /* SearchItem.h */,
+				F462A27920E134EA0062B230 /* SearchItem.m */,
+				F471DF6120F52A200057E667 /* Util */,
+				F462A26F20E111FB0062B230 /* Resources */,
+			);
+			path = KatSearch;
+			sourceTree = "<group>";
+		};
+		F462A26F20E111FB0062B230 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F471DF5F20F4DAE70057E667 /* Credits.rtf */,
+				F462A26020E111D10062B230 /* Assets.xcassets */,
+				F462A26220E111D10062B230 /* MainMenu.xib */,
+				F462A27220E1122A0062B230 /* SearchWindow.xib */,
+				F462A26520E111D10062B230 /* Info.plist */,
+				F4A5CF0020ED7E15008D0A06 /* searchfs */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F471DF6120F52A200057E667 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */,
+				F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */,
+				F4A7BA8320EC208F00083B48 /* NSTableView+PreserveSelection.h */,
+				F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */,
+				F471DF5D20F4D7060057E667 /* NSWorkspace+Additions.h */,
+				F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F462A25920E111CF0062B230 /* KatSearch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F462A26B20E111D10062B230 /* Build configuration list for PBXNativeTarget "KatSearch" */;
+			buildPhases = (
+				F462A25620E111CF0062B230 /* Sources */,
+				F462A25720E111CF0062B230 /* Frameworks */,
+				F462A25820E111CF0062B230 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KatSearch;
+			productName = SearchFS;
+			productReference = F462A25A20E111CF0062B230 /* KatSearch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F462A25220E111CF0062B230 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Sveinbjorn Thordarson";
+				TargetAttributes = {
+					F462A25920E111CF0062B230 = {
+						CreatedOnToolsVersion = 9.4;
+					};
+				};
+			};
+			buildConfigurationList = F462A25520E111CF0062B230 /* Build configuration list for PBXProject "KatSearch" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F462A25120E111CF0062B230;
+			productRefGroup = F462A25B20E111CF0062B230 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F462A25920E111CF0062B230 /* KatSearch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F462A25820E111CF0062B230 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */,
+				F462A26120E111D10062B230 /* Assets.xcassets in Resources */,
+				F462A27420E1122A0062B230 /* SearchWindow.xib in Resources */,
+				F462A26420E111D10062B230 /* MainMenu.xib in Resources */,
+				F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F462A25620E111CF0062B230 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F462A27720E117760062B230 /* SearchTask.m in Sources */,
+				F462A26720E111D10062B230 /* main.m in Sources */,
+				F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */,
+				F462A27320E1122A0062B230 /* WindowController.m in Sources */,
+				F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */,
+				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
+				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
+				F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F462A26220E111D10062B230 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F462A26320E111D10062B230 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F462A26920E111D10062B230 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F462A26A20E111D10062B230 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F462A26C20E111D10062B230 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5WX26Y89JP;
+				INFOPLIST_FILE = "$(SRCROOT)/KatSearch/Resources/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = org.sveinbjorn.SearchFS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F462A26D20E111D10062B230 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5WX26Y89JP;
+				INFOPLIST_FILE = "$(SRCROOT)/KatSearch/Resources/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = org.sveinbjorn.SearchFS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F462A25520E111CF0062B230 /* Build configuration list for PBXProject "KatSearch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F462A26920E111D10062B230 /* Debug */,
+				F462A26A20E111D10062B230 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F462A26B20E111D10062B230 /* Build configuration list for PBXNativeTarget "KatSearch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F462A26C20E111D10062B230 /* Debug */,
+				F462A26D20E111D10062B230 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F462A25220E111CF0062B230 /* Project object */;
+}
