@@ -97,7 +97,7 @@ DQ
                             <rect key="frame" x="1" y="0.0" width="619" height="338"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Ra2-TM-s0y" viewBased="YES" id="Tli-9g-yrd">
+                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Ra2-TM-s0y" viewBased="YES" id="Tli-9g-yrd" customClass="FileListTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="619" height="315"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>

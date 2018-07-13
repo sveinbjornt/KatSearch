@@ -57,6 +57,27 @@
 
 #pragma mark - NSWindowDelegate
 
++ (void)initialize {
+    static BOOL initialized = NO;
+    /* Make sure code only gets executed once. */
+    if (initialized == YES) return;
+    initialized = YES;
+    
+    [NSApp registerServicesMenuSendTypes:@[(__bridge NSString *)kUTTypeFileURL, NSFilenamesPboardType] returnTypes:@[]];
+}
+- (id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType {
+    if ([sendType isEqual:(__bridge NSString *)kUTTypeFileURL]) {
+        return self;
+    }
+    return [super validRequestorForSendType:sendType returnType:returnType];
+}
+- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray *)types {
+    //    if([self.delegate respondsToSelector:@selector(writeSelectionToPasteboard:types:)])
+    //        return [self.delegate writeSelectionToPasteboard:pboard types:types];
+    return TRUE;
+}
+
+
 - (void)windowDidLoad {
     [super windowDidLoad];
 
@@ -116,6 +137,8 @@
         [task stop];
         return;
     }
+    
+    [self.window setTitle:[NSString stringWithFormat:@"“%@” - KatSearch", [searchField stringValue]]];
     
     NSLog(@"Starting task");
     [searchField setEnabled:NO];
@@ -251,7 +274,7 @@
     [self copyFiles:self];
 }
 
-- (IBAction)copyFiles:(id)sender {
+- (void)copySelectedFilesToPasteboard:(NSPasteboard *)pboard {
     NSMutableArray *items = [NSMutableArray array];
     [[tableView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger row, BOOL *stop){
         SearchItem *item = results[row];
@@ -259,15 +282,18 @@
             [items addObject:item.path];
         }
     }];
-
-    NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
-    [pasteBoard clearContents];
     
-    [pasteBoard declareTypes:@[NSFilenamesPboardType] owner:nil];
-    [pasteBoard setPropertyList:items forType:NSFilenamesPboardType];
+    [pboard clearContents];
+    
+    [pboard declareTypes:@[NSFilenamesPboardType] owner:nil];
+    [pboard setPropertyList:items forType:NSFilenamesPboardType];
     
     NSString *strRep = [items componentsJoinedByString:@"\n"];
-    [pasteBoard setString:strRep forType:NSStringPboardType];
+    [pboard setString:strRep forType:NSStringPboardType];
+}
+
+- (IBAction)copyFiles:(id)sender {
+    [self copySelectedFilesToPasteboard:[NSPasteboard generalPasteboard]];
 }
 
 #pragma mark - Contextual menus
@@ -418,13 +444,14 @@
 #pragma mark - NSTableViewDelegate
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    NSURL *fileURL = nil;
     NSInteger selectedRow = [tableView selectedRow];
-    if (selectedRow < 0 || selectedRow >= [results count]) {
-        return;
+    if (selectedRow >= 0 || selectedRow < [results count]) {
+        SearchItem *item = results[selectedRow];
+        fileURL = [NSURL fileURLWithPath:item.path];
     }
     
-    SearchItem *item = results[selectedRow];
-    [pathControl setURL:[NSURL fileURLWithPath:item.path]];
+    [pathControl setURL:fileURL];
 }
 
 @end

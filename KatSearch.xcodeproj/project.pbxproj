@@ -17,6 +17,7 @@
 		F462A27A20E134EA0062B230 /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27920E134EA0062B230 /* SearchItem.m */; };
 		F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */; };
 		F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F471DF5F20F4DAE70057E667 /* Credits.rtf */; };
+		F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* FileListTableView.m */; };
 		F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */ = {isa = PBXBuildFile; fileRef = F4A5CF0020ED7E15008D0A06 /* searchfs */; };
 		F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */; };
 		F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */; };
@@ -42,6 +43,9 @@
 		F471DF5F20F4DAE70057E667 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		F471DF6520F7AF6D0057E667 /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		F471DF6620F7AF6D0057E667 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F48451E520F8DE31005797C1 /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
+		F48451E620F8E4CB005797C1 /* FileListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileListTableView.h; sourceTree = "<group>"; };
+		F48451E720F8E4CB005797C1 /* FileListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileListTableView.m; sourceTree = "<group>"; };
 		F4A5CF0020ED7E15008D0A06 /* searchfs */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = searchfs; sourceTree = "<group>"; };
 		F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STVolumesPopupButton.h; sourceTree = "<group>"; };
 		F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STVolumesPopupButton.m; sourceTree = "<group>"; };
@@ -64,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				F471DF6620F7AF6D0057E667 /* README.md */,
+				F48451E520F8DE31005797C1 /* TODO.txt */,
 				F471DF6520F7AF6D0057E667 /* License.txt */,
 				F462A25C20E111CF0062B230 /* KatSearch */,
 				F462A25B20E111CF0062B230 /* Products */,
@@ -86,6 +91,8 @@
 				F462A25E20E111CF0062B230 /* AppDelegate.m */,
 				F462A27020E1122A0062B230 /* WindowController.h */,
 				F462A27120E1122A0062B230 /* WindowController.m */,
+				F48451E620F8E4CB005797C1 /* FileListTableView.h */,
+				F48451E720F8E4CB005797C1 /* FileListTableView.m */,
 				F462A27520E117760062B230 /* SearchTask.h */,
 				F462A27620E117760062B230 /* SearchTask.m */,
 				F462A27820E134EA0062B230 /* SearchItem.h */,
@@ -196,6 +203,7 @@
 			files = (
 				F462A27720E117760062B230 /* SearchTask.m in Sources */,
 				F462A26720E111D10062B230 /* main.m in Sources */,
+				F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */,
 				F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */,
 				F462A27320E1122A0062B230 /* WindowController.m in Sources */,
 				F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */,

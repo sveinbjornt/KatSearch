@@ -27,10 +27,17 @@
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                             <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                            <menuItem isSeparatorItem="YES" id="QNm-Wo-54e"/>
+                            <menuItem title="Visit KatSearch Website" id="GCJ-yy-PgG">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openWebsite:" target="Voe-Tx-rLC" id="e9f-7a-pKS"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Donate to Support KatSearch" id="Vki-3a-10y">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="openDonations:" target="Voe-Tx-rLC" id="QeU-ab-AC0"/>
+                                    <action selector="openDonations:" target="Voe-Tx-rLC" id="y8B-Bt-GnT"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
@@ -331,8 +338,36 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="View" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Show Kind" id="zXk-dA-oCE">
+                            <menuItem title="Columns" id="gAw-Ya-pwe">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Columns" id="i4m-59-3lW">
+                                    <items>
+                                        <menuItem title="Kind" id="Lit-tk-sWq">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Size" id="fJx-nb-ae4">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Date Created" id="rrT-dc-NSJ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Date Modified" id="YcE-5S-9JT">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Date Accessed" id="hhc-6K-aVd">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="User:Group" id="Cpt-BE-9EQ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Permissions" id="IzL-9i-Tyq">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="UTI" id="nep-Ue-FPx">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="gTx-Wl-iKt"/>
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -412,10 +447,22 @@ DQ
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                         <items>
-                            <menuItem title="Donate to Support KatSearch Development" id="em6-ae-q81">
+                            <menuItem title="KatSearch Website" id="em6-ae-q81">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="openDonations:" target="Voe-Tx-rLC" id="Azh-f2-7Jo"/>
+                                    <action selector="openWebsite:" target="Voe-Tx-rLC" id="Dcr-D0-5kZ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="KatSearch on GitHub" id="kQT-d4-aqC">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openGitHubWebsite:" target="Voe-Tx-rLC" id="HLq-Sl-t5C"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Donate to Support KatSearch Development" id="BQm-lE-D2U">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openDonations:" target="Voe-Tx-rLC" id="vYl-jU-zfO"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="61R-FP-cS1"/>
@@ -430,5 +477,11 @@ DQ
             </items>
             <point key="canvasLocation" x="-153" y="-73"/>
         </menu>
+        <menuItem title="Donate to Support KatSearch Development" id="gcA-9j-ipy">
+            <modifierMask key="keyEquivalentModifierMask"/>
+            <connections>
+                <action selector="openDonations:" target="Voe-Tx-rLC" id="bxc-7R-Ks1"/>
+            </connections>
+        </menuItem>
     </objects>
 </document>

@@ -40,7 +40,6 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
     windowControllers = [NSMutableArray array];
     
     [self newWindow:self];
@@ -72,6 +71,10 @@
 
 - (IBAction)openWebsite:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://sveinbjorn.org/katsearch"]];
+}
+
+- (IBAction)openGitHubWebsite:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/sveinbjornt/KatSearch"]];
 }
 
 @end
