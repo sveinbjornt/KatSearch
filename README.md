@@ -1,6 +1,6 @@
 # KatSearch
 
-<!--<img src="app_icon.png" width="128" height="128" align="right" style="float: right; margin-left: 30px;">-->
+<img src="icon.png" width="128" height="128" align="right" style="float: right; margin-left: 30px;">
 
 **Work in progress**
 
