@@ -118,10 +118,6 @@
 				F462A25E20E111CF0062B230 /* AppDelegate.m */,
 				F462A27020E1122A0062B230 /* WindowController.h */,
 				F462A27120E1122A0062B230 /* WindowController.m */,
-				F48451E620F8E4CB005797C1 /* FileListTableView.h */,
-				F48451E720F8E4CB005797C1 /* FileListTableView.m */,
-				F45D8BBA20FA6FCC00D6E8F6 /* KatPathControl.h */,
-				F45D8BBB20FA6FCC00D6E8F6 /* KatPathControl.m */,
 				F462A27520E117760062B230 /* SearchTask.h */,
 				F462A27620E117760062B230 /* SearchTask.m */,
 				F462A27820E134EA0062B230 /* SearchItem.h */,
@@ -149,6 +145,10 @@
 		F471DF6120F52A200057E667 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F48451E620F8E4CB005797C1 /* FileListTableView.h */,
+				F48451E720F8E4CB005797C1 /* FileListTableView.m */,
+				F45D8BBA20FA6FCC00D6E8F6 /* KatPathControl.h */,
+				F45D8BBB20FA6FCC00D6E8F6 /* KatPathControl.m */,
 				F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */,
 				F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */,
 				F4A7BA8320EC208F00083B48 /* NSTableView+PreserveSelection.h */,

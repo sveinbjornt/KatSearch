@@ -74,6 +74,26 @@
         [args addObject:@"-f"];
     }
     
+    if (self.caseSensitive) {
+        [args addObject:@"-s"];
+    }
+
+    if (self.skipPackages) {
+        [args addObject:@"-p"];
+    }
+    
+    if (self.skipInvisibles) {
+        [args addObject:@"-i"];
+    }
+    
+    if (self.skipInappropriate) {
+        [args addObject:@"-x"];
+    }
+    
+    if (self.negateSearchParams) {
+        [args addObject:@"-n"];
+    }
+    
     [args addObject:self.searchString];
     task.arguments = args;
     
@@ -98,6 +118,7 @@
     pid_t pid = [task processIdentifier];
     if (pid) {
         kill(pid, SIGKILL);
+        // TODO: verify
         killed = YES;
     }
     

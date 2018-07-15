@@ -351,36 +351,29 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="D2T-07-NSd"/>
-                            <menuItem title="Columns" id="gAw-Ya-pwe">
+                            <menuItem title="Show Kind" id="Y4S-zk-wYB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Columns" id="i4m-59-3lW">
-                                    <items>
-                                        <menuItem title="Kind" id="Lit-tk-sWq">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Size" id="fJx-nb-ae4">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Date Created" id="rrT-dc-NSJ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Date Modified" id="YcE-5S-9JT">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Date Accessed" id="hhc-6K-aVd">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="User:Group" id="Cpt-BE-9EQ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Permissions" id="IzL-9i-Tyq">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="UTI" id="nep-Ue-FPx">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                    </items>
-                                </menu>
+                            </menuItem>
+                            <menuItem title="Show Size" id="fBx-eC-aYG">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Show Date Created" id="QuO-X2-z9k">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Show Date Modified" id="VTp-Wi-5ue">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Show Date Accessed" id="NRA-Br-TMN">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Show User:Group" id="tAU-a8-tTl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Show Permissions" id="f5n-os-aoJ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Show UTI" id="7JE-Aj-uFA">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="gTx-Wl-iKt"/>
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -421,6 +414,12 @@ DQ
                                 <connections>
                                     <action selector="getInfo:" target="-1" id="QzR-5S-cvn"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="5GP-nS-Kq9">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Authenticate" id="Cvl-zu-hPB">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
                     </menu>

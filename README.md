@@ -6,6 +6,28 @@
 
 Mac app to quickly find files on entire HFS+/APFS volumes using the file system catalog.
 
+* Native, modern macOS app
+* Faster than comparable apps with similar functionality
+* Snappy, responsive no-nonsense interface
+* Can run with admin privileges to search all files and folders on the system
+* Free, open source software
+
+## Downloads
+
+<!--
+*  **[⇩ Download KatSearch 1.0](https://sveinbjorn.org/files/software/katsearch.zip)** (~1.5 MB, Intel 64-bit, 10.8 or later)
+-->
+
+## About
+
+## Screenshots
+
+<img src="screenshots/katsearch_screenshot1.jpg" align="center">
+
+<img src="screenshots/katsearch_screenshot2.jpg" align="center">
+
+## Version History
+
 ## BSD License 
 
 Copyright (C) 2018 Sveinbjorn Thordarson &lt;<a href="mailto:">sveinbjorn@sveinbjorn.org</a>&gt;

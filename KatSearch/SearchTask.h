@@ -47,6 +47,11 @@
 @property BOOL exactNameOnly;
 @property BOOL directoriesOnly;
 @property BOOL filesOnly;
+@property BOOL caseSensitive;
+@property BOOL skipPackages;
+@property BOOL skipInvisibles;
+@property BOOL skipInappropriate;
+@property BOOL negateSearchParams;
 @property (readonly) BOOL isRunning;
 
 - (instancetype)initWithDelegate:(id<SearchTaskDelegate>)delegate;

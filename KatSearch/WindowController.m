@@ -42,6 +42,7 @@
     IBOutlet NSPopUpButton *matchCriterionPopupButton;
     IBOutlet NSTextField *searchField;
     IBOutlet NSPopUpButton *volumesPopupButton;
+    IBOutlet NSButton *searchOptionsButton;
     IBOutlet NSButton *authenticateButton;
     
     IBOutlet NSProgressIndicator *progressIndicator;
@@ -73,11 +74,11 @@
     [self.window setRepresentedURL:[NSURL URLWithString:@""]];
     [[self.window standardWindowButton:NSWindowDocumentIconButton] setImage:[NSApp applicationIconImage]];
     
+    // Configure table view
     [tableView setDoubleAction:@selector(rowDoubleClicked:)];
     [tableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
-    [self.window makeFirstResponder:searchField];
     
-    // Load system lock icon and set as icon for button & menu
+    // Load system lock image as icon for button
     NSImage *lockIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kLockedIcon)];
     [lockIcon setSize:NSMakeSize(16, 16)];
     [authenticateButton setImage:lockIcon];
@@ -85,9 +86,12 @@
     [self setObserveDefaults:YES];
     
     [self.window setInitialFirstResponder:searchField];
+    [self.window makeFirstResponder:searchField];
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
+    [task stop];
+    
     AppDelegate *delegate = [[NSApplication sharedApplication] delegate];
     [delegate performSelector:@selector(windowDidClose:) withObject:self afterDelay:0.05];
 }
@@ -166,16 +170,24 @@
     [self.window setTitle:[NSString stringWithFormat:@"“%@” - KatSearch", [searchField stringValue]]];
     
     NSLog(@"Starting task");
-    [searchField setEnabled:NO];
+    
+    [self setSearchControlsEnabled:NO];
+    
     [self hidePathBar];
     [pathControl setURL:nil];
+    
     [progressIndicator setHidden:NO];
     [progressIndicator startAnimation:self];
+    
     [numResultsTextField setStringValue:@""];
     
+    [searchButton setTitle:@"Stop"];
+    
+    // Clear results
     results = [NSMutableArray array];
     [tableView reloadData];
     
+    // Configure task
     task = [[SearchTask alloc] initWithDelegate:self];
     task.searchString = [searchField stringValue];
     task.volume = [[volumesPopupButton selectedItem] toolTip];
@@ -191,9 +203,22 @@
         task.exactNameOnly = YES;
     }
     
-    [task start];
+    task.caseSensitive = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchCaseSensitive"];
+    task.skipPackages = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchSkipPackages"];
+    task.skipInvisibles = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchSkipInvisibles"];
+    task.skipInappropriate = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchSkipSystemFolder"];
+    task.negateSearchParams = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchInvertSearch"];
     
-    [searchButton setTitle:@"Stop"];
+    [task start];
+}
+
+- (void)setSearchControlsEnabled:(BOOL)enabled {
+    [itemTypePopupButton setEnabled:enabled];
+    [matchCriterionPopupButton setEnabled:enabled];
+    [searchField setEnabled:enabled];
+    [volumesPopupButton setEnabled:enabled];
+    [authenticateButton setEnabled:enabled];
+    [searchOptionsButton setEnabled:enabled];
 }
 
 #pragma mark - SearchTaskDelegate
@@ -202,12 +227,17 @@
     [results addObjectsFromArray:items];
     [tableView reloadDataPreservingSelection];
     [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu items", [results count]]];
+    
+    [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:[NSString stringWithFormat:@"Items (%lu)", [results count]]];
+    
 }
 
 - (void)taskDidFinish:(SearchTask *)task {
-    [searchField setEnabled:YES];
+    [self setSearchControlsEnabled:YES];
+    
     [progressIndicator stopAnimation:self];
     [progressIndicator setHidden:YES];
+    
     [searchButton setTitle:@"Search"];
     
     [tableView reloadDataPreservingSelection];
@@ -559,9 +589,9 @@
     NSTableCellView *cellView;
     SearchItem *item = results[row];
     
-    if ([[tc identifier] isEqualToString:@"Name"]) {
+    if ([[tc identifier] isEqualToString:@"Items"]) {
         
-        cellView = [tv makeViewWithIdentifier:@"Name" owner:self];
+        cellView = [tv makeViewWithIdentifier:@"Items" owner:self];
         
         SearchItem *item = results[row];
         cellView.textField.stringValue = item.name;
