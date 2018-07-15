@@ -1,7 +1,7 @@
 
 TODO
 
-* Install CLT via menu item
+* Install CLT via Preferences
 * Export results to text file
 * Search history (Recent searches)
 * Preferences
@@ -10,7 +10,6 @@ TODO
 * Column sorting
 * Columns adjust size with window
 * Remember window position and size
-* Files/directories only / exact name only
 * Authentication
 * Search filters
     * Case sensitive
@@ -18,4 +17,7 @@ TODO
     * Kind filters
     * Within bundles filter
     * Matches regex
-* Contextual menu for items in path control
+
+DONE * Files/directories only / exact name only
+DONE * Show/Hide Path Bar
+DONE * Contextual menu for items in path control

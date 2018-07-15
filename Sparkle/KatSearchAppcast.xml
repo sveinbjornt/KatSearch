@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+    <channel>
+        <title>KatSearch Version Release Appcast</title>
+        <link>https://sveinbjorn.org/files/appcasts/KatSearchAppcast.xml</link>
+        <description>Most recent KatSearch releases, with links to signed updates.</description>
+        <language>en</language>
+    </channel>
+    
+    <item>
+        <title>Version 1.0</title>
+        <pubDate>Saturday, 2 Jun 2018 12:55:00 +0000</pubDate>
+        <enclosure url="https://sveinbjorn.org/files/software/katsearch/KatSearch-2.5.zip" sparkle:version="" sparkle:shortVersionString="" length="" type="application/octet-stream" sparkle:dsaSignature=""/>
+        <sparkle:minimumSystemVersion>10.8.0</sparkle:minimumSystemVersion>
+        <description><![CDATA[
+            <h2>New in KatSearch 1.0</h2>
+            <ul>
+                <li>Initial release</li>
+            </ul>
+        ]]></description>
+    </item>
+
+</rss>

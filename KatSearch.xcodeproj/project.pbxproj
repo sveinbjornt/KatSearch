@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F45D8BB820FA655A00D6E8F6 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45D8BB720FA655A00D6E8F6 /* Sparkle.framework */; };
+		F45D8BB920FA657000D6E8F6 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F45D8BB720FA655A00D6E8F6 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F45D8BBC20FA6FCC00D6E8F6 /* KatPathControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45D8BBB20FA6FCC00D6E8F6 /* KatPathControl.m */; };
 		F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A25E20E111CF0062B230 /* AppDelegate.m */; };
 		F462A26120E111D10062B230 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F462A26020E111D10062B230 /* Assets.xcassets */; };
 		F462A26420E111D10062B230 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A26220E111D10062B230 /* MainMenu.xib */; };
@@ -18,12 +21,30 @@
 		F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */; };
 		F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F471DF5F20F4DAE70057E667 /* Credits.rtf */; };
 		F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* FileListTableView.m */; };
+		F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F48451EF20F8F914005797C1 /* dsa_pub.pem */; };
 		F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */ = {isa = PBXBuildFile; fileRef = F4A5CF0020ED7E15008D0A06 /* searchfs */; };
 		F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */; };
 		F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F48451F420F8FA19005797C1 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F45D8BB920FA657000D6E8F6 /* Sparkle.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		F45D8BB720FA655A00D6E8F6 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		F45D8BBA20FA6FCC00D6E8F6 /* KatPathControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KatPathControl.h; sourceTree = "<group>"; };
+		F45D8BBB20FA6FCC00D6E8F6 /* KatPathControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KatPathControl.m; sourceTree = "<group>"; };
 		F462A25A20E111CF0062B230 /* KatSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KatSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F462A25D20E111CF0062B230 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F462A25E20E111CF0062B230 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -46,6 +67,11 @@
 		F48451E520F8DE31005797C1 /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		F48451E620F8E4CB005797C1 /* FileListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileListTableView.h; sourceTree = "<group>"; };
 		F48451E720F8E4CB005797C1 /* FileListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileListTableView.m; sourceTree = "<group>"; };
+		F48451EA20F8F914005797C1 /* update_appcast.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = update_appcast.sh; sourceTree = "<group>"; };
+		F48451EC20F8F914005797C1 /* KatSearchAppcast.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KatSearchAppcast.xml; sourceTree = "<group>"; };
+		F48451ED20F8F914005797C1 /* sign_update.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = sign_update.rb; sourceTree = "<group>"; };
+		F48451EE20F8F914005797C1 /* dsa_priv.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = dsa_priv.pem; sourceTree = "<group>"; };
+		F48451EF20F8F914005797C1 /* dsa_pub.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		F4A5CF0020ED7E15008D0A06 /* searchfs */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = searchfs; sourceTree = "<group>"; };
 		F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STVolumesPopupButton.h; sourceTree = "<group>"; };
 		F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STVolumesPopupButton.m; sourceTree = "<group>"; };
@@ -58,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F45D8BB820FA655A00D6E8F6 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,12 +120,15 @@
 				F462A27120E1122A0062B230 /* WindowController.m */,
 				F48451E620F8E4CB005797C1 /* FileListTableView.h */,
 				F48451E720F8E4CB005797C1 /* FileListTableView.m */,
+				F45D8BBA20FA6FCC00D6E8F6 /* KatPathControl.h */,
+				F45D8BBB20FA6FCC00D6E8F6 /* KatPathControl.m */,
 				F462A27520E117760062B230 /* SearchTask.h */,
 				F462A27620E117760062B230 /* SearchTask.m */,
 				F462A27820E134EA0062B230 /* SearchItem.h */,
 				F462A27920E134EA0062B230 /* SearchItem.m */,
 				F471DF6120F52A200057E667 /* Util */,
 				F462A26F20E111FB0062B230 /* Resources */,
+				F48451E920F8F914005797C1 /* Sparkle */,
 			);
 			path = KatSearch;
 			sourceTree = "<group>";
@@ -129,6 +159,19 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		F48451E920F8F914005797C1 /* Sparkle */ = {
+			isa = PBXGroup;
+			children = (
+				F48451EA20F8F914005797C1 /* update_appcast.sh */,
+				F48451EC20F8F914005797C1 /* KatSearchAppcast.xml */,
+				F45D8BB720FA655A00D6E8F6 /* Sparkle.framework */,
+				F48451ED20F8F914005797C1 /* sign_update.rb */,
+				F48451EE20F8F914005797C1 /* dsa_priv.pem */,
+				F48451EF20F8F914005797C1 /* dsa_pub.pem */,
+			);
+			path = Sparkle;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,6 +182,8 @@
 				F462A25620E111CF0062B230 /* Sources */,
 				F462A25720E111CF0062B230 /* Frameworks */,
 				F462A25820E111CF0062B230 /* Resources */,
+				F48451F420F8FA19005797C1 /* Copy Frameworks */,
+				F48451F320F8F9E8005797C1 /* Set CFBundleVersion */,
 			);
 			buildRules = (
 			);
@@ -187,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */,
+				F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */,
 				F462A26120E111D10062B230 /* Assets.xcassets in Resources */,
 				F462A27420E1122A0062B230 /* SearchWindow.xib in Resources */,
 				F462A26420E111D10062B230 /* MainMenu.xib in Resources */,
@@ -195,6 +241,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F48451F320F8F9E8005797C1 /* Set CFBundleVersion */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set CFBundleVersion";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\nBUILD_NUMBER=`git rev-list HEAD | wc -l`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILD_NUMBER\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nif [ \"$?\" -ne 0 ] ; then\necho \"warning:Error incrementing CFBundleVersion\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F462A25620E111CF0062B230 /* Sources */ = {
@@ -206,6 +269,7 @@
 				F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */,
 				F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */,
 				F462A27320E1122A0062B230 /* WindowController.m in Sources */,
+				F45D8BBC20FA6FCC00D6E8F6 /* KatPathControl.m in Sources */,
 				F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */,
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
@@ -344,6 +408,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 5WX26Y89JP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Sparkle",
+				);
+				GENERATE_PKGINFO_FILE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/KatSearch/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -363,6 +432,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 5WX26Y89JP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Sparkle",
+				);
+				GENERATE_PKGINFO_FILE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/KatSearch/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

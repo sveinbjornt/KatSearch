@@ -26,6 +26,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
+                            <menuItem title="Check for Updates…" id="lK8-Ph-f2r">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkForUpdates:" target="SLG-ns-ELk" id="paz-DU-zFG"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
                             <menuItem isSeparatorItem="YES" id="QNm-Wo-54e"/>
                             <menuItem title="Visit KatSearch Website" id="GCJ-yy-PgG">
@@ -338,6 +344,13 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="View" id="HyV-fh-RgO">
                         <items>
+                            <menuItem title="Show Path Bar" id="WXQ-N1-kGq">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowPathBar" id="Ftt-bJ-BBd"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="D2T-07-NSd"/>
                             <menuItem title="Columns" id="gAw-Ya-pwe">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Columns" id="i4m-59-3lW">
@@ -409,12 +422,6 @@ DQ
                                     <action selector="getInfo:" target="-1" id="QzR-5S-cvn"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="v7k-me-Xo6">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Authenticate" toolTip="Authenticate to view all system processes" id="hBM-he-znV" userLabel="Copy">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -475,7 +482,7 @@ DQ
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-153" y="-73"/>
+            <point key="canvasLocation" x="-52" y="-163"/>
         </menu>
         <menuItem title="Donate to Support KatSearch Development" id="gcA-9j-ipy">
             <modifierMask key="keyEquivalentModifierMask"/>
@@ -483,5 +490,7 @@ DQ
                 <action selector="openDonations:" target="Voe-Tx-rLC" id="bxc-7R-Ks1"/>
             </connections>
         </menuItem>
+        <customObject id="SLG-ns-ELk" customClass="SUUpdater"/>
+        <userDefaultsController representsSharedInstance="YES" id="aad-Ka-dzA"/>
     </objects>
 </document>

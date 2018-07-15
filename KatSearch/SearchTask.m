@@ -61,6 +61,19 @@
     task.currentDirectoryPath = [[NSBundle mainBundle] resourcePath];
     
     NSMutableArray *args = [@[@"-v", self.volume] mutableCopy];
+    
+    if (self.exactNameOnly) {
+        [args addObject:@"-e"];
+    }
+    
+    if (self.directoriesOnly) {
+        [args addObject:@"-d"];
+    }
+    
+    if (self.filesOnly) {
+        [args addObject:@"-f"];
+    }
+    
     [args addObject:self.searchString];
     task.arguments = args;
     

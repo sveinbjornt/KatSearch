@@ -44,6 +44,9 @@
 @property (nonatomic, assign) id<SearchTaskDelegate> delegate;
 @property (nonatomic, copy) NSString *searchString;
 @property (nonatomic, copy) NSString *volume;
+@property BOOL exactNameOnly;
+@property BOOL directoriesOnly;
+@property BOOL filesOnly;
 @property (readonly) BOOL isRunning;
 
 - (instancetype)initWithDelegate:(id<SearchTaskDelegate>)delegate;

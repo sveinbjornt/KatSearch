@@ -34,19 +34,28 @@
 #import "NSTableView+PreserveSelection.h"
 #import "NSWorkspace+Additions.h"
 
+#define VALUES_KEYPATH(X) [NSString stringWithFormat:@"values.%@", (X)]
+
 @interface WindowController ()
 {
+    IBOutlet NSPopUpButton *itemTypePopupButton;
+    IBOutlet NSPopUpButton *matchCriterionPopupButton;
     IBOutlet NSTextField *searchField;
     IBOutlet NSPopUpButton *volumesPopupButton;
+    IBOutlet NSButton *authenticateButton;
+    
     IBOutlet NSProgressIndicator *progressIndicator;
     IBOutlet NSTextField *numResultsTextField;
+    
     IBOutlet NSTableView *tableView;
-    IBOutlet NSButton *searchButton;
     IBOutlet NSPathControl *pathControl;
+    
+    IBOutlet NSButton *searchButton;
     
     IBOutlet NSMenu *itemContextualMenu;
     IBOutlet NSMenu *openWithSubMenu;
     IBOutlet NSMenu *columnsMenu;
+    IBOutlet NSMenu *searchOptionsMenu;
     
     NSMutableArray *results;
     SearchTask *task;
@@ -56,27 +65,6 @@
 @implementation WindowController
 
 #pragma mark - NSWindowDelegate
-
-+ (void)initialize {
-    static BOOL initialized = NO;
-    /* Make sure code only gets executed once. */
-    if (initialized == YES) return;
-    initialized = YES;
-    
-    [NSApp registerServicesMenuSendTypes:@[(__bridge NSString *)kUTTypeFileURL, NSFilenamesPboardType] returnTypes:@[]];
-}
-- (id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType {
-    if ([sendType isEqual:(__bridge NSString *)kUTTypeFileURL]) {
-        return self;
-    }
-    return [super validRequestorForSendType:sendType returnType:returnType];
-}
-- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray *)types {
-    //    if([self.delegate respondsToSelector:@selector(writeSelectionToPasteboard:types:)])
-    //        return [self.delegate writeSelectionToPasteboard:pboard types:types];
-    return TRUE;
-}
-
 
 - (void)windowDidLoad {
     [super windowDidLoad];
@@ -88,6 +76,15 @@
     [tableView setDoubleAction:@selector(rowDoubleClicked:)];
     [tableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
     [self.window makeFirstResponder:searchField];
+    
+    // Load system lock icon and set as icon for button & menu
+    NSImage *lockIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kLockedIcon)];
+    [lockIcon setSize:NSMakeSize(16, 16)];
+    [authenticateButton setImage:lockIcon];
+    
+    [self setObserveDefaults:YES];
+    
+    [self.window setInitialFirstResponder:searchField];
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
@@ -129,6 +126,34 @@
     }];
 }
 
+#pragma mark - Defaults observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    if ([keyPath hasSuffix:@"ShowPathBar"]) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ShowPathBar"] && [tableView selectedRow] != -1) {
+            [self showPathBar];
+        } else {
+            [self hidePathBar];
+        }
+    }
+}
+
+- (void)setObserveDefaults:(BOOL)observeDefaults {
+    NSArray *defaults = @[@"ShowPathBar"];
+    
+    for (NSString *key in defaults) {
+        if (observeDefaults) {
+            [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                                      forKeyPath:VALUES_KEYPATH(key)
+                                                                         options:NSKeyValueObservingOptionNew
+                                                                         context:NULL];
+        } else {
+            [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:VALUES_KEYPATH(key)];
+        }
+    }
+}
+
 #pragma mark - Search
 
 - (IBAction)search:(id)sender {
@@ -142,6 +167,7 @@
     
     NSLog(@"Starting task");
     [searchField setEnabled:NO];
+    [self hidePathBar];
     [pathControl setURL:nil];
     [progressIndicator setHidden:NO];
     [progressIndicator startAnimation:self];
@@ -154,6 +180,17 @@
     task.searchString = [searchField stringValue];
     task.volume = [[volumesPopupButton selectedItem] toolTip];
     
+    if ([itemTypePopupButton selectedTag] == 1) {
+        task.filesOnly = YES;
+    }
+    else if ([itemTypePopupButton selectedTag] == 2) {
+        task.directoriesOnly = YES;
+    }
+
+    if ([matchCriterionPopupButton selectedTag] == 1) {
+        task.exactNameOnly = YES;
+    }
+    
     [task start];
     
     [searchButton setTitle:@"Stop"];
@@ -164,7 +201,7 @@
 - (void)taskResultsFound:(NSArray *)items {
     [results addObjectsFromArray:items];
     [tableView reloadDataPreservingSelection];
-    [numResultsTextField setStringValue:[NSString stringWithFormat:@"%lu items", [results count]]];
+    [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu items", [results count]]];
 }
 
 - (void)taskDidFinish:(SearchTask *)task {
@@ -175,16 +212,140 @@
     
     [tableView reloadDataPreservingSelection];
     
-    [numResultsTextField setStringValue:[NSString stringWithFormat:@"%lu items", [results count]]];
+    [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu items", [results count]]];
     task = nil;
     NSLog(@"Task finished");
 }
 
+#pragma mark - Authentication
+
+- (IBAction)toggleAuthentication:(id)sender {
+//    if (isRefreshing) {
+//        NSBeep();
+//        return;
+//    }
+//
+//    if (!authenticated) {
+//        OSStatus err = [self authenticate];
+//        if (err == errAuthorizationSuccess) {
+//            authenticated = YES;
+//        } else {
+//            if (err != errAuthorizationCanceled) {
+//                NSBeep();
+//                NSLog(@"Authentication failed: %d", err);
+//            }
+//            return;
+//        }
+//    } else {
+//        [self deauthenticate];
+//    }
+//
+    static BOOL authenticated = NO;
+    authenticated = !authenticated;
+    OSType iconID = authenticated ? kUnlockedIcon : kLockedIcon;
+    NSImage *img = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(iconID)];
+    [img setSize:NSMakeSize(16, 16)];
+//    NSString *actionName = authenticated ? @"Deauthenticate" : @"Authenticate";
+    NSString *ttip = authenticated ? @"Deauthenticate" : @"Authenticate to view all system processes";
+//
+    [authenticateButton setImage:img];
+    [authenticateButton setToolTip:ttip];
+//    [authenticateMenuItem setImage:img];
+//    [authenticateMenuItem setTitle:actionName];
+//    [authenticateMenuItem setToolTip:ttip];
+//
+//    [self refresh:self];
+}
+
+- (OSStatus)authenticate {
+//    OSStatus err = noErr;
+//    const char *toolPath = [[self lsofPath] fileSystemRepresentation];
+//
+//    AuthorizationItem myItems = { kAuthorizationRightExecute, strlen(toolPath), &toolPath, 0 };
+//    AuthorizationRights myRights = { 1, &myItems };
+//    AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
+//
+//    // Create authorization reference
+//    err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
+//    if (err != errAuthorizationSuccess) {
+//        return err;
+//    }
+//
+//    // Pre-authorize the privileged operation
+//    err = AuthorizationCopyRights(authorizationRef, &myRights, kAuthorizationEmptyEnvironment, flags, NULL);
+//    if (err != errAuthorizationSuccess) {
+//        return err;
+//    }
+//
+    return noErr;
+}
+
+- (void)deauthenticate {
+//    if (authorizationRef) {
+//        AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
+//        authorizationRef = NULL;
+//    }
+//    authenticated = NO;
+}
+
+#pragma mark - Path Bar
+
+- (void)showPathBar {
+    if ([pathControl isHidden] == NO) {
+        return;
+    }
+    
+    NSView *borderView = [[tableView superview] superview];
+    
+    NSRect pathCtrlRect = [pathControl frame];
+    NSRect borderViewRect = [borderView frame];
+    CGFloat height = pathCtrlRect.size.height + 3;
+    
+    borderViewRect.origin.y += height;
+    borderViewRect.size.height -= height;
+    
+    [borderView setFrame:borderViewRect];
+    [pathControl setHidden:NO];
+}
+
+- (void)hidePathBar {
+    if ([pathControl isHidden]) {
+        return;
+    }
+    
+    NSView *borderView = [[tableView superview] superview];
+    
+    NSRect pathCtrlRect = [pathControl frame];
+    NSRect borderViewRect = [borderView frame];
+    CGFloat height = pathCtrlRect.size.height + 3;
+    
+    borderViewRect.origin.y -= height;
+    borderViewRect.size.height += height;
+    
+    [borderView setFrame:borderViewRect];
+    [pathControl setHidden:YES];
+}
+
 #pragma mark - Item actions
 
-- (NSIndexSet *)selectedItems {
-    NSIndexSet *sel = [tableView selectedRowIndexes];
-    return sel;
+- (NSMutableArray *)selectedItems {
+    NSMutableArray *items = [NSMutableArray array];
+    
+    if ([pathControl clickedPathItem]) {
+        NSString *path = [[[pathControl clickedPathItem] URL] path];
+        SearchItem *item = [[SearchItem alloc] initWithPath:path];
+        [items addObject:item];
+        return items;
+    }
+    else {
+        NSIndexSet *sel = [tableView selectedRowIndexes];
+        [sel enumerateIndexesUsingBlock:^(NSUInteger row, BOOL *stop){
+            SearchItem *item = results[row];
+            [items addObject:item];
+        }];
+    }
+    
+    return items;
 //    if ([sel containsIndex:[tableView clickedRow]]) {
 //        return sel;
 //    } else {
@@ -194,13 +355,11 @@
 
 - (void)rowDoubleClicked:(id)object {
     NSInteger row = [tableView clickedRow];
-    
     if (row < 0 || row >= [results count]) {
         return;
     }
     
     SearchItem *item = results[row];
-
     BOOL cmdKeyDown = (([[NSApp currentEvent] modifierFlags] & NSCommandKeyMask) == NSCommandKeyMask);
     
     if (cmdKeyDown) {
@@ -211,15 +370,13 @@
 }
 
 - (IBAction)open:(id)sender {
-    [[self selectedItems] enumerateIndexesUsingBlock:^(NSUInteger row, BOOL *stop){
-        SearchItem *item = results[row];
+    for (SearchItem *item in [self selectedItems]) {
         [item open];
-    }];
+    }
 }
 
 - (IBAction)openWith:(id)sender {
     NSString *appPath = [sender toolTip];
-    NSIndexSet *selectedIndices = [self selectedItems];
     
     if ([[sender title] isEqualToString:@"Select..."]) {
         //create open panel
@@ -242,96 +399,95 @@
         }
     }
     
-    [selectedIndices enumerateIndexesUsingBlock:^(NSUInteger row, BOOL *stop){
-        SearchItem *item = results[row];
-        NSLog(@"Opening %@ with app %@", item.path, appPath);
+    for (SearchItem *item in [self selectedItems]) {
         [item openWith:appPath];
-    }];
+    }
 }
 
 - (IBAction)showInFinder:(id)sender {
-    [[self selectedItems] enumerateIndexesUsingBlock:^(NSUInteger row, BOOL *stop){
-        SearchItem *item = results[row];
+    for (SearchItem *item in [self selectedItems]) {
         [item showInFinder];
-    }];
+    }
 }
 
 - (IBAction)getInfo:(id)sender {
-    [[self selectedItems] enumerateIndexesUsingBlock:^(NSUInteger row, BOOL *stop){
-        SearchItem *item = results[row];
+    for (SearchItem *item in [self selectedItems]) {
         [item getInfo];
-    }];
+    }
 }
 
 - (IBAction)quickLook:(id)sender {
-    [[self selectedItems] enumerateIndexesUsingBlock:^(NSUInteger row, BOOL *stop){
-        SearchItem *item = results[row];
+    for (SearchItem *item in [self selectedItems]) {
         [item quickLook];
-    }];
+    }
 }
 
 - (void)copy:(id)sender {
     [self copyFiles:self];
 }
 
-- (void)copySelectedFilesToPasteboard:(NSPasteboard *)pboard {
-    NSMutableArray *items = [NSMutableArray array];
-    [[tableView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger row, BOOL *stop){
-        SearchItem *item = results[row];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:item.path]) {
-            [items addObject:item.path];
-        }
-    }];
-    
-    [pboard clearContents];
-    
-    [pboard declareTypes:@[NSFilenamesPboardType] owner:nil];
-    [pboard setPropertyList:items forType:NSFilenamesPboardType];
-    
-    NSString *strRep = [items componentsJoinedByString:@"\n"];
-    [pboard setString:strRep forType:NSStringPboardType];
-}
-
 - (IBAction)copyFiles:(id)sender {
     [self copySelectedFilesToPasteboard:[NSPasteboard generalPasteboard]];
 }
 
+- (void)copySelectedFilesToPasteboard:(NSPasteboard *)pboard {
+    NSMutableArray *paths = [NSMutableArray array];
+
+    for (SearchItem *item in [self selectedItems]) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:item.path]) {
+                [paths addObject:item.path];
+            }
+    }
+    
+    [pboard clearContents];
+    [pboard declareTypes:@[NSFilenamesPboardType] owner:nil];
+    [pboard setPropertyList:paths forType:NSFilenamesPboardType];
+    
+    NSString *strRep = [paths componentsJoinedByString:@"\n"];
+    [pboard setString:strRep forType:NSStringPboardType];
+}
+
 #pragma mark - Contextual menus
 
+- (IBAction)searchOptionsButtonClicked:(id)sender {
+    [searchOptionsMenu popUpMenuPositioningItem:nil atLocation:[sender frame].origin inView:[sender superview]];
+}
+
 - (void)menuWillOpen:(NSMenu *)menu {
+    
     if (menu == itemContextualMenu) {
-//        NSMenu *servicesMenu = [[NSApplication sharedApplication] servicesMenu];
-//        for (NSMenuItem *item in [servicesMenu itemArray]) {
-//            NSLog(@"%@", item.title);
-//            [menu addItem:[item copy]];
-//        }
+
+        NSMutableArray *items = [self selectedItems];
+        NSUInteger numSelectedFiles = [items count];
         
         NSString *copyTitle = @"";
         NSString *qlTitle = @"";
-        NSUInteger numSelectedFiles = [[tableView selectedRowIndexes] count];
-        if (numSelectedFiles > 1) {
+        
+        if (numSelectedFiles == 0) {
+            return;
+        }
+        else if (numSelectedFiles > 1) {
             copyTitle = [NSString stringWithFormat:@"Copy %lu files", (unsigned long)numSelectedFiles];
             qlTitle = [NSString stringWithFormat:@"Quick Look %lu files", (unsigned long)numSelectedFiles];
         } else {
-            SearchItem *item = results[[tableView selectedRow]];
-            copyTitle = [NSString stringWithFormat:@"Copy “%@”", item.name];
-            qlTitle = [NSString stringWithFormat:@"Quick Look “%@”", item.name];
+            SearchItem *item = items[0];
+            NSString *name = item.name;
+            
+            copyTitle = [NSString stringWithFormat:@"Copy “%@”", name];
+            qlTitle = [NSString stringWithFormat:@"Quick Look “%@”", name];
         }
         [[menu itemWithTag:1] setTitle:qlTitle];
         [[menu itemWithTag:2] setTitle:copyTitle];
     }
     else if (menu == openWithSubMenu) {
     
-        NSUInteger selected = [tableView selectedRow];
-        if ([tableView selectedRow] == -1) {
+        NSMutableArray *items = [self selectedItems];
+        if ([items count] == 0) {
             return;
         }
         
-        SearchItem *item = results[selected];
-        if (!item) {
-            return;
-        }
-        
+        SearchItem *item = items[0];
+
         [menu removeAllItems];
         
         NSString *defaultApp = [item defaultHandlerApplication];
@@ -374,6 +530,7 @@
             
             [menu addItem:menuItem];
         }
+        
         if ([handlerApps count]) {
             [menu addItem:[NSMenuItem separatorItem]];
         }
@@ -410,7 +567,6 @@
         cellView.textField.stringValue = item.name;
         cellView.imageView.objectValue = item.icon;
         
-        return cellView;
     } else if ([[tc identifier] isEqualToString:@"Kind"]) {
         cellView = [tv makeViewWithIdentifier:@"Kind" owner:self];
         cellView.textField.stringValue = item.kind;
@@ -444,14 +600,18 @@
 #pragma mark - NSTableViewDelegate
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
-    NSURL *fileURL = nil;
     NSInteger selectedRow = [tableView selectedRow];
-    if (selectedRow >= 0 || selectedRow < [results count]) {
+    if (selectedRow >= 0 && selectedRow < [results count] && [results count]) {
         SearchItem *item = results[selectedRow];
-        fileURL = [NSURL fileURLWithPath:item.path];
+        NSURL *fileURL = [NSURL fileURLWithPath:item.path];
+        [pathControl setURL:fileURL];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ShowPathBar"]) {
+            [self showPathBar];
+        }
+    } else {
+        [pathControl setURL:nil];
+        [self hidePathBar];
     }
-    
-    [pathControl setURL:fileURL];
 }
 
 @end
