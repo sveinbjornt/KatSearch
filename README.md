@@ -4,13 +4,13 @@
 
 **Work in progress**
 
-Mac power-user app to quickly find files on entire HFS+/APFS volumes using the file system catalog.
+Mac power-user app to quickly find files on entire HFS+/APFS volumes by scanning the file system catalog. Unlike Spotlight, KatSearch only looks at filenames, not content. It also searches the entire file system, not just the parts Apple wants you to see.
 
-* Fast, native, modern macOS app
-* Faster than comparable apps with similar functionality
-* Snappy, responsive no-nonsense interface with all the native bells and whistles
+* Fast, native, modern macOS app with a responsive, no-nonsense interface
+* Can run with admin privileges to scan all files and folders on the volume irrespective of permissions
+* Ubiquitous drag and drop support and hooks into Finder actions
 * Free, open source software
-* Can run with admin privileges to search all files and folders on the system
+
 
 ## Downloads
 
@@ -22,11 +22,10 @@ Mac power-user app to quickly find files on entire HFS+/APFS volumes using the f
 
 ## Screenshots
 
-<img src="screenshots/katsearch_screenshot1.jpg" align="center">
+<!--<img src="screenshots/katsearch_screenshot1.jpg" align="center">
 
-<img src="screenshots/katsearch_screenshot2.jpg" align="center">
+<img src="screenshots/katsearch_screenshot2.jpg" align="center">-->
 
-## Version History
 
 ## BSD License 
 
