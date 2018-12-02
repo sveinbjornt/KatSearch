@@ -31,37 +31,65 @@
 #import "SearchItem.h"
 #import "NSWorkspace+Additions.h"
 #include <sys/stat.h>
+#include <pwd.h>
+#include <grp.h>
+
 
 @implementation SearchItem
 {
+    NSString *cachedName;
+    NSImage *cachedIcon;
     NSString *cachedKindString;
     NSString *cachedSizeString;
+    NSString *cachedDateAccessedString;
+    NSString *cachedDateCreatedString;
     NSString *cachedDateModifiedString;
+    NSString *cachedUTI;
+    NSString *cachedOwner;
+    NSString *cachedGroup;
+    NSString *cachedPermissionsString;
+    
+    struct stat cachedStat;
+    struct stat *cachedStatPtr;
 }
 
 - (instancetype)initWithPath:(NSString *)path {
     self = [super init];
     if (self) {
         _path = path;
-        _name = [path lastPathComponent];
-        _icon = [[NSWorkspace sharedWorkspace] iconForFile:path];
     }
     return self;
 }
 
+#pragma mark - Attributes
+
+- (NSString *)name {
+    if (!cachedName) {
+        cachedName = [_path lastPathComponent];
+    }
+    return cachedName;
+}
+
+- (NSImage *)icon {
+    if (!cachedIcon) {
+        cachedIcon = [[NSWorkspace sharedWorkspace] iconForFile:_path];
+    }
+    return cachedIcon;
+}
+
 - (NSString *)sizeString {
-    if (_sizeString) {
-        return _sizeString;
+    if (cachedSizeString) {
+        return cachedSizeString;
     }
     
     UInt64 size = self.size;
     if (size == -1) {
-        _sizeString = @"-";
+        cachedSizeString = @"-";
     } else {
-        _sizeString = [self fileSizeAsHumanReadableString:size];
+        cachedSizeString = [[NSWorkspace sharedWorkspace] fileSizeAsHumanReadableString:size];
     }
     
-    return _sizeString;
+    return cachedSizeString;
 }
 
 - (NSString *)kind {
@@ -80,46 +108,145 @@
     return cachedKindString;
 }
 
-- (void)stat {
+- (BOOL)stat {
+    if (cachedStatPtr) {
+        return YES;
+    }
     
+    if (stat([self.path fileSystemRepresentation], &cachedStat)) {
+        return NO;
+    }
+    
+    cachedStatPtr = &cachedStat;
+    
+    return YES;
+}
+
+- (NSDate *)dateAccessed {
+    return [NSDate dateWithTimeIntervalSince1970:cachedStatPtr->st_atimespec.tv_sec];
+}
+
+- (NSString *)dateAccessedString {
+    if (![self stat]) {
+        return @"?";
+    }
+    
+    if (!cachedDateAccessedString) {
+        cachedDateAccessedString = [self relativeDateStringForTimestamp:cachedStatPtr->st_atimespec.tv_sec];
+    }
+    
+    return cachedDateAccessedString;
+}
+
+- (NSDate *)dateCreated {
+    return [NSDate dateWithTimeIntervalSince1970:cachedStatPtr->st_ctimespec.tv_sec];
+}
+
+- (NSString *)dateCreatedString {
+    if (![self stat]) {
+        return @"?";
+    }
+    
+    if (!cachedDateCreatedString) {
+        cachedDateCreatedString = [self relativeDateStringForTimestamp:cachedStatPtr->st_ctimespec.tv_sec];
+    }
+    
+    return cachedDateCreatedString;
+}
+
+- (NSDate *)dateModified {
+    return [NSDate dateWithTimeIntervalSince1970:cachedStatPtr->st_mtimespec.tv_sec];
+}
+
+- (NSString *)dateModifiedString {
+    if (![self stat]) {
+        return @"?";
+    }
+    
+    if (!cachedDateModifiedString) {
+        cachedDateModifiedString = [self relativeDateStringForTimestamp:cachedStatPtr->st_mtimespec.tv_sec];
+    }
+    
+    return cachedDateModifiedString;
+}
+
+- (NSString *)relativeDateStringForTimestamp:(__darwin_time_t)time {
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.doesRelativeDateFormatting = YES;
+    formatter.locale = [NSLocale currentLocale];
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    formatter.timeStyle = NSDateFormatterShortStyle;
+    return [formatter stringFromDate:date];
+}
+
+- (NSString *)owner {
+    if (![self stat]) {
+        return nil;
+    }
+    
+    if (!cachedOwner) {
+        const char *u = user_from_uid(cachedStatPtr->st_uid, 0);
+        cachedOwner = @(u);
+    }
+    
+    return cachedOwner;
+}
+
+- (NSString *)group {
+    if (![self stat]) {
+        return nil;
+    }
+    
+    if (!cachedGroup) {
+        const char *g = group_from_gid(cachedStatPtr->st_gid, 0);
+        cachedGroup = @(g);
+    }
+    
+    return cachedGroup;
+}
+
+- (NSString *)permissionsString {
+    if (![self stat]) {
+        return nil;
+    }
+    
+    if (!cachedPermissionsString) {
+        char buf[20];
+        strmode(cachedStatPtr->st_mode, (char *)&buf);
+        cachedPermissionsString = @((char *)&buf);
+    }
+    
+    return cachedPermissionsString;
 }
 
 - (UInt64)size {
-//    BOOL isDir;
-    NSString *p = self.path;
-//    [[NSFileManager defaultManager] fileExistsAtPath:p isDirectory:&isDir];
-//    if (isDir) {
-//        return 0;
-//    }
-    
-    
-    
-    struct stat stat1;
-    if (stat([p fileSystemRepresentation], &stat1)) {
-        return -1;
+    if ([self stat] && S_ISREG(cachedStat.st_mode)) {
+        return cachedStatPtr->st_size;
     }
-    
-    if (!S_ISREG(stat1.st_mode)) {
-        return -1;
-    }
-    
-    return stat1.st_size;
+    return -1;
 }
 
-- (NSString *)fileSizeAsHumanReadableString:(UInt64)size {
-    NSString *str;
-    
-    if (size < 1024ULL) {
-        str = [NSString stringWithFormat:@"%u bytes", (unsigned int)size];
-    } else if (size < 1048576ULL) {
-        str = [NSString stringWithFormat:@"%llu KB", (UInt64)size / 1024];
-    } else if (size < 1073741824ULL) {
-        str = [NSString stringWithFormat:@"%.1f MB", size / 1048576.0];
-    } else {
-        str = [NSString stringWithFormat:@"%.1f GB", size / 1073741824.0];
+- (NSString *)uti {
+    if (cachedUTI) {
+        return cachedUTI;
     }
-    return str;
+    NSString *type = [[NSWorkspace sharedWorkspace] typeOfFile:_path error:nil];
+    cachedUTI = (type == nil) ? @"" : type;
+    return cachedUTI;
 }
+
+#pragma mark - Handler apps
+
+- (NSString *)defaultHandlerApplication {
+    return [[NSWorkspace sharedWorkspace] defaultApplicationForFile:self.path];
+}
+
+- (NSArray *)handlerApplications {
+    return [[NSWorkspace sharedWorkspace] applicationsForFile:self.path];
+}
+
+#pragma mark - Actions
 
 - (void)open {
     [[NSWorkspace sharedWorkspace] openFile:self.path];
@@ -140,15 +267,6 @@
 
 - (void)quickLook {
     [[NSWorkspace sharedWorkspace] quickLookFile:self.path];
-}
-
-- (NSArray *)handlerApplications {
-    return [[NSWorkspace sharedWorkspace] applicationsForFile:self.path];
-
-}
-
-- (NSString *)defaultHandlerApplication {
-    return [[NSWorkspace sharedWorkspace] defaultApplicationForFile:self.path];
 }
 
 #pragma mark -

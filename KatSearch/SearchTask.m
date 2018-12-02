@@ -37,6 +37,7 @@
     NSFileHandle *readHandle;
     NSString *remnants;
     BOOL killed;
+    AuthorizationRef authorizationRef;
 }
 
 - (instancetype)initWithDelegate:(id<SearchTaskDelegate>)delegate {
@@ -52,7 +53,7 @@
 - (void)start {
     
     task = [[NSTask alloc] init];
-    task.launchPath = [[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil];
+    task.launchPath = @"/usr/local/bin/searchfs"; //[[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil];
     if (!task.launchPath) {
         NSLog(@"searchfs binary not found in app bundle");
         NSBeep();
@@ -177,6 +178,17 @@
 
 - (BOOL)isRunning {
     return [task isRunning];
+}
+
+- (BOOL)wasKilled {
+    return killed;
+}
+
+- (BOOL)isAuthenticated {
+    return (authorizationRef != NULL);
+}
+- (void)setAuthorizationRef:(AuthorizationRef)authRef {
+    authorizationRef = authRef;
 }
 
 @end

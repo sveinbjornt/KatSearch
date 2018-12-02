@@ -30,6 +30,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface KatPathControl : NSPathControl
+@interface PreferencesController : NSWindowController
 
 @end

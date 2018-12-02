@@ -35,8 +35,7 @@
 @protocol SearchTaskDelegate <NSObject>
 @required
 - (void)taskResultsFound:(NSArray *)items;
-- (void)taskDidFinish:(SearchTask *)task;
-@optional
+- (void)taskDidFinish:(SearchTask *)theTask;
 @end
 
 @interface SearchTask : NSObject
@@ -53,9 +52,12 @@
 @property BOOL skipInappropriate;
 @property BOOL negateSearchParams;
 @property (readonly) BOOL isRunning;
+@property (readonly) BOOL wasKilled;
+@property (readonly) BOOL isAuthenticated;
 
 - (instancetype)initWithDelegate:(id<SearchTaskDelegate>)delegate;
 - (void)start;
 - (void)stop;
+- (void)setAuthorizationRef:(AuthorizationRef)authRef;
 
 @end

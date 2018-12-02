@@ -7,11 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F45D8BB820FA655A00D6E8F6 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45D8BB720FA655A00D6E8F6 /* Sparkle.framework */; };
-		F45D8BB920FA657000D6E8F6 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F45D8BB720FA655A00D6E8F6 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F45D8BBC20FA6FCC00D6E8F6 /* KatPathControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45D8BBB20FA6FCC00D6E8F6 /* KatPathControl.m */; };
 		F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A25E20E111CF0062B230 /* AppDelegate.m */; };
-		F462A26120E111D10062B230 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F462A26020E111D10062B230 /* Assets.xcassets */; };
 		F462A26420E111D10062B230 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A26220E111D10062B230 /* MainMenu.xib */; };
 		F462A26720E111D10062B230 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A26620E111D10062B230 /* main.m */; };
 		F462A27320E1122A0062B230 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27120E1122A0062B230 /* WindowController.m */; };
@@ -22,6 +19,14 @@
 		F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F471DF5F20F4DAE70057E667 /* Credits.rtf */; };
 		F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* FileListTableView.m */; };
 		F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F48451EF20F8F914005797C1 /* dsa_pub.pem */; };
+		F48DC0F220FB8D7000B21222 /* NSTableView+TBHideableTableViewColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = F48DC0F120FB8D6F00B21222 /* NSTableView+TBHideableTableViewColumns.m */; };
+		F48DC0F920FBF16100B21222 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48DC0F720FBF16100B21222 /* PreferencesController.m */; };
+		F48DC0FC20FBF17E00B21222 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F48DC0FB20FBF17E00B21222 /* PreferencesController.xib */; };
+		F48DC10020FCC51D00B21222 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48DC0FE20FCC51D00B21222 /* Sparkle.framework */; };
+		F48DC10120FCC51D00B21222 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48DC0FF20FCC51D00B21222 /* MASShortcut.framework */; };
+		F48DC10220FCC53500B21222 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F48DC0FE20FCC51D00B21222 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F48DC10320FCC53500B21222 /* MASShortcut.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F48DC0FF20FCC51D00B21222 /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F48DC10520FCD16400B21222 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = F48DC10420FCD16400B21222 /* AppIcon.icns */; };
 		F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */ = {isa = PBXBuildFile; fileRef = F4A5CF0020ED7E15008D0A06 /* searchfs */; };
 		F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */; };
 		F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */; };
@@ -34,7 +39,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F45D8BB920FA657000D6E8F6 /* Sparkle.framework in Copy Frameworks */,
+				F48DC10220FCC53500B21222 /* Sparkle.framework in Copy Frameworks */,
+				F48DC10320FCC53500B21222 /* MASShortcut.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -42,7 +48,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F45D8BB720FA655A00D6E8F6 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		F45D8BBA20FA6FCC00D6E8F6 /* KatPathControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KatPathControl.h; sourceTree = "<group>"; };
 		F45D8BBB20FA6FCC00D6E8F6 /* KatPathControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KatPathControl.m; sourceTree = "<group>"; };
 		F462A25A20E111CF0062B230 /* KatSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KatSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +77,14 @@
 		F48451ED20F8F914005797C1 /* sign_update.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = sign_update.rb; sourceTree = "<group>"; };
 		F48451EE20F8F914005797C1 /* dsa_priv.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = dsa_priv.pem; sourceTree = "<group>"; };
 		F48451EF20F8F914005797C1 /* dsa_pub.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		F48DC0F020FB8D6F00B21222 /* NSTableView+TBHideableTableViewColumns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+TBHideableTableViewColumns.h"; sourceTree = "<group>"; };
+		F48DC0F120FB8D6F00B21222 /* NSTableView+TBHideableTableViewColumns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+TBHideableTableViewColumns.m"; sourceTree = "<group>"; };
+		F48DC0F620FBF16100B21222 /* PreferencesController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
+		F48DC0F720FBF16100B21222 /* PreferencesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
+		F48DC0FB20FBF17E00B21222 /* PreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesController.xib; sourceTree = "<group>"; };
+		F48DC0FE20FCC51D00B21222 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		F48DC0FF20FCC51D00B21222 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASShortcut.framework; sourceTree = "<group>"; };
+		F48DC10420FCD16400B21222 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		F4A5CF0020ED7E15008D0A06 /* searchfs */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = searchfs; sourceTree = "<group>"; };
 		F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STVolumesPopupButton.h; sourceTree = "<group>"; };
 		F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STVolumesPopupButton.m; sourceTree = "<group>"; };
@@ -84,7 +97,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F45D8BB820FA655A00D6E8F6 /* Sparkle.framework in Frameworks */,
+				F48DC10120FCC51D00B21222 /* MASShortcut.framework in Frameworks */,
+				F48DC10020FCC51D00B21222 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,9 +136,12 @@
 				F462A27620E117760062B230 /* SearchTask.m */,
 				F462A27820E134EA0062B230 /* SearchItem.h */,
 				F462A27920E134EA0062B230 /* SearchItem.m */,
+				F48DC0F620FBF16100B21222 /* PreferencesController.h */,
+				F48DC0F720FBF16100B21222 /* PreferencesController.m */,
 				F471DF6120F52A200057E667 /* Util */,
 				F462A26F20E111FB0062B230 /* Resources */,
 				F48451E920F8F914005797C1 /* Sparkle */,
+				F48DC0FD20FCC51D00B21222 /* Frameworks */,
 			);
 			path = KatSearch;
 			sourceTree = "<group>";
@@ -133,9 +150,11 @@
 			isa = PBXGroup;
 			children = (
 				F471DF5F20F4DAE70057E667 /* Credits.rtf */,
+				F48DC10420FCD16400B21222 /* AppIcon.icns */,
 				F462A26020E111D10062B230 /* Assets.xcassets */,
 				F462A26220E111D10062B230 /* MainMenu.xib */,
 				F462A27220E1122A0062B230 /* SearchWindow.xib */,
+				F48DC0FB20FBF17E00B21222 /* PreferencesController.xib */,
 				F462A26520E111D10062B230 /* Info.plist */,
 				F4A5CF0020ED7E15008D0A06 /* searchfs */,
 			);
@@ -145,6 +164,8 @@
 		F471DF6120F52A200057E667 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F48DC0F020FB8D6F00B21222 /* NSTableView+TBHideableTableViewColumns.h */,
+				F48DC0F120FB8D6F00B21222 /* NSTableView+TBHideableTableViewColumns.m */,
 				F48451E620F8E4CB005797C1 /* FileListTableView.h */,
 				F48451E720F8E4CB005797C1 /* FileListTableView.m */,
 				F45D8BBA20FA6FCC00D6E8F6 /* KatPathControl.h */,
@@ -164,12 +185,20 @@
 			children = (
 				F48451EA20F8F914005797C1 /* update_appcast.sh */,
 				F48451EC20F8F914005797C1 /* KatSearchAppcast.xml */,
-				F45D8BB720FA655A00D6E8F6 /* Sparkle.framework */,
 				F48451ED20F8F914005797C1 /* sign_update.rb */,
 				F48451EE20F8F914005797C1 /* dsa_priv.pem */,
 				F48451EF20F8F914005797C1 /* dsa_pub.pem */,
 			);
 			path = Sparkle;
+			sourceTree = SOURCE_ROOT;
+		};
+		F48DC0FD20FCC51D00B21222 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F48DC0FE20FCC51D00B21222 /* Sparkle.framework */,
+				F48DC0FF20FCC51D00B21222 /* MASShortcut.framework */,
+			);
+			path = Frameworks;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -231,9 +260,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F48DC0FC20FBF17E00B21222 /* PreferencesController.xib in Resources */,
 				F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */,
 				F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */,
-				F462A26120E111D10062B230 /* Assets.xcassets in Resources */,
+				F48DC10520FCD16400B21222 /* AppIcon.icns in Resources */,
 				F462A27420E1122A0062B230 /* SearchWindow.xib in Resources */,
 				F462A26420E111D10062B230 /* MainMenu.xib in Resources */,
 				F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */,
@@ -264,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F48DC0F920FBF16100B21222 /* PreferencesController.m in Sources */,
 				F462A27720E117760062B230 /* SearchTask.m in Sources */,
 				F462A26720E111D10062B230 /* main.m in Sources */,
 				F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */,
@@ -271,6 +302,7 @@
 				F462A27320E1122A0062B230 /* WindowController.m in Sources */,
 				F45D8BBC20FA6FCC00D6E8F6 /* KatPathControl.m in Sources */,
 				F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */,
+				F48DC0F220FB8D7000B21222 /* NSTableView+TBHideableTableViewColumns.m in Sources */,
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
 				F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */,
@@ -323,7 +355,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -381,7 +413,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -405,12 +437,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 5WX26Y89JP;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sparkle",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GENERATE_PKGINFO_FILE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/KatSearch/Resources/Info.plist";
@@ -419,8 +452,9 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = org.sveinbjorn.SearchFS;
+				PRODUCT_BUNDLE_IDENTIFIER = org.sveinbjorn.KatSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -429,12 +463,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 5WX26Y89JP;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sparkle",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GENERATE_PKGINFO_FILE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/KatSearch/Resources/Info.plist";
@@ -443,8 +478,9 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = org.sveinbjorn.SearchFS;
+				PRODUCT_BUNDLE_IDENTIFIER = org.sveinbjorn.KatSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

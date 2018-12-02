@@ -33,6 +33,7 @@
 #import "SearchItem.h"
 #import "NSTableView+PreserveSelection.h"
 #import "NSWorkspace+Additions.h"
+#import "NSTableView+TBHideableTableViewColumns.h"
 
 #define VALUES_KEYPATH(X) [NSString stringWithFormat:@"values.%@", (X)]
 
@@ -50,6 +51,7 @@
     
     IBOutlet NSTableView *tableView;
     IBOutlet NSPathControl *pathControl;
+    IBOutlet NSTextField *filterTextField;
     
     IBOutlet NSButton *searchButton;
     
@@ -60,6 +62,7 @@
     
     NSMutableArray *results;
     SearchTask *task;
+    AuthorizationRef authorizationRef;
 }
 @end
 
@@ -77,7 +80,10 @@
     // Configure table view
     [tableView setDoubleAction:@selector(rowDoubleClicked:)];
     [tableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
+//    [tableView createHideableColumnContextualMenuWithAutoResizingColumns:YES identifierException:nil];
     
+    [pathControl setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
+
     // Load system lock image as icon for button
     NSImage *lockIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kLockedIcon)];
     [lockIcon setSize:NSMakeSize(16, 16)];
@@ -141,10 +147,17 @@
             [self hidePathBar];
         }
     }
+    else if ([keyPath hasSuffix:@"ShowFilter"]) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ShowFilter"]) {
+            [self showFilter];
+        } else {
+            [self hideFilter];
+        }
+    }
 }
 
 - (void)setObserveDefaults:(BOOL)observeDefaults {
-    NSArray *defaults = @[@"ShowPathBar"];
+    NSArray *defaults = @[@"ShowPathBar", @"ShowFilter"];
     
     for (NSString *key in defaults) {
         if (observeDefaults) {
@@ -173,12 +186,25 @@
     
     [self setSearchControlsEnabled:NO];
     
+    // Path bar
     [self hidePathBar];
     [pathControl setURL:nil];
     
-    [progressIndicator setHidden:NO];
-    [progressIndicator startAnimation:self];
+    [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:@"Items"];
     
+    // Configure progress indicator and set it off
+    [tableView addSubview:progressIndicator];
+    CGFloat x = (NSWidth([tableView bounds]) - NSWidth([progressIndicator frame])) / 2;
+    CGFloat y = (NSHeight([tableView bounds]) - NSHeight([progressIndicator frame])) / 2;
+    [progressIndicator setFrameOrigin:NSMakePoint(x, y)];
+    [progressIndicator setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+    [progressIndicator setUsesThreadedAnimation:TRUE];
+    [progressIndicator startAnimation:self];
+    [progressIndicator setHidden:NO];
+
+    CGPoint origin = [numResultsTextField frame].origin;
+    origin.x += 30;
+    [numResultsTextField setFrameOrigin:origin];
     [numResultsTextField setStringValue:@""];
     
     [searchButton setTitle:@"Stop"];
@@ -209,6 +235,10 @@
     task.skipInappropriate = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchSkipSystemFolder"];
     task.negateSearchParams = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchInvertSearch"];
     
+    if (authorizationRef) {
+        [task setAuthorizationRef:authorizationRef];
+    }
+    
     [task start];
 }
 
@@ -224,25 +254,35 @@
 #pragma mark - SearchTaskDelegate
 
 - (void)taskResultsFound:(NSArray *)items {
+    
+    [progressIndicator setFrameOrigin:NSMakePoint(8, 8)];
+    [progressIndicator setAutoresizingMask:NSViewNotSizable];
+    [[self.window contentView] addSubview:progressIndicator];
+    [progressIndicator setControlSize:NSControlSizeSmall];
+    
     [results addObjectsFromArray:items];
     [tableView reloadDataPreservingSelection];
-    [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu items", [results count]]];
+    [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu %@", [results count], [itemTypePopupButton titleOfSelectedItem]]];
     
     [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:[NSString stringWithFormat:@"Items (%lu)", [results count]]];
-    
 }
 
-- (void)taskDidFinish:(SearchTask *)task {
+- (void)taskDidFinish:(SearchTask *)theTask {
     [self setSearchControlsEnabled:YES];
     
     [progressIndicator stopAnimation:self];
     [progressIndicator setHidden:YES];
     
+    CGPoint origin = [numResultsTextField frame].origin;
+    origin.x -= 30;
+    [numResultsTextField setFrameOrigin:origin];
+    
     [searchButton setTitle:@"Search"];
     
     [tableView reloadDataPreservingSelection];
     
-    [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu items", [results count]]];
+    NSString *killed = [theTask wasKilled] ? @"(cancelled)" : @"";
+    [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu items %@", [results count], killed]];
     task = nil;
     NSLog(@"Task finished");
 }
@@ -250,72 +290,64 @@
 #pragma mark - Authentication
 
 - (IBAction)toggleAuthentication:(id)sender {
-//    if (isRefreshing) {
-//        NSBeep();
-//        return;
-//    }
-//
-//    if (!authenticated) {
-//        OSStatus err = [self authenticate];
-//        if (err == errAuthorizationSuccess) {
-//            authenticated = YES;
-//        } else {
-//            if (err != errAuthorizationCanceled) {
-//                NSBeep();
-//                NSLog(@"Authentication failed: %d", err);
-//            }
-//            return;
-//        }
-//    } else {
-//        [self deauthenticate];
-//    }
-//
-    static BOOL authenticated = NO;
-    authenticated = !authenticated;
+    
+    if (!authorizationRef) {
+        OSStatus err = [self authenticate];
+        if (err != errAuthorizationSuccess) {
+            if (err != errAuthorizationCanceled) {
+                NSBeep();
+                NSLog(@"Authentication failed: %d", err);
+            }
+            authorizationRef = NULL;
+            return;
+        }
+    } else {
+        [self deauthenticate];
+    }
+    
+    BOOL authenticated = (authorizationRef != NULL);
+
     OSType iconID = authenticated ? kUnlockedIcon : kLockedIcon;
     NSImage *img = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(iconID)];
     [img setSize:NSMakeSize(16, 16)];
 //    NSString *actionName = authenticated ? @"Deauthenticate" : @"Authenticate";
-    NSString *ttip = authenticated ? @"Deauthenticate" : @"Authenticate to view all system processes";
+    NSString *ttip = authenticated ? @"Deauthenticate" : @"Authenticate to search as root";
 //
     [authenticateButton setImage:img];
     [authenticateButton setToolTip:ttip];
 //    [authenticateMenuItem setImage:img];
 //    [authenticateMenuItem setTitle:actionName];
 //    [authenticateMenuItem setToolTip:ttip];
-//
-//    [self refresh:self];
 }
 
 - (OSStatus)authenticate {
-//    OSStatus err = noErr;
-//    const char *toolPath = [[self lsofPath] fileSystemRepresentation];
-//
-//    AuthorizationItem myItems = { kAuthorizationRightExecute, strlen(toolPath), &toolPath, 0 };
-//    AuthorizationRights myRights = { 1, &myItems };
-//    AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
-//
-//    // Create authorization reference
-//    err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
-//    if (err != errAuthorizationSuccess) {
-//        return err;
-//    }
-//
-//    // Pre-authorize the privileged operation
-//    err = AuthorizationCopyRights(authorizationRef, &myRights, kAuthorizationEmptyEnvironment, flags, NULL);
-//    if (err != errAuthorizationSuccess) {
-//        return err;
-//    }
-//
+    OSStatus err = noErr;
+    const char *toolPath = [[[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil] fileSystemRepresentation];
+    
+    AuthorizationItem myItems = { kAuthorizationRightExecute, strlen(toolPath), &toolPath, 0 };
+    AuthorizationRights myRights = { 1, &myItems };
+    AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
+    
+    // Create authorization reference
+    err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
+    if (err != errAuthorizationSuccess) {
+        return err;
+    }
+    
+    // Pre-authorize the privileged operation
+    err = AuthorizationCopyRights(authorizationRef, &myRights, kAuthorizationEmptyEnvironment, flags, NULL);
+    if (err != errAuthorizationSuccess) {
+        return err;
+    }
+    
     return noErr;
 }
 
 - (void)deauthenticate {
-//    if (authorizationRef) {
-//        AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
-//        authorizationRef = NULL;
-//    }
-//    authenticated = NO;
+    if (authorizationRef) {
+        AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
+        authorizationRef = NULL;
+    }
 }
 
 #pragma mark - Path Bar
@@ -326,7 +358,6 @@
     }
     
     NSView *borderView = [[tableView superview] superview];
-    
     NSRect pathCtrlRect = [pathControl frame];
     NSRect borderViewRect = [borderView frame];
     CGFloat height = pathCtrlRect.size.height + 3;
@@ -356,6 +387,16 @@
     [pathControl setHidden:YES];
 }
 
+- (void)showFilter {
+    [self.window makeFirstResponder:filterTextField];
+    //[ becomeFirstResponder];
+    NSLog(@"Hey");
+}
+
+- (void)hideFilter {
+    
+}
+
 #pragma mark - Item actions
 
 - (NSMutableArray *)selectedItems {
@@ -365,7 +406,6 @@
         NSString *path = [[[pathControl clickedPathItem] URL] path];
         SearchItem *item = [[SearchItem alloc] initWithPath:path];
         [items addObject:item];
-        return items;
     }
     else {
         NSIndexSet *sel = [tableView selectedRowIndexes];
@@ -376,11 +416,6 @@
     }
     
     return items;
-//    if ([sel containsIndex:[tableView clickedRow]]) {
-//        return sel;
-//    } else {
-//        return [NSIndexSet indexSetWithIndex:[tableView clickedRow]];
-//    }
 }
 
 - (void)rowDoubleClicked:(id)object {
@@ -460,21 +495,26 @@
     [self copySelectedFilesToPasteboard:[NSPasteboard generalPasteboard]];
 }
 
-- (void)copySelectedFilesToPasteboard:(NSPasteboard *)pboard {
-    NSMutableArray *paths = [NSMutableArray array];
+#pragma mark - Write items to pasteboard
 
-    for (SearchItem *item in [self selectedItems]) {
-        if ([[NSFileManager defaultManager] fileExistsAtPath:item.path]) {
-                [paths addObject:item.path];
-            }
-    }
-    
+- (void)copyFiles:(NSArray *)files toPasteboard:(NSPasteboard *)pboard {
     [pboard clearContents];
     [pboard declareTypes:@[NSFilenamesPboardType] owner:nil];
-    [pboard setPropertyList:paths forType:NSFilenamesPboardType];
+    [pboard setPropertyList:files forType:NSFilenamesPboardType];
     
-    NSString *strRep = [paths componentsJoinedByString:@"\n"];
+    NSString *strRep = [files componentsJoinedByString:@"\n"];
     [pboard setString:strRep forType:NSStringPboardType];
+}
+
+- (void)copySelectedFilesToPasteboard:(NSPasteboard *)pboard {
+    NSMutableArray *files = [NSMutableArray array];
+    
+    for (SearchItem *item in [self selectedItems]) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:item.path]) {
+            [files addObject:item.path];
+        }
+    }
+    [self copyFiles:files toPasteboard:pboard];
 }
 
 #pragma mark - Contextual menus
@@ -590,10 +630,8 @@
     SearchItem *item = results[row];
     
     if ([[tc identifier] isEqualToString:@"Items"]) {
-        
-        cellView = [tv makeViewWithIdentifier:@"Items" owner:self];
-        
         SearchItem *item = results[row];
+        cellView = [tv makeViewWithIdentifier:@"Items" owner:self];
         cellView.textField.stringValue = item.name;
         cellView.imageView.objectValue = item.icon;
         
@@ -602,7 +640,7 @@
         cellView.textField.stringValue = item.kind;
     } else if ([[tc identifier] isEqualToString:@"Date Modified"]) {
         cellView = [tv makeViewWithIdentifier:@"Date Modified" owner:self];
-        cellView.textField.stringValue = item.kind;
+        cellView.textField.stringValue = item.dateModifiedString;
     } else if ([[tc identifier] isEqualToString:@"Size"]) {
         cellView = [tv makeViewWithIdentifier:@"Size" owner:self];
         cellView.textField.stringValue = [item sizeString];
@@ -642,6 +680,16 @@
         [pathControl setURL:nil];
         [self hidePathBar];
     }
+}
+
+#pragma mark - NSPathControlDelegate
+
+- (BOOL)pathControl:(NSPathControl *)pathControl shouldDragItem:(NSPathControlItem *)pathItem withPasteboard:(NSPasteboard *)pboard {
+    
+    NSString *draggedFile = [[pathItem URL] path];
+    [self copyFiles:@[draggedFile] toPasteboard:pboard];
+
+    return YES;
 }
 
 @end

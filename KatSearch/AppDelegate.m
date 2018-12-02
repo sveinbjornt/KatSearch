@@ -30,10 +30,12 @@
 
 #import "AppDelegate.h"
 #import "WindowController.h"
+#import "PreferencesController.h"
 
 @interface AppDelegate ()
 {
     NSMutableArray *windowControllers;
+    PreferencesController *prefsController;
 }
 @end
 
@@ -41,7 +43,6 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     windowControllers = [NSMutableArray array];
-    
     [self newWindow:self];
 }
 
@@ -55,6 +56,8 @@
     return YES;
 }
 
+#pragma mark -
+
 - (IBAction)newWindow:(id)sender {
     WindowController *controller = [[WindowController alloc] initWithWindowNibName:@"SearchWindow"];
     [windowControllers addObject:controller];
@@ -63,6 +66,15 @@
 
 - (void)windowDidClose:(id)sender {
     [windowControllers removeObject:sender];
+}
+
+#pragma mark -
+
+- (IBAction)showPreferences:(id)sender {
+    if (prefsController == nil) {
+        prefsController = [[PreferencesController alloc] initWithWindowNibName:@"PreferencesController"];
+    }
+    [prefsController showWindow:self];
 }
 
 - (IBAction)openDonations:(id)sender {

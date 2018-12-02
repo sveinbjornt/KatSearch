@@ -10,14 +10,13 @@ TODO
 * Column sorting
 * Columns adjust size with window
 * Remember window position and size
-* Authentication
 * Search filters
-    * Case sensitive
     * Date filters
     * Kind filters
-    * Within bundles filter
     * Matches regex
+* Use CoreData & NSArrayController to populate table view
 
+DONE * Authentication
 DONE * Files/directories only / exact name only
 DONE * Show/Hide Path Bar
 DONE * Contextual menu for items in path control

@@ -28,8 +28,20 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Cocoa/Cocoa.h>
+#import "PreferencesController.h"
 
-@interface KatPathControl : NSPathControl
+@interface PreferencesController ()
+
+@end
+
+@implementation PreferencesController
+
+- (void)windowDidLoad {
+    [super windowDidLoad];
+}
+
+- (IBAction)restoreDefaults:(id)sender {
+    
+}
 
 @end

@@ -4,13 +4,13 @@
 
 **Work in progress**
 
-Mac app to quickly find files on entire HFS+/APFS volumes using the file system catalog.
+Mac power-user app to quickly find files on entire HFS+/APFS volumes using the file system catalog.
 
-* Native, modern macOS app
+* Fast, native, modern macOS app
 * Faster than comparable apps with similar functionality
-* Snappy, responsive no-nonsense interface
-* Can run with admin privileges to search all files and folders on the system
+* Snappy, responsive no-nonsense interface with all the native bells and whistles
 * Free, open source software
+* Can run with admin privileges to search all files and folders on the system
 
 ## Downloads
 
