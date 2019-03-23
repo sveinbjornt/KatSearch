@@ -44,7 +44,7 @@
                                     <action selector="openWebsite:" target="Voe-Tx-rLC" id="e9f-7a-pKS"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Donate to Support KatSearch" id="Vki-3a-10y">
+                            <menuItem title="Make a Donation" id="Vki-3a-10y">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="openDonations:" target="Voe-Tx-rLC" id="y8B-Bt-GnT"/>
@@ -86,7 +86,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
-                            <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl">
+                            <menuItem title="New Search Window" keyEquivalent="n" id="Was-JA-tGl">
                                 <connections>
                                     <action selector="newWindow:" target="Voe-Tx-rLC" id="RQy-hf-XGb"/>
                                 </connections>
@@ -467,13 +467,13 @@ DQ
                                     <action selector="openWebsite:" target="Voe-Tx-rLC" id="Dcr-D0-5kZ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="KatSearch on GitHub" id="kQT-d4-aqC">
+                            <menuItem title="GitHub Project Page" id="kQT-d4-aqC">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="openGitHubWebsite:" target="Voe-Tx-rLC" id="HLq-Sl-t5C"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Donate to Support KatSearch Development" id="BQm-lE-D2U">
+                            <menuItem title="Make a Donation" id="BQm-lE-D2U">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="openDonations:" target="Voe-Tx-rLC" id="vYl-jU-zfO"/>
@@ -489,7 +489,7 @@ DQ
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-52" y="-163"/>
+            <point key="canvasLocation" x="-103" y="-249"/>
         </menu>
         <menuItem title="Donate to Support KatSearch Development" id="gcA-9j-ipy">
             <modifierMask key="keyEquivalentModifierMask"/>

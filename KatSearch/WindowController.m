@@ -180,7 +180,7 @@
         return;
     }
     
-    [self.window setTitle:[NSString stringWithFormat:@"“%@” - KatSearch", [searchField stringValue]]];
+    [self.window setTitle:[NSString stringWithFormat:@"“%@” on %@ - KatSearch", [searchField stringValue], [volumesPopupButton titleOfSelectedItem]]];
     
     NSLog(@"Starting task");
     
@@ -529,25 +529,20 @@
 
         NSMutableArray *items = [self selectedItems];
         NSUInteger numSelectedFiles = [items count];
-        
         NSString *copyTitle = @"";
-        NSString *qlTitle = @"";
         
         if (numSelectedFiles == 0) {
             return;
         }
         else if (numSelectedFiles > 1) {
             copyTitle = [NSString stringWithFormat:@"Copy %lu files", (unsigned long)numSelectedFiles];
-            qlTitle = [NSString stringWithFormat:@"Quick Look %lu files", (unsigned long)numSelectedFiles];
         } else {
             SearchItem *item = items[0];
             NSString *name = item.name;
             
             copyTitle = [NSString stringWithFormat:@"Copy “%@”", name];
-            qlTitle = [NSString stringWithFormat:@"Quick Look “%@”", name];
         }
-        [[menu itemWithTag:1] setTitle:qlTitle];
-        [[menu itemWithTag:2] setTitle:copyTitle];
+        [[menu itemWithTag:1] setTitle:copyTitle];
     }
     else if (menu == openWithSubMenu) {
     

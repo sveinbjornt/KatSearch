@@ -99,7 +99,7 @@ DQ
                             <rect key="frame" x="1" y="0.0" width="798" height="495"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="FileListTableView">
+                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="FileListTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="798" height="472"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -145,7 +145,7 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="Kind" width="148" minWidth="10" maxWidth="3.4028234663852886e+38" id="e6e-bl-cId" userLabel="Kind">
+                                        <tableColumn identifier="Kind" editable="NO" width="148" minWidth="10" maxWidth="3.4028234663852886e+38" id="e6e-bl-cId" userLabel="Kind">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Kind">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -178,7 +178,7 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="Date Modified" width="112" minWidth="10" maxWidth="3.4028234663852886e+38" id="14A-ud-fM2" userLabel="Date Modified">
+                                        <tableColumn identifier="Date Modified" editable="NO" width="130" minWidth="10" maxWidth="3.4028234663852886e+38" id="14A-ud-fM2" userLabel="Date Modified">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Date Modified">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -189,14 +189,13 @@ DQ
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="99j-Ne-kGR">
-                                                    <rect key="frame" x="489" y="1" width="112" height="17"/>
+                                                    <rect key="frame" x="489" y="1" width="130" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="gOe-2v-Sx2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="112" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="130" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Date Modified" id="h9B-i6-zwK">
                                                                 <font key="font" metaFont="system"/>
@@ -211,7 +210,7 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="Size" width="192" minWidth="10" maxWidth="3.4028234663852886e+38" id="P8S-bY-VTe" userLabel="Size">
+                                        <tableColumn identifier="Size" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="P8S-bY-VTe" userLabel="Size">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Size">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -222,14 +221,13 @@ DQ
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="wLv-os-SgI">
-                                                    <rect key="frame" x="604" y="1" width="192" height="17"/>
+                                                    <rect key="frame" x="622" y="1" width="120" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="h1H-hw-ejo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="192" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Size" id="Tyd-fG-ZmC">
                                                                 <font key="font" metaFont="system"/>
@@ -479,14 +477,8 @@ DQ
                         <action selector="getInfo:" target="-2" id="Ocw-X3-k6d"/>
                     </connections>
                 </menuItem>
-                <menuItem title="QuickLook" tag="1" id="t6G-h3-Mdw" userLabel="Copy">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="quickLook:" target="-2" id="4fl-Ui-dFW"/>
-                    </connections>
-                </menuItem>
                 <menuItem isSeparatorItem="YES" id="R9U-QJ-AHH"/>
-                <menuItem title="Copy" tag="2" id="0ba-6T-LVO" userLabel="Copy">
+                <menuItem title="Copy" tag="1" id="0ba-6T-LVO" userLabel="Copy">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="copyFiles:" target="-2" id="6f8-A7-47V"/>

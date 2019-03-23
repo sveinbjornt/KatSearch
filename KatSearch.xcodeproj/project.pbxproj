@@ -23,9 +23,7 @@
 		F48DC0F920FBF16100B21222 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48DC0F720FBF16100B21222 /* PreferencesController.m */; };
 		F48DC0FC20FBF17E00B21222 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F48DC0FB20FBF17E00B21222 /* PreferencesController.xib */; };
 		F48DC10020FCC51D00B21222 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48DC0FE20FCC51D00B21222 /* Sparkle.framework */; };
-		F48DC10120FCC51D00B21222 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48DC0FF20FCC51D00B21222 /* MASShortcut.framework */; };
 		F48DC10220FCC53500B21222 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F48DC0FE20FCC51D00B21222 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F48DC10320FCC53500B21222 /* MASShortcut.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F48DC0FF20FCC51D00B21222 /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F48DC10520FCD16400B21222 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = F48DC10420FCD16400B21222 /* AppIcon.icns */; };
 		F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */ = {isa = PBXBuildFile; fileRef = F4A5CF0020ED7E15008D0A06 /* searchfs */; };
 		F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */; };
@@ -40,7 +38,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				F48DC10220FCC53500B21222 /* Sparkle.framework in Copy Frameworks */,
-				F48DC10320FCC53500B21222 /* MASShortcut.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,7 +80,6 @@
 		F48DC0F720FBF16100B21222 /* PreferencesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
 		F48DC0FB20FBF17E00B21222 /* PreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesController.xib; sourceTree = "<group>"; };
 		F48DC0FE20FCC51D00B21222 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		F48DC0FF20FCC51D00B21222 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASShortcut.framework; sourceTree = "<group>"; };
 		F48DC10420FCD16400B21222 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		F4A5CF0020ED7E15008D0A06 /* searchfs */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = searchfs; sourceTree = "<group>"; };
 		F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STVolumesPopupButton.h; sourceTree = "<group>"; };
@@ -97,7 +93,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F48DC10120FCC51D00B21222 /* MASShortcut.framework in Frameworks */,
 				F48DC10020FCC51D00B21222 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				F48DC0FE20FCC51D00B21222 /* Sparkle.framework */,
-				F48DC0FF20FCC51D00B21222 /* MASShortcut.framework */,
 			);
 			path = Frameworks;
 			sourceTree = SOURCE_ROOT;
