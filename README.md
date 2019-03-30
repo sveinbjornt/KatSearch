@@ -2,13 +2,18 @@
 
 <img src="icon.png" width="128" height="128" align="right" style="float: right; margin-left: 30px;">
 
-**Work in progress**
+**KatSearch is a work in progress**
 
-Mac power-user app to quickly find files on entire HFS+/APFS volumes by scanning the file system catalog. Unlike Spotlight, KatSearch only looks at filenames, not content. It also searches the entire file system, not just the parts Apple wants you to see.
+Mac power-user app to quickly find files on entire HFS+/APFS volumes by scanning the file system catalog. 
 
-* Fast, native, modern macOS app with a responsive, no-nonsense interface
+Remember the good old days when search on the Mac simply scanned the filesystem? Yeah, me too, and I miss the simplicity of it. 
+
+Unlike Spotlight, KatSearch performs no indexing and only looks at filenames, not content. It uses low-level kernel calls to search the **entire** file system, not just the parts Apple wants you to see, via the APFS or HFS+ file system catalog.
+
+* Fast, native, modern macOS app with a responsive, no-nonsense interface, written in Objective-C/Cocoa
+* Scans the actual file system, not just the userland files Apple wants you to see
 * Can run with admin privileges to scan all files and folders on the volume irrespective of permissions
-* Ubiquitous drag and drop support and hooks into Finder actions
+* Ubiquitous native drag and drop behaviour, with hooks into Finder actions/services
 * Free, open source software
 
 
@@ -17,8 +22,6 @@ Mac power-user app to quickly find files on entire HFS+/APFS volumes by scanning
 <!--
 *  **[⇩ Download KatSearch 1.0](https://sveinbjorn.org/files/software/katsearch.zip)** (~1.5 MB, Intel 64-bit, 10.8 or later)
 -->
-
-## About
 
 ## Screenshots
 
@@ -29,7 +32,7 @@ Mac power-user app to quickly find files on entire HFS+/APFS volumes by scanning
 
 ## BSD License 
 
-Copyright (C) 2018 Sveinbjorn Thordarson &lt;<a href="mailto:">sveinbjorn@sveinbjorn.org</a>&gt;
+Copyright (C) 2018-2019 Sveinbjorn Thordarson &lt;<a href="mailto:">sveinbjorn@sveinbjorn.org</a>&gt;
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
