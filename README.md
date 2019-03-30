@@ -8,10 +8,11 @@ Mac power-user app to quickly find files on entire HFS+/APFS volumes by scanning
 
 Remember the good old days when search on the Mac simply scanned the filesystem? Yeah, me too, and I miss the simplicity of it. 
 
-Unlike Spotlight, KatSearch performs no indexing and only looks at filenames, not content. It uses low-level kernel calls to search the **entire** file system, not just the parts Apple wants you to see, via the APFS or HFS+ file system catalog.
+Unlike Spotlight, KatSearch performs no indexing and only looks at filenames, not content. It uses low-level kernel calls to search the **entire** file system via the APFS or HFS+ file system catalog.
 
 * Fast, native, modern macOS app with a responsive, no-nonsense interface, written in Objective-C/Cocoa
-* Scans the actual file system, not just the userland files Apple wants you to see
+* Live search results
+* Scans the actual file system, not just userland files Apple wants you to see
 * Can run with admin privileges to scan all files and folders on the volume irrespective of permissions
 * Ubiquitous native drag and drop behaviour, with hooks into Finder actions/services
 * Free, open source software
@@ -19,16 +20,15 @@ Unlike Spotlight, KatSearch performs no indexing and only looks at filenames, no
 
 ## Downloads
 
+* No binaries on offer yet.
+
 <!--
 *  **[⇩ Download KatSearch 1.0](https://sveinbjorn.org/files/software/katsearch.zip)** (~1.5 MB, Intel 64-bit, 10.8 or later)
 -->
 
 ## Screenshots
 
-<!--<img src="screenshots/katsearch_screenshot1.jpg" align="center">
-
-<img src="screenshots/katsearch_screenshot2.jpg" align="center">-->
-
+<img src="screenshots/katsearch_screenshot1.jpg" align="center">
 
 ## BSD License 
 
@@ -58,3 +58,5 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
+
+The KatSearch application icon is copyright (C) [Drífa Thoroddsen](https://drifaliftora.is).
