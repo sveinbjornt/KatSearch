@@ -66,6 +66,7 @@
 		F471DF5F20F4DAE70057E667 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		F471DF6520F7AF6D0057E667 /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		F471DF6620F7AF6D0057E667 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F47967392250102900CA0746 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		F48451E520F8DE31005797C1 /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		F48451E620F8E4CB005797C1 /* FileListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileListTableView.h; sourceTree = "<group>"; };
 		F48451E720F8E4CB005797C1 /* FileListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileListTableView.m; sourceTree = "<group>"; };
@@ -123,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				F462A26620E111D10062B230 /* main.m */,
+				F47967392250102900CA0746 /* Common.h */,
 				F462A25D20E111CF0062B230 /* AppDelegate.h */,
 				F462A25E20E111CF0062B230 /* AppDelegate.m */,
 				F462A27020E1122A0062B230 /* WindowController.h */,

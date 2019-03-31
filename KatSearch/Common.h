@@ -28,66 +28,8 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "Common.h"
-#import "AppDelegate.h"
-#import "WindowController.h"
-#import "PreferencesController.h"
-
-@interface AppDelegate ()
-{
-    NSMutableArray *windowControllers;
-    PreferencesController *prefsController;
-}
-@end
-
-@implementation AppDelegate
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    windowControllers = [NSMutableArray array];
-    [self newWindow:self];
-}
-
-- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
-    if (flag) {
-        return NO;
-    }
-
-    [self newWindow:self];
-    
-    return YES;
-}
-
-#pragma mark -
-
-- (IBAction)newWindow:(id)sender {
-    WindowController *controller = [[WindowController alloc] initWithWindowNibName:@"SearchWindow"];
-    [windowControllers addObject:controller];
-    [controller showWindow:self];
-}
-
-- (void)windowDidClose:(id)sender {
-    [windowControllers removeObject:sender];
-}
-
-#pragma mark -
-
-- (IBAction)showPreferences:(id)sender {
-    if (prefsController == nil) {
-        prefsController = [[PreferencesController alloc] initWithWindowNibName:@"PreferencesController"];
-    }
-    [prefsController showWindow:self];
-}
-
-- (IBAction)openDonations:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:PROGRAM_DONATIONS_URL]];
-}
-
-- (IBAction)openWebsite:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:PROGRAM_WEBSITE_URL]];
-}
-
-- (IBAction)openGitHubWebsite:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:PROGRAM_GITHUB_URL]];
-}
-
-@end
+#define PROGRAM_NAME            @"KatSearch"
+#define PROGRAM_VERSION         @"0.1"
+#define PROGRAM_WEBSITE_URL     @"https://sveinbjorn.org/katsearch"
+#define PROGRAM_DONATIONS_URL   @"https://sveinbjorn.org/donations"
+#define PROGRAM_GITHUB_URL      @"https://github.com/sveinbjornt/KatSearch"
