@@ -81,6 +81,12 @@
     [tableView setDoubleAction:@selector(rowDoubleClicked:)];
     [tableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
 //    [tableView createHideableColumnContextualMenuWithAutoResizingColumns:YES identifierException:nil];
+//    for (NSTableColumn *tableColumn in [tableView tableColumns]) {
+//        
+//        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(compare:)];
+//        [tableColumn setSortDescriptorPrototype:sortDescriptor];
+//    }
+    
     
     [pathControl setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
 
@@ -285,6 +291,13 @@
     [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu items %@", [results count], killed]];
     task = nil;
     NSLog(@"Task finished");
+}
+
+#pragma mark - Sort
+
+- (void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
+    [results sortUsingDescriptors:oldDescriptors];
+    [tableView reloadData];
 }
 
 #pragma mark - Authentication

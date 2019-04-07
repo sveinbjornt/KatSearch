@@ -123,6 +123,9 @@
 }
 
 - (NSDate *)dateAccessed {
+    if (![self stat]) {
+        return nil;
+    }
     return [NSDate dateWithTimeIntervalSince1970:cachedStatPtr->st_atimespec.tv_sec];
 }
 
@@ -139,6 +142,9 @@
 }
 
 - (NSDate *)dateCreated {
+    if (![self stat]) {
+        return nil;
+    }
     return [NSDate dateWithTimeIntervalSince1970:cachedStatPtr->st_ctimespec.tv_sec];
 }
 
@@ -155,6 +161,9 @@
 }
 
 - (NSDate *)dateModified {
+    if (![self stat]) {
+        return nil;
+    }
     return [NSDate dateWithTimeIntervalSince1970:cachedStatPtr->st_mtimespec.tv_sec];
 }
 
