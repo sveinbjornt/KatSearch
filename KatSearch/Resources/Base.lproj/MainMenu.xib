@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -12,7 +12,11 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
+            <connections>
+                <outlet property="openRecentMenu" destination="kkF-xs-mwP" id="kw0-1E-Rja"/>
+            </connections>
+        </customObject>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
                 <menuItem title="KatSearch" id="1Xt-HY-uBw">
@@ -93,15 +97,10 @@
                             </menuItem>
                             <menuItem title="Recent Searches" id="tXI-mr-wws">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Recent Searches" systemMenu="recentDocuments" id="oas-Oc-fiZ">
-                                    <items>
-                                        <menuItem title="Clear Menu" id="vNY-rz-j42">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="clearRecentDocuments:" target="-1" id="Daa-9d-B3U"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
+                                <menu key="submenu" id="kkF-xs-mwP">
+                                    <connections>
+                                        <outlet property="delegate" destination="Voe-Tx-rLC" id="ttP-rR-F9L"/>
+                                    </connections>
                                 </menu>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
@@ -489,14 +488,8 @@ DQ
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-103" y="-249"/>
+            <point key="canvasLocation" x="-185" y="-263"/>
         </menu>
-        <menuItem title="Donate to Support KatSearch Development" id="gcA-9j-ipy">
-            <modifierMask key="keyEquivalentModifierMask"/>
-            <connections>
-                <action selector="openDonations:" target="Voe-Tx-rLC" id="bxc-7R-Ks1"/>
-            </connections>
-        </menuItem>
         <customObject id="SLG-ns-ELk" customClass="SUUpdater"/>
         <userDefaultsController representsSharedInstance="YES" id="aad-Ka-dzA"/>
     </objects>

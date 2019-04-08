@@ -33,10 +33,7 @@
 @implementation KatPathControl
 
 + (void)initialize {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [NSApp registerServicesMenuSendTypes:@[NSFilenamesPboardType] returnTypes:@[]];
-    });
+    [NSApp registerServicesMenuSendTypes:@[NSFilenamesPboardType] returnTypes:@[]];
 }
 
 - (id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType {

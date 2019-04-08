@@ -33,3 +33,5 @@
 #define PROGRAM_WEBSITE_URL     @"https://sveinbjorn.org/katsearch"
 #define PROGRAM_DONATIONS_URL   @"https://sveinbjorn.org/donations"
 #define PROGRAM_GITHUB_URL      @"https://github.com/sveinbjornt/KatSearch"
+
+#define NUM_RECENT_SEARCHES     10

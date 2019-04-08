@@ -7,7 +7,6 @@ TODO
 * Preferences
     * Hotkey trigger
 * Columns menu
-* Column sorting
 * Columns adjust size with window
 * Remember window position and size
 * Search filters
@@ -16,6 +15,7 @@ TODO
     * Matches regex
 * Use CoreData & NSArrayController to populate table view
 
+DONE * Column sorting
 DONE * Authentication
 DONE * Files/directories only / exact name only
 DONE * Show/Hide Path Bar

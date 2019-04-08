@@ -187,8 +187,15 @@
 - (BOOL)isAuthenticated {
     return (authorizationRef != NULL);
 }
+
 - (void)setAuthorizationRef:(AuthorizationRef)authRef {
     authorizationRef = authRef;
+}
+
+#pragma mark - Description
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"“%@” on %@", self.searchString, self.volume];
 }
 
 @end

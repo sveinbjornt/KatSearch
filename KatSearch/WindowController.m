@@ -245,6 +245,8 @@
         [task setAuthorizationRef:authorizationRef];
     }
     
+    [(AppDelegate *)[[NSApplication sharedApplication] delegate] noteRecentSearch:task];
+    
     [task start];
 }
 
