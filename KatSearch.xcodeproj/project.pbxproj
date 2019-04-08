@@ -19,7 +19,6 @@
 		F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F471DF5F20F4DAE70057E667 /* Credits.rtf */; };
 		F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* FileListTableView.m */; };
 		F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F48451EF20F8F914005797C1 /* dsa_pub.pem */; };
-		F48DC0F220FB8D7000B21222 /* NSTableView+TBHideableTableViewColumns.m in Sources */ = {isa = PBXBuildFile; fileRef = F48DC0F120FB8D6F00B21222 /* NSTableView+TBHideableTableViewColumns.m */; };
 		F48DC0F920FBF16100B21222 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48DC0F720FBF16100B21222 /* PreferencesController.m */; };
 		F48DC0FC20FBF17E00B21222 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F48DC0FB20FBF17E00B21222 /* PreferencesController.xib */; };
 		F48DC10020FCC51D00B21222 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48DC0FE20FCC51D00B21222 /* Sparkle.framework */; };
@@ -75,8 +74,6 @@
 		F48451ED20F8F914005797C1 /* sign_update.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = sign_update.rb; sourceTree = "<group>"; };
 		F48451EE20F8F914005797C1 /* dsa_priv.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = dsa_priv.pem; sourceTree = "<group>"; };
 		F48451EF20F8F914005797C1 /* dsa_pub.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		F48DC0F020FB8D6F00B21222 /* NSTableView+TBHideableTableViewColumns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+TBHideableTableViewColumns.h"; sourceTree = "<group>"; };
-		F48DC0F120FB8D6F00B21222 /* NSTableView+TBHideableTableViewColumns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+TBHideableTableViewColumns.m"; sourceTree = "<group>"; };
 		F48DC0F620FBF16100B21222 /* PreferencesController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
 		F48DC0F720FBF16100B21222 /* PreferencesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
 		F48DC0FB20FBF17E00B21222 /* PreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesController.xib; sourceTree = "<group>"; };
@@ -163,8 +160,6 @@
 		F471DF6120F52A200057E667 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				F48DC0F020FB8D6F00B21222 /* NSTableView+TBHideableTableViewColumns.h */,
-				F48DC0F120FB8D6F00B21222 /* NSTableView+TBHideableTableViewColumns.m */,
 				F48451E620F8E4CB005797C1 /* FileListTableView.h */,
 				F48451E720F8E4CB005797C1 /* FileListTableView.m */,
 				F45D8BBA20FA6FCC00D6E8F6 /* KatPathControl.h */,
@@ -300,7 +295,6 @@
 				F462A27320E1122A0062B230 /* WindowController.m in Sources */,
 				F45D8BBC20FA6FCC00D6E8F6 /* KatPathControl.m in Sources */,
 				F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */,
-				F48DC0F220FB8D7000B21222 /* NSTableView+TBHideableTableViewColumns.m in Sources */,
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
 				F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */,
