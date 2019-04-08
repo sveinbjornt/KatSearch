@@ -35,3 +35,5 @@
 #define PROGRAM_GITHUB_URL      @"https://github.com/sveinbjornt/KatSearch"
 
 #define NUM_RECENT_SEARCHES     10
+
+#define VALUES_KEYPATH(X) [NSString stringWithFormat:@"values.%@", (X)]

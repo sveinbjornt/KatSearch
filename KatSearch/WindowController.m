@@ -33,9 +33,7 @@
 #import "SearchItem.h"
 #import "NSTableView+PreserveSelection.h"
 #import "NSWorkspace+Additions.h"
-#import "NSTableView+TBHideableTableViewColumns.h"
-
-#define VALUES_KEYPATH(X) [NSString stringWithFormat:@"values.%@", (X)]
+#import "Common.h"
 
 @interface WindowController ()
 {
