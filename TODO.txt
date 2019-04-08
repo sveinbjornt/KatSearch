@@ -1,20 +1,23 @@
 
 TODO
 
-* Install CLT via Preferences
 * Export results to text file
-* Search history (Recent searches)
 * Preferences
     * Hotkey trigger
 * Columns menu
 * Columns adjust size with window
-* Remember window position and size
+* Handle aliases
 * Search filters
     * Date filters
     * Kind filters
     * Matches regex
 * Use CoreData & NSArrayController to populate table view
 
+* Install CLT via Preferences
+
+* Search history (Recent searches)
+
+DONE * Remember window position and size
 DONE * Column sorting
 DONE * Authentication
 DONE * Files/directories only / exact name only
