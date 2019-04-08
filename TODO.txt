@@ -11,8 +11,11 @@ TODO
     * Date filters
     * Kind filters
     * Matches regex
+    * Should highlight strings that match
+    * Only search columns that are enabled
 * Use CoreData & NSArrayController to populate table view
-
+* Detect when file no longer exists at path
+* Add "Move to Trash" to contextual menu (with confirmation prompt)
 * Install CLT via Preferences
 
 * Search history (Recent searches)
