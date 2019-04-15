@@ -488,7 +488,7 @@ DQ
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-185" y="-263"/>
+            <point key="canvasLocation" x="-24" y="-406"/>
         </menu>
         <customObject id="SLG-ns-ELk" customClass="SUUpdater"/>
         <userDefaultsController representsSharedInstance="YES" id="aad-Ka-dzA"/>

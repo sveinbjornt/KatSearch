@@ -33,6 +33,7 @@
 
 @interface WindowController : NSWindowController <  NSTableViewDelegate,
                                                     NSTableViewDataSource,
+                                                    NSMenuDelegate,
                                                     SearchTaskDelegate      >
 
 @end

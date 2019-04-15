@@ -10,7 +10,7 @@
             <connections>
                 <outlet property="authenticateButton" destination="Mqr-y6-S2s" id="VMr-pG-7fC"/>
                 <outlet property="columnsMenu" destination="ZqL-KF-wJB" id="cMJ-s8-ifC"/>
-                <outlet property="filterTextField" destination="RMp-6N-DDK" id="xkO-vj-sAz"/>
+                <outlet property="filterTextField" destination="RMp-6N-DDK" id="8Lq-f7-DXR"/>
                 <outlet property="itemContextualMenu" destination="tCS-El-m2x" id="VK7-ok-q7f"/>
                 <outlet property="itemTypePopupButton" destination="ZFf-6d-eZi" id="F8B-6R-uOW"/>
                 <outlet property="matchCriterionPopupButton" destination="IVn-aA-hWY" id="d6s-4g-3TU"/>
@@ -376,6 +376,7 @@ DQ
                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                 </dictionary>
                             </binding>
+                            <outlet property="delegate" destination="-2" id="To8-dW-8ch"/>
                         </connections>
                     </searchField>
                 </subviews>

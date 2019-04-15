@@ -61,6 +61,7 @@
     NSMutableArray *results;
     SearchTask *task;
     AuthorizationRef authorizationRef;
+    NSTimer *filterTimer;
 }
 @end
 
@@ -209,7 +210,7 @@
     CGPoint origin = [numResultsTextField frame].origin;
     origin.x += 30;
     [numResultsTextField setFrameOrigin:origin];
-    [numResultsTextField setStringValue:@""];
+    [numResultsTextField setStringValue:@"Searching..."];
     
     [searchButton setTitle:@"Stop"];
     
@@ -299,6 +300,52 @@
     [results sortUsingDescriptors:oldDescriptors];
     [tableView reloadData];
 }
+
+#pragma mark - Filter
+
+- (void)updateFiltering {
+    NSLog(@"Filtering...");
+//    if (isRefreshing) {
+//        return;
+//    }
+    
+//    // Filter content
+//    int matchingFilesCount = 0;
+//    self.content = [self filterContent:self.unfilteredContent numberOfMatchingFiles:&matchingFilesCount];
+//
+//    // Update outline view header
+//    [self updateProcessCountHeader];
+//
+//    // Update num items label
+//    NSString *str = [NSString stringWithFormat:@"Showing %d out of %d items", matchingFilesCount, self.totalFileCount];
+//    if (matchingFilesCount == self.totalFileCount) {
+//        str = [NSString stringWithFormat:@"Showing all %d items", self.totalFileCount];
+//    }
+//    [numItemsTextField setStringValue:str];
+//
+//    [outlineView reloadData];
+//
+//    if ([DEFAULTS boolForKey:@"disclosure"]) {
+//        [outlineView expandItem:nil expandChildren:YES];
+//    } else {
+//        [outlineView collapseItem:nil collapseChildren:YES];
+//    }
+}
+
+// User typed in search filter
+- (void)controlTextDidChange:(NSNotification *)aNotification {
+    id o = [aNotification object];
+    if (o == filterTextField) {
+        if (filterTimer) {
+            [filterTimer invalidate];
+        }
+        filterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateFiltering) userInfo:nil repeats:NO];
+    }
+    else if (o == searchField) {
+        [searchButton setEnabled:[[searchField stringValue] length]];
+    }
+}
+
 
 #pragma mark - Authentication
 
@@ -617,10 +664,13 @@
     }
 }
 
-#pragma mark - Text field delegate
+#pragma mark - NSMenuItemValidation
 
-- (void)controlTextDidChange:(NSNotification *)obj {
-    [searchButton setEnabled:[[searchField stringValue] length]];
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
+    if ([menuItem action] == @selector(search:) && [task isRunning]) {
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - NSTableViewDataSource
