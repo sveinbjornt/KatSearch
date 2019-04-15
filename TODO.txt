@@ -17,7 +17,7 @@ TODO
 * Detect when file no longer exists at path
 * Add "Move to Trash" to contextual menu (with confirmation prompt)
 * Install CLT via Preferences
-
+* Override Cmd-F to show filter field
 * Search history (Recent searches)
 
 DONE * Remember window position and size

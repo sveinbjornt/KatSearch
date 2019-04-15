@@ -360,27 +360,51 @@
                             <menuItem isSeparatorItem="YES" id="D2T-07-NSd"/>
                             <menuItem title="Show Kind" id="Y4S-zk-wYB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnKind" id="XSt-Mu-uE8"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Show Size" id="fBx-eC-aYG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnSize" id="TBQ-xt-x0S"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Show Date Created" id="QuO-X2-z9k">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnDateCreated" id="qOc-Hh-B36"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Show Date Modified" id="VTp-Wi-5ue">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnDateModified" id="sOk-uv-1Gp"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Show Date Accessed" id="NRA-Br-TMN">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnDateAccessed" id="e3T-uC-SeV"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Show User:Group" id="tAU-a8-tTl">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnUserGroup" id="qNm-Cp-byP"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Show Permissions" id="f5n-os-aoJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnPermissions" id="eqH-j7-naL"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Show UTI" id="7JE-Aj-uFA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnUTI" id="A23-0A-0H3"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="gTx-Wl-iKt"/>
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -488,7 +512,7 @@ DQ
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-24" y="-406"/>
+            <point key="canvasLocation" x="-98" y="-533"/>
         </menu>
         <customObject id="SLG-ns-ELk" customClass="SUUpdater"/>
         <userDefaultsController representsSharedInstance="YES" id="aad-Ka-dzA"/>

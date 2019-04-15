@@ -144,25 +144,32 @@
 #pragma mark - Defaults observation
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
-    if ([keyPath hasSuffix:@"ShowPathBar"]) {
+    NSString *def = [keyPath substringFromIndex:[@"values." length]];
+    if ([def hasSuffix:@"ShowPathBar"]) {
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ShowPathBar"] && [tableView selectedRow] != -1) {
             [self showPathBar];
         } else {
             [self hidePathBar];
         }
     }
-    else if ([keyPath hasSuffix:@"ShowFilter"]) {
+    else if ([def hasSuffix:@"ShowFilter"]) {
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ShowFilter"]) {
             [self showFilter];
         } else {
             [self hideFilter];
         }
     }
+    else if ([def hasPrefix:COL_DEFAULT_PREFIX]) {
+        NSString *colName = [def substringFromIndex:[COL_DEFAULT_PREFIX length]];
+        NSLog(@"%@", colName);
+    }
 }
 
 - (void)setObserveDefaults:(BOOL)observeDefaults {
-    NSArray *defaults = @[@"ShowPathBar", @"ShowFilter"];
+    NSMutableArray *defaults = [@[@"ShowPathBar", @"ShowFilter"] mutableCopy];
+    for (NSString *colString in COLUMNS) {
+        [defaults addObject:[NSString stringWithFormat:@"ShowColumn%@", colString]];
+    }
     
     for (NSString *key in defaults) {
         if (observeDefaults) {

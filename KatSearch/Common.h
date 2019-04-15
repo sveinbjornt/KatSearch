@@ -37,3 +37,8 @@
 #define NUM_RECENT_SEARCHES     10
 
 #define VALUES_KEYPATH(X) [NSString stringWithFormat:@"values.%@", (X)]
+
+#define COL_DEFAULT_PREFIX @"ShowColumn"
+#define COLUMNS \
+@[@"Kind", @"Size", @"DateCreated", @"DateModified", \
+  @"DateAccessed", @"UserGroup", @"Permissions", @"UTI"]

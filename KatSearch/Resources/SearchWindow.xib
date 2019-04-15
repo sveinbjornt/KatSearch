@@ -265,6 +265,9 @@ DQ
                         <tableHeaderView key="headerView" id="aEN-xB-2Qs">
                             <rect key="frame" x="0.0" y="0.0" width="799" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <connections>
+                                <outlet property="menu" destination="Y72-8T-8y7" id="Lzb-O6-xdC"/>
+                            </connections>
                         </tableHeaderView>
                     </scrollView>
                     <pathControl hidden="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" id="bfe-bX-o7s" customClass="KatPathControl">
@@ -495,6 +498,58 @@ DQ
             <point key="canvasLocation" x="298" y="383"/>
         </menu>
         <userDefaultsController representsSharedInstance="YES" id="7VI-tp-uBM"/>
+        <menu id="Y72-8T-8y7" userLabel="Columns Contextual Menu">
+            <items>
+                <menuItem title="Show Kind" id="27S-Uw-WmW">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnKind" id="RBK-R3-5w6"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show Size" id="Vfk-pr-upL">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnSize" id="f3w-x4-FkG"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show Date Created" id="v8y-LW-D9L">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnDateCreated" id="yfk-s1-pMD"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show Date Modified" id="tGQ-KF-LmP">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnDateCreated" id="wHT-JQ-DxM"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show Date Accessed" id="1RI-Io-SiA">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnDateAccessed" id="aKK-df-Qud"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show User:Group" id="bwU-21-hjh">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnUserGroup" id="0NI-uM-iGl"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show Permissions" id="vrc-F2-s8R">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnPermissions" id="vXx-bI-nrN"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Show UTI" id="V2Q-KB-eMF">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnUTI" id="DeZ-xI-lJm"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
