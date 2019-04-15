@@ -28,6 +28,7 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
+#import "Common.h"
 #import "PreferencesController.h"
 
 @interface PreferencesController ()
@@ -37,11 +38,36 @@
 @implementation PreferencesController
 
 - (void)windowDidLoad {
-    [super windowDidLoad];
+    //[super windowDidLoad];
+    NSImage *img = [NSImage imageNamed:NSImageNamePreferencesGeneral];
+    if (img) {
+        [self.window setRepresentedURL:[NSURL URLWithString:@""]]; // Not representing a URL
+        [[self.window standardWindowButton:NSWindowDocumentIconButton] setImage:img];
+    }
+}
+
+- (BOOL)window:(NSWindow *)window shouldPopUpDocumentPathMenu:(NSMenu *)menu {
+    // Prevent popup menu when window icon/title is cmd-clicked
+    return NO;
+}
+
+- (BOOL)window:(NSWindow *)window shouldDragDocumentWithEvent:(NSEvent *)event from:(NSPoint)dragImageLocation withPasteboard:(NSPasteboard *)pasteboard {
+    // Prevent dragging of title bar icon
+    return NO;
 }
 
 - (IBAction)restoreDefaults:(id)sender {
-    
+    [DEFAULTS setBool:YES forKey:@"ShowPathBar"];
+    [DEFAULTS setBool:NO forKey:@"ShowFilter"];
+    [DEFAULTS setBool:YES forKey:@"friendlyProcessNames"];
+    [DEFAULTS setBool:NO forKey:@"authenticateOnLaunch"];
+
+    for (int i = 0; i < [COLUMNS count]; i++) {
+        NSString *key = [COL_DEFAULT_PREFIX stringByAppendingString:COLUMNS[i]];
+        [DEFAULTS setBool:[[COLUMN_DEFAULTS objectAtIndex:i] boolValue] forKey:key];
+    }
+
+    [DEFAULTS synchronize];
 }
 
 @end

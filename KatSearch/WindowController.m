@@ -146,14 +146,14 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     NSString *def = [keyPath substringFromIndex:[@"values." length]];
     if ([def hasSuffix:@"ShowPathBar"]) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ShowPathBar"] && [tableView selectedRow] != -1) {
+        if ([DEFAULTS boolForKey:@"ShowPathBar"] && [tableView selectedRow] != -1) {
             [self showPathBar];
         } else {
             [self hidePathBar];
         }
     }
     else if ([def hasSuffix:@"ShowFilter"]) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ShowFilter"]) {
+        if ([DEFAULTS boolForKey:@"ShowFilter"]) {
             [self showFilter];
         } else {
             [self hideFilter];
@@ -241,11 +241,11 @@
         task.exactNameOnly = YES;
     }
     
-    task.caseSensitive = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchCaseSensitive"];
-    task.skipPackages = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchSkipPackages"];
-    task.skipInvisibles = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchSkipInvisibles"];
-    task.skipInappropriate = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchSkipSystemFolder"];
-    task.negateSearchParams = [[NSUserDefaults standardUserDefaults] boolForKey:@"SearchInvertSearch"];
+    task.caseSensitive = [DEFAULTS boolForKey:@"SearchCaseSensitive"];
+    task.skipPackages = [DEFAULTS boolForKey:@"SearchSkipPackages"];
+    task.skipInvisibles = [DEFAULTS boolForKey:@"SearchSkipInvisibles"];
+    task.skipInappropriate = [DEFAULTS boolForKey:@"SearchSkipSystemFolder"];
+    task.negateSearchParams = [DEFAULTS boolForKey:@"SearchInvertSearch"];
     
     if (authorizationRef) {
         [task setAuthorizationRef:authorizationRef];
@@ -738,7 +738,7 @@
         SearchItem *item = results[selectedRow];
         NSURL *fileURL = [NSURL fileURLWithPath:item.path];
         [pathControl setURL:fileURL];
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"ShowPathBar"]) {
+        if ([DEFAULTS boolForKey:@"ShowPathBar"]) {
             [self showPathBar];
         }
     } else {

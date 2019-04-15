@@ -72,7 +72,7 @@
 }
 
 - (void)noteRecentSearch:(SearchTask *)task {
-    NSMutableArray *recent = [[[NSUserDefaults standardUserDefaults] objectForKey:@"RecentSearches"] mutableCopy];
+    NSMutableArray *recent = [[DEFAULTS objectForKey:@"RecentSearches"] mutableCopy];
     if (!recent) {
         recent = [NSMutableArray new];
     }
@@ -81,14 +81,14 @@
     }
     [recent insertObject:[task description] atIndex:0];
 
-    [[NSUserDefaults standardUserDefaults] setObject:[recent copy] forKey:@"RecentSearches"];
+    [DEFAULTS setObject:[recent copy] forKey:@"RecentSearches"];
 }
 
 - (void)menuWillOpen:(NSMenu *)menu {
     if (menu == openRecentMenu) {
         [menu removeAllItems];
         // Construct menu with list of recent searches
-        NSArray *recent = [[NSUserDefaults standardUserDefaults] objectForKey:@"RecentSearches"];
+        NSArray *recent = [DEFAULTS objectForKey:@"RecentSearches"];
         for (NSString *n in recent) {
             [menu addItemWithTitle:n action:@selector(openRecentSearch:) keyEquivalent: @""];
         }
@@ -102,7 +102,7 @@
 }
 
 - (IBAction)clearRecentSearches:(id)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@[] forKey:@"RecentSearches"];
+    [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
 }
 
 #pragma mark -

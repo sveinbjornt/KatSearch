@@ -9,7 +9,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="WindowController">
             <connections>
                 <outlet property="authenticateButton" destination="Mqr-y6-S2s" id="VMr-pG-7fC"/>
-                <outlet property="columnsMenu" destination="ZqL-KF-wJB" id="cMJ-s8-ifC"/>
                 <outlet property="filterTextField" destination="RMp-6N-DDK" id="8Lq-f7-DXR"/>
                 <outlet property="itemContextualMenu" destination="tCS-El-m2x" id="VK7-ok-q7f"/>
                 <outlet property="itemTypePopupButton" destination="ZFf-6d-eZi" id="F8B-6R-uOW"/>
@@ -425,35 +424,6 @@ DQ
                 </menuItem>
             </items>
             <point key="canvasLocation" x="14" y="317"/>
-        </menu>
-        <menu title="Columns Contextual Menu" id="ZqL-KF-wJB" userLabel="Columns Contextual Menu">
-            <items>
-                <menuItem title="Kind" id="fls-ur-lE2" userLabel="Kind">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Label" id="Y0j-vb-djA">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Date Modified" id="yfd-6y-KGd" userLabel="Date Modified">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Date Created" id="35i-Ma-PjF" userLabel="Date Modified">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Date Accessed" id="jY9-R9-ZJd" userLabel="Date Modified">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Owner:Group" id="Ab3-bH-eia">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="UTI" id="RcI-ag-we7">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-                <menuItem title="Size" id="wIg-gd-9Oa">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                </menuItem>
-            </items>
-            <point key="canvasLocation" x="-232" y="-130"/>
         </menu>
         <menu title="ItemContextualMenu" id="tCS-El-m2x" userLabel="Item Contextual Menu">
             <items>

@@ -42,3 +42,9 @@
 #define COLUMNS \
 @[@"Kind", @"Size", @"DateCreated", @"DateModified", \
   @"DateAccessed", @"UserGroup", @"Permissions", @"UTI"]
+#define COLUMN_DEFAULTS \
+@[@YES, @YES, @NO, @YES, \
+  @NO, @NO, @NO, @NO]
+
+
+#define DEFAULTS [NSUserDefaults standardUserDefaults] 
