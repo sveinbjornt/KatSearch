@@ -28,14 +28,14 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "WindowController.h"
+#import "SearchController.h"
 #import "AppDelegate.h"
 #import "SearchItem.h"
 #import "NSTableView+PreserveSelection.h"
 #import "NSWorkspace+Additions.h"
 #import "Common.h"
 
-@interface WindowController ()
+@interface SearchController ()
 {
     IBOutlet NSPopUpButton *itemTypePopupButton;
     IBOutlet NSPopUpButton *matchCriterionPopupButton;
@@ -65,7 +65,7 @@
 }
 @end
 
-@implementation WindowController
+@implementation SearchController
 
 #pragma mark - NSWindowDelegate
 
@@ -103,7 +103,7 @@
 - (void)windowWillClose:(NSNotification *)notification {
     [task stop];
     
-    AppDelegate *delegate = [[NSApplication sharedApplication] delegate];
+    AppDelegate *delegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     [delegate performSelector:@selector(windowDidClose:) withObject:self afterDelay:0.05];
 }
 

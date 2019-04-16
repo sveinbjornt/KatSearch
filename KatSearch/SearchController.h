@@ -31,9 +31,9 @@
 #import <Cocoa/Cocoa.h>
 #import "SearchTask.h"
 
-@interface WindowController : NSWindowController <  NSTableViewDelegate,
+@interface SearchController : NSWindowController <  NSTableViewDelegate,
                                                     NSTableViewDataSource,
                                                     NSMenuDelegate,
-                                                    SearchTaskDelegate      >
+                                                    SearchTaskDelegate >
 
 @end

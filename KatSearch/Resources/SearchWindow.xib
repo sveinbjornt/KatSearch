@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="WindowController">
+        <customObject id="-2" userLabel="File's Owner" customClass="SearchController">
             <connections>
                 <outlet property="authenticateButton" destination="Mqr-y6-S2s" id="VMr-pG-7fC"/>
                 <outlet property="filterTextField" destination="RMp-6N-DDK" id="8Lq-f7-DXR"/>
@@ -95,7 +94,7 @@ DQ
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="y0c-ed-QWB">
                             <rect key="frame" x="1" y="0.0" width="799" height="390"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="FileListTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="799" height="367"/>

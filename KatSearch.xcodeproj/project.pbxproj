@@ -11,7 +11,7 @@
 		F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A25E20E111CF0062B230 /* AppDelegate.m */; };
 		F462A26420E111D10062B230 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A26220E111D10062B230 /* MainMenu.xib */; };
 		F462A26720E111D10062B230 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A26620E111D10062B230 /* main.m */; };
-		F462A27320E1122A0062B230 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27120E1122A0062B230 /* WindowController.m */; };
+		F462A27320E1122A0062B230 /* SearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27120E1122A0062B230 /* SearchController.m */; };
 		F462A27420E1122A0062B230 /* SearchWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A27220E1122A0062B230 /* SearchWindow.xib */; };
 		F462A27720E117760062B230 /* SearchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27620E117760062B230 /* SearchTask.m */; };
 		F462A27A20E134EA0062B230 /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27920E134EA0062B230 /* SearchItem.m */; };
@@ -56,8 +56,8 @@
 		F462A26320E111D10062B230 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F462A26520E111D10062B230 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F462A26620E111D10062B230 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F462A27020E1122A0062B230 /* WindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
-		F462A27120E1122A0062B230 /* WindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
+		F462A27020E1122A0062B230 /* SearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchController.h; sourceTree = "<group>"; };
+		F462A27120E1122A0062B230 /* SearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchController.m; sourceTree = "<group>"; };
 		F462A27220E1122A0062B230 /* SearchWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchWindow.xib; sourceTree = "<group>"; };
 		F462A27520E117760062B230 /* SearchTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchTask.h; sourceTree = "<group>"; };
 		F462A27620E117760062B230 /* SearchTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchTask.m; sourceTree = "<group>"; };
@@ -133,8 +133,8 @@
 				F47967392250102900CA0746 /* Common.h */,
 				F462A25D20E111CF0062B230 /* AppDelegate.h */,
 				F462A25E20E111CF0062B230 /* AppDelegate.m */,
-				F462A27020E1122A0062B230 /* WindowController.h */,
-				F462A27120E1122A0062B230 /* WindowController.m */,
+				F462A27020E1122A0062B230 /* SearchController.h */,
+				F462A27120E1122A0062B230 /* SearchController.m */,
 				F462A27520E117760062B230 /* SearchTask.h */,
 				F462A27620E117760062B230 /* SearchTask.m */,
 				F462A27820E134EA0062B230 /* SearchItem.h */,
@@ -298,7 +298,7 @@
 				F462A26720E111D10062B230 /* main.m in Sources */,
 				F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */,
 				F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */,
-				F462A27320E1122A0062B230 /* WindowController.m in Sources */,
+				F462A27320E1122A0062B230 /* SearchController.m in Sources */,
 				F45D8BBC20FA6FCC00D6E8F6 /* KatPathControl.m in Sources */,
 				F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */,
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,

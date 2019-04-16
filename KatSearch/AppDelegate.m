@@ -30,7 +30,7 @@
 
 #import "Common.h"
 #import "AppDelegate.h"
-#import "WindowController.h"
+#import "SearchController.h"
 #import "PreferencesController.h"
 #import <MASShortcut/Shortcut.h>
 
@@ -74,7 +74,7 @@
 #pragma mark -
 
 - (IBAction)newWindow:(id)sender {
-    WindowController *controller = [[WindowController alloc] initWithWindowNibName:@"SearchWindow"];
+    SearchController *controller = [[SearchController alloc] initWithWindowNibName:@"SearchWindow"];
     [windowControllers addObject:controller];
     [controller showWindow:self];
 }
