@@ -15,12 +15,10 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="KatSearch Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="F0z-JX-Cv5" userLabel="KatSearch Preferences">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="300"/>
+            <rect key="contentRect" x="196" y="240" width="702" height="300"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-            <value key="minSize" type="size" width="480" height="270"/>
-            <value key="maxSize" type="size" width="480" height="270"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="300"/>
+                <rect key="frame" x="0.0" y="0.0" width="702" height="300"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box fixedFrame="YES" title="Show Columns" translatesAutoresizingMaskIntoConstraints="NO" id="cIO-Rs-5mn">
@@ -121,11 +119,11 @@
                             </subviews>
                         </view>
                     </box>
-                    <box fixedFrame="YES" title="Default Search" translatesAutoresizingMaskIntoConstraints="NO" id="vQX-9Y-byj">
-                        <rect key="frame" x="250" y="57" width="213" height="230"/>
+                    <box fixedFrame="YES" title="Default Search Settings" translatesAutoresizingMaskIntoConstraints="NO" id="vQX-9Y-byj">
+                        <rect key="frame" x="244" y="57" width="215" height="230"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView" id="Iav-BB-tnO">
-                            <rect key="frame" x="3" y="3" width="207" height="212"/>
+                            <rect key="frame" x="3" y="3" width="209" height="212"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PoM-4P-vlT">
@@ -209,7 +207,7 @@
                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8sN-W1-ozJ">
                                     <rect key="frame" x="18" y="18" width="171" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="check" title="Recent Searches" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="AGi-z5-eCz">
+                                    <buttonCell key="cell" type="check" title="Remember Recent" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="AGi-z5-eCz">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -231,8 +229,16 @@
                             <action selector="restoreDefaults:" target="-2" id="6Rc-fA-NH7"/>
                         </connections>
                     </button>
+                    <box fixedFrame="YES" title="Hotkeys" translatesAutoresizingMaskIntoConstraints="NO" id="aFG-jV-bkx">
+                        <rect key="frame" x="470" y="57" width="215" height="230"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <view key="contentView" id="KQW-a2-7he">
+                            <rect key="frame" x="3" y="3" width="209" height="212"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                    </box>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BJB-T3-4u6">
-                        <rect key="frame" x="346" y="13" width="120" height="32"/>
+                        <rect key="frame" x="568" y="13" width="120" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Qhy-0S-c45">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -250,7 +256,7 @@ DQ
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="-21" y="108"/>
+            <point key="canvasLocation" x="193" y="74"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="CYm-Rc-d96"/>
     </objects>

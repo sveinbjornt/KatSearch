@@ -4,25 +4,25 @@ TODO
 * Export results to text file
 * Preferences
     * Hotkey trigger
-* Columns menu
 * Columns adjust size with window
-* Handle aliases
-* Search filters
+* Handle aliases intelligently
+* Extensive search filters?
     * Date filters
     * Kind filters
-    * Matches regex
-    * Should highlight strings that match
-    * Only search columns that are enabled
+    * Matches regex - Should highlight strings that match
+    * Only filter by columns that are enabled
 * Use CoreData & NSArrayController to populate table view
 * Detect when file no longer exists at path
-* Add "Move to Trash" to contextual menu (with confirmation prompt)
 * Install CLT via Preferences
-* Override Cmd-F to show filter field
-* Search history (Recent searches)
 * Smart columns (estimate min-max size, calc. length of filenames to estimate etc.)
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
 * Don't show non-AFPS/HFS+ file systems
+* Rename via contextual menu
+* Add "Move to Trash" to contextual menu (with confirmation prompt)
+* Search history (Recent searches)
+* Override Cmd-F to show filter field
 
+DONE * Columns menu
 DONE * Remember window position and size
 DONE * Column sorting
 DONE * Authentication
