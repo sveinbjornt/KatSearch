@@ -59,8 +59,7 @@
 - (IBAction)restoreDefaults:(id)sender {
     [DEFAULTS setBool:YES forKey:@"ShowPathBar"];
     [DEFAULTS setBool:NO forKey:@"ShowFilter"];
-    [DEFAULTS setBool:YES forKey:@"friendlyProcessNames"];
-    [DEFAULTS setBool:NO forKey:@"authenticateOnLaunch"];
+    [DEFAULTS setBool:YES forKey:@"RememberRecentSearches"];
 
     for (int i = 0; i < [COLUMNS count]; i++) {
         NSString *key = [COL_DEFAULT_PREFIX stringByAppendingString:COLUMNS[i]];

@@ -206,6 +206,17 @@
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                 </button>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8sN-W1-ozJ">
+                                    <rect key="frame" x="18" y="18" width="171" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Recent Searches" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="AGi-z5-eCz">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <binding destination="CYm-Rc-d96" name="value" keyPath="values.RememberRecentSearches" id="7cX-Z7-b42"/>
+                                    </connections>
+                                </button>
                             </subviews>
                         </view>
                     </box>

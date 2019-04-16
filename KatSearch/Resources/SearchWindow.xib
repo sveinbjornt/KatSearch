@@ -491,7 +491,7 @@ DQ
                 <menuItem title="Show Date Modified" id="tGQ-KF-LmP">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnDateCreated" id="wHT-JQ-DxM"/>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnDateModified" id="JBy-LP-x8r"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Show Date Accessed" id="1RI-Io-SiA">

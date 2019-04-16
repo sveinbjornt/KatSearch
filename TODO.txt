@@ -20,6 +20,7 @@ TODO
 * Override Cmd-F to show filter field
 * Search history (Recent searches)
 * Smart columns (estimate min-max size, calc. length of filenames to estimate etc.)
+* Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
 
 DONE * Remember window position and size
 DONE * Column sorting
