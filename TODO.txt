@@ -21,6 +21,7 @@ TODO
 * Search history (Recent searches)
 * Smart columns (estimate min-max size, calc. length of filenames to estimate etc.)
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
+* Don't show non-AFPS/HFS+ file systems
 
 DONE * Remember window position and size
 DONE * Column sorting

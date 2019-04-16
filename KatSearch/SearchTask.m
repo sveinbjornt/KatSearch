@@ -53,7 +53,7 @@
 - (void)start {
     
     task = [[NSTask alloc] init];
-    task.launchPath = @"/usr/local/bin/searchfs"; //[[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil];
+    task.launchPath = [[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil];
     if (!task.launchPath) {
         NSLog(@"searchfs binary not found in app bundle");
         NSBeep();
