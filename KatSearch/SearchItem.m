@@ -93,16 +93,10 @@
 }
 
 - (NSString *)kind {
-    
     if (!cachedKindString) {
-        CFStringRef kindCFStr = nil;
-        LSCopyKindStringForURL((__bridge CFURLRef)[NSURL fileURLWithPath:self.path], &kindCFStr);
-        if (kindCFStr) {
-            cachedKindString = [NSString stringWithString:(__bridge NSString *)kindCFStr];
-            CFRelease(kindCFStr);
-        } else {
-            cachedKindString = @"Unknown";
-        }
+        NSString *kindStr = nil;
+        [[NSURL fileURLWithPath:self.path] getResourceValue:&kindStr forKey:NSURLLocalizedTypeDescriptionKey error:nil];
+        cachedKindString = kindStr ? kindStr : @"";
     }
     
     return cachedKindString;

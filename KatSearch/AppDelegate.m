@@ -32,6 +32,7 @@
 #import "AppDelegate.h"
 #import "WindowController.h"
 #import "PreferencesController.h"
+#import <MASShortcut/Shortcut.h>
 
 @interface AppDelegate ()
 {
@@ -45,6 +46,17 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    
+    // Associate the preference key with an action
+    [[MASShortcutBinder sharedBinder]
+     bindShortcutWithDefaultsKey:@"GlobalShortcut"
+     toAction:^{
+         [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+         if (![windowControllers count]) {
+             [self newWindow:self];
+         }
+     }];
+    
     windowControllers = [NSMutableArray array];
     [self newWindow:self];
 }

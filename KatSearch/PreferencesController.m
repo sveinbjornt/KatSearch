@@ -30,20 +30,26 @@
 
 #import "Common.h"
 #import "PreferencesController.h"
+#import <MASShortcut/Shortcut.h>
+
 
 @interface PreferencesController ()
-
+@property (nonatomic, weak) IBOutlet MASShortcutView *shortcutView;
 @end
+
 
 @implementation PreferencesController
 
 - (void)windowDidLoad {
-    //[super windowDidLoad];
+    [super windowDidLoad];
     NSImage *img = [NSImage imageNamed:NSImageNamePreferencesGeneral];
     if (img) {
         [self.window setRepresentedURL:[NSURL URLWithString:@""]]; // Not representing a URL
         [[self.window standardWindowButton:NSWindowDocumentIconButton] setImage:img];
     }
+    
+    // Associate the shortcut view with user defaults
+    self.shortcutView.associatedUserDefaultsKey = @"GlobalShortcut";
 }
 
 - (BOOL)window:(NSWindow *)window shouldPopUpDocumentPathMenu:(NSMenu *)menu {

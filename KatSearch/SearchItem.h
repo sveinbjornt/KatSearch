@@ -34,6 +34,7 @@
 @interface SearchItem : NSObject
 
 @property (retain, nonatomic) NSString *path;
+@property (retain, nonatomic) NSURL *url;
 @property (readonly, nonatomic) NSString *name;
 @property (readonly, nonatomic) NSImage *icon;
 @property (readonly, nonatomic) NSString *kind;
