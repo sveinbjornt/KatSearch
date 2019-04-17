@@ -26,6 +26,7 @@
 		F498ADF022666D4300CB6A6E /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F498ADED22666CDB00CB6A6E /* MASShortcut.framework */; };
 		F498ADF122666D4E00CB6A6E /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F498ADEE22666D2200CB6A6E /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F498ADF222666D5000CB6A6E /* MASShortcut.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F498ADED22666CDB00CB6A6E /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F498ADF62267988000CB6A6E /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F498ADF42267988000CB6A6E /* STPrivilegedTask.m */; };
 		F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */ = {isa = PBXBuildFile; fileRef = F4A5CF0020ED7E15008D0A06 /* searchfs */; };
 		F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */; };
 		F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */; };
@@ -84,6 +85,8 @@
 		F498ADED22666CDB00CB6A6E /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASShortcut.framework; sourceTree = "<group>"; };
 		F498ADEE22666D2200CB6A6E /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		F498ADF32266A91500CB6A6E /* PasteboardDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasteboardDelegate.h; sourceTree = "<group>"; };
+		F498ADF42267988000CB6A6E /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPrivilegedTask.m; sourceTree = "<group>"; };
+		F498ADF52267988000CB6A6E /* STPrivilegedTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
 		F4A5CF0020ED7E15008D0A06 /* searchfs */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = searchfs; sourceTree = "<group>"; };
 		F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STVolumesPopupButton.h; sourceTree = "<group>"; };
 		F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STVolumesPopupButton.m; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				F48451E720F8E4CB005797C1 /* FileListTableView.m */,
 				F45D8BBA20FA6FCC00D6E8F6 /* KatPathControl.h */,
 				F45D8BBB20FA6FCC00D6E8F6 /* KatPathControl.m */,
+				F498ADF52267988000CB6A6E /* STPrivilegedTask.h */,
+				F498ADF42267988000CB6A6E /* STPrivilegedTask.m */,
 				F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */,
 				F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */,
 				F4A7BA8320EC208F00083B48 /* NSTableView+PreserveSelection.h */,
@@ -297,6 +302,7 @@
 			files = (
 				F48DC0F920FBF16100B21222 /* PreferencesController.m in Sources */,
 				F462A27720E117760062B230 /* SearchTask.m in Sources */,
+				F498ADF62267988000CB6A6E /* STPrivilegedTask.m in Sources */,
 				F462A26720E111D10062B230 /* main.m in Sources */,
 				F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */,
 				F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */,

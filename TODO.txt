@@ -21,6 +21,7 @@ TODO
 * Add "Move to Trash" to contextual menu (with confirmation prompt)
 * Search history (Recent searches)
 * Override Cmd-F to show filter field
+* Use STPriviledTask when authenticated
 
 DONE * Columns menu
 DONE * Remember window position and size
