@@ -83,6 +83,7 @@
 		F48DC10420FCD16400B21222 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		F498ADED22666CDB00CB6A6E /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASShortcut.framework; sourceTree = "<group>"; };
 		F498ADEE22666D2200CB6A6E /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		F498ADF32266A91500CB6A6E /* PasteboardDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasteboardDelegate.h; sourceTree = "<group>"; };
 		F4A5CF0020ED7E15008D0A06 /* searchfs */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = searchfs; sourceTree = "<group>"; };
 		F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STVolumesPopupButton.h; sourceTree = "<group>"; };
 		F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STVolumesPopupButton.m; sourceTree = "<group>"; };
@@ -165,6 +166,7 @@
 		F471DF6120F52A200057E667 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F498ADF32266A91500CB6A6E /* PasteboardDelegate.h */,
 				F48451E620F8E4CB005797C1 /* FileListTableView.h */,
 				F48451E720F8E4CB005797C1 /* FileListTableView.m */,
 				F45D8BBA20FA6FCC00D6E8F6 /* KatPathControl.h */,

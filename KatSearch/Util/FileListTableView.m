@@ -29,14 +29,12 @@
 */
 
 #import "FileListTableView.h"
+#import "PasteboardDelegate.h"
 
 @implementation FileListTableView
 
 + (void)initialize {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [NSApp registerServicesMenuSendTypes:@[NSFilenamesPboardType] returnTypes:@[]];
-    });
+    [NSApp registerServicesMenuSendTypes:@[NSFilenamesPboardType] returnTypes:@[]];
 }
 
 - (id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType {
@@ -47,10 +45,12 @@
 }
 
 - (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray *)types {
-    
-    [[self dataSource] performSelector:@selector(copySelectedFilesToPasteboard:) withObject:pboard];
-    
-    return YES;
+    id<PasteboardDelegate> pbDel = (id)[self dataSource];
+    if ([pbDel respondsToSelector:@selector(copySelectedFilesToPasteboard:)]) {
+        [pbDel performSelector:@selector(copySelectedFilesToPasteboard:) withObject:pboard];
+        return YES;
+    }
+    return NO;
 }
 
 @end

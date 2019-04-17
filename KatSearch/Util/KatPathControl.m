@@ -29,6 +29,7 @@
 */
 
 #import "KatPathControl.h"
+#import "PasteboardDelegate.h"
 
 @implementation KatPathControl
 
@@ -44,10 +45,12 @@
 }
 
 - (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray *)types {
-    
-    [[[self window] windowController] performSelector:@selector(copySelectedFilesToPasteboard:) withObject:pboard];
-    
-    return YES;
+    id<PasteboardDelegate> pbDel = (id)[[self window] windowController];
+    if ([pbDel respondsToSelector:@selector(copySelectedFilesToPasteboard:)]) {
+        [pbDel performSelector:@selector(copySelectedFilesToPasteboard:) withObject:pboard];
+        return YES;
+    }
+    return NO;
 }
 
 
