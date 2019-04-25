@@ -161,7 +161,7 @@
     }
     else if ([def hasPrefix:COL_DEFAULT_PREFIX]) {
         NSString *colName = [def substringFromIndex:[COL_DEFAULT_PREFIX length]];
-        DLog(@"%@", colName);
+        DLog(@"Default %@ changed", colName);
     }
 }
 

@@ -18,6 +18,7 @@
 		F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */; };
 		F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F471DF5F20F4DAE70057E667 /* Credits.rtf */; };
 		F481834E22720145002738AE /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = F481834D22720145002738AE /* Defaults.plist */; };
+		F481835122726366002738AE /* SDOpenAtLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = F481834F22726366002738AE /* SDOpenAtLogin.m */; };
 		F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* FileListTableView.m */; };
 		F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F48451EF20F8F914005797C1 /* dsa_pub.pem */; };
 		F48DC0F920FBF16100B21222 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48DC0F720FBF16100B21222 /* PreferencesController.m */; };
@@ -72,6 +73,8 @@
 		F471DF6620F7AF6D0057E667 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F47967392250102900CA0746 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		F481834D22720145002738AE /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		F481834F22726366002738AE /* SDOpenAtLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDOpenAtLogin.m; sourceTree = "<group>"; };
+		F481835022726366002738AE /* SDOpenAtLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDOpenAtLogin.h; sourceTree = "<group>"; };
 		F48451E520F8DE31005797C1 /* CHANGES.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		F48451E620F8E4CB005797C1 /* FileListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileListTableView.h; sourceTree = "<group>"; };
 		F48451E720F8E4CB005797C1 /* FileListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileListTableView.m; sourceTree = "<group>"; };
@@ -185,6 +188,8 @@
 				F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */,
 				F471DF5D20F4D7060057E667 /* NSWorkspace+Additions.h */,
 				F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */,
+				F481835022726366002738AE /* SDOpenAtLogin.h */,
+				F481834F22726366002738AE /* SDOpenAtLogin.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				F462A27320E1122A0062B230 /* SearchController.m in Sources */,
 				F45D8BBC20FA6FCC00D6E8F6 /* KatPathControl.m in Sources */,
 				F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */,
+				F481835122726366002738AE /* SDOpenAtLogin.m in Sources */,
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
 				F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */,

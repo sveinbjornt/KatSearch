@@ -110,7 +110,7 @@
                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8sN-W1-ozJ">
                                     <rect key="frame" x="18" y="17" width="171" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <buttonCell key="cell" type="check" title="Store Recent Searches" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="AGi-z5-eCz">
+                                    <buttonCell key="cell" type="check" title="Remember Searches" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="AGi-z5-eCz">
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -157,6 +157,18 @@ DQ
                                     <rect key="frame" x="25" y="172" width="158" height="19"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </customView>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfC-Sz-9Q4">
+                                    <rect key="frame" x="23" y="18" width="171" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Launch At Login" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="s5K-th-mNx">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="toggleLaunchAtLogin:" target="-2" id="lpb-Ia-uSg"/>
+                                        <binding destination="CYm-Rc-d96" name="value" keyPath="values.LaunchAtLogin" id="RbG-Rd-Fkz"/>
+                                    </connections>
+                                </button>
                             </subviews>
                         </view>
                     </box>

@@ -30,6 +30,7 @@
 
 #import "Common.h"
 #import "PreferencesController.h"
+#import "SDOpenAtLogin.h"
 #import <MASShortcut/Shortcut.h>
 
 
@@ -69,6 +70,10 @@
         [DEFAULTS setObject:def[key] forKey:key];
     }
     [DEFAULTS synchronize];
+}
+
+- (IBAction)toggleLaunchAtLogin:(id)sender {
+    [SDOpenAtLogin setOpensAtLogin:[DEFAULTS boolForKey:@"LaunchAtLogin"]];
 }
 
 @end
