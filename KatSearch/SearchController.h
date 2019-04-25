@@ -30,10 +30,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SearchTask.h"
+#import "PasteboardDelegate.h"
 
 @interface SearchController : NSWindowController <  NSTableViewDelegate,
                                                     NSTableViewDataSource,
                                                     NSMenuDelegate,
-                                                    SearchTaskDelegate >
+                                                    SearchTaskDelegate,
+                                                    PasteboardDelegate>
 
 @end

@@ -15,7 +15,6 @@ Unlike Spotlight, KatSearch performs *no indexing* and only looks at filenames, 
 * Scans the actual file system, not just the userland files Apple wants you to see
 * Can run with admin privileges to find all files irrespective of permissions
 * Ubiquitous native drag and drop behaviour, with hooks into Finder actions/services
-* Particularly useful and effective on large screens
 * Free, open source software written in Objective-C/Cocoa
 
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BDT58J7HYKAEE"><img align="right" src="https://www.paypalobjects.com/WEBSCR-640-20110306-1/en_US/i/btn/btn_donate_LG.gif" ></a>
@@ -25,11 +24,9 @@ If you find this program useful, please support continued development by [making
 
 ## Downloads
 
-* No binaries on offer yet.
+This is an early **alpha** release for testing purposes only. Some things will be broken.
 
-<!--
-*  **[⇩ Download KatSearch 0.1b](https://sveinbjorn.org/files/software/katsearch.zip)** (~0.8 MB, Intel 64-bit, 10.10 or later)
--->
+*  **[⇩ Download KatSearch 0.1a](https://sveinbjorn.org/files/software/katsearch.zip)** (~0.8 MB, Intel 64-bit, 10.10 or later)
 
 ## Screenshots
 

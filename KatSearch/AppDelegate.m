@@ -51,8 +51,8 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
-    // Associate the preference key with an action
+
+    // Associate the shortcut key key with an action
     [[MASShortcutBinder sharedBinder]
      bindShortcutWithDefaultsKey:@"GlobalShortcut"
      toAction:^{

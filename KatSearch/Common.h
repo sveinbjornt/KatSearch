@@ -42,9 +42,8 @@
 
 #define COL_DEFAULT_PREFIX  @"ShowColumn"
 
-#define COLUMNS \
-@[  @"Kind", @"Size", @"DateCreated", @"DateModified", \
-    @"DateAccessed", @"UserGroup", @"Permissions", @"UTI"]
+#define COLUMNS     @[  @"Kind", @"Size", @"DateCreated", @"DateModified", \
+                        @"DateAccessed", @"UserGroup", @"Permissions", @"UTI"   ]
 
 // Logging
 #ifdef DEBUG

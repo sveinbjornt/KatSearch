@@ -1,5 +1,5 @@
 
-TODO
+# TODO LIST
 
 * Export results to text file
 * Columns adjust size with window
@@ -14,19 +14,16 @@ TODO
 * Install CLT via Preferences
 * Smart columns (estimate min-max size, calc. length of filenames to estimate etc.)
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
-* Don't show non-AFPS/HFS+ file systems
-* Rename via contextual menu
+* Don't show non-AFPS/HFS+ file systems in volumes popup
 * Add "Move to Trash" to contextual menu (with confirmation prompt)
 * Search history (Recent searches)
 * Override Cmd-F to show filter field
 * Use STPriviledTask when authenticated
+* Show/hide columns according to prefs
 
-DONE * Preferences
-DONE * Hotkey trigger
-DONE * Columns menu
-DONE * Remember window position and size
-DONE * Column sorting
-DONE * Authentication
-DONE * Files/directories only / exact name only
-DONE * Show/Hide Path Bar
-DONE * Contextual menu for items in path control
+
+## Version History
+
+0.1a - 25/04/2019
+
+    * Initial release alpha release

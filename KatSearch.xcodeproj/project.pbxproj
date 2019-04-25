@@ -72,7 +72,7 @@
 		F471DF6620F7AF6D0057E667 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F47967392250102900CA0746 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		F481834D22720145002738AE /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
-		F48451E520F8DE31005797C1 /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
+		F48451E520F8DE31005797C1 /* CHANGES.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGES.txt; sourceTree = "<group>"; };
 		F48451E620F8E4CB005797C1 /* FileListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileListTableView.h; sourceTree = "<group>"; };
 		F48451E720F8E4CB005797C1 /* FileListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileListTableView.m; sourceTree = "<group>"; };
 		F48451EA20F8F914005797C1 /* update_appcast.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = update_appcast.sh; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				F471DF6620F7AF6D0057E667 /* README.md */,
-				F48451E520F8DE31005797C1 /* TODO.txt */,
+				F48451E520F8DE31005797C1 /* CHANGES.txt */,
 				F471DF6520F7AF6D0057E667 /* License.txt */,
 				F4E32305225BDB1300C89C81 /* Makefile */,
 				F462A25C20E111CF0062B230 /* KatSearch */,
