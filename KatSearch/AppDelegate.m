@@ -45,6 +45,11 @@
 
 @implementation AppDelegate
 
++ (void)initialize {
+    NSString *defaultsPath = [[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"];
+    [DEFAULTS registerDefaults:[NSDictionary dictionaryWithContentsOfFile:defaultsPath]];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
     // Associate the preference key with an action

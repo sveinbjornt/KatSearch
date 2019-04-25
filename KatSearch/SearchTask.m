@@ -30,10 +30,11 @@
 
 #import "SearchTask.h"
 #import "SearchItem.h"
+#import "Common.h"
 
 @implementation SearchTask
 {
-    NSTask *task;
+    id task;
     NSFileHandle *readHandle;
     NSString *remnants;
     BOOL killed;
@@ -53,13 +54,15 @@
 - (void)start {
     
     task = [[NSTask alloc] init];
-    task.launchPath = [[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil];
-    if (!task.launchPath) {
-        NSLog(@"searchfs binary not found in app bundle");
+    
+    NSString *launchPath = [[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil];
+    if (launchPath) {
+        [task setLaunchPath:launchPath];
+    } else {
+        DLog(@"searchfs binary not found in app bundle");
         NSBeep();
         [self stop];
     }
-    task.currentDirectoryPath = [[NSBundle mainBundle] resourcePath];
     
     NSMutableArray *args = [@[@"-v", self.volume] mutableCopy];
     
@@ -78,7 +81,7 @@
     if (self.caseSensitive) {
         [args addObject:@"-s"];
     }
-
+    
     if (self.skipPackages) {
         [args addObject:@"-p"];
     }
@@ -96,7 +99,7 @@
     }
     
     [args addObject:self.searchString];
-    task.arguments = args;
+    [task setArguments:args];
     
     NSPipe *outputPipe = [NSPipe pipe];
     [task setStandardOutput:outputPipe];
@@ -150,7 +153,7 @@
             [outputString insertString:remnants atIndex:0];
         }
         
-        //NSLog(@"%@", outputString);
+        //DLog(@"%@", outputString);
         NSMutableArray *paths = [[outputString componentsSeparatedByString:@"\n"] mutableCopy];
         remnants = [paths lastObject];
         [paths removeLastObject];
@@ -161,14 +164,14 @@
             if (item) {
                 [items addObject:item];
             } else {
-                NSLog(@"Error instantiating search item %@", path);
+                DLog(@"Error instantiating search item %@", path);
             }
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
             [self.delegate taskResultsFound:items];
-        });
-        
+//        });
+    
 //    }});
     
     [[aNotification object] readInBackgroundAndNotify];

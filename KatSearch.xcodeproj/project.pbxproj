@@ -17,6 +17,7 @@
 		F462A27A20E134EA0062B230 /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27920E134EA0062B230 /* SearchItem.m */; };
 		F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */; };
 		F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F471DF5F20F4DAE70057E667 /* Credits.rtf */; };
+		F481834E22720145002738AE /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = F481834D22720145002738AE /* Defaults.plist */; };
 		F48451E820F8E4CB005797C1 /* FileListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* FileListTableView.m */; };
 		F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F48451EF20F8F914005797C1 /* dsa_pub.pem */; };
 		F48DC0F920FBF16100B21222 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48DC0F720FBF16100B21222 /* PreferencesController.m */; };
@@ -70,6 +71,7 @@
 		F471DF6520F7AF6D0057E667 /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		F471DF6620F7AF6D0057E667 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F47967392250102900CA0746 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		F481834D22720145002738AE /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		F48451E520F8DE31005797C1 /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		F48451E620F8E4CB005797C1 /* FileListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileListTableView.h; sourceTree = "<group>"; };
 		F48451E720F8E4CB005797C1 /* FileListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileListTableView.m; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			children = (
 				F471DF5F20F4DAE70057E667 /* Credits.rtf */,
 				F48DC10420FCD16400B21222 /* AppIcon.icns */,
+				F481834D22720145002738AE /* Defaults.plist */,
 				F462A26020E111D10062B230 /* Assets.xcassets */,
 				F462A26220E111D10062B230 /* MainMenu.xib */,
 				F462A27220E1122A0062B230 /* SearchWindow.xib */,
@@ -266,6 +269,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F481834E22720145002738AE /* Defaults.plist in Resources */,
 				F48DC0FC20FBF17E00B21222 /* PreferencesController.xib in Resources */,
 				F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */,
 				F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */,

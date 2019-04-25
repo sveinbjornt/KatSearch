@@ -38,12 +38,17 @@
 
 #define VALUES_KEYPATH(X) [NSString stringWithFormat:@"values.%@", (X)]
 
-#define COL_DEFAULT_PREFIX @"ShowColumn"
-#define COLUMNS \
-@[@"Kind", @"Size", @"DateCreated", @"DateModified", \
-  @"DateAccessed", @"UserGroup", @"Permissions", @"UTI"]
-#define COLUMN_DEFAULTS \
-@[@YES, @YES, @NO, @YES, \
-  @NO, @NO, @NO, @NO]
-
 #define DEFAULTS [NSUserDefaults standardUserDefaults] 
+
+#define COL_DEFAULT_PREFIX  @"ShowColumn"
+
+#define COLUMNS \
+@[  @"Kind", @"Size", @"DateCreated", @"DateModified", \
+    @"DateAccessed", @"UserGroup", @"Permissions", @"UTI"]
+
+// Logging
+#ifdef DEBUG
+    #define DLog(...) NSLog(__VA_ARGS__)
+#else
+    #define DLog(...)
+#endif

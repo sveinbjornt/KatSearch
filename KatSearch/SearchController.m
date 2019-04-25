@@ -161,14 +161,14 @@
     }
     else if ([def hasPrefix:COL_DEFAULT_PREFIX]) {
         NSString *colName = [def substringFromIndex:[COL_DEFAULT_PREFIX length]];
-        NSLog(@"%@", colName);
+        DLog(@"%@", colName);
     }
 }
 
 - (void)setObserveDefaults:(BOOL)observeDefaults {
     NSMutableArray *defaults = [@[@"ShowPathBar", @"ShowFilter"] mutableCopy];
     for (NSString *colString in COLUMNS) {
-        [defaults addObject:[NSString stringWithFormat:@"ShowColumn%@", colString]];
+        [defaults addObject:[NSString stringWithFormat:@"%@%@", COL_DEFAULT_PREFIX, colString]];
     }
     
     for (NSString *key in defaults) {
@@ -187,14 +187,14 @@
 
 - (IBAction)search:(id)sender {
     if ([task isRunning]) {
-        NSLog(@"Stopping task");
+        DLog(@"Stopping task");
         [task stop];
         return;
     }
     
     [self.window setTitle:[NSString stringWithFormat:@"“%@” on %@ - KatSearch", [searchField stringValue], [volumesPopupButton titleOfSelectedItem]]];
     
-    NSLog(@"Starting task");
+    DLog(@"Starting task");
     
     [self setSearchControlsEnabled:NO];
     
@@ -298,7 +298,7 @@
     NSString *killed = [theTask wasKilled] ? @"(cancelled)" : @"";
     [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu items %@", [results count], killed]];
     task = nil;
-    NSLog(@"Task finished");
+    DLog(@"Task finished");
 }
 
 #pragma mark - Sort
@@ -311,7 +311,7 @@
 #pragma mark - Filter
 
 - (void)updateFiltering {
-    NSLog(@"Filtering...");
+    DLog(@"Filtering...");
 //    if (isRefreshing) {
 //        return;
 //    }
@@ -363,7 +363,7 @@
         if (err != errAuthorizationSuccess) {
             if (err != errAuthorizationCanceled) {
                 NSBeep();
-                NSLog(@"Authentication failed: %d", err);
+                DLog(@"Authentication failed: %d", err);
             }
             authorizationRef = NULL;
             return;
@@ -377,14 +377,10 @@
     OSType iconID = authenticated ? kUnlockedIcon : kLockedIcon;
     NSImage *img = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(iconID)];
     [img setSize:NSMakeSize(16, 16)];
-//    NSString *actionName = authenticated ? @"Deauthenticate" : @"Authenticate";
     NSString *ttip = authenticated ? @"Deauthenticate" : @"Authenticate to search as root";
-//
+
     [authenticateButton setImage:img];
     [authenticateButton setToolTip:ttip];
-//    [authenticateMenuItem setImage:img];
-//    [authenticateMenuItem setTitle:actionName];
-//    [authenticateMenuItem setToolTip:ttip];
 }
 
 - (OSStatus)authenticate {
@@ -457,7 +453,7 @@
 - (void)showFilter {
     [self.window makeFirstResponder:filterTextField];
     //[ becomeFirstResponder];
-    NSLog(@"Hey");
+    DLog(@"Hey");
 }
 
 - (void)hideFilter {

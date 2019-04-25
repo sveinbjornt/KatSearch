@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -94,7 +95,7 @@ DQ
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="y0c-ed-QWB">
                             <rect key="frame" x="1" y="0.0" width="799" height="390"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="FileListTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="799" height="367"/>
@@ -311,6 +312,8 @@ DQ
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>
                                     <menuItem title="name is" tag="1" id="djs-w2-QrC"/>
+                                    <menuItem title="name starts with" tag="1" id="xfI-NN-nDI"/>
+                                    <menuItem title="name ends with" tag="1" id="xDe-ib-ZSg"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
@@ -385,7 +388,7 @@ DQ
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="773" y="-26"/>
+            <point key="canvasLocation" x="779" y="-37"/>
         </window>
         <menu id="4Bj-Tq-H8Z" userLabel="Search Options Menu">
             <items>

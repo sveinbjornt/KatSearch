@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ShowColumnKind</key>
+	<true/>
+	<key>ShowColumnSize</key>
+	<true/>
+	<key>ShowColumnDateCreated</key>
+	<false/>
+	<key>ShowColumnDateModified</key>
+	<true/>
+	<key>ShowColumnDateAccessed</key>
+	<false/>
+	<key>ShowColumnUserGroup</key>
+	<false/>
+	<key>ShowColumnPermissions</key>
+	<false/>
+	<key>ShowColumnUTI</key>
+	<false/>
+	<key>ShowPathBar</key>
+	<true/>
+	<key>ShowFilter</key>
+	<true/>
+	<key>RememberRecentSearches</key>
+	<true/>
+</dict>
+</plist>

@@ -2,8 +2,6 @@
 TODO
 
 * Export results to text file
-* Preferences
-    * Hotkey trigger
 * Columns adjust size with window
 * Handle aliases intelligently
 * Extensive search filters?
@@ -23,6 +21,8 @@ TODO
 * Override Cmd-F to show filter field
 * Use STPriviledTask when authenticated
 
+DONE * Preferences
+DONE * Hotkey trigger
 DONE * Columns menu
 DONE * Remember window position and size
 DONE * Column sorting

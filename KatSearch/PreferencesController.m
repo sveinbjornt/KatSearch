@@ -63,15 +63,11 @@
 }
 
 - (IBAction)restoreDefaults:(id)sender {
-    [DEFAULTS setBool:YES forKey:@"ShowPathBar"];
-    [DEFAULTS setBool:NO forKey:@"ShowFilter"];
-    [DEFAULTS setBool:YES forKey:@"RememberRecentSearches"];
-
-    for (int i = 0; i < [COLUMNS count]; i++) {
-        NSString *key = [COL_DEFAULT_PREFIX stringByAppendingString:COLUMNS[i]];
-        [DEFAULTS setBool:[[COLUMN_DEFAULTS objectAtIndex:i] boolValue] forKey:key];
+    NSString *defPath = [[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"];
+    NSDictionary *def = [NSDictionary dictionaryWithContentsOfFile:defPath];
+    for (NSString *key in def) {
+        [DEFAULTS setObject:def[key] forKey:key];
     }
-
     [DEFAULTS synchronize];
 }
 
