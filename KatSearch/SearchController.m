@@ -682,7 +682,7 @@
     return [results count];
 }
 
-- (NSView *)tableView:(NSTableView *)tv viewForTableColumn:(NSTableColumn *)tc row:(NSInteger)row {
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)col row:(NSInteger)row {
     if (row < 0 || row >= [results count]) {
         return nil;
     }
@@ -690,22 +690,34 @@
     NSTableCellView *cellView;
     SearchItem *item = results[row];
     
-    if ([[tc identifier] isEqualToString:@"Items"]) {
+    NSString *colStr = nil;
+    if ([[col identifier] isEqualToString:@"Items"]) {
         SearchItem *item = results[row];
-        cellView = [tv makeViewWithIdentifier:@"Items" owner:self];
-        cellView.textField.stringValue = item.name;
+        cellView = [tableView makeViewWithIdentifier:@"Items" owner:self];
+        colStr = item.name;
         cellView.imageView.objectValue = item.icon;
         
-    } else if ([[tc identifier] isEqualToString:@"Kind"]) {
-        cellView = [tv makeViewWithIdentifier:@"Kind" owner:self];
-        cellView.textField.stringValue = item.kind;
-    } else if ([[tc identifier] isEqualToString:@"Date Modified"]) {
-        cellView = [tv makeViewWithIdentifier:@"Date Modified" owner:self];
-        cellView.textField.stringValue = item.dateModifiedString;
-    } else if ([[tc identifier] isEqualToString:@"Size"]) {
-        cellView = [tv makeViewWithIdentifier:@"Size" owner:self];
-        cellView.textField.stringValue = [item sizeString];
+    } else if ([[col identifier] isEqualToString:@"Kind"]) {
+        cellView = [tableView makeViewWithIdentifier:@"Kind" owner:self];
+        colStr = item.kind;
+    } else if ([[col identifier] isEqualToString:@"Date Modified"]) {
+        cellView = [tableView makeViewWithIdentifier:@"Date Modified" owner:self];
+        colStr = item.dateModifiedString;
+    } else if ([[col identifier] isEqualToString:@"Size"]) {
+        cellView = [tableView makeViewWithIdentifier:@"Size" owner:self];
+        colStr = [item sizeString];
     }
+    
+    // TODO: Very inefficient, reimplement
+    if ([[NSFileManager defaultManager] fileExistsAtPath:item.path] == NO) {
+        NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
+        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:colStr
+                                                                      attributes:attr];
+        [cellView.textField setAttributedStringValue:attrStr];
+    } else {
+        cellView.textField.stringValue = colStr;
+    }
+    
     
     return cellView;
 }
@@ -716,7 +728,11 @@
     
     while (NSNotFound != index) {
         SearchItem *item = results[index];
-        [filenames addObject:item.path];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:item.path]) {
+            [filenames addObject:item.path];
+        } else {
+            DLog(@"Not copying, no file at path: %@", item.path);
+        }
         index = [rowIndexes indexGreaterThanIndex:index];
     }
     

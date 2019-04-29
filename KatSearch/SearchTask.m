@@ -145,7 +145,7 @@
         return;
     }
         
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ @autoreleasepool {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ @autoreleasepool {
     
         NSMutableString *outputString = [[NSMutableString alloc] initWithData:data
                                                                      encoding:NSUTF8StringEncoding];
@@ -168,11 +168,11 @@
             }
         }
         
-//        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self.delegate taskResultsFound:items];
-//        });
+        });
     
-//    }});
+    }});
     
     [[aNotification object] readInBackgroundAndNotify];
 }
