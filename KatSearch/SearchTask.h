@@ -44,6 +44,8 @@
 @property (nonatomic, copy) NSString *searchString;
 @property (nonatomic, copy) NSString *volume;
 @property BOOL exactNameOnly;
+@property BOOL matchStartOnly;
+@property BOOL matchEndOnly;
 @property BOOL directoriesOnly;
 @property BOOL filesOnly;
 @property BOOL caseSensitive;
@@ -55,7 +57,7 @@
 @property (readonly) BOOL wasKilled;
 @property (readonly) BOOL isAuthenticated;
 
-- (instancetype)initWithDelegate:(id<SearchTaskDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<SearchTaskDelegate>)delegate searchString:(NSString *)searchStr;
 - (void)start;
 - (void)stop;
 - (void)setAuthorizationRef:(AuthorizationRef)authRef;

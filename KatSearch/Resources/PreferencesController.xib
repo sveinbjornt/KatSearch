@@ -17,7 +17,7 @@
         <window title="KatSearch Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="PreferencesWindow" animationBehavior="default" titlebarAppearsTransparent="YES" id="F0z-JX-Cv5" userLabel="KatSearch Preferences">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="196" y="240" width="475" height="300"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="475" height="300"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -167,6 +167,18 @@ DQ
                                     <connections>
                                         <action selector="toggleLaunchAtLogin:" target="-2" id="lpb-Ia-uSg"/>
                                         <binding destination="CYm-Rc-d96" name="value" keyPath="values.LaunchAtLogin" id="RbG-Rd-Fkz"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmf-Nn-9ge">
+                                    <rect key="frame" x="23" y="108" width="171" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Run in Menu-only mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ThZ-hz-zVF">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="toggleLaunchAtLogin:" target="-2" id="Ams-Qb-DYB"/>
+                                        <binding destination="CYm-Rc-d96" name="value" keyPath="values.RunInMenuMode" id="cXb-mY-STN"/>
                                     </connections>
                                 </button>
                             </subviews>

@@ -204,10 +204,11 @@
     
     [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:@"Items"];
     
-    // Configure progress indicator and set it off
+    // Configure progress indicator, move to centre of table view and set it off
     [tableView addSubview:progressIndicator];
     CGFloat x = (NSWidth([tableView bounds]) - NSWidth([progressIndicator frame])) / 2;
     CGFloat y = (NSHeight([tableView bounds]) - NSHeight([progressIndicator frame])) / 2;
+    [progressIndicator setControlSize:NSControlSizeRegular];
     [progressIndicator setFrameOrigin:NSMakePoint(x, y)];
     [progressIndicator setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
     [progressIndicator setUsesThreadedAnimation:TRUE];
@@ -226,8 +227,7 @@
     [tableView reloadData];
     
     // Configure task
-    task = [[SearchTask alloc] initWithDelegate:self];
-    task.searchString = [searchField stringValue];
+    task = [[SearchTask alloc] initWithDelegate:self searchString:[searchField stringValue]];
     task.volume = [[volumesPopupButton selectedItem] toolTip];
     
     if ([itemTypePopupButton selectedTag] == 1) {
@@ -269,10 +269,17 @@
 
 - (void)taskResultsFound:(NSArray *)items {
     
-    [progressIndicator setFrameOrigin:NSMakePoint(8, 8)];
-    [progressIndicator setAutoresizingMask:NSViewNotSizable];
-    [[self.window contentView] addSubview:progressIndicator];
-    [progressIndicator setControlSize:NSControlSizeSmall];
+    if ([progressIndicator controlSize] != NSControlSizeSmall) {
+        [progressIndicator setFrameOrigin:NSMakePoint(16, 16)];
+        [[self.window contentView] addSubview:progressIndicator];
+//        NSRect frame = [progressIndicator frame];
+//        NSSize size = frame.size;
+//        size.width = size.width/2;
+//        size.height = size.height/2;
+//        frame.size = size;
+//        [progressIndicator setFrame:frame];
+        [progressIndicator setControlSize:NSControlSizeSmall];
+    }
     
     [results addObjectsFromArray:items];
     [tableView reloadDataPreservingSelection];
@@ -690,6 +697,10 @@
     NSTableCellView *cellView;
     SearchItem *item = results[row];
     
+#define COLUMNS     @[  @"Kind", @"Size", @"DateCreated", @"DateModified", \
+@"DateAccessed", @"UserGroup", @"Permissions", @"UTI"   ]
+
+    
     NSString *colStr = nil;
     if ([[col identifier] isEqualToString:@"Items"]) {
         SearchItem *item = results[row];
@@ -700,23 +711,38 @@
     } else if ([[col identifier] isEqualToString:@"Kind"]) {
         cellView = [tableView makeViewWithIdentifier:@"Kind" owner:self];
         colStr = item.kind;
-    } else if ([[col identifier] isEqualToString:@"Date Modified"]) {
-        cellView = [tableView makeViewWithIdentifier:@"Date Modified" owner:self];
-        colStr = item.dateModifiedString;
     } else if ([[col identifier] isEqualToString:@"Size"]) {
         cellView = [tableView makeViewWithIdentifier:@"Size" owner:self];
         colStr = [item sizeString];
+    } else if ([[col identifier] isEqualToString:@"Date Created"]) {
+        cellView = [tableView makeViewWithIdentifier:@"Date Created" owner:self];
+        colStr = item.dateCreatedString;
+    } else if ([[col identifier] isEqualToString:@"Date Modified"]) {
+        cellView = [tableView makeViewWithIdentifier:@"Date Modified" owner:self];
+        colStr = item.dateModifiedString;
+    } else if ([[col identifier] isEqualToString:@"Date Accessed"]) {
+        cellView = [tableView makeViewWithIdentifier:@"Date Accessed" owner:self];
+        colStr = item.dateAccessedString;
+    } else if ([[col identifier] isEqualToString:@"User/Group"]) {
+        cellView = [tableView makeViewWithIdentifier:@"User/Group" owner:self];
+        colStr = item.owner;
+    } else if ([[col identifier] isEqualToString:@"Permissions"]) {
+        cellView = [tableView makeViewWithIdentifier:@"Permissions" owner:self];
+        colStr = item.permissionsString;
+    } else if ([[col identifier] isEqualToString:@"UTI"]) {
+        cellView = [tableView makeViewWithIdentifier:@"UTI" owner:self];
+        colStr = item.UTI;
     }
     
     // TODO: Very inefficient, reimplement
-    if ([[NSFileManager defaultManager] fileExistsAtPath:item.path] == NO) {
-        NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
-        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:colStr
-                                                                      attributes:attr];
-        [cellView.textField setAttributedStringValue:attrStr];
-    } else {
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:item.path] == NO) {
+//        NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
+//        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:colStr
+//                                                                      attributes:attr];
+//        [cellView.textField setAttributedStringValue:attrStr];
+//    } else {
         cellView.textField.stringValue = colStr;
-    }
+//    }
     
     
     return cellView;

@@ -125,7 +125,7 @@
 
 - (NSString *)dateAccessedString {
     if (![self stat]) {
-        return @"?";
+        return SI_UNKNOWN;
     }
     
     if (!cachedDateAccessedString) {
@@ -144,7 +144,7 @@
 
 - (NSString *)dateCreatedString {
     if (![self stat]) {
-        return @"?";
+        return SI_UNKNOWN;
     }
     
     if (!cachedDateCreatedString) {
@@ -163,7 +163,7 @@
 
 - (NSString *)dateModifiedString {
     if (![self stat]) {
-        return @"?";
+        return SI_UNKNOWN;
     }
     
     if (!cachedDateModifiedString) {
@@ -185,25 +185,24 @@
 
 - (NSString *)owner {
     if (![self stat]) {
-        return nil;
+        return SI_UNKNOWN;
     }
     
     if (!cachedOwner) {
-        const char *u = user_from_uid(cachedStatPtr->st_uid, 0);
-        cachedOwner = @(u);
+        const char *u = user_from_uid(cachedStatPtr->st_uid, 1);
+        cachedOwner = u ? @(u) : SI_UNKNOWN;
     }
-    
     return cachedOwner;
 }
 
 - (NSString *)group {
     if (![self stat]) {
-        return nil;
+        return SI_UNKNOWN;
     }
     
     if (!cachedGroup) {
-        const char *g = group_from_gid(cachedStatPtr->st_gid, 0);
-        cachedGroup = @(g);
+        const char *g = group_from_gid(cachedStatPtr->st_gid, 1);
+        cachedGroup = g ? @(g) : SI_UNKNOWN;
     }
     
     return cachedGroup;

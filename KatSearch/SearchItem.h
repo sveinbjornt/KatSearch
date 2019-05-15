@@ -31,6 +31,8 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
+#define SI_UNKNOWN @"?"
+
 @interface SearchItem : NSObject
 
 @property (retain, nonatomic) NSString *path;

@@ -41,10 +41,19 @@
     AuthorizationRef authorizationRef;
 }
 
-- (instancetype)initWithDelegate:(id<SearchTaskDelegate>)delegate {
+- (instancetype)initWithDelegate:(id<SearchTaskDelegate>)delegate  searchString:(NSString *)searchStr {
     self = [super init];
     if (self) {
         _delegate = delegate;
+        if ([searchStr hasPrefix:@"^"]) {
+//            searchStr = [searchStr substringFromIndex:1];
+            _matchStartOnly = YES;
+        }
+        if ([searchStr hasSuffix:@"$"]) {
+//            searchStr = [searchStr substringToIndex:[searchStr length]-2];
+            _matchEndOnly = YES;
+        }
+        _searchString = searchStr;
     }
     return self;
 }
