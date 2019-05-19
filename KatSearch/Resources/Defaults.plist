@@ -22,7 +22,17 @@
 	<true/>
 	<key>ShowFilter</key>
 	<true/>
+	<key>MenuOnlyMode</key>
+	<false/>
+	<key>AuthenticateOnLaunch</key>
+	<false/>
+	<key>HumanFriendlyDates</key>
+	<true/>
+	<key>HumanFriendlyFileSize</key>
+	<true/>
 	<key>RememberRecentSearches</key>
 	<true/>
+	<key>LaunchAtLogin</key>
+	<false/>
 </dict>
 </plist>

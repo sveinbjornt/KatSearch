@@ -32,6 +32,7 @@
 		F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */ = {isa = PBXBuildFile; fileRef = F4A5CF0020ED7E15008D0A06 /* searchfs */; };
 		F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */; };
 		F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */; };
+		F4CB199D2291064000265CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F462A26020E111D10062B230 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -281,6 +282,7 @@
 				F48DC10520FCD16400B21222 /* AppIcon.icns in Resources */,
 				F462A27420E1122A0062B230 /* SearchWindow.xib in Resources */,
 				F462A26420E111D10062B230 /* MainMenu.xib in Resources */,
+				F4CB199D2291064000265CE8 /* Assets.xcassets in Resources */,
 				F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

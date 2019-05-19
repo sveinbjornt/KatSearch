@@ -178,7 +178,7 @@ DQ
                                     </buttonCell>
                                     <connections>
                                         <action selector="toggleLaunchAtLogin:" target="-2" id="Ams-Qb-DYB"/>
-                                        <binding destination="CYm-Rc-d96" name="value" keyPath="values.RunInMenuMode" id="cXb-mY-STN"/>
+                                        <binding destination="CYm-Rc-d96" name="value" keyPath="values.MenuOnlyMode" id="vTg-t6-prD"/>
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ubr-YS-A7X">

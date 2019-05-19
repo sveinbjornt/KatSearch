@@ -523,7 +523,7 @@ DQ
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-78" y="-589"/>
+            <point key="canvasLocation" x="-13" y="-612"/>
         </menu>
         <menu id="Hft-qY-P2n" userLabel="Status Menu">
             <items>
@@ -538,6 +538,37 @@ DQ
                         <connections>
                             <outlet property="delegate" destination="Voe-Tx-rLC" id="6HS-le-0LJ"/>
                         </connections>
+                    </menu>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="7eb-HI-7KO"/>
+                <menuItem title="Windows" id="jmo-Yj-Ybg" userLabel="Windows">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Windows" systemMenu="window" id="H1G-21-fYh">
+                        <items>
+                            <menuItem title="Close" keyEquivalent="w" id="wvG-eI-nYx">
+                                <connections>
+                                    <action selector="performClose:" target="-1" id="OYf-lo-Nra"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Minimize" keyEquivalent="m" id="KbI-Pj-cDT">
+                                <connections>
+                                    <action selector="performMiniaturize:" target="-1" id="1n7-Y1-IYk"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom" keyEquivalent="z" id="yAV-R0-OHg">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="performZoom:" target="-1" id="UfW-e2-p6g"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="eil-w3-UoM"/>
+                            <menuItem title="Bring All to Front" id="o2T-o1-IfU">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="arrangeInFront:" target="-1" id="Lnb-1d-Qd4"/>
+                                </connections>
+                            </menuItem>
+                        </items>
                     </menu>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="V0H-Oo-RGu"/>
@@ -559,7 +590,10 @@ DQ
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-208" y="-224"/>
+            <connections>
+                <outlet property="delegate" destination="Voe-Tx-rLC" id="lNd-6i-Nre"/>
+            </connections>
+            <point key="canvasLocation" x="-98" y="-259"/>
         </menu>
     </objects>
 </document>

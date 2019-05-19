@@ -55,22 +55,18 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
     // Associate the shortcut key key with an action
-    [[MASShortcutBinder sharedBinder]
-     bindShortcutWithDefaultsKey:@"GlobalShortcut"
-     toAction:^{
-         if ([[NSApplication sharedApplication] isActive]) {
+    [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:@"GlobalShortcut"
+                                                         toAction:^{
+         if ([[NSApplication sharedApplication] isActive] || ![windowControllers count]) {
              [self newWindow:self];
-         } else {
-             [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-             if (![windowControllers count]) {
-                 [self newWindow:self];
-             }
          }
      }];
     
     windowControllers = [NSMutableArray array];
-    [self newWindow:self];
     
+    if (1) { // TODO: Not in status mode
+        [self newWindow:self];
+    }
     [self showStatusItem];
 }
 
@@ -87,6 +83,7 @@
 #pragma mark -
 
 - (IBAction)newWindow:(id)sender {
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
     SearchController *controller = [[SearchController alloc] initWithWindowNibName:@"SearchWindow"];
     [windowControllers addObject:controller];
     [controller showWindow:self];
@@ -114,7 +111,9 @@
 }
 
 - (void)menuWillOpen:(NSMenu *)menu {
-    if (menu == openRecentMenu) {
+    if (menu == statusMenu) {
+    }
+    else if (menu == openRecentMenu) {
         [menu removeAllItems];
         
         if ([DEFAULTS boolForKey:@"RememberRecentSearches"] == NO) {
@@ -141,7 +140,7 @@
 
 - (void)showStatusItem {
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    NSImage *icon = [[NSApplication sharedApplication] applicationIconImage];
+    NSImage *icon = [NSImage imageNamed:@"StatusItemIcon"];
     [icon setSize:NSMakeSize(18, 18)];
     [statusItem setImage:icon];
     [statusItem setMenu:statusMenu];
@@ -154,6 +153,7 @@
     if (prefsController == nil) {
         prefsController = [[PreferencesController alloc] initWithWindowNibName:@"PreferencesController"];
     }
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
     [prefsController showWindow:self];
 }
 

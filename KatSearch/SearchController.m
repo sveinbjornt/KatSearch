@@ -792,7 +792,6 @@
     if (mRange.location != NSNotFound) {
         NSDictionary *mattr = @{ NSForegroundColorAttributeName: [NSColor blackColor],
                                  NSBackgroundColorAttributeName: [NSColor yellowColor],
-                                 NSMarkedClauseSegmentAttributeName: @7
                                  };
         
         [attrStr setAttributes:mattr range:mRange];

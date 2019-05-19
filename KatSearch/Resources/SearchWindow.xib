@@ -78,7 +78,7 @@ DQ
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="PasteboardTableView">
-                                    <rect key="frame" x="0.0" y="0.0" width="844" height="441"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="846" height="441"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -124,7 +124,7 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="Kind" editable="NO" width="148" minWidth="100" maxWidth="2000" id="e6e-bl-cId" userLabel="Kind">
+                                        <tableColumn identifier="Kind" editable="NO" width="150" minWidth="100" maxWidth="250" id="e6e-bl-cId" userLabel="Kind">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Kind">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -139,11 +139,11 @@ DQ
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Dhn-xV-clw">
-                                                    <rect key="frame" x="214" y="1" width="148" height="17"/>
+                                                    <rect key="frame" x="214" y="1" width="150" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="A9v-Dv-gzl">
-                                                            <rect key="frame" x="0.0" y="0.0" width="148" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Kind" id="5Dt-2X-GNc">
                                                                 <font key="font" metaFont="system"/>
@@ -172,7 +172,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="dateModified"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="99j-Ne-kGR">
-                                                    <rect key="frame" x="365" y="1" width="128" height="17"/>
+                                                    <rect key="frame" x="367" y="1" width="128" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="gOe-2v-Sx2">
@@ -205,7 +205,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="size"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="wLv-os-SgI">
-                                                    <rect key="frame" x="496" y="1" width="100" height="17"/>
+                                                    <rect key="frame" x="498" y="1" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="h1H-hw-ejo">
@@ -238,7 +238,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="owner"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Bxw-Ww-mwr">
-                                                    <rect key="frame" x="599" y="1" width="120" height="17"/>
+                                                    <rect key="frame" x="601" y="1" width="120" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="HZd-pq-6wF">
@@ -271,7 +271,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="UTI"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="xSB-lL-UJ1">
-                                                    <rect key="frame" x="722" y="1" width="120" height="17"/>
+                                                    <rect key="frame" x="724" y="1" width="120" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="yPX-Gv-62n">
@@ -299,7 +299,7 @@ DQ
                                 </tableView>
                             </subviews>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.98561151079136688" horizontal="YES" id="qXN-lA-vxt">
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.97163120567375882" horizontal="YES" id="qXN-lA-vxt">
                             <rect key="frame" x="1" y="464" width="705" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -308,7 +308,7 @@ DQ
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" id="aEN-xB-2Qs">
-                            <rect key="frame" x="0.0" y="0.0" width="844" height="23"/>
+                            <rect key="frame" x="0.0" y="0.0" width="846" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <connections>
                                 <outlet property="menu" destination="Y72-8T-8y7" id="Lzb-O6-xdC"/>
