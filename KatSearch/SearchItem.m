@@ -237,10 +237,10 @@
         return cachedUTI;
     }
     if ([self isBookmark]) {
-        cachedUTI = kUTTypeSymLink; // or kUTTypeAliasFile ???
+        cachedUTI = (NSString *)kUTTypeSymLink; // or kUTTypeAliasFile ???
     } else {
         NSString *type = [[NSWorkspace sharedWorkspace] typeOfFile:_path error:nil];
-        cachedUTI = (type == nil) ? @"" : type;
+        cachedUTI = (type == nil) ? SI_UNKNOWN : type;
     }
     return cachedUTI;
 }

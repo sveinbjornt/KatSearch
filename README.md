@@ -4,7 +4,7 @@
 
 **KatSearch is a work in progress**
 
-Mac power-user app to quickly find files on entire HFS+/APFS volumes by scanning the file system catalog.
+Mac power-user app to quickly find files on entire APFS and HFS+ volumes by scanning the file system catalog.
 
 Do you miss the good ol’ days before Spotlight, when search on the Mac simply scanned the filesystem? Yeah, me too.
 

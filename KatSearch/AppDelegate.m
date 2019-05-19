@@ -58,6 +58,7 @@
     [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:@"GlobalShortcut"
                                                          toAction:^{
          if ([[NSApplication sharedApplication] isActive] || ![windowControllers count]) {
+             [self animateStatusItem];
              [self newWindow:self];
          }
      }];
@@ -144,7 +145,23 @@
     [icon setSize:NSMakeSize(18, 18)];
     [statusItem setImage:icon];
     [statusItem setMenu:statusMenu];
+}
+
+- (void)hideStatusItem {
+    if (!statusItem) {
+        return;
+    }
+    [[NSStatusBar systemStatusBar] removeStatusItem:statusItem];
+    statusItem = nil;
+}
+
+- (void)animateStatusItem {
+    [statusItem.button setHighlighted:YES];
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.15 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [statusItem.button setHighlighted:NO];
+
+    });
 }
 
 #pragma mark -
