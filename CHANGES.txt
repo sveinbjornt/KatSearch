@@ -14,23 +14,24 @@
 * Install CLT via Preferences
 * Smart columns (estimate min-max size, calc. length of filenames to estimate etc.)
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
-* Don't show non-AFPS/HFS+ file systems in volumes popup
 * Add "Move to Trash" to contextual menu (with confirmation prompt)
 * Search history (Recent searches)
 * Override Cmd-F to show filter field
-* Use STPriviledTask when authenticated
+* Use STPriviledTask when authenticated (global app-wide shared authentication)
 * Show/hide columns according to prefs
 * Status Menu mode
 * Show volumes which don't have catalog but have them disabled
 * Fix rounding of even size numbers (17 MB, not 17.0 MB)
-* Get status menu icon
+* Create status menu icon
 * Path bar with string option
 * Regex option for filter
 * Filter menu with fields
 * Show/hide filter
 * Highlight matching string when filter active
 * Support using /usr/bin/find
-* Support selecting folder to search
+* Support selecting folder to search (add home folder preset)
+* "Show Original" for aliases/symlinks
+* Versions for identical apps in Open With menu
 
 
 ## Version History

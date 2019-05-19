@@ -45,6 +45,8 @@
 @property (readonly, nonatomic) NSString *owner;
 @property (readonly, nonatomic) NSString *group;
 @property (readonly, nonatomic) NSString *permissionsString;
+@property (readonly, nonatomic) BOOL isBookmark;
+
 
 @property (readonly) UInt64 size;
 @property (readonly, nonatomic) NSString *sizeString;
@@ -66,6 +68,7 @@
 - (void)showInFinder;
 - (void)openWith:(NSString *)appIdentifier;
 - (void)getInfo;
+- (void)showOriginal;
 - (void)quickLook;
 
 @end

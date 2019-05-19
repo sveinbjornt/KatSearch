@@ -49,6 +49,8 @@
     NSString *cachedGroup;
     NSString *cachedPermissionsString;
     
+    int bookmark;
+    
     struct stat cachedStat;
     struct stat *cachedStatPtr;
 }
@@ -57,6 +59,7 @@
     self = [super init];
     if (self) {
         _path = path;
+        bookmark = -1;
     }
     return self;
 }
@@ -229,13 +232,28 @@
     return -1;
 }
 
-- (NSString *)uti {
+- (NSString *)UTI {
     if (cachedUTI) {
         return cachedUTI;
     }
-    NSString *type = [[NSWorkspace sharedWorkspace] typeOfFile:_path error:nil];
-    cachedUTI = (type == nil) ? @"" : type;
+    if ([self isBookmark]) {
+        cachedUTI = kUTTypeSymLink; // or kUTTypeAliasFile ???
+    } else {
+        NSString *type = [[NSWorkspace sharedWorkspace] typeOfFile:_path error:nil];
+        cachedUTI = (type == nil) ? @"" : type;
+    }
     return cachedUTI;
+}
+
+- (BOOL)isBookmark {
+    if (bookmark == -1) {
+        NSNumber *number = nil;
+        [[NSURL fileURLWithPath:self.path] getResourceValue:&number
+                                                     forKey:NSURLIsAliasFileKey
+                                                      error:nil];
+        bookmark = [number boolValue];
+    }
+    return bookmark;
 }
 
 #pragma mark - Handler apps
@@ -261,6 +279,14 @@
 - (void)showInFinder {
     [[NSWorkspace sharedWorkspace] selectFile:self.path
                      inFileViewerRootedAtPath:[self.path stringByDeletingLastPathComponent]];
+}
+
+- (void)showOriginal {
+    if ([self isBookmark]) {
+        [[NSWorkspace sharedWorkspace] showOriginal:self.path];
+    } else {
+        NSBeep();
+    }
 }
 
 - (void)getInfo {

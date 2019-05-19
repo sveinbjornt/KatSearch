@@ -370,6 +370,27 @@
 
 #pragma mark - Finder
 
+- (BOOL)showOriginal:(NSString *)path {
+    NSData* bookmark = [NSURL bookmarkDataWithContentsOfURL:[NSURL fileURLWithPath:path]
+                                                      error:nil];
+    NSError *error;
+    NSURL *origURL = [NSURL URLByResolvingBookmarkData:bookmark
+                                               options:NSURLBookmarkResolutionWithoutUI
+                                         relativeToURL:nil
+                                   bookmarkDataIsStale:nil
+                                                 error:&error];
+    if (origURL == nil) {
+        NSLog(@"Unable to resolve bookmark %@", path);
+        NSBeep();
+        return NO;
+    }
+    
+    BOOL succ = [[NSWorkspace sharedWorkspace] selectFile:path
+                                 inFileViewerRootedAtPath:[path stringByDeletingLastPathComponent]];
+
+    return succ;
+}
+
 - (BOOL)moveFileToTrash:(NSString *)path {
     
     NSURL *fileURL = [NSURL fileURLWithPath:path];

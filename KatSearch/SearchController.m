@@ -301,7 +301,6 @@
     [progressIndicator stopAnimation:self];
     [progressIndicator setHidden:YES];
     [smallProgressIndicator stopAnimation:self];
-    [smallProgressIndicator setHidden:YES];
     [smallProgressIndicator setUsesThreadedAnimation:NO];
     
 //    CGPoint origin = [numResultsTextField frame].origin;
@@ -575,6 +574,21 @@
     [self copySelectedFilesToPasteboard:[NSPasteboard generalPasteboard]];
 }
 
+- (IBAction)moveToTrash:(id)sender {
+    for (SearchItem *item in [self selectedItems]) {
+        // TODO: Confirm prompt
+        [[NSWorkspace sharedWorkspace] moveFileToTrash:item.path];
+    }
+}
+
+- (IBAction)showOriginal:(id)sender {
+    for (SearchItem *item in [self selectedItems]) {
+        if ([item isBookmark]) {
+            [item showOriginal];
+        }
+    }
+}
+
 #pragma mark - Write items to pasteboard
 
 - (void)copyFiles:(NSArray *)files toPasteboard:(NSPasteboard *)pboard {
@@ -623,6 +637,18 @@
             copyTitle = [NSString stringWithFormat:@"Copy “%@”", name];
         }
         [[menu itemWithTag:1] setTitle:copyTitle];
+        
+//        BOOL bookmarksOnly = YES;
+//        for (SearchItem *item in items) {
+//            if ([item isBookmark] == NO) {
+//                bookmarksOnly = NO;
+//            }
+//        }
+//        if (bookmarksOnly) {
+//            [menu addItemWithTitle:@"Show Original" action:nil keyEquivalent:@""];
+//        } else {
+//            [menu removeItemAtIndex:[[menu itemArray] count]-1];
+//        }
     }
     else if (menu == openWithSubMenu) {
     
@@ -769,14 +795,14 @@
                                  NSMarkedClauseSegmentAttributeName: @7
                                  };
         
-        
+        [attrStr setAttributes:mattr range:mRange];
+
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init] ;
         [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
         [attrStr addAttribute:NSParagraphStyleAttributeName
                         value:paragraphStyle
-                        range:NSMakeRange(0,[attrStr length])];
+                        range:NSMakeRange(0,[title length])];
         
-        [attrStr setAttributes:mattr range:mRange];
         
 //        [attrStr beginEditing];
 //        [attrStr applyFontTraits:NSBoldFontMask

@@ -51,6 +51,7 @@
 - (NSString *)createTempFileWithContents:(NSString *)contentStr;
 - (NSString *)createTempFileWithContents:(NSString *)contentStr encoding:(NSStringEncoding)textEncoding;
 
+- (BOOL)showOriginal:(NSString *)path;
 - (BOOL)moveFileToTrash:(NSString *)path;
 - (BOOL)showFinderGetInfoForFile:(NSString *)path;
 - (BOOL)quickLookFile:(NSString *)path;

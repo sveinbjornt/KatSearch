@@ -74,17 +74,17 @@ DQ
                         <rect key="frame" x="-1" y="46" width="707" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="y0c-ed-QWB">
-                            <rect key="frame" x="1" y="0.0" width="705" height="479"/>
+                            <rect key="frame" x="1" y="0.0" width="705" height="464"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="FileListTableView">
-                                    <rect key="frame" x="0.0" y="0.0" width="705" height="456"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="844" height="441"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn identifier="Items" editable="NO" width="172" minWidth="33.28857421875" maxWidth="2000" id="QWP-6f-Nbl" userLabel="Filename">
+                                        <tableColumn identifier="Items" editable="NO" width="210" minWidth="210" maxWidth="2000" id="QWP-6f-Nbl" userLabel="Filename">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Items">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -99,7 +99,7 @@ DQ
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="M6h-sX-oD6">
-                                                    <rect key="frame" x="1" y="1" width="172" height="17"/>
+                                                    <rect key="frame" x="1" y="1" width="210" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <imageView id="k2e-gK-PyD">
@@ -108,7 +108,7 @@ DQ
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="wGC-33-ptA"/>
                                                         </imageView>
                                                         <textField verticalHuggingPriority="750" textCompletion="NO" id="ieL-Jw-uRH">
-                                                            <rect key="frame" x="26" y="0.0" width="145" height="17"/>
+                                                            <rect key="frame" x="26" y="0.0" width="183" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingMiddle" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Table View Cell" id="0P3-jk-VPj">
                                                                 <font key="font" metaFont="system"/>
@@ -124,7 +124,7 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="Kind" editable="NO" width="148" minWidth="10" maxWidth="3.4028234663852886e+38" id="e6e-bl-cId" userLabel="Kind">
+                                        <tableColumn identifier="Kind" editable="NO" width="148" minWidth="100" maxWidth="2000" id="e6e-bl-cId" userLabel="Kind">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Kind">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -139,7 +139,7 @@ DQ
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Dhn-xV-clw">
-                                                    <rect key="frame" x="176" y="1" width="148" height="17"/>
+                                                    <rect key="frame" x="214" y="1" width="148" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="A9v-Dv-gzl">
@@ -158,7 +158,7 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="Date Modified" editable="NO" width="130" minWidth="10" maxWidth="3.4028234663852886e+38" id="14A-ud-fM2" userLabel="Date Modified">
+                                        <tableColumn identifier="Date Modified" editable="NO" width="128" minWidth="128" maxWidth="128" id="14A-ud-fM2" userLabel="Date Modified">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Date Modified">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -172,11 +172,11 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="dateModified"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="99j-Ne-kGR">
-                                                    <rect key="frame" x="327" y="1" width="130" height="17"/>
+                                                    <rect key="frame" x="365" y="1" width="128" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="gOe-2v-Sx2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="130" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Date Modified" id="h9B-i6-zwK">
                                                                 <font key="font" metaFont="system"/>
@@ -191,7 +191,7 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="Size" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="P8S-bY-VTe" userLabel="Size">
+                                        <tableColumn identifier="Size" editable="NO" width="100" minWidth="100" maxWidth="100" id="P8S-bY-VTe" userLabel="Size">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Size">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -205,11 +205,11 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="size"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="wLv-os-SgI">
-                                                    <rect key="frame" x="460" y="1" width="120" height="17"/>
+                                                    <rect key="frame" x="496" y="1" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="h1H-hw-ejo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Size" id="Tyd-fG-ZmC">
                                                                 <font key="font" metaFont="system"/>
@@ -238,7 +238,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="owner"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Bxw-Ww-mwr">
-                                                    <rect key="frame" x="583" y="1" width="120" height="17"/>
+                                                    <rect key="frame" x="599" y="1" width="120" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="HZd-pq-6wF">
@@ -257,6 +257,39 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
+                                        <tableColumn identifier="UTI" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="R7D-oa-fUu">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="UTI">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="left" title="User/Group" id="Pt2-mL-hgc">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="UTI"/>
+                                            <prototypeCellViews>
+                                                <tableCellView id="xSB-lL-UJ1">
+                                                    <rect key="frame" x="722" y="1" width="120" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="yPX-Gv-62n">
+                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="17"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="User/Group" id="DtQ-LF-hOe">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <connections>
+                                                        <outlet property="textField" destination="yPX-Gv-62n" id="QBm-cV-cnK"/>
+                                                    </connections>
+                                                </tableCellView>
+                                            </prototypeCellViews>
+                                        </tableColumn>
                                     </tableColumns>
                                     <connections>
                                         <outlet property="dataSource" destination="-2" id="9F9-48-nJX"/>
@@ -266,8 +299,8 @@ DQ
                                 </tableView>
                             </subviews>
                         </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="qXN-lA-vxt">
-                            <rect key="frame" x="-100" y="-100" width="783" height="15"/>
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.98561151079136688" horizontal="YES" id="qXN-lA-vxt">
+                            <rect key="frame" x="1" y="464" width="705" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="5Mh-8y-eFZ">
@@ -275,7 +308,7 @@ DQ
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" id="aEN-xB-2Qs">
-                            <rect key="frame" x="0.0" y="0.0" width="705" height="23"/>
+                            <rect key="frame" x="0.0" y="0.0" width="844" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <connections>
                                 <outlet property="menu" destination="Y72-8T-8y7" id="Lzb-O6-xdC"/>
@@ -513,48 +546,56 @@ DQ
                 <menuItem title="Show Kind" id="27S-Uw-WmW">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
+                        <binding destination="7VI-tp-uBM" name="enabled" keyPath="values.ShowColumnKind" id="HOh-qz-U9w"/>
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnKind" id="RBK-R3-5w6"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Show Size" id="Vfk-pr-upL">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
+                        <binding destination="7VI-tp-uBM" name="enabled" keyPath="values.ShowColumnSize" id="7jp-xm-llL"/>
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnSize" id="f3w-x4-FkG"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Show Date Created" id="v8y-LW-D9L">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
+                        <binding destination="7VI-tp-uBM" name="enabled" keyPath="values.ShowColumnDateCreated" id="q7q-vq-Jx6"/>
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnDateCreated" id="yfk-s1-pMD"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Show Date Modified" id="tGQ-KF-LmP">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
+                        <binding destination="7VI-tp-uBM" name="enabled" keyPath="values.ShowColumnDateModified" id="29v-Tf-EsU"/>
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnDateModified" id="JBy-LP-x8r"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Show Date Accessed" id="1RI-Io-SiA">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
+                        <binding destination="7VI-tp-uBM" name="enabled" keyPath="values.ShowColumnDateAccessed" id="1zO-nP-vlL"/>
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnDateAccessed" id="aKK-df-Qud"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Show User:Group" id="bwU-21-hjh">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
+                        <binding destination="7VI-tp-uBM" name="enabled" keyPath="values.ShowColumnUserGroup" id="COb-t6-Htx"/>
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnUserGroup" id="0NI-uM-iGl"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Show Permissions" id="vrc-F2-s8R">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
+                        <binding destination="7VI-tp-uBM" name="enabled" keyPath="values.ShowColumnPermissions" id="phk-r7-Kki"/>
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnPermissions" id="vXx-bI-nrN"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Show UTI" id="V2Q-KB-eMF">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
+                        <binding destination="7VI-tp-uBM" name="enabled" keyPath="values.ShowColumnUTI" id="8yg-96-njC"/>
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnUTI" id="DeZ-xI-lJm"/>
                     </connections>
                 </menuItem>
