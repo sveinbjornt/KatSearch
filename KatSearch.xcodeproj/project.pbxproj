@@ -33,6 +33,9 @@
 		F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */; };
 		F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */; };
 		F4CB199D2291064000265CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F462A26020E111D10062B230 /* Assets.xcassets */; };
+		F4CB19A022919A9200265CE8 /* SavedSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB199F22919A9200265CE8 /* SavedSearch.m */; };
+		F4CB19A22291A2E800265CE8 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CB19A12291A2E800265CE8 /* MASPreferences.framework */; };
+		F4CB19A42291A30A00265CE8 /* MASPreferences.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F4CB19A12291A2E800265CE8 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +45,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F4CB19A42291A30A00265CE8 /* MASPreferences.framework in Copy Frameworks */,
 				F498ADF122666D4E00CB6A6E /* Sparkle.framework in Copy Frameworks */,
 				F498ADF222666D5000CB6A6E /* MASShortcut.framework in Copy Frameworks */,
 			);
@@ -98,6 +102,9 @@
 		F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STVolumesPopupButton.m; sourceTree = "<group>"; };
 		F4A7BA8320EC208F00083B48 /* NSTableView+PreserveSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+PreserveSelection.h"; sourceTree = "<group>"; };
 		F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+PreserveSelection.m"; sourceTree = "<group>"; };
+		F4CB199E22919A9200265CE8 /* SavedSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavedSearch.h; sourceTree = "<group>"; };
+		F4CB199F22919A9200265CE8 /* SavedSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavedSearch.m; sourceTree = "<group>"; };
+		F4CB19A12291A2E800265CE8 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASPreferences.framework; sourceTree = "<group>"; };
 		F4E32305225BDB1300C89C81 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4CB19A22291A2E800265CE8 /* MASPreferences.framework in Frameworks */,
 				F498ADF022666D4300CB6A6E /* MASShortcut.framework in Frameworks */,
 				F498ADEF22666D2200CB6A6E /* Sparkle.framework in Frameworks */,
 			);
@@ -143,6 +151,8 @@
 				F47967392250102900CA0746 /* Common.h */,
 				F462A25D20E111CF0062B230 /* AppDelegate.h */,
 				F462A25E20E111CF0062B230 /* AppDelegate.m */,
+				F4CB199E22919A9200265CE8 /* SavedSearch.h */,
+				F4CB199F22919A9200265CE8 /* SavedSearch.m */,
 				F462A27020E1122A0062B230 /* SearchController.h */,
 				F462A27120E1122A0062B230 /* SearchController.m */,
 				F462A27520E117760062B230 /* SearchTask.h */,
@@ -210,6 +220,7 @@
 		F498ADEC22666CDB00CB6A6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4CB19A12291A2E800265CE8 /* MASPreferences.framework */,
 				F498ADEE22666D2200CB6A6E /* Sparkle.framework */,
 				F498ADED22666CDB00CB6A6E /* MASShortcut.framework */,
 			);
@@ -312,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F48DC0F920FBF16100B21222 /* PreferencesController.m in Sources */,
+				F4CB19A022919A9200265CE8 /* SavedSearch.m in Sources */,
 				F462A27720E117760062B230 /* SearchTask.m in Sources */,
 				F498ADF62267988000CB6A6E /* STPrivilegedTask.m in Sources */,
 				F462A26720E111D10062B230 /* main.m in Sources */,

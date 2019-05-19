@@ -52,6 +52,10 @@
     [DEFAULTS registerDefaults:[NSDictionary dictionaryWithContentsOfFile:defaultsPath]];
 }
 
+- (void)awakeFromNib {
+    [NSApp setServicesProvider:self];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
     // Associate the shortcut key key with an action
@@ -84,13 +88,12 @@
 #pragma mark - Services
 
 - (void)searchByName:(NSPasteboard *)pb userData:(NSString *)userData error:(NSString **)err {
-    DLog(@"Received search by name");
+    DLog(@"Received search by name request");
 }
 
 - (void)searchFolder:(NSPasteboard *)pb userData:(NSString *)userData error:(NSString **)err {
-    DLog(@"Received search in folder");
+    DLog(@"Received search in folder request");
 }
-
 
 #pragma mark -
 
