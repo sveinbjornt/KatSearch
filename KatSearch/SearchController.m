@@ -45,6 +45,7 @@
     IBOutlet NSButton *authenticateButton;
     
     IBOutlet NSProgressIndicator *progressIndicator;
+    IBOutlet NSProgressIndicator *smallProgressIndicator;
     IBOutlet NSTextField *numResultsTextField;
     
     IBOutlet NSTableView *tableView;
@@ -215,9 +216,9 @@
     [progressIndicator startAnimation:self];
     [progressIndicator setHidden:NO];
 
-    CGPoint origin = [numResultsTextField frame].origin;
-    origin.x += 30;
-    [numResultsTextField setFrameOrigin:origin];
+//    CGPoint origin = [numResultsTextField frame].origin;
+//    origin.x += 30;
+//    [numResultsTextField setFrameOrigin:origin];
     [numResultsTextField setStringValue:@"Searching..."];
     
     [searchButton setTitle:@"Stop"];
@@ -269,16 +270,22 @@
 
 - (void)taskResultsFound:(NSArray *)items {
     
-    if ([progressIndicator controlSize] != NSControlSizeSmall) {
-        [progressIndicator setFrameOrigin:NSMakePoint(16, 16)];
-        [[self.window contentView] addSubview:progressIndicator];
-//        NSRect frame = [progressIndicator frame];
-//        NSSize size = frame.size;
-//        size.width = size.width/2;
-//        size.height = size.height/2;
-//        frame.size = size;
-//        [progressIndicator setFrame:frame];
-        [progressIndicator setControlSize:NSControlSizeSmall];
+//    if ([progressIndicator controlSize] != NSControlSizeSmall) {
+//        [progressIndicator setFrameOrigin:NSMakePoint(16, 16)];
+//        [[self.window contentView] addSubview:progressIndicator];
+////        NSRect frame = [progressIndicator frame];
+////        NSSize size = frame.size;
+////        size.width = size.width/2;
+////        size.height = size.height/2;
+////        frame.size = size;
+////        [progressIndicator setFrame:frame];
+//        [progressIndicator setControlSize:NSControlSizeSmall];
+//    }
+    
+    if ([progressIndicator isHidden] == NO) {
+        [smallProgressIndicator setUsesThreadedAnimation:TRUE];
+        [smallProgressIndicator startAnimation:self];
+        [progressIndicator setHidden:YES];
     }
     
     [results addObjectsFromArray:items];
@@ -293,10 +300,13 @@
     
     [progressIndicator stopAnimation:self];
     [progressIndicator setHidden:YES];
+    [smallProgressIndicator stopAnimation:self];
+    [smallProgressIndicator setHidden:YES];
+    [smallProgressIndicator setUsesThreadedAnimation:NO];
     
-    CGPoint origin = [numResultsTextField frame].origin;
-    origin.x -= 30;
-    [numResultsTextField setFrameOrigin:origin];
+//    CGPoint origin = [numResultsTextField frame].origin;
+//    origin.x -= 30;
+//    [numResultsTextField setFrameOrigin:origin];
     
     [searchButton setTitle:@"Search"];
     
@@ -739,13 +749,43 @@
 //        NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
 //        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:colStr
 //                                                                      attributes:attr];
-//        [cellView.textField setAttributedStringValue:attrStr];
+    [cellView.textField setAttributedStringValue:[self attr:colStr]];
 //    } else {
-        cellView.textField.stringValue = colStr;
+//        cellView.textField.stringValue = colStr;
 //    }
     
     
     return cellView;
+}
+
+- (NSAttributedString *)attr:(NSString *)title {
+    NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor whiteColor] };
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:title attributes:attr];
+    
+    NSRange mRange = [[title lowercaseString] rangeOfString:@"test"];
+    if (mRange.location != NSNotFound) {
+        NSDictionary *mattr = @{ NSForegroundColorAttributeName: [NSColor blackColor],
+                                 NSBackgroundColorAttributeName: [NSColor yellowColor],
+                                 NSMarkedClauseSegmentAttributeName: @7
+                                 };
+        
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init] ;
+        [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+        [attrStr addAttribute:NSParagraphStyleAttributeName
+                        value:paragraphStyle
+                        range:NSMakeRange(0,[attrStr length])];
+        
+        [attrStr setAttributes:mattr range:mRange];
+        
+//        [attrStr beginEditing];
+//        [attrStr applyFontTraits:NSBoldFontMask
+//                           range:mRange];
+//        [attrStr endEditing];
+
+    }
+    
+    return attrStr;
 }
 
 - (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {

@@ -2,8 +2,8 @@
 #
 # Print total lines of code for project
 #
-echo "Lines of code in Sloth codebase"
-cd source
+echo "Lines of code in codebase"
+
 echo "LOC Total:"
 find . -name \*.\[m\|h\] -exec cat {} \; | wc -l
 

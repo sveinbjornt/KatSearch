@@ -3,7 +3,7 @@
 
 * Export results to text file
 * Columns adjust size with window
-* Handle aliases intelligently
+* Handle aliases/symlinks intelligently
 * Extensive search filters?
     * Date filters
     * Kind filters
@@ -20,6 +20,17 @@
 * Override Cmd-F to show filter field
 * Use STPriviledTask when authenticated
 * Show/hide columns according to prefs
+* Status Menu mode
+* Show volumes which don't have catalog but have them disabled
+* Fix rounding of even size numbers (17 MB, not 17.0 MB)
+* Get status menu icon
+* Path bar with string option
+* Regex option for filter
+* Filter menu with fields
+* Show/hide filter
+* Highlight matching string when filter active
+* Support using /usr/bin/find
+* Support selecting folder to search
 
 
 ## Version History

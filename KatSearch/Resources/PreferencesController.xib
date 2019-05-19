@@ -17,7 +17,7 @@
         <window title="KatSearch Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="PreferencesWindow" animationBehavior="default" titlebarAppearsTransparent="YES" id="F0z-JX-Cv5" userLabel="KatSearch Preferences">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="196" y="240" width="475" height="300"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="475" height="300"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -179,6 +179,42 @@ DQ
                                     <connections>
                                         <action selector="toggleLaunchAtLogin:" target="-2" id="Ams-Qb-DYB"/>
                                         <binding destination="CYm-Rc-d96" name="value" keyPath="values.RunInMenuMode" id="cXb-mY-STN"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ubr-YS-A7X">
+                                    <rect key="frame" x="13" y="78" width="191" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Human-friendly date format" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zJN-JP-rLa">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="toggleLaunchAtLogin:" target="-2" id="UbB-Ea-t98"/>
+                                        <binding destination="CYm-Rc-d96" name="value" keyPath="values.HumanFriendlyDates" id="op4-6l-Req"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cFN-b1-V7u">
+                                    <rect key="frame" x="13" y="51" width="166" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Human-friendly file size" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="WdZ-jh-CrJ">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="toggleLaunchAtLogin:" target="-2" id="oDR-Ne-Dm2"/>
+                                        <binding destination="CYm-Rc-d96" name="value" keyPath="values.HumanFriendlyFileSize" id="Gvj-mu-m5F"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hqg-9i-SOP">
+                                    <rect key="frame" x="23" y="138" width="162" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" title="Authenticate on launch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="3Of-p2-GiU">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="toggleLaunchAtLogin:" target="-2" id="Bat-Tc-JfK"/>
+                                        <binding destination="CYm-Rc-d96" name="value" keyPath="values.AuthenticateOnLaunch" id="BeY-ZC-i3Y"/>
                                     </connections>
                                 </button>
                             </subviews>

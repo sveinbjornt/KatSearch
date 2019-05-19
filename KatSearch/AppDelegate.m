@@ -56,9 +56,13 @@
     [[MASShortcutBinder sharedBinder]
      bindShortcutWithDefaultsKey:@"GlobalShortcut"
      toAction:^{
-         [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-         if (![windowControllers count]) {
+         if ([[NSApplication sharedApplication] isActive]) {
              [self newWindow:self];
+         } else {
+             [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+             if (![windowControllers count]) {
+                 [self newWindow:self];
+             }
          }
      }];
     
