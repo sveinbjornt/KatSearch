@@ -10,11 +10,12 @@ Do you miss the good ol’ days before Spotlight, when search on the Mac simply 
 
 Unlike Spotlight, KatSearch performs *no indexing* and only looks at filenames, not content. It uses a fast low-level kernel call to search the *entire* file system via the APFS or HFS+ file system catalog.
 
-* Fast, native, modern macOS app with a responsive, no-nonsense interface
+* Fast, native, modern macOS app with a responsive, powerful, no-nonsense interface
 * Displays live search results
 * Scans the actual file system, not just the userland files Apple wants you to see
 * Can run with admin privileges to find all files irrespective of permissions
-* Ubiquitous native drag and drop behaviour, with hooks into Finder actions/services
+* Ubiquitous native drag and drop behaviour, with hooks into Finder actions/services via contextual menu
+* Supports all the standard Finder keyboard shortcuts for file actions
 * Free, open source software written in Objective-C/Cocoa
 
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BDT58J7HYKAEE"><img align="right" src="https://www.paypalobjects.com/WEBSCR-640-20110306-1/en_US/i/btn/btn_donate_LG.gif" ></a>

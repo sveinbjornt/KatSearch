@@ -77,7 +77,7 @@ DQ
                             <rect key="frame" x="1" y="0.0" width="705" height="464"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="FileListTableView">
+                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="PasteboardTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="844" height="441"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -315,7 +315,7 @@ DQ
                             </connections>
                         </tableHeaderView>
                     </scrollView>
-                    <pathControl hidden="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" id="bfe-bX-o7s" customClass="KatPathControl">
+                    <pathControl hidden="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" id="bfe-bX-o7s" customClass="PasteboardPathControl">
                         <rect key="frame" x="-1" y="48" width="708" height="22"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         <pathCell key="cell" selectable="YES" refusesFirstResponder="YES" alignment="left" placeholderString="" id="QPf-7X-WU9">

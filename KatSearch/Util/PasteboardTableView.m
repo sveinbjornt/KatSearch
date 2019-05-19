@@ -28,8 +28,29 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Cocoa/Cocoa.h>
+#import "PasteboardTableView.h"
+#import "PasteboardDelegate.h"
 
-@interface KatPathControl : NSPathControl
+@implementation PasteboardTableView
+
++ (void)initialize {
+    [NSApp registerServicesMenuSendTypes:@[NSFilenamesPboardType] returnTypes:@[]];
+}
+
+- (id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType {
+    if ([sendType isEqual:NSFilenamesPboardType]) {
+        return self;
+    }
+    return [super validRequestorForSendType:sendType returnType:returnType];
+}
+
+- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray *)types {
+    id<PasteboardDelegate> pbDel = (id)[self dataSource];
+    if ([pbDel respondsToSelector:@selector(copySelectedFilesToPasteboard:)]) {
+        [pbDel performSelector:@selector(copySelectedFilesToPasteboard:) withObject:pboard];
+        return YES;
+    }
+    return NO;
+}
 
 @end

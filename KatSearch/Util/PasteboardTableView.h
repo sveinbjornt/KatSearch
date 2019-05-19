@@ -28,29 +28,8 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "FileListTableView.h"
-#import "PasteboardDelegate.h"
+#import <Cocoa/Cocoa.h>
 
-@implementation FileListTableView
-
-+ (void)initialize {
-    [NSApp registerServicesMenuSendTypes:@[NSFilenamesPboardType] returnTypes:@[]];
-}
-
-- (id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType {
-    if ([sendType isEqual:NSFilenamesPboardType]) {
-        return self;
-    }
-    return [super validRequestorForSendType:sendType returnType:returnType];
-}
-
-- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray *)types {
-    id<PasteboardDelegate> pbDel = (id)[self dataSource];
-    if ([pbDel respondsToSelector:@selector(copySelectedFilesToPasteboard:)]) {
-        [pbDel performSelector:@selector(copySelectedFilesToPasteboard:) withObject:pboard];
-        return YES;
-    }
-    return NO;
-}
+@interface PasteboardTableView : NSTableView
 
 @end
