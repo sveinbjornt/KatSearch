@@ -40,6 +40,8 @@
     PreferencesController *prefsController;
     
     IBOutlet NSMenu *openRecentMenu;
+    IBOutlet NSMenu *statusMenu;
+    NSStatusItem *statusItem;
 }
 @end
 
@@ -68,6 +70,8 @@
     
     windowControllers = [NSMutableArray array];
     [self newWindow:self];
+    
+    [self showStatusItem];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
@@ -131,6 +135,17 @@
 
 - (IBAction)clearRecentSearches:(id)sender {
     [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
+}
+
+#pragma mark - Status Menu
+
+- (void)showStatusItem {
+    statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    NSImage *icon = [[NSApplication sharedApplication] applicationIconImage];
+    [icon setSize:NSMakeSize(18, 18)];
+    [statusItem setImage:icon];
+    [statusItem setMenu:statusMenu];
+    
 }
 
 #pragma mark -
