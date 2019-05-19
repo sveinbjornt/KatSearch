@@ -81,6 +81,17 @@
     return YES;
 }
 
+#pragma mark - Services
+
+- (void)searchByName:(NSPasteboard *)pb userData:(NSString *)userData error:(NSString **)err {
+    DLog(@"Received search by name");
+}
+
+- (void)searchFolder:(NSPasteboard *)pb userData:(NSString *)userData error:(NSString **)err {
+    DLog(@"Received search in folder");
+}
+
+
 #pragma mark -
 
 - (IBAction)newWindow:(id)sender {
