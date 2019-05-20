@@ -16,6 +16,8 @@ Unlike Spotlight, KatSearch performs *no indexing* and only looks at filenames, 
 * Can run with admin privileges to find all files irrespective of permissions
 * Ubiquitous native drag and drop behaviour, with hooks into Finder actions/services via contextual menu
 * Supports all the standard Finder keyboard shortcuts for file actions
+* Search windows can be invoked using a global hotkey
+* Includes [`searchfs`](https://github.com/sveinbjornt/searchfs), a command line tool counterpart
 * Free, open source software written in Objective-C/Cocoa
 
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BDT58J7HYKAEE"><img align="right" src="https://www.paypalobjects.com/WEBSCR-640-20110306-1/en_US/i/btn/btn_donate_LG.gif" ></a>

@@ -28,8 +28,64 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Foundation/Foundation.h>
+#import "ToolPreferencesController.h"
+#import "Common.h"
 
-@interface SavedSearch : NSObject
+@interface ToolPreferencesController()
+{
+    IBOutlet NSImageView *execImageView;
+    IBOutlet NSTextField *statusTextField;
+    IBOutlet NSButton *installButton;
+}
+@end
+
+@implementation ToolPreferencesController
+
+#pragma mark -
+
+- (id)init {
+    return [super initWithNibName:@"ToolPreferencesView" bundle:nil];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    NSImage *execIcon = [[NSImage alloc] initWithContentsOfFile:EXEC_ICON_PATH];
+    [execImageView setImage:execIcon];
+    [self updateInstallStatusMessage];
+}
+
+- (void)updateInstallStatusMessage {
+    
+}
+
+- (IBAction)buttonPressed:(id)sender {
+    [self updateInstallStatusMessage];
+}
+
+#pragma mark - MASPreferencesViewController
+
+- (NSString *)viewIdentifier {
+    return @"ToolPreferences";
+}
+
+- (NSImage *)toolbarItemImage {
+    return [[NSImage alloc] initWithContentsOfFile:EXEC_ICON_PATH];
+}
+
+- (NSString *)toolbarItemLabel {
+    return NSLocalizedString(@"Tool", @"Toolbar item name for the Tool preference pane");
+}
+
+- (NSView *)initialKeyView {
+    return nil;
+}
+
+- (BOOL)hasResizableWidth {
+    return NO;
+}
+
+- (BOOL)hasResizableHeight {
+    return NO;
+}
 
 @end

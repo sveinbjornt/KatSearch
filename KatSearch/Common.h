@@ -29,21 +29,32 @@
 */
 
 #define PROGRAM_NAME            @"KatSearch"
-#define PROGRAM_VERSION         @"0.1"
+
+#define PROGRAM_VERSION_MAJ     0
+#define PROGRAM_VERSION_MIN     1
+#define PROGRAM_VERSION_STRING  @[NSString stringWithFormat:@"%d.%d",\
+                                PROGRAM_VERSION_MAJ, PROGRAM_VERSION_MIN]
+
 #define PROGRAM_WEBSITE_URL     @"https://sveinbjorn.org/katsearch"
 #define PROGRAM_DONATIONS_URL   @"https://sveinbjorn.org/donations"
 #define PROGRAM_GITHUB_URL      @"https://github.com/sveinbjornt/KatSearch"
 
 #define NUM_RECENT_SEARCHES     10
 
-#define VALUES_KEYPATH(X) [NSString stringWithFormat:@"values.%@", (X)]
+#define VALUES_KEYPATH(X)       [NSString stringWithFormat:@"values.%@", (X)]
 
-#define DEFAULTS [NSUserDefaults standardUserDefaults] 
+#define DEFAULTS                [NSUserDefaults standardUserDefaults]
 
-#define COL_DEFAULT_PREFIX  @"ShowColumn"
+#define COL_DEFAULT_PREFIX      @"ShowColumn"
 
-#define COLUMNS     @[  @"Kind", @"Size", @"DateCreated", @"DateModified", \
-                        @"DateAccessed", @"UserGroup", @"Permissions", @"UTI"   ]
+#define COLUMNS                 @[@"Kind", @"Size", @"DateCreated", @"DateModified", \
+                                  @"DateAccessed", @"UserGroup", @"Permissions", @"UTI"]
+
+#define CORE_TYPES_RESOURCE(X)  [NSString stringWithFormat:\
+@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/%@",(X)]
+
+#define EXEC_ICON_PATH          CORE_TYPES_RESOURCE(@"ExecutableBinaryIcon.icns")
+
 
 // Logging
 #ifdef DEBUG

@@ -28,8 +28,45 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Foundation/Foundation.h>
+#import "AdvancedPreferencesController.h"
+#import <Sparkle/Sparkle.h>
 
-@interface SavedSearch : NSObject
+@implementation AdvancedPreferencesController
+
+#pragma mark -
+
+- (id)init {
+    return [super initWithNibName:@"AdvancedPreferencesView" bundle:nil];
+}
+
+- (IBAction)checkForUpdates:(id)sender {
+    [[SUUpdater sharedUpdater] checkForUpdates:nil];
+}
+
+#pragma mark - MASPreferencesViewController
+
+- (NSString *)viewIdentifier {
+    return @"AdvancedPreferences";
+}
+
+- (NSImage *)toolbarItemImage {
+    return [NSImage imageNamed:NSImageNameAdvanced];
+}
+
+- (NSString *)toolbarItemLabel {
+    return NSLocalizedString(@"Advanced", @"Toolbar item name for the Advanced preference pane");
+}
+
+- (NSView *)initialKeyView {
+    return nil;
+}
+
+- (BOOL)hasResizableWidth {
+    return NO;
+}
+
+- (BOOL)hasResizableHeight {
+    return NO;
+}
 
 @end

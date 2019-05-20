@@ -31,13 +31,13 @@
 #import "Common.h"
 #import "AppDelegate.h"
 #import "SearchController.h"
-#import "PreferencesController.h"
 #import <MASShortcut/Shortcut.h>
+#import "PrefsController.h"
 
 @interface AppDelegate ()
 {
     NSMutableArray *windowControllers;
-    PreferencesController *prefsController;
+    MASPreferencesWindowController *prefsController;
     
     IBOutlet NSMenu *openRecentMenu;
     IBOutlet NSMenu *statusMenu;
@@ -62,7 +62,6 @@
     [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:@"GlobalShortcut"
                                                          toAction:^{
          if ([[NSApplication sharedApplication] isActive] || ![windowControllers count]) {
-             [self animateStatusItem];
              [self newWindow:self];
          }
      }];
@@ -98,6 +97,7 @@
 #pragma mark -
 
 - (IBAction)newWindow:(id)sender {
+    [self animateStatusItem];
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
     SearchController *controller = [[SearchController alloc] initWithWindowNibName:@"SearchWindow"];
     [windowControllers addObject:controller];
@@ -170,11 +170,13 @@
 }
 
 - (void)animateStatusItem {
+    if (!statusItem) {
+        return;
+    }
+    // Briefly highlight status item
     [statusItem.button setHighlighted:YES];
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.15 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [statusItem.button setHighlighted:NO];
-
     });
 }
 
@@ -182,10 +184,11 @@
 
 - (IBAction)showPreferences:(id)sender {
     if (prefsController == nil) {
-        prefsController = [[PreferencesController alloc] initWithWindowNibName:@"PreferencesController"];
+        prefsController = [PrefsController newController];
     }
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-    [prefsController showWindow:self];
+
+    [[prefsController window] center];
+    [prefsController showWindow:nil];
 }
 
 #pragma mark -

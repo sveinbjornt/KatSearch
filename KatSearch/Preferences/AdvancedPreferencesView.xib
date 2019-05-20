@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AdvancedPreferencesController">
+            <connections>
+                <outlet property="view" destination="1" id="11"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="1">
+            <rect key="frame" x="0.0" y="0.0" width="520" height="260"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" id="m4j-N6-olf">
+                    <rect key="frame" x="174" y="120" width="191" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Human-friendly date format" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pdt-O7-f60">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="Tpd-dY-U4W">
+                    <rect key="frame" x="174" y="94" width="166" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Human-friendly file size" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FiU-nf-kF9">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="bk7-zS-Vtd">
+                    <rect key="frame" x="174" y="147" width="162" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Authenticate on launch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="m1E-BS-tgR">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" id="DGu-o7-Plj">
+                    <rect key="frame" x="167" y="185" width="187" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Check for Updates..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lJ0-Jd-VzT">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="checkForUpdates:" target="-2" id="lPo-hU-JRa"/>
+                    </connections>
+                </button>
+                <popUpButton verticalHuggingPriority="750" id="Fh4-RV-NQF">
+                    <rect key="frame" x="203" y="52" width="115" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" title="Automatic" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="FYx-D8-jDc" id="8at-Cm-gQk">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="tm3-tp-WAe">
+                            <items>
+                                <menuItem title="Automatic" state="on" id="FYx-D8-jDc"/>
+                                <menuItem title="Catalog (searchfs)" id="JYd-lU-ST6"/>
+                                <menuItem title="Filesystem Traversal (find)" id="bJN-of-S0p">
+                                    <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                </menuItem>
+                                <menuItem title="Spotlight (mdfind)" id="Fgl-3w-Ask">
+                                    <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                </popUpButton>
+            </subviews>
+        </customView>
+    </objects>
+</document>

@@ -28,8 +28,11 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Cocoa/Cocoa.h>
+#import <MASPreferences/MASPreferences.h>
 
-@interface PreferencesController : NSWindowController
+@interface AdvancedPreferencesController : NSViewController <MASPreferencesViewController>
+
+@property (nonatomic, assign) IBOutlet NSTextField *textField;
+@property (assign) IBOutlet NSTableView *tableView;
 
 @end

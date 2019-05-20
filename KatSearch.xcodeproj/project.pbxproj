@@ -21,8 +21,6 @@
 		F481835122726366002738AE /* SDOpenAtLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = F481834F22726366002738AE /* SDOpenAtLogin.m */; };
 		F48451E820F8E4CB005797C1 /* PasteboardTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* PasteboardTableView.m */; };
 		F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F48451EF20F8F914005797C1 /* dsa_pub.pem */; };
-		F48DC0F920FBF16100B21222 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48DC0F720FBF16100B21222 /* PreferencesController.m */; };
-		F48DC0FC20FBF17E00B21222 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F48DC0FB20FBF17E00B21222 /* PreferencesController.xib */; };
 		F48DC10520FCD16400B21222 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = F48DC10420FCD16400B21222 /* AppIcon.icns */; };
 		F498ADEF22666D2200CB6A6E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F498ADEE22666D2200CB6A6E /* Sparkle.framework */; };
 		F498ADF022666D4300CB6A6E /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F498ADED22666CDB00CB6A6E /* MASShortcut.framework */; };
@@ -36,6 +34,15 @@
 		F4CB19A022919A9200265CE8 /* SavedSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB199F22919A9200265CE8 /* SavedSearch.m */; };
 		F4CB19A22291A2E800265CE8 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CB19A12291A2E800265CE8 /* MASPreferences.framework */; };
 		F4CB19A42291A30A00265CE8 /* MASPreferences.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F4CB19A12291A2E800265CE8 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F4CB19AB2291A84400265CE8 /* GeneralPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CB19A52291A84300265CE8 /* GeneralPreferencesView.xib */; };
+		F4CB19AC2291A84400265CE8 /* SearchPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19A62291A84300265CE8 /* SearchPreferencesController.m */; };
+		F4CB19AD2291A84400265CE8 /* GeneralPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19A72291A84400265CE8 /* GeneralPreferencesController.m */; };
+		F4CB19AE2291A84400265CE8 /* SearchPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CB19A92291A84400265CE8 /* SearchPreferencesView.xib */; };
+		F4CB19B32291AA4A00265CE8 /* ToolPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19B02291AA4A00265CE8 /* ToolPreferencesController.m */; };
+		F4CB19B42291AA4A00265CE8 /* ToolPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CB19B22291AA4A00265CE8 /* ToolPreferencesView.xib */; };
+		F4CB19B82291BB0300265CE8 /* AdvancedPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CB19B52291BB0300265CE8 /* AdvancedPreferencesView.xib */; };
+		F4CB19B92291BB0300265CE8 /* AdvancedPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19B72291BB0300265CE8 /* AdvancedPreferencesController.m */; };
+		F4CB19BC229330BC00265CE8 /* PrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19BB229330BC00265CE8 /* PrefsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,9 +95,6 @@
 		F48451ED20F8F914005797C1 /* sign_update.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = sign_update.rb; sourceTree = "<group>"; };
 		F48451EE20F8F914005797C1 /* dsa_priv.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = dsa_priv.pem; sourceTree = "<group>"; };
 		F48451EF20F8F914005797C1 /* dsa_pub.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		F48DC0F620FBF16100B21222 /* PreferencesController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
-		F48DC0F720FBF16100B21222 /* PreferencesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
-		F48DC0FB20FBF17E00B21222 /* PreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesController.xib; sourceTree = "<group>"; };
 		F48DC10420FCD16400B21222 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		F498ADED22666CDB00CB6A6E /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASShortcut.framework; sourceTree = "<group>"; };
 		F498ADEE22666D2200CB6A6E /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
@@ -105,6 +109,20 @@
 		F4CB199E22919A9200265CE8 /* SavedSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavedSearch.h; sourceTree = "<group>"; };
 		F4CB199F22919A9200265CE8 /* SavedSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavedSearch.m; sourceTree = "<group>"; };
 		F4CB19A12291A2E800265CE8 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASPreferences.framework; sourceTree = "<group>"; };
+		F4CB19A52291A84300265CE8 /* GeneralPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		F4CB19A62291A84300265CE8 /* SearchPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchPreferencesController.m; sourceTree = "<group>"; };
+		F4CB19A72291A84400265CE8 /* GeneralPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPreferencesController.m; sourceTree = "<group>"; };
+		F4CB19A82291A84400265CE8 /* SearchPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchPreferencesController.h; sourceTree = "<group>"; };
+		F4CB19A92291A84400265CE8 /* SearchPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPreferencesView.xib; sourceTree = "<group>"; };
+		F4CB19AA2291A84400265CE8 /* GeneralPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPreferencesController.h; sourceTree = "<group>"; };
+		F4CB19B02291AA4A00265CE8 /* ToolPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolPreferencesController.m; sourceTree = "<group>"; };
+		F4CB19B12291AA4A00265CE8 /* ToolPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolPreferencesController.h; sourceTree = "<group>"; };
+		F4CB19B22291AA4A00265CE8 /* ToolPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToolPreferencesView.xib; sourceTree = "<group>"; };
+		F4CB19B52291BB0300265CE8 /* AdvancedPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		F4CB19B62291BB0300265CE8 /* AdvancedPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedPreferencesController.h; sourceTree = "<group>"; };
+		F4CB19B72291BB0300265CE8 /* AdvancedPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedPreferencesController.m; sourceTree = "<group>"; };
+		F4CB19BA229330BC00265CE8 /* PrefsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefsController.h; sourceTree = "<group>"; };
+		F4CB19BB229330BC00265CE8 /* PrefsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrefsController.m; sourceTree = "<group>"; };
 		F4E32305225BDB1300C89C81 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,16 +169,15 @@
 				F47967392250102900CA0746 /* Common.h */,
 				F462A25D20E111CF0062B230 /* AppDelegate.h */,
 				F462A25E20E111CF0062B230 /* AppDelegate.m */,
-				F4CB199E22919A9200265CE8 /* SavedSearch.h */,
-				F4CB199F22919A9200265CE8 /* SavedSearch.m */,
 				F462A27020E1122A0062B230 /* SearchController.h */,
 				F462A27120E1122A0062B230 /* SearchController.m */,
 				F462A27520E117760062B230 /* SearchTask.h */,
 				F462A27620E117760062B230 /* SearchTask.m */,
 				F462A27820E134EA0062B230 /* SearchItem.h */,
 				F462A27920E134EA0062B230 /* SearchItem.m */,
-				F48DC0F620FBF16100B21222 /* PreferencesController.h */,
-				F48DC0F720FBF16100B21222 /* PreferencesController.m */,
+				F4CB199E22919A9200265CE8 /* SavedSearch.h */,
+				F4CB199F22919A9200265CE8 /* SavedSearch.m */,
+				F4CB19AF2291A85700265CE8 /* Preferences */,
 				F471DF6120F52A200057E667 /* Util */,
 				F462A26F20E111FB0062B230 /* Resources */,
 			);
@@ -176,7 +193,6 @@
 				F462A26020E111D10062B230 /* Assets.xcassets */,
 				F462A26220E111D10062B230 /* MainMenu.xib */,
 				F462A27220E1122A0062B230 /* SearchWindow.xib */,
-				F48DC0FB20FBF17E00B21222 /* PreferencesController.xib */,
 				F462A26520E111D10062B230 /* Info.plist */,
 				F4A5CF0020ED7E15008D0A06 /* searchfs */,
 			);
@@ -225,6 +241,27 @@
 				F498ADED22666CDB00CB6A6E /* MASShortcut.framework */,
 			);
 			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4CB19AF2291A85700265CE8 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				F4CB19BA229330BC00265CE8 /* PrefsController.h */,
+				F4CB19BB229330BC00265CE8 /* PrefsController.m */,
+				F4CB19AA2291A84400265CE8 /* GeneralPreferencesController.h */,
+				F4CB19A72291A84400265CE8 /* GeneralPreferencesController.m */,
+				F4CB19A52291A84300265CE8 /* GeneralPreferencesView.xib */,
+				F4CB19A82291A84400265CE8 /* SearchPreferencesController.h */,
+				F4CB19A62291A84300265CE8 /* SearchPreferencesController.m */,
+				F4CB19A92291A84400265CE8 /* SearchPreferencesView.xib */,
+				F4CB19B62291BB0300265CE8 /* AdvancedPreferencesController.h */,
+				F4CB19B72291BB0300265CE8 /* AdvancedPreferencesController.m */,
+				F4CB19B52291BB0300265CE8 /* AdvancedPreferencesView.xib */,
+				F4CB19B12291AA4A00265CE8 /* ToolPreferencesController.h */,
+				F4CB19B02291AA4A00265CE8 /* ToolPreferencesController.m */,
+				F4CB19B22291AA4A00265CE8 /* ToolPreferencesView.xib */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,10 +324,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F481834E22720145002738AE /* Defaults.plist in Resources */,
-				F48DC0FC20FBF17E00B21222 /* PreferencesController.xib in Resources */,
+				F4CB19AE2291A84400265CE8 /* SearchPreferencesView.xib in Resources */,
+				F4CB19AB2291A84400265CE8 /* GeneralPreferencesView.xib in Resources */,
+				F4CB19B82291BB0300265CE8 /* AdvancedPreferencesView.xib in Resources */,
 				F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */,
 				F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */,
 				F48DC10520FCD16400B21222 /* AppIcon.icns in Resources */,
+				F4CB19B42291AA4A00265CE8 /* ToolPreferencesView.xib in Resources */,
 				F462A27420E1122A0062B230 /* SearchWindow.xib in Resources */,
 				F462A26420E111D10062B230 /* MainMenu.xib in Resources */,
 				F4CB199D2291064000265CE8 /* Assets.xcassets in Resources */,
@@ -322,17 +362,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F48DC0F920FBF16100B21222 /* PreferencesController.m in Sources */,
 				F4CB19A022919A9200265CE8 /* SavedSearch.m in Sources */,
 				F462A27720E117760062B230 /* SearchTask.m in Sources */,
 				F498ADF62267988000CB6A6E /* STPrivilegedTask.m in Sources */,
 				F462A26720E111D10062B230 /* main.m in Sources */,
 				F48451E820F8E4CB005797C1 /* PasteboardTableView.m in Sources */,
+				F4CB19B92291BB0300265CE8 /* AdvancedPreferencesController.m in Sources */,
 				F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */,
 				F462A27320E1122A0062B230 /* SearchController.m in Sources */,
+				F4CB19BC229330BC00265CE8 /* PrefsController.m in Sources */,
 				F45D8BBC20FA6FCC00D6E8F6 /* PasteboardPathControl.m in Sources */,
 				F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */,
+				F4CB19AC2291A84400265CE8 /* SearchPreferencesController.m in Sources */,
+				F4CB19B32291AA4A00265CE8 /* ToolPreferencesController.m in Sources */,
 				F481835122726366002738AE /* SDOpenAtLogin.m in Sources */,
+				F4CB19AD2291A84400265CE8 /* GeneralPreferencesController.m in Sources */,
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
 				F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */,

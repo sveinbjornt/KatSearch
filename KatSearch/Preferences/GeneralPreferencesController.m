@@ -28,8 +28,58 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Foundation/Foundation.h>
+#import "GeneralPreferencesController.h"
+#import "Common.h"
+#import "SDOpenAtLogin.h"
+#import <MASShortcut/Shortcut.h>
 
-@interface SavedSearch : NSObject
+@interface GeneralPreferencesController ()
+@property (nonatomic, weak) IBOutlet MASShortcutView *shortcutView;
+@end
+
+@implementation GeneralPreferencesController
+
+- (id)init {
+    return [super initWithNibName:@"GeneralPreferencesView" bundle:nil];
+}
+
+- (void)viewDidLoad {
+    self.shortcutView.associatedUserDefaultsKey = @"GlobalShortcut";
+}
+
+- (IBAction)restoreDefaults:(id)sender {
+    NSString *defPath = [[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"];
+    NSDictionary *def = [NSDictionary dictionaryWithContentsOfFile:defPath];
+    for (NSString *key in def) {
+        [DEFAULTS setObject:def[key] forKey:key];
+    }
+    [DEFAULTS synchronize];
+}
+
+- (IBAction)toggleLaunchAtLogin:(id)sender {
+    [SDOpenAtLogin setOpensAtLogin:[DEFAULTS boolForKey:@"LaunchAtLogin"]];
+}
+
+#pragma mark - MASPreferencesViewController
+
+- (NSString *)viewIdentifier {
+    return @"GeneralPreferences";
+}
+
+- (NSImage *)toolbarItemImage {
+    return [NSImage imageNamed:NSImageNamePreferencesGeneral];
+}
+
+- (NSString *)toolbarItemLabel {
+    return NSLocalizedString(@"General", @"Toolbar item name for the General preference pane");
+}
+
+- (BOOL)hasResizableWidth {
+    return NO;
+}
+
+- (BOOL)hasResizableHeight {
+    return NO;
+}
 
 @end

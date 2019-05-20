@@ -28,8 +28,12 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Foundation/Foundation.h>
+#import <MASPreferences/MASPreferences.h>
 
-@interface SavedSearch : NSObject
+@interface ToolPreferencesController : NSViewController <MASPreferencesViewController> {
+}
+
+@property (nonatomic, assign) IBOutlet NSTextField *textField;
+@property (assign) IBOutlet NSTableView *tableView;
 
 @end

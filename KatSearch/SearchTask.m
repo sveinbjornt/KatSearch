@@ -45,6 +45,8 @@
     self = [super init];
     if (self) {
         _delegate = delegate;
+        authorizationRef = NULL;
+        
         if ([searchStr hasPrefix:@"^"]) {
 //            searchStr = [searchStr substringFromIndex:1];
             _matchStartOnly = YES;
@@ -53,6 +55,7 @@
 //            searchStr = [searchStr substringToIndex:[searchStr length]-2];
             _matchEndOnly = YES;
         }
+        
         _searchString = searchStr;
     }
     return self;
@@ -62,7 +65,7 @@
 
 - (void)start {
     
-    task = [[NSTask alloc] init];
+    task = [NSTask new];
     
     NSString *launchPath = [[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil];
     if (launchPath) {
@@ -126,12 +129,9 @@
         return;
     }
     
-    //    [task terminate];
-    
     pid_t pid = [task processIdentifier];
     if (pid) {
         kill(pid, SIGKILL);
-        // TODO: verify
         killed = YES;
     }
     

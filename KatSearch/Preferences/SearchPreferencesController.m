@@ -28,8 +28,40 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Foundation/Foundation.h>
+#import "SearchPreferencesController.h"
 
-@interface SavedSearch : NSObject
+@implementation SearchPreferencesController
+
+#pragma mark -
+
+- (id)init {
+    return [super initWithNibName:@"SearchPreferencesView" bundle:nil];
+}
+
+#pragma mark - MASPreferencesViewController
+
+- (NSString *)viewIdentifier {
+    return @"SearchPreferences";
+}
+
+- (NSImage *)toolbarItemImage {
+    return [NSImage imageNamed:@"SearchCatIcon"];
+}
+
+- (NSString *)toolbarItemLabel {
+    return NSLocalizedString(@"Search", @"Toolbar item name for the Search preference pane");
+}
+
+- (NSView *)initialKeyView {
+    return nil;
+}
+
+- (BOOL)hasResizableWidth {
+    return NO;
+}
+
+- (BOOL)hasResizableHeight {
+    return NO;
+}
 
 @end

@@ -48,6 +48,7 @@
     NSString *cachedOwner;
     NSString *cachedGroup;
     NSString *cachedPermissionsString;
+    NSURL *cachedURL;
     
     int bookmark;
     
@@ -59,7 +60,7 @@
     self = [super init];
     if (self) {
         _path = path;
-        bookmark = -1;
+        bookmark = -1; // Unknown
     }
     return self;
 }
@@ -73,6 +74,13 @@
     return cachedName;
 }
 
+- (NSURL *)url {
+    if (!cachedURL) {
+        cachedURL = [NSURL fileURLWithPath:self.path];
+    }
+    return cachedURL;
+}
+
 - (NSImage *)icon {
     if (!cachedIcon) {
         cachedIcon = [[NSWorkspace sharedWorkspace] iconForFile:_path];
@@ -81,15 +89,13 @@
 }
 
 - (NSString *)sizeString {
-    if (cachedSizeString) {
-        return cachedSizeString;
-    }
-    
-    UInt64 size = self.size;
-    if (size == -1) {
-        cachedSizeString = @"-";
-    } else {
-        cachedSizeString = [[NSWorkspace sharedWorkspace] fileSizeAsHumanReadableString:size];
+    if (!cachedSizeString) {
+        UInt64 size = self.size;
+        if (size == -1) {
+            cachedSizeString = @"-";
+        } else {
+            cachedSizeString = [[NSWorkspace sharedWorkspace] fileSizeAsHumanReadableString:size];
+        }
     }
     
     return cachedSizeString;
@@ -98,8 +104,8 @@
 - (NSString *)kind {
     if (!cachedKindString) {
         NSString *kindStr = nil;
-        [[NSURL fileURLWithPath:self.path] getResourceValue:&kindStr forKey:NSURLLocalizedTypeDescriptionKey error:nil];
-        cachedKindString = kindStr ? kindStr : @"";
+        [self.url getResourceValue:&kindStr forKey:NSURLLocalizedTypeDescriptionKey error:nil];
+        cachedKindString = kindStr ? kindStr : SI_UNKNOWN;
     }
     
     return cachedKindString;
@@ -178,7 +184,7 @@
 
 - (NSString *)relativeDateStringForTimestamp:(__darwin_time_t)time {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.doesRelativeDateFormatting = YES;
     formatter.locale = [NSLocale currentLocale];
     formatter.dateStyle = NSDateFormatterShortStyle;
@@ -248,9 +254,9 @@
 - (BOOL)isBookmark {
     if (bookmark == -1) {
         NSNumber *number = nil;
-        [[NSURL fileURLWithPath:self.path] getResourceValue:&number
-                                                     forKey:NSURLIsAliasFileKey
-                                                      error:nil];
+        [self.url getResourceValue:&number
+                            forKey:NSURLIsAliasFileKey
+                             error:nil];
         bookmark = [number boolValue];
     }
     return bookmark;

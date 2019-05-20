@@ -32,6 +32,7 @@
 * Support selecting folder to search (add home folder preset)
 * "Show Original" for aliases/symlinks
 * Versions for identical apps in Open With menu
+* Drag and drop folder/volume on window to make it target of search
 
 
 ## Version History

@@ -28,52 +28,11 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "Common.h"
-#import "PreferencesController.h"
-#import "SDOpenAtLogin.h"
-#import <MASShortcut/Shortcut.h>
+#import <MASPreferences/MASPreferences.h>
 
+@interface SearchPreferencesController : NSViewController <MASPreferencesViewController>
 
-@interface PreferencesController ()
-@property (nonatomic, weak) IBOutlet MASShortcutView *shortcutView;
-@end
-
-
-@implementation PreferencesController
-
-- (void)windowDidLoad {
-    [super windowDidLoad];
-    NSImage *img = [NSImage imageNamed:NSImageNamePreferencesGeneral];
-    if (img) {
-        [self.window setRepresentedURL:[NSURL URLWithString:@""]]; // Not representing a URL
-        [[self.window standardWindowButton:NSWindowDocumentIconButton] setImage:img];
-    }
-    
-    // Associate the shortcut view with user defaults
-    self.shortcutView.associatedUserDefaultsKey = @"GlobalShortcut";
-}
-
-- (BOOL)window:(NSWindow *)window shouldPopUpDocumentPathMenu:(NSMenu *)menu {
-    // Prevent popup menu when window icon/title is cmd-clicked
-    return NO;
-}
-
-- (BOOL)window:(NSWindow *)window shouldDragDocumentWithEvent:(NSEvent *)event from:(NSPoint)dragImageLocation withPasteboard:(NSPasteboard *)pasteboard {
-    // Prevent dragging of title bar icon
-    return NO;
-}
-
-- (IBAction)restoreDefaults:(id)sender {
-    NSString *defPath = [[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"];
-    NSDictionary *def = [NSDictionary dictionaryWithContentsOfFile:defPath];
-    for (NSString *key in def) {
-        [DEFAULTS setObject:def[key] forKey:key];
-    }
-    [DEFAULTS synchronize];
-}
-
-- (IBAction)toggleLaunchAtLogin:(id)sender {
-    [SDOpenAtLogin setOpensAtLogin:[DEFAULTS boolForKey:@"LaunchAtLogin"]];
-}
+@property (nonatomic, assign) IBOutlet NSTextField *textField;
+@property (assign) IBOutlet NSTableView *tableView;
 
 @end

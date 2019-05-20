@@ -28,8 +28,7 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Foundation/Foundation.h>
+#import <MASPreferences/MASPreferences.h>
 
-@interface SavedSearch : NSObject
-
+@interface GeneralPreferencesController : NSViewController <MASPreferencesViewController>
 @end

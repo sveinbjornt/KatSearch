@@ -733,10 +733,6 @@
     NSTableCellView *cellView;
     SearchItem *item = results[row];
     
-#define COLUMNS     @[  @"Kind", @"Size", @"DateCreated", @"DateModified", \
-@"DateAccessed", @"UserGroup", @"Permissions", @"UTI"   ]
-
-    
     NSString *colStr = nil;
     if ([[col identifier] isEqualToString:@"Items"]) {
         SearchItem *item = results[row];
@@ -775,9 +771,9 @@
 //        NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
 //        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:colStr
 //                                                                      attributes:attr];
-    [cellView.textField setAttributedStringValue:[self attr:colStr]];
+//    [cellView.textField setAttributedStringValue:[self attr:colStr]];
 //    } else {
-//        cellView.textField.stringValue = colStr;
+        cellView.textField.stringValue = colStr;
 //    }
     
     
@@ -796,7 +792,7 @@
         
         [attrStr setAttributes:mattr range:mRange];
 
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init] ;
+        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
         [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
         [attrStr addAttribute:NSParagraphStyleAttributeName
                         value:paragraphStyle

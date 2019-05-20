@@ -108,8 +108,7 @@
         if ([labelStr length] != 1) {
             return NO;
         }
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        NSNumber *num = [f numberFromString:labelStr];
+        NSNumber *num = [[NSNumberFormatter new] numberFromString:labelStr];
         if (num == nil) {
             return NO;
         }
