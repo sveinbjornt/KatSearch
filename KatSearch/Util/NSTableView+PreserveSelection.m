@@ -32,6 +32,20 @@
 
 @implementation NSTableView (PreserveSelection)
 
+- (void)reloadDataPreservingSelectionFromIndex:(NSInteger)idx1 toIndex:(NSInteger)idx2 {
+//    NSIndexSet *selected = [self selectedRowIndexes];
+//    NSLog(@"Reloading %d->%d", idx1, idx2);
+//    [self reloadDataPreservingSelection];
+//    return;
+//    [self beginUpdates];
+    [self beginUpdates];
+    [self noteNumberOfRowsChanged];
+//    [self reloadDataForRowIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.numberOfRows)]
+//                    columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.numberOfColumns)]];
+//    [self selectRowIndexes:selected byExtendingSelection:NO];
+    [self endUpdates];
+}
+
 - (void)reloadDataPreservingSelection {
     NSIndexSet *selected = [self selectedRowIndexes];
     [self reloadData];

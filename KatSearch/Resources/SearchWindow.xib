@@ -17,6 +17,7 @@
                 <outlet property="openWithSubMenu" destination="KuE-s4-4Vw" id="eC2-jt-fPg"/>
                 <outlet property="pathControl" destination="bfe-bX-o7s" id="xP1-wD-s0o"/>
                 <outlet property="progressIndicator" destination="GH5-h1-4RM" id="IhC-Zf-g6E"/>
+                <outlet property="scrollView" destination="tGM-M2-dAP" id="3BT-aA-XdJ"/>
                 <outlet property="searchButton" destination="NWK-5T-C0c" id="dHU-R0-QGb"/>
                 <outlet property="searchField" destination="hte-nM-0uB" id="Awq-9D-pVR"/>
                 <outlet property="searchOptionsButton" destination="yW9-RH-xrI" id="tfa-QS-UYl"/>
@@ -70,14 +71,14 @@ DQ
                             <action selector="search:" target="-2" id="7Zi-wf-qxm"/>
                         </connections>
                     </button>
-                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="tGM-M2-dAP">
+                    <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="tGM-M2-dAP">
                         <rect key="frame" x="-1" y="46" width="707" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <clipView key="contentView" copiesOnScroll="NO" id="y0c-ed-QWB">
+                        <clipView key="contentView" wantsLayer="YES" copiesOnScroll="NO" id="y0c-ed-QWB">
                             <rect key="frame" x="1" y="0.0" width="705" height="464"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="PasteboardTableView">
+                                <tableView wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="PasteboardTableView">
                                     <rect key="frame" x="0.0" y="0.0" width="929" height="441"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>

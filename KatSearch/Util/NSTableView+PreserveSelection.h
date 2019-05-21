@@ -32,6 +32,7 @@
 
 @interface NSTableView (PreserveSelection)
 
+- (void)reloadDataPreservingSelectionFromIndex:(NSInteger)idx1 toIndex:(NSInteger)idx2;
 - (void)reloadDataPreservingSelection;
 
 @end

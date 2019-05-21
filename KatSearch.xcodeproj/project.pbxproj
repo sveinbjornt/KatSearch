@@ -43,6 +43,8 @@
 		F4CB19B82291BB0300265CE8 /* AdvancedPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CB19B52291BB0300265CE8 /* AdvancedPreferencesView.xib */; };
 		F4CB19B92291BB0300265CE8 /* AdvancedPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19B72291BB0300265CE8 /* AdvancedPreferencesController.m */; };
 		F4CB19BC229330BC00265CE8 /* PrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19BB229330BC00265CE8 /* PrefsController.m */; };
+		F4CB19BE2294399B00265CE8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CB19BD2294399B00265CE8 /* QuartzCore.framework */; };
+		F4CB19C62294450900265CE8 /* DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19C52294450900265CE8 /* DateFormatter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -123,6 +125,9 @@
 		F4CB19B72291BB0300265CE8 /* AdvancedPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedPreferencesController.m; sourceTree = "<group>"; };
 		F4CB19BA229330BC00265CE8 /* PrefsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefsController.h; sourceTree = "<group>"; };
 		F4CB19BB229330BC00265CE8 /* PrefsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrefsController.m; sourceTree = "<group>"; };
+		F4CB19BD2294399B00265CE8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F4CB19C42294450900265CE8 /* DateFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateFormatter.h; sourceTree = "<group>"; };
+		F4CB19C52294450900265CE8 /* DateFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateFormatter.m; sourceTree = "<group>"; };
 		F4E32305225BDB1300C89C81 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4CB19BE2294399B00265CE8 /* QuartzCore.framework in Frameworks */,
 				F4CB19A22291A2E800265CE8 /* MASPreferences.framework in Frameworks */,
 				F498ADF022666D4300CB6A6E /* MASShortcut.framework in Frameworks */,
 				F498ADEF22666D2200CB6A6E /* Sparkle.framework in Frameworks */,
@@ -202,6 +208,8 @@
 		F471DF6120F52A200057E667 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F4CB19C42294450900265CE8 /* DateFormatter.h */,
+				F4CB19C52294450900265CE8 /* DateFormatter.m */,
 				F498ADF32266A91500CB6A6E /* PasteboardDelegate.h */,
 				F45D8BBA20FA6FCC00D6E8F6 /* PasteboardPathControl.h */,
 				F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */,
@@ -236,6 +244,7 @@
 		F498ADEC22666CDB00CB6A6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4CB19BD2294399B00265CE8 /* QuartzCore.framework */,
 				F4CB19A12291A2E800265CE8 /* MASPreferences.framework */,
 				F498ADEE22666D2200CB6A6E /* Sparkle.framework */,
 				F498ADED22666CDB00CB6A6E /* MASShortcut.framework */,
@@ -380,6 +389,7 @@
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
 				F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */,
+				F4CB19C62294450900265CE8 /* DateFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

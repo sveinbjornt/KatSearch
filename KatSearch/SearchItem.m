@@ -30,24 +30,38 @@
 
 #import "SearchItem.h"
 #import "NSWorkspace+Additions.h"
+#import "DateFormatter.h"
 #include <sys/stat.h>
 #include <pwd.h>
 #include <grp.h>
 
-
 @implementation SearchItem
 {
     NSString *cachedName;
+    
     NSImage *cachedIcon;
+    
     NSString *cachedKindString;
+    
     NSString *cachedSizeString;
+    
+    NSDate *cachedDateAccessed;
     NSString *cachedDateAccessedString;
+    
+    NSDate *cachedDateCreated;
     NSString *cachedDateCreatedString;
+    
+    NSDate *cachedDateModified;
     NSString *cachedDateModifiedString;
+    
     NSString *cachedUTI;
+    
     NSString *cachedOwner;
     NSString *cachedGroup;
+    NSString *cachedUserGroupString;
+    
     NSString *cachedPermissionsString;
+    
     NSURL *cachedURL;
     
     int bookmark;
@@ -69,7 +83,7 @@
 
 - (NSString *)name {
     if (!cachedName) {
-        cachedName = [_path lastPathComponent];
+        cachedName = [self.path lastPathComponent];
     }
     return cachedName;
 }
@@ -83,7 +97,7 @@
 
 - (NSImage *)icon {
     if (!cachedIcon) {
-        cachedIcon = [[NSWorkspace sharedWorkspace] iconForFile:_path];
+        cachedIcon = [[NSWorkspace sharedWorkspace] iconForFile:self.path];
     }
     return cachedIcon;
 }
@@ -104,7 +118,12 @@
 - (NSString *)kind {
     if (!cachedKindString) {
         NSString *kindStr = nil;
-        [self.url getResourceValue:&kindStr forKey:NSURLLocalizedTypeDescriptionKey error:nil];
+        
+        if ([self isSymlink]) {
+            kindStr = @"Symbolic Link";
+        } else {
+            [self.url getResourceValue:&kindStr forKey:NSURLLocalizedTypeDescriptionKey error:nil];
+        }
         cachedKindString = kindStr ? kindStr : SI_UNKNOWN;
     }
     
@@ -115,8 +134,10 @@
     if (cachedStatPtr) {
         return YES;
     }
-    
-    if (stat([self.path fileSystemRepresentation], &cachedStat)) {
+    NSLog(@"Stat");
+
+    if (lstat([self.path fileSystemRepresentation], &cachedStat)) {
+        NSLog(@"Stat failed: %@", self.description);
         return NO;
     }
     
@@ -184,12 +205,7 @@
 
 - (NSString *)relativeDateStringForTimestamp:(__darwin_time_t)time {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.doesRelativeDateFormatting = YES;
-    formatter.locale = [NSLocale currentLocale];
-    formatter.dateStyle = NSDateFormatterShortStyle;
-    formatter.timeStyle = NSDateFormatterShortStyle;
-    return [formatter stringFromDate:date];
+    return [[DateFormatter formatter] stringFromDate:date];
 }
 
 - (NSString *)owner {
@@ -218,9 +234,12 @@
 }
 
 - (NSString *)userGroupString {
-    NSString *user = [self owner];
-    NSString *group = [self group];
-    return [NSString stringWithFormat:@"%@:%@", user, group];
+    if (!cachedUserGroupString) {
+        NSString *user = [self owner];
+        NSString *group = [self group];
+        cachedUserGroupString = [NSString stringWithFormat:@"%@:%@", user, group];
+    }
+    return cachedUserGroupString;
 }
 
 - (NSString *)permissionsString {
@@ -230,6 +249,7 @@
     
     if (!cachedPermissionsString) {
         char buf[20];
+//        NSLog(@"%07o", cachedStatPtr->st_mode);
         strmode(cachedStatPtr->st_mode, (char *)&buf);
         cachedPermissionsString = @((char *)&buf);
     }
@@ -248,17 +268,17 @@
     if (cachedUTI) {
         return cachedUTI;
     }
-    if ([self isBookmark]) {
+    if ([self isSymlink]) {
         cachedUTI = (NSString *)kUTTypeSymLink; // or kUTTypeAliasFile ???
     } else {
-        NSString *type = [[NSWorkspace sharedWorkspace] typeOfFile:_path error:nil];
+        NSString *type = [[NSWorkspace sharedWorkspace] typeOfFile:self.path error:nil];
         cachedUTI = (type == nil) ? SI_UNKNOWN : type;
     }
     return cachedUTI;
 }
 
 - (BOOL)isBookmark {
-    if (bookmark == -1) {
+    if (bookmark == -1) { // Indeterminate
         NSNumber *number = nil;
         [self.url getResourceValue:&number
                             forKey:NSURLIsAliasFileKey
@@ -266,6 +286,20 @@
         bookmark = [number boolValue];
     }
     return bookmark;
+}
+
+- (BOOL)isSymlink {
+    if (![self stat]) {
+        return NO;
+    }
+    return S_ISLNK(cachedStatPtr->st_mode);
+}
+
+- (BOOL)isDirectory {
+    if (![self stat]) {
+        return NO;
+    }
+    return S_ISDIR(cachedStatPtr->st_mode);
 }
 
 #pragma mark - Handler apps

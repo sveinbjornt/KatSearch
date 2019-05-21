@@ -49,6 +49,7 @@
     IBOutlet NSTextField *numResultsTextField;
     
     IBOutlet NSTableView *tableView;
+    IBOutlet NSScrollView *scrollView;
     IBOutlet NSPathControl *pathControl;
     IBOutlet NSTextField *filterTextField;
     
@@ -73,6 +74,9 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
 
+    [[self.window contentView] setWantsLayer:YES];
+    [scrollView setWantsLayer:YES];
+    
     // Put application icon in window title bar
     [self.window setRepresentedURL:[NSURL URLWithString:@""]];
     [[self.window standardWindowButton:NSWindowDocumentIconButton] setImage:[NSApp applicationIconImage]];
@@ -288,11 +292,18 @@
         [progressIndicator setHidden:YES];
     }
     
-    [results addObjectsFromArray:items];
-    [tableView reloadDataPreservingSelection];
+    if ([results count] == 0) {
+        [results addObjectsFromArray:items];
+        [tableView reloadData];
+    } else {
+        NSInteger idx1 = [results count];
+        [results addObjectsFromArray:items];
+        NSInteger idx2 = [results count];
+        [tableView reloadDataPreservingSelectionFromIndex:idx1 toIndex:idx2];
+    }
     [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu %@", [results count], [itemTypePopupButton titleOfSelectedItem]]];
     
-    [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:[NSString stringWithFormat:@"Items (%lu)", [results count]]];
+//    [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:[NSString stringWithFormat:@"Items (%lu)", [results count]]];
 }
 
 - (void)taskDidFinish:(SearchTask *)theTask {
@@ -309,7 +320,7 @@
     
     [searchButton setTitle:@"Search"];
     
-    [tableView reloadDataPreservingSelection];
+//    [tableView reloadDataPreservingSelection];
     
     NSString *killed = [theTask wasKilled] ? @"(cancelled)" : @"";
     [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu items %@", [results count], killed]];
@@ -726,21 +737,27 @@
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)col row:(NSInteger)row {
-    if (row < 0 || row >= [results count]) {
-        return nil;
-    }
+//    if (row < 0 || row >= [results count]) {
+//        return nil;
+//    }
+    
+   
     
     NSTableCellView *cellView;
     SearchItem *item = results[row];
     
     NSString *colStr = nil;
     if ([[col identifier] isEqualToString:@"Items"]) {
-        SearchItem *item = results[row];
         cellView = [tableView makeViewWithIdentifier:@"Items" owner:self];
         colStr = item.name;
         cellView.imageView.objectValue = item.icon;
-        
-    } else if ([[col identifier] isEqualToString:@"Kind"]) {
+//        NSLog(@"UPDATING ROW %d", row);
+    }
+//    else if (1) {
+//        cellView = [tableView makeViewWithIdentifier:@"Kind" owner:self];
+//        colStr = @"Test";
+//    }
+    else if ([[col identifier] isEqualToString:@"Kind"]) {
         cellView = [tableView makeViewWithIdentifier:@"Kind" owner:self];
         colStr = item.kind;
     } else if ([[col identifier] isEqualToString:@"Size"]) {
