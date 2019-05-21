@@ -217,9 +217,15 @@
     return cachedGroup;
 }
 
+- (NSString *)userGroupString {
+    NSString *user = [self owner];
+    NSString *group = [self group];
+    return [NSString stringWithFormat:@"%@:%@", user, group];
+}
+
 - (NSString *)permissionsString {
     if (![self stat]) {
-        return nil;
+        return SI_UNKNOWN;
     }
     
     if (!cachedPermissionsString) {

@@ -757,7 +757,7 @@
         colStr = item.dateAccessedString;
     } else if ([[col identifier] isEqualToString:@"User/Group"]) {
         cellView = [tableView makeViewWithIdentifier:@"User/Group" owner:self];
-        colStr = item.owner;
+        colStr = item.userGroupString;
     } else if ([[col identifier] isEqualToString:@"Permissions"]) {
         cellView = [tableView makeViewWithIdentifier:@"Permissions" owner:self];
         colStr = item.permissionsString;

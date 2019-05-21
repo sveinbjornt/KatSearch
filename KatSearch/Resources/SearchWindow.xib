@@ -78,7 +78,7 @@ DQ
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="aEN-xB-2Qs" viewBased="YES" id="Tli-9g-yrd" customClass="PasteboardTableView">
-                                    <rect key="frame" x="0.0" y="0.0" width="846" height="441"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="929" height="441"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -235,7 +235,7 @@ DQ
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="owner"/>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="userGroupString"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Bxw-Ww-mwr">
                                                     <rect key="frame" x="601" y="1" width="120" height="17"/>
@@ -257,7 +257,7 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="UTI" editable="NO" width="120" minWidth="10" maxWidth="3.4028234663852886e+38" id="R7D-oa-fUu">
+                                        <tableColumn identifier="UTI" editable="NO" width="120" minWidth="100" maxWidth="3.4028234663852886e+38" id="R7D-oa-fUu">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="UTI">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -269,6 +269,7 @@ DQ
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="UTI"/>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="xSB-lL-UJ1">
                                                     <rect key="frame" x="724" y="1" width="120" height="17"/>
@@ -290,6 +291,39 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
+                                        <tableColumn identifier="Permissions" editable="NO" width="80" minWidth="80" maxWidth="80" id="Mc5-R5-Vf6" userLabel="Permissions">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Permissions">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="left" title="User/Group" id="xpK-fn-lcv">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="permissionsString"/>
+                                            <prototypeCellViews>
+                                                <tableCellView id="jbx-aF-UND">
+                                                    <rect key="frame" x="847" y="1" width="80" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Q8y-Lq-WxY">
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="17"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="User/Group" id="ZUY-U5-rpj">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <connections>
+                                                        <outlet property="textField" destination="Q8y-Lq-WxY" id="ix4-Vz-Qfa"/>
+                                                    </connections>
+                                                </tableCellView>
+                                            </prototypeCellViews>
+                                        </tableColumn>
                                     </tableColumns>
                                     <connections>
                                         <outlet property="dataSource" destination="-2" id="9F9-48-nJX"/>
@@ -299,7 +333,7 @@ DQ
                                 </tableView>
                             </subviews>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.97163120567375882" horizontal="YES" id="qXN-lA-vxt">
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="qXN-lA-vxt">
                             <rect key="frame" x="1" y="464" width="705" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -308,7 +342,7 @@ DQ
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" id="aEN-xB-2Qs">
-                            <rect key="frame" x="0.0" y="0.0" width="846" height="23"/>
+                            <rect key="frame" x="0.0" y="0.0" width="929" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <connections>
                                 <outlet property="menu" destination="Y72-8T-8y7" id="Lzb-O6-xdC"/>
@@ -538,7 +572,7 @@ DQ
             <connections>
                 <outlet property="delegate" destination="-2" id="6hr-j1-sd4"/>
             </connections>
-            <point key="canvasLocation" x="298" y="383"/>
+            <point key="canvasLocation" x="216" y="344"/>
         </menu>
         <userDefaultsController representsSharedInstance="YES" id="7VI-tp-uBM"/>
         <menu id="Y72-8T-8y7" userLabel="Columns Contextual Menu">
@@ -581,8 +615,8 @@ DQ
                 <menuItem title="Show User:Group" id="bwU-21-hjh">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <binding destination="7VI-tp-uBM" name="enabled" keyPath="values.ShowColumnUserGroup" id="COb-t6-Htx"/>
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnUserGroup" id="0NI-uM-iGl"/>
+                        <binding destination="7VI-tp-uBM" name="enabled" keyPath="values.ShowColumnUserGroup" id="COb-t6-Htx"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Show Permissions" id="vrc-F2-s8R">

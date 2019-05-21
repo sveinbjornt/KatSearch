@@ -44,9 +44,9 @@
 @property (readonly, nonatomic) NSString *label;
 @property (readonly, nonatomic) NSString *owner;
 @property (readonly, nonatomic) NSString *group;
+@property (readonly, nonatomic) NSString *userGroupString;
 @property (readonly, nonatomic) NSString *permissionsString;
 @property (readonly, nonatomic) BOOL isBookmark;
-
 
 @property (readonly) UInt64 size;
 @property (readonly, nonatomic) NSString *sizeString;
