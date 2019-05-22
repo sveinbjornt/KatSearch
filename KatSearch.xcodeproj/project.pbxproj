@@ -45,6 +45,8 @@
 		F4CB19BC229330BC00265CE8 /* PrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19BB229330BC00265CE8 /* PrefsController.m */; };
 		F4CB19BE2294399B00265CE8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CB19BD2294399B00265CE8 /* QuartzCore.framework */; };
 		F4CB19C62294450900265CE8 /* DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19C52294450900265CE8 /* DateFormatter.m */; };
+		F4CB19C92294769700265CE8 /* OptClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19C82294769700265CE8 /* OptClipView.m */; };
+		F4CB19CC2294770D00265CE8 /* OptScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19CB2294770C00265CE8 /* OptScrollView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -128,6 +130,10 @@
 		F4CB19BD2294399B00265CE8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F4CB19C42294450900265CE8 /* DateFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateFormatter.h; sourceTree = "<group>"; };
 		F4CB19C52294450900265CE8 /* DateFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateFormatter.m; sourceTree = "<group>"; };
+		F4CB19C72294769700265CE8 /* OptClipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptClipView.h; sourceTree = "<group>"; };
+		F4CB19C82294769700265CE8 /* OptClipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptClipView.m; sourceTree = "<group>"; };
+		F4CB19CA2294770C00265CE8 /* OptScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptScrollView.h; sourceTree = "<group>"; };
+		F4CB19CB2294770C00265CE8 /* OptScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptScrollView.m; sourceTree = "<group>"; };
 		F4E32305225BDB1300C89C81 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +214,10 @@
 		F471DF6120F52A200057E667 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F4CB19CA2294770C00265CE8 /* OptScrollView.h */,
+				F4CB19CB2294770C00265CE8 /* OptScrollView.m */,
+				F4CB19C72294769700265CE8 /* OptClipView.h */,
+				F4CB19C82294769700265CE8 /* OptClipView.m */,
 				F4CB19C42294450900265CE8 /* DateFormatter.h */,
 				F4CB19C52294450900265CE8 /* DateFormatter.m */,
 				F498ADF32266A91500CB6A6E /* PasteboardDelegate.h */,
@@ -373,6 +383,8 @@
 			files = (
 				F4CB19A022919A9200265CE8 /* SavedSearch.m in Sources */,
 				F462A27720E117760062B230 /* SearchTask.m in Sources */,
+				F4CB19CC2294770D00265CE8 /* OptScrollView.m in Sources */,
+				F4CB19C92294769700265CE8 /* OptClipView.m in Sources */,
 				F498ADF62267988000CB6A6E /* STPrivilegedTask.m in Sources */,
 				F462A26720E111D10062B230 /* main.m in Sources */,
 				F48451E820F8E4CB005797C1 /* PasteboardTableView.m in Sources */,

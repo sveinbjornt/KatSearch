@@ -74,17 +74,20 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
 
-    [[self.window contentView] setWantsLayer:YES];
-    [scrollView setWantsLayer:YES];
+//    [[self.window contentView] setWantsLayer:YES];
+//    [scrollView setWantsLayer:YES];
+//    [tableView setCanDrawSubviewsIntoLayer:YES];
+//    [tableView setValue:@(0) forKey:@"_animationDuration"];
     
     // Put application icon in window title bar
     [self.window setRepresentedURL:[NSURL URLWithString:@""]];
     [[self.window standardWindowButton:NSWindowDocumentIconButton] setImage:[NSApp applicationIconImage]];
     
+    
     // Configure table view
+    [tableView setRowHeight:18.0f];
     [tableView setDoubleAction:@selector(rowDoubleClicked:)];
     [tableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
-//    [tableView createHideableColumnContextualMenuWithAutoResizingColumns:YES identifierException:nil];
 //    for (NSTableColumn *tableColumn in [tableView tableColumns]) {
 //        
 //        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(compare:)];
@@ -285,6 +288,10 @@
 ////        [progressIndicator setFrame:frame];
 //        [progressIndicator setControlSize:NSControlSizeSmall];
 //    }
+    
+    for (SearchItem *item in items) {
+        [item prime];
+    }
     
     if ([progressIndicator isHidden] == NO) {
         [smallProgressIndicator setUsesThreadedAnimation:TRUE];
@@ -741,49 +748,51 @@
 //        return nil;
 //    }
     
-   
+    NSString *colID = [col identifier];
+    NSTableCellView *cellView = [tableView makeViewWithIdentifier:colID owner:self];
+//    NSTextField *cellView = [tableView makeViewWithIdentifier:@"MyView"
+//                                                      owner:self];
+//    if (cellView == nil) {
+//        cellView = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
+//        cellView.identifier = @"MyView";
+//        cellView.drawsBackground = NO;
+//        cellView.bordered = NO;
+//        cellView.bezeled = NO;
+//        cellView.selectable = NO;
+//    }
     
-    NSTableCellView *cellView;
+    
+    
     SearchItem *item = results[row];
     
     NSString *colStr = nil;
-    if ([[col identifier] isEqualToString:@"Items"]) {
-        cellView = [tableView makeViewWithIdentifier:@"Items" owner:self];
+    if ([colID isEqualToString:@"Items"]) {
         colStr = item.name;
         cellView.imageView.objectValue = item.icon;
 //        NSLog(@"UPDATING ROW %d", row);
     }
 //    else if (1) {
 //        cellView = [tableView makeViewWithIdentifier:@"Kind" owner:self];
-//        colStr = @"Test";
+//        colStr = @"SomethingReallyLongStuff";
 //    }
-    else if ([[col identifier] isEqualToString:@"Kind"]) {
-        cellView = [tableView makeViewWithIdentifier:@"Kind" owner:self];
+    else if ([colID isEqualToString:@"Kind"]) {
         colStr = item.kind;
-    } else if ([[col identifier] isEqualToString:@"Size"]) {
-        cellView = [tableView makeViewWithIdentifier:@"Size" owner:self];
+    } else if ([colID isEqualToString:@"Size"]) {
         colStr = [item sizeString];
-    } else if ([[col identifier] isEqualToString:@"Date Created"]) {
-        cellView = [tableView makeViewWithIdentifier:@"Date Created" owner:self];
+    } else if ([colID isEqualToString:@"Date Created"]) {
         colStr = item.dateCreatedString;
-    } else if ([[col identifier] isEqualToString:@"Date Modified"]) {
-        cellView = [tableView makeViewWithIdentifier:@"Date Modified" owner:self];
+    } else if ([colID isEqualToString:@"Date Modified"]) {
         colStr = item.dateModifiedString;
-    } else if ([[col identifier] isEqualToString:@"Date Accessed"]) {
-        cellView = [tableView makeViewWithIdentifier:@"Date Accessed" owner:self];
+    } else if ([colID isEqualToString:@"Date Accessed"]) {
         colStr = item.dateAccessedString;
-    } else if ([[col identifier] isEqualToString:@"User/Group"]) {
-        cellView = [tableView makeViewWithIdentifier:@"User/Group" owner:self];
+    } else if ([colID isEqualToString:@"User/Group"]) {
         colStr = item.userGroupString;
-    } else if ([[col identifier] isEqualToString:@"Permissions"]) {
-        cellView = [tableView makeViewWithIdentifier:@"Permissions" owner:self];
+    } else if ([colID isEqualToString:@"Permissions"]) {
         colStr = item.permissionsString;
-    } else if ([[col identifier] isEqualToString:@"UTI"]) {
-        cellView = [tableView makeViewWithIdentifier:@"UTI" owner:self];
+    } else if ([colID isEqualToString:@"UTI"]) {
         colStr = item.UTI;
     }
     
-    // TODO: Very inefficient, reimplement
 //    if ([[NSFileManager defaultManager] fileExistsAtPath:item.path] == NO) {
 //        NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
 //        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:colStr

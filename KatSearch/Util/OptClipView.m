@@ -28,50 +28,25 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Foundation/Foundation.h>
-#import <Cocoa/Cocoa.h>
+#import "OptClipView.h"
+#import <QuartzCore/QuartzCore.h>
 
-#define SI_UNKNOWN @"?"
+@implementation OptClipView
 
-@interface SearchItem : NSObject
+- (id)initWithFrame:(NSRect)frame {
+    self = [super initWithFrame:frame];
+    if (!self) return nil;
+    
+    NSLog(@"%@", [self.layer className]);
+    self.layer = [CAScrollLayer layer];
+    self.wantsLayer = YES;
+    self.layerContentsRedrawPolicy = NSViewLayerContentsRedrawNever;
+    
+    return self;
+}
 
-@property (retain, nonatomic) NSString *path;
-@property (retain, nonatomic) NSURL *url;
-@property (readonly, nonatomic) NSString *name;
-@property (readonly, nonatomic) NSImage *icon;
-@property (readonly, nonatomic) NSString *kind;
-@property (readonly, nonatomic) NSString *UTI;
-@property (readonly, nonatomic) NSString *label;
-@property (readonly, nonatomic) NSString *owner;
-@property (readonly, nonatomic) NSString *group;
-@property (readonly, nonatomic) NSString *userGroupString;
-@property (readonly, nonatomic) NSString *permissionsString;
-@property (readonly, nonatomic) BOOL isBookmark;
-@property (readonly, nonatomic) BOOL isSymlink;
-
-
-@property (readonly) UInt64 size;
-@property (readonly, nonatomic) NSString *sizeString;
-
-@property (readonly) NSDate *dateAccessed;
-@property (readonly, nonatomic) NSString *dateAccessedString;
-
-@property (readonly) NSDate *dateCreated;
-@property (readonly, nonatomic) NSString *dateCreatedString;
-
-@property (readonly) NSDate *dateModified;
-@property (readonly, nonatomic) NSString *dateModifiedString;
-
-@property (readonly, nonatomic) NSString *defaultHandlerApplication;
-@property (readonly, nonatomic) NSArray<NSString *> *handlerApplications;
-
-- (instancetype)initWithPath:(NSString *)path;
-- (void)prime;
-- (void)open;
-- (void)showInFinder;
-- (void)openWith:(NSString *)appIdentifier;
-- (void)getInfo;
-- (void)showOriginal;
-- (void)quickLook;
+//- (BOOL)compatibleWithResponsiveScrolling {
+//    return NO;
+//}
 
 @end

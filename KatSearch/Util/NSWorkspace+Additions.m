@@ -303,13 +303,19 @@
     } else if (size < 1048576ULL) {
         desc = [NSString stringWithFormat:@"%llu KB", (UInt64)size / 1024];
     } else if (size < 1073741824ULL) {
-        desc = [NSString stringWithFormat:@"%.1f MB", size / 1048576.0];
+        desc = [NSString stringWithFormat:@"%.1f", size / 1048576.0];
+        if ([desc hasSuffix:@".0"]) {
+            desc = [desc substringToIndex:[desc length] -2];
+        }
+        desc = [desc stringByAppendingString:@" MB"];
     } else {
-        desc = [NSString stringWithFormat:@"%.1f GB", size / 1073741824.0];
+        desc = [NSString stringWithFormat:@"%.1f", size / 1073741824.0];
+        if ([desc hasSuffix:@".0 GB"]) {
+            desc = [desc substringToIndex:[desc length] -2];
+            desc = [desc stringByAppendingString:@" GB"];
+        }
     }
-    if ([desc hasSuffix:@".0"]) {
-        desc = [desc substringToIndex:[desc length] -2];
-    }
+    
     return desc;
 }
 

@@ -79,6 +79,18 @@
     return self;
 }
 
+// This method primes the item's caching mechanism
+// by running stat and generating strings for display
+- (void)prime {
+    [self name];
+    [self url];
+    [self icon];
+    [self sizeString];
+    [self kind];
+    [self dateModifiedString];
+    // TODO: Prime according to visible columns
+}
+
 #pragma mark - Attributes
 
 - (NSString *)name {
@@ -134,7 +146,7 @@
     if (cachedStatPtr) {
         return YES;
     }
-    NSLog(@"Stat");
+//    NSLog(@"Stat");
 
     if (lstat([self.path fileSystemRepresentation], &cachedStat)) {
         NSLog(@"Stat failed: %@", self.description);
