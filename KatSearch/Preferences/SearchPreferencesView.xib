@@ -44,15 +44,17 @@
                 <popUpButton verticalHuggingPriority="750" id="gJW-tY-mxc">
                     <rect key="frame" x="213" y="160" width="132" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" title="name matches" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="thi-0k-FhO" id="LnW-WX-qMp">
+                    <popUpButtonCell key="cell" type="push" title="name contains" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="thi-0k-FhO" id="LnW-WX-qMp">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="IaN-VY-yLU">
                             <items>
-                                <menuItem title="name matches" state="on" id="thi-0k-FhO">
+                                <menuItem title="name contains" state="on" id="thi-0k-FhO">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="name is" tag="1" id="IZO-bd-4p0"/>
+                                <menuItem title="name starts with" tag="1" id="xa7-U0-NNJ"/>
+                                <menuItem title="name ends with" tag="1" id="cQX-i2-CF9"/>
                             </items>
                         </menu>
                     </popUpButtonCell>

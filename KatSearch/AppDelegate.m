@@ -175,7 +175,7 @@
     }
     // Briefly highlight status item
     [statusItem.button setHighlighted:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.15 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.20 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [statusItem.button setHighlighted:NO];
     });
 }

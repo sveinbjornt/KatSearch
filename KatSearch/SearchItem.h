@@ -40,15 +40,18 @@
 @property (readonly, nonatomic) NSString *name;
 @property (readonly, nonatomic) NSImage *icon;
 @property (readonly, nonatomic) NSString *kind;
+@property (readonly, nonatomic) NSString *HFSType;
+@property (readonly, nonatomic) NSString *creatorType;
+@property (readonly, nonatomic) NSString *MIMEType;
 @property (readonly, nonatomic) NSString *UTI;
 @property (readonly, nonatomic) NSString *label;
-@property (readonly, nonatomic) NSString *owner;
+@property (readonly, nonatomic) NSString *user;
 @property (readonly, nonatomic) NSString *group;
 @property (readonly, nonatomic) NSString *userGroupString;
 @property (readonly, nonatomic) NSString *permissionsString;
+
 @property (readonly, nonatomic) BOOL isBookmark;
 @property (readonly, nonatomic) BOOL isSymlink;
-
 
 @property (readonly) UInt64 size;
 @property (readonly, nonatomic) NSString *sizeString;

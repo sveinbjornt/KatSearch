@@ -35,9 +35,10 @@
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
-    if (!self) return nil;
+    if (!self) {
+        return nil;
+    }
     
-    NSLog(@"%@", [self.layer className]);
     self.layer = [CAScrollLayer layer];
     self.wantsLayer = YES;
     self.layerContentsRedrawPolicy = NSViewLayerContentsRedrawNever;

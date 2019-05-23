@@ -43,6 +43,11 @@
     
     NSString *cachedKindString;
     
+    NSString *cachedHFSType;
+    NSString *cachedCreatorType;
+    
+    NSString *cachedMIMEType;
+    
     NSString *cachedSizeString;
     
     NSDate *cachedDateAccessed;
@@ -56,7 +61,7 @@
     
     NSString *cachedUTI;
     
-    NSString *cachedOwner;
+    NSString *cachedUser;
     NSString *cachedGroup;
     NSString *cachedUserGroupString;
     
@@ -142,6 +147,40 @@
     return cachedKindString;
 }
 
+- (NSString *)HFSType {
+    if (!cachedHFSType) {
+        cachedHFSType = NSHFSTypeOfFile(self.path);
+        if (cachedHFSType == nil) {
+            cachedHFSType = @"";
+        }
+    }
+    return cachedHFSType;
+}
+
+- (NSString *)creatorType {
+    if (!cachedCreatorType) {
+        NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:self.path error:nil];
+        if (attr) {
+            OSType ccType = [attr fileHFSCreatorCode];
+            if (ccType) {
+                cachedCreatorType = (__bridge NSString *)UTCreateStringForOSType(ccType);
+            }
+        }
+        cachedCreatorType = cachedCreatorType ? cachedCreatorType : @"";
+    }
+    return cachedCreatorType;
+}
+
+- (NSString *)MIMEType {
+    if (!cachedMIMEType) {
+        CFStringRef mType = UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)[self UTI], kUTTagClassMIMEType);
+        
+        cachedMIMEType = mType ? (__bridge_transfer NSString *)mType : @"";
+        
+    }
+    return cachedMIMEType;
+}
+
 - (BOOL)stat {
     if (cachedStatPtr) {
         return YES;
@@ -220,16 +259,16 @@
     return [[DateFormatter formatter] stringFromDate:date];
 }
 
-- (NSString *)owner {
+- (NSString *)user {
     if (![self stat]) {
         return SI_UNKNOWN;
     }
     
-    if (!cachedOwner) {
+    if (!cachedUser) {
         const char *u = user_from_uid(cachedStatPtr->st_uid, 1);
-        cachedOwner = u ? @(u) : SI_UNKNOWN;
+        cachedUser = u ? @(u) : SI_UNKNOWN;
     }
-    return cachedOwner;
+    return cachedUser;
 }
 
 - (NSString *)group {
@@ -247,9 +286,7 @@
 
 - (NSString *)userGroupString {
     if (!cachedUserGroupString) {
-        NSString *user = [self owner];
-        NSString *group = [self group];
-        cachedUserGroupString = [NSString stringWithFormat:@"%@:%@", user, group];
+        cachedUserGroupString = [NSString stringWithFormat:@"%@:%@", [self user], [self group]];
     }
     return cachedUserGroupString;
 }

@@ -791,15 +791,21 @@
         colStr = item.permissionsString;
     } else if ([colID isEqualToString:@"UTI"]) {
         colStr = item.UTI;
+    } else if ([colID isEqualToString:@"HFS Type"]) {
+        colStr = item.HFSType;
+    } else if ([colID isEqualToString:@"Creator Type"]) {
+        colStr = item.creatorType;
+    } else if ([colID isEqualToString:@"MIME Type"]) {
+        colStr = item.MIMEType;
     }
     
 //    if ([[NSFileManager defaultManager] fileExistsAtPath:item.path] == NO) {
 //        NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
 //        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:colStr
 //                                                                      attributes:attr];
-//    [cellView.textField setAttributedStringValue:[self attr:colStr]];
+    [cellView.textField setAttributedStringValue:[self attr:colStr]];
 //    } else {
-        cellView.textField.stringValue = colStr;
+//        cellView.textField.stringValue = colStr;
 //    }
     
     

@@ -28,9 +28,10 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-/*  This singleton class exists in order to provide a single, pre-initialised date 
-    formatter used in the rest of the program. Minor optimization, initialising the
-    formatter is surprisingly expensive and not at all suited for fast data source calls. 
+/*  This singleton class exists in order to provide a single, pre-initialised date
+    formatter to be used in the rest of the program. Minor optimization, initialising the
+    formatter is surprisingly expensive and not at all suited for fast data source calls
+    from the table view. 
 */
 
 #import "DateFormatter.h"
@@ -44,8 +45,7 @@
 
 @implementation DateFormatter
 
-+(id)formatter {
-    
++ (id)formatter {
     static DateFormatter *instance = nil; // Local static variable
     // All access to this local static variable must go through +formatter
     
@@ -60,7 +60,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        NSLog(@"Creating date formatter");
         formatter = [NSDateFormatter new];
         formatter.doesRelativeDateFormatting = YES;
         formatter.locale = [NSLocale currentLocale];
