@@ -15,6 +15,7 @@
         <userDefaultsController representsSharedInstance="YES" id="aad-Ka-dzA"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="newMenuItem" destination="LfL-5u-XLd" id="hbD-SF-RKB"/>
                 <outlet property="openRecentMenu" destination="kkF-xs-mwP" id="kw0-1E-Rja"/>
                 <outlet property="statusMenu" destination="Hft-qY-P2n" id="Ts3-Hi-PuJ"/>
             </connections>
@@ -364,15 +365,15 @@
                             <menuItem title="Show Kind" id="Y4S-zk-wYB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <binding destination="aad-Ka-dzA" name="enabled" keyPath="values.ShowColumnKind" id="qBD-LH-rli"/>
                                     <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnKind" id="XSt-Mu-uE8"/>
+                                    <binding destination="aad-Ka-dzA" name="enabled" keyPath="values.ShowColumnKind" id="qBD-LH-rli"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Show Size" id="fBx-eC-aYG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <binding destination="aad-Ka-dzA" name="enabled" keyPath="values.ShowColumnSize" id="hgy-nm-uzd"/>
                                     <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnSize" id="TBQ-xt-x0S"/>
+                                    <binding destination="aad-Ka-dzA" name="enabled" keyPath="values.ShowColumnSize" id="hgy-nm-uzd"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Show Date Created" id="QuO-X2-z9k">
@@ -406,15 +407,15 @@
                             <menuItem title="Show Permissions" id="f5n-os-aoJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <binding destination="aad-Ka-dzA" name="enabled" keyPath="values.ShowColumnPermissions" id="tvo-tv-zdp"/>
                                     <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnPermissions" id="eqH-j7-naL"/>
+                                    <binding destination="aad-Ka-dzA" name="enabled" keyPath="values.ShowColumnPermissions" id="tvo-tv-zdp"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Show UTI" id="7JE-Aj-uFA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <binding destination="aad-Ka-dzA" name="enabled" keyPath="values.ShowColumnUTI" id="YlV-4p-KCQ"/>
                                     <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowColumnUTI" id="A23-0A-0H3"/>
+                                    <binding destination="aad-Ka-dzA" name="enabled" keyPath="values.ShowColumnUTI" id="YlV-4p-KCQ"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="gTx-Wl-iKt"/>

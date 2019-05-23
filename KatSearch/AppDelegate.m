@@ -41,6 +41,8 @@
     
     IBOutlet NSMenu *openRecentMenu;
     IBOutlet NSMenu *statusMenu;
+    IBOutlet NSMenuItem *newMenuItem;
+    
     NSStatusItem *statusItem;
 }
 @end
@@ -57,16 +59,20 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-
+    // Set and remember the shortcut
+    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:SHORTCUT_DEFAULT_KEYCODE modifierFlags:0];
+    NSData *shortcutData = [NSKeyedArchiver archivedDataWithRootObject:shortcut];
+    [DEFAULTS setObject:shortcutData forKey:SHORTCUT_DEFAULT_NAME];
+    
     // Associate the shortcut key key with an action
-    [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:@"GlobalShortcut"
+    [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:SHORTCUT_DEFAULT_NAME
                                                          toAction:^{
          if ([[NSApplication sharedApplication] isActive] || ![windowControllers count]) {
              [self newWindow:self];
          }
      }];
     
-    windowControllers = [NSMutableArray array];
+    windowControllers = [NSMutableArray new];
     
     if (1) { // TODO: Not in status mode
         [self newWindow:self];

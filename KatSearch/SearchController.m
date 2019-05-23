@@ -765,7 +765,7 @@
     
     SearchItem *item = results[row];
     
-    NSString *colStr = nil;
+    id colStr = nil;
     if ([colID isEqualToString:@"Items"]) {
         colStr = item.name;
         cellView.imageView.objectValue = item.icon;
@@ -803,10 +803,13 @@
 //        NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
 //        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:colStr
 //                                                                      attributes:attr];
-    [cellView.textField setAttributedStringValue:[self attr:colStr]];
+//    [cellView.textField setAttributedStringValue:[self attr:colStr]];
 //    } else {
-//        cellView.textField.stringValue = colStr;
-//    }
+    if (![colStr isKindOfClass:[NSAttributedString class]]) {
+        cellView.textField.stringValue = colStr;
+    } else {
+        [cellView.textField setAttributedStringValue:colStr];
+    }
     
     
     return cellView;
