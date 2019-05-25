@@ -85,7 +85,7 @@ DQ
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn identifier="Items" editable="NO" width="262.5" minWidth="210" maxWidth="700" id="QWP-6f-Nbl" userLabel="Filename">
+                                        <tableColumn identifier="Items" editable="NO" width="262.5" minWidth="210" maxWidth="2000" id="QWP-6f-Nbl" userLabel="Filename">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Items">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -96,7 +96,7 @@ DQ
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="name"/>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="name"/>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="M6h-sX-oD6">
@@ -136,11 +136,11 @@ DQ
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="kind"/>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="kind"/>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Dhn-xV-clw">
-                                                    <rect key="frame" x="266.5" y="1" width="100" height="17"/>
+                                                    <rect key="frame" x="267" y="1" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="A9v-Dv-gzl">
@@ -173,7 +173,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="dateModified"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="99j-Ne-kGR">
-                                                    <rect key="frame" x="369.5" y="1" width="128" height="17"/>
+                                                    <rect key="frame" x="370" y="1" width="128" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="gOe-2v-Sx2">
@@ -206,7 +206,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="dateCreated"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Qor-BE-CPb">
-                                                    <rect key="frame" x="500.5" y="1" width="128" height="17"/>
+                                                    <rect key="frame" x="501" y="1" width="128" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="N0p-uG-Yxv">
@@ -239,7 +239,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="dateAccessed"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="nQk-7E-jZ6">
-                                                    <rect key="frame" x="631.5" y="1" width="128" height="17"/>
+                                                    <rect key="frame" x="632" y="1" width="128" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Q6s-gL-9ST" userLabel="Date Accessed">
@@ -272,7 +272,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="size"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="wLv-os-SgI">
-                                                    <rect key="frame" x="762.5" y="1" width="75" height="17"/>
+                                                    <rect key="frame" x="763" y="1" width="75" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="h1H-hw-ejo">
@@ -302,10 +302,10 @@ DQ
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="userGroupString"/>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="userGroupString"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="CJ0-Hr-7x4">
-                                                    <rect key="frame" x="840.5" y="1" width="100" height="17"/>
+                                                    <rect key="frame" x="841" y="1" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="3uG-FG-9XF" userLabel="User/Group">
@@ -338,7 +338,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="permissionsNumber"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="s6A-7s-NDr">
-                                                    <rect key="frame" x="943.5" y="1" width="100" height="17"/>
+                                                    <rect key="frame" x="944" y="1" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Kp9-AY-Owk" userLabel="Permissions">
@@ -368,10 +368,10 @@ DQ
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="UTI"/>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="UTI"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="y8I-ZF-3fu">
-                                                    <rect key="frame" x="1046.5" y="1" width="100" height="17"/>
+                                                    <rect key="frame" x="1047" y="1" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="GJI-tN-2Mn">
@@ -401,10 +401,10 @@ DQ
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="HFSType"/>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="HFSType"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="nf2-gp-wcg">
-                                                    <rect key="frame" x="1149.5" y="1" width="70" height="17"/>
+                                                    <rect key="frame" x="1150" y="1" width="70" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="qe1-R2-k6A" userLabel="HFS Type">
@@ -434,10 +434,10 @@ DQ
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="creatorType"/>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="creatorType"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="GHS-f1-uNI">
-                                                    <rect key="frame" x="1222.5" y="1" width="60" height="17"/>
+                                                    <rect key="frame" x="1223" y="1" width="60" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="y5S-oX-tss" userLabel="Creator Type">
@@ -467,10 +467,10 @@ DQ
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="MIMEType"/>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="MIMEType"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="gNc-Ai-BVh">
-                                                    <rect key="frame" x="1285.5" y="1" width="130" height="17"/>
+                                                    <rect key="frame" x="1286" y="1" width="130" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="w7a-Tv-bTU" userLabel="MIME Type">

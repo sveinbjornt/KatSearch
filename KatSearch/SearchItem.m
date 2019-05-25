@@ -31,22 +31,21 @@
 #import "SearchItem.h"
 #import "NSWorkspace+Additions.h"
 #import "SharedDateFormatter.h"
-#include <sys/stat.h>
-#include <pwd.h>
-#include <grp.h>
+#import "Common.h"
+#import <sys/stat.h>
+#import <pwd.h>
+#import <grp.h>
 
 @implementation SearchItem
 {
-    NSString *cachedName;
+    struct stat cachedStat;
+    struct stat *cachedStatPtr;
     
+    NSString *cachedName;
+    NSURL *cachedURL;
     NSImage *cachedIcon;
     
     NSString *cachedKindString;
-    
-    NSString *cachedHFSType;
-    NSString *cachedCreatorType;
-    
-    NSString *cachedMIMEType;
     
     NSString *cachedRawSizeString;
     NSString *cachedSizeString;
@@ -63,8 +62,6 @@
     NSString *cachedDateModifiedString;
     NSString *cachedDateModifiedISOString;
     
-    NSString *cachedUTI;
-    
     NSString *cachedUser;
     NSString *cachedGroup;
     NSString *cachedUserGroupString;
@@ -73,12 +70,12 @@
     NSString *cachedPermissionsNumberString;
     NSString *cachedPermissionsString;
     
-    NSURL *cachedURL;
-    
+    NSString *cachedUTI;
+    NSString *cachedHFSType;
+    NSString *cachedCreatorType;
+    NSString *cachedMIMEType;
+
     int bookmark;
-    
-    struct stat cachedStat;
-    struct stat *cachedStatPtr;
 }
 
 - (instancetype)initWithPath:(NSString *)path {
@@ -92,15 +89,14 @@
 }
 
 // This method primes the item's caching mechanism
-// by running stat and generating strings for display
+// by running stat and generating strings for later display
 - (void)prime {
+    // TODO: Prime specific attributes
     [self name];
-    [self url];
     [self icon];
     [self sizeString];
     [self kind];
     [self dateModifiedString];
-    // TODO: Prime according to visible columns
 }
 
 #pragma mark - Attributes
@@ -132,10 +128,9 @@
     if (cachedStatPtr) {
         return YES;
     }
-    //    NSLog(@"Stat");
     
     if (lstat([self.path fileSystemRepresentation], &cachedStat)) {
-        NSLog(@"Stat failed: %@", self.description);
+        DLog(@"Stat failed: %@", self.description);
         return NO;
     }
     
@@ -150,7 +145,6 @@
     }
     return -1;
 }
-
 
 - (NSString *)rawSizeString {
     if (!cachedRawSizeString) {
@@ -210,7 +204,7 @@
     }
     
     if (!cachedDateAccessedString) {
-        cachedDateAccessedString = [self friendlyDateStringForTimestamp:cachedStatPtr->st_atimespec.tv_sec];
+        cachedDateAccessedString = [[SharedDateFormatter formatter] friendlyStringFromTimestamp:cachedStatPtr->st_atimespec.tv_sec];
     }
     
     return cachedDateAccessedString;
@@ -222,7 +216,7 @@
     }
     
     if (!cachedDateAccessedISOString) {
-        cachedDateAccessedISOString = [self isoDateStringForTimestamp:cachedStatPtr->st_atimespec.tv_sec];
+        cachedDateAccessedISOString = [[SharedDateFormatter formatter] isoStringFromTimestamp:cachedStatPtr->st_atimespec.tv_sec];
     }
     
     return cachedDateAccessedISOString;
@@ -243,7 +237,7 @@
     }
     
     if (!cachedDateCreatedString) {
-        cachedDateCreatedString = [self friendlyDateStringForTimestamp:cachedStatPtr->st_ctimespec.tv_sec];
+        cachedDateCreatedString = [[SharedDateFormatter formatter] friendlyStringFromTimestamp:cachedStatPtr->st_ctimespec.tv_sec];
     }
     
     return cachedDateCreatedString;
@@ -255,7 +249,7 @@
     }
     
     if (!cachedDateCreatedISOString) {
-        cachedDateCreatedISOString = [self isoDateStringForTimestamp:cachedStatPtr->st_ctimespec.tv_sec];
+        cachedDateCreatedISOString = [[SharedDateFormatter formatter] isoStringFromTimestamp: cachedStatPtr->st_ctimespec.tv_sec];
     }
     
     return cachedDateCreatedISOString;
@@ -276,7 +270,7 @@
     }
     
     if (!cachedDateModifiedString) {
-        cachedDateModifiedString = [self friendlyDateStringForTimestamp:cachedStatPtr->st_mtimespec.tv_sec];
+        cachedDateModifiedString = [[SharedDateFormatter formatter] friendlyStringFromTimestamp:cachedStatPtr->st_mtimespec.tv_sec];
     }
     
     return cachedDateModifiedString;
@@ -288,22 +282,10 @@
     }
     
     if (!cachedDateModifiedISOString) {
-        cachedDateModifiedISOString = [self isoDateStringForTimestamp:cachedStatPtr->st_mtimespec.tv_sec];
+        cachedDateModifiedISOString = [[SharedDateFormatter formatter] isoStringFromTimestamp: cachedStatPtr->st_mtimespec.tv_sec];
     }
     
     return cachedDateModifiedISOString;
-}
-
-#pragma mark -
-
-- (NSString *)friendlyDateStringForTimestamp:(__darwin_time_t)time {
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
-    return [[SharedDateFormatter formatter] friendlyStringFromDate:date];
-}
-
-- (NSString *)isoDateStringForTimestamp:(__darwin_time_t)time {
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
-    return [[SharedDateFormatter formatter] isoStringFromDate:date];
 }
 
 #pragma mark -
@@ -329,7 +311,6 @@
         const char *g = group_from_gid(cachedStatPtr->st_gid, 1);
         cachedGroup = g ? @(g) : SI_UNKNOWN;
     }
-    
     return cachedGroup;
 }
 
@@ -441,7 +422,7 @@
     return cachedCreatorType;
 }
 
-#pragma mark -
+#pragma mark - Other properties
 
 - (BOOL)isBookmark {
     if (bookmark == -1) { // Indeterminate

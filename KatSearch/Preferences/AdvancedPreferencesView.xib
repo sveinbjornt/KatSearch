@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" id="m4j-N6-olf">
-                    <rect key="frame" x="168" y="98" width="191" height="18"/>
+                    <rect key="frame" x="183" y="98" width="191" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Human-friendly date format" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pdt-O7-f60">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -29,7 +29,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="Tpd-dY-U4W">
-                    <rect key="frame" x="168" y="70" width="166" height="18"/>
+                    <rect key="frame" x="183" y="70" width="166" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Human-friendly file size" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FiU-nf-kF9">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -40,7 +40,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="bk7-zS-Vtd">
-                    <rect key="frame" x="168" y="126" width="193" height="18"/>
+                    <rect key="frame" x="183" y="126" width="193" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Authenticate on launch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="m1E-BS-tgR">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -51,7 +51,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="DGu-o7-Plj">
-                    <rect key="frame" x="161" y="155" width="211" height="32"/>
+                    <rect key="frame" x="176" y="155" width="211" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Check for Updates..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lJ0-Jd-VzT">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -62,7 +62,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="M2o-0C-PK0">
-                    <rect key="frame" x="168" y="42" width="193" height="18"/>
+                    <rect key="frame" x="183" y="42" width="193" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Human-friendly permissions" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vlc-J7-k8v">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -73,7 +73,7 @@
                     </connections>
                 </button>
                 <popUpButton verticalHuggingPriority="750" id="Fh4-RV-NQF">
-                    <rect key="frame" x="165" y="203" width="204" height="25"/>
+                    <rect key="frame" x="180" y="203" width="204" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Automatic" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="FYx-D8-jDc" id="8at-Cm-gQk">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -96,7 +96,7 @@
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="HyN-c2-glH">
-                    <rect key="frame" x="61" y="209" width="100" height="17"/>
+                    <rect key="frame" x="76" y="209" width="100" height="17"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Search Method:" id="Vcu-by-HDe">
                         <font key="font" metaFont="system"/>

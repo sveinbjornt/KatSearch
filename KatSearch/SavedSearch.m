@@ -32,4 +32,21 @@
 
 @implementation SavedSearch
 
+- (instancetype)initWithDictionary:(NSDictionary *)dict {
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
+- (instancetype)init {
+    return [self initWithDictionary:@{}];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Find %@ where %@ '%@' on '%@'",
+            self.itemType, self.matchType, self.searchString, self.volume];
+}
+
 @end

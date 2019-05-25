@@ -89,8 +89,18 @@
     return [friendlyFormatter stringFromDate:date];
 }
 
+- (NSString *)friendlyStringFromTimestamp:(__darwin_time_t)time {
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+    return [self friendlyStringFromDate:date];
+}
+
 - (NSString *)isoStringFromDate:(NSDate *)date {
     return [isoFormatter stringFromDate:date];
+}
+
+- (NSString *)isoStringFromTimestamp:(__darwin_time_t)time {
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+    return [self isoStringFromDate:date];
 }
 
 @end

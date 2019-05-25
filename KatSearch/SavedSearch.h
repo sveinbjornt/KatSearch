@@ -32,4 +32,11 @@
 
 @interface SavedSearch : NSObject
 
+@property (readonly, nonatomic) NSString *itemType;
+@property (readonly, nonatomic) NSString *matchType;
+@property (readonly, nonatomic) NSString *searchString;
+@property (readonly, nonatomic) NSString *volume;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
+
 @end

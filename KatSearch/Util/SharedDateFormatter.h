@@ -33,7 +33,11 @@
 @interface SharedDateFormatter : NSObject
 
 +(id)formatter;
+
 - (NSString *)friendlyStringFromDate:(NSDate *)date;
+- (NSString *)friendlyStringFromTimestamp:(__darwin_time_t)time;
+
 - (NSString *)isoStringFromDate:(NSDate *)date;
+- (NSString *)isoStringFromTimestamp:(__darwin_time_t)time;
 
 @end

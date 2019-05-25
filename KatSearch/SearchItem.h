@@ -40,7 +40,7 @@
 @property (readonly, nonatomic) NSURL *url;
 @property (readonly, nonatomic) NSImage *icon;
 
-@property (readonly) UInt64 size;
+@property (readonly, nonatomic) UInt64 size;
 @property (readonly, nonatomic) NSString *rawSizeString;
 @property (readonly, nonatomic) NSString *sizeString;
 
@@ -61,16 +61,17 @@
 
 @property (readonly, nonatomic) BOOL isBookmark;
 @property (readonly, nonatomic) BOOL isSymlink;
+@property (readonly, nonatomic) BOOL isDirectory;
 
-@property (readonly) NSDate *dateAccessed;
+@property (readonly, nonatomic) NSDate *dateAccessed;
 @property (readonly, nonatomic) NSString *dateAccessedString;
 @property (readonly, nonatomic) NSString *dateAccessedISOString;
 
-@property (readonly) NSDate *dateCreated;
+@property (readonly, nonatomic) NSDate *dateCreated;
 @property (readonly, nonatomic) NSString *dateCreatedString;
 @property (readonly, nonatomic) NSString *dateCreatedISOString;
 
-@property (readonly) NSDate *dateModified;
+@property (readonly, nonatomic) NSDate *dateModified;
 @property (readonly, nonatomic) NSString *dateModifiedString;
 @property (readonly, nonatomic) NSString *dateModifiedISOString;
 
