@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019, Sveinbjorn Thordarson <sveinbjorn@sveinbjorn.org>
+    Copyright (c) 2003-2019, Sveinbjorn Thordarson <sveinbjorn@sveinbjorn.org>
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification,
@@ -28,15 +28,69 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Foundation/Foundation.h>
+#import "MutableDictProxy.h"
 
-@interface SavedSearch : NSObject
+@interface MutableDictProxy()
+{
+    NSMutableDictionary *_properties;
+}
+@end
 
-@property (readonly, nonatomic) NSString *itemType;
-@property (readonly, nonatomic) NSString *matchType;
-@property (readonly, nonatomic) NSString *searchString;
-@property (readonly, nonatomic) NSString *volume;
+@implementation MutableDictProxy
 
-- (instancetype)initWithDictionary:(NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
+#pragma mark - NSMutableDictionary proxy
+
+- (instancetype)init {
+    if (self = [super init]) {
+        // Proxy dictionary object
+        _properties = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+}
+
+- (instancetype)initWithContentsOfFile:(NSString *)path {
+    if (self = [super init]) {
+        _properties = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
+    if (self = [super init]) {
+        _properties = [[NSMutableDictionary alloc] initWithCoder:aDecoder];
+    }
+    return self;
+}
+
+- (instancetype)initWithDictionary:(NSDictionary *)dict {
+    if (self = [super init]) {
+        _properties = [[NSMutableDictionary alloc] initWithDictionary:dict];
+    }
+    return self;
+}
+
+- (void)removeObjectForKey:(id)aKey {
+    [_properties removeObjectForKey:aKey];
+}
+
+- (void)setObject:(id)anObject forKey:(id <NSCopying>)aKey {
+    [_properties setObject:anObject forKey:aKey];
+}
+
+- (id)objectForKey:(id)aKey {
+    return [_properties objectForKey:aKey];
+}
+
+- (void)addEntriesFromDictionary:(NSDictionary *)otherDictionary {
+    [_properties addEntriesFromDictionary:otherDictionary];
+}
+
+- (NSEnumerator *)keyEnumerator {
+    return [_properties keyEnumerator];
+}
+
+- (NSUInteger) count {
+    return [_properties count];
+}
 
 @end

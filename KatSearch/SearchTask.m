@@ -30,6 +30,7 @@
 
 #import "SearchTask.h"
 #import "SearchItem.h"
+#import "SearchQuery.h"
 #import "Common.h"
 
 @implementation SearchTask
@@ -41,24 +42,20 @@
     AuthorizationRef authorizationRef;
 }
 
-- (instancetype)initWithDelegate:(id<SearchTaskDelegate>)delegate  searchString:(NSString *)searchStr {
+- (instancetype)initWithSearchQuery:(SearchQuery *)query delegate:(id<SearchTaskDelegate>)delegate {
     self = [super init];
     if (self) {
         _delegate = delegate;
         authorizationRef = NULL;
-        
-        if ([searchStr hasPrefix:@"^"]) {
-//            searchStr = [searchStr substringFromIndex:1];
-            _matchStartOnly = YES;
-        }
-        if ([searchStr hasSuffix:@"$"]) {
-//            searchStr = [searchStr substringToIndex:[searchStr length]-2];
-            _matchEndOnly = YES;
-        }
-        
-        _searchString = searchStr;
+        // TODO: Configure the search task according to query properties
     }
     return self;
+}
+
+- (instancetype)initWithSearchString:(NSString *)searchStr delegate:(id<SearchTaskDelegate>)delegate {
+    SearchQuery *query = [SearchQuery defaultQuery];
+    query[@"searchstring"] = searchStr;
+    return [self initWithSearchQuery:query delegate:delegate];
 }
 
 #pragma mark -

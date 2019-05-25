@@ -13,6 +13,7 @@
 		F45CA6F82298B80500D4D6D0 /* LSUIElementApp.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */; };
 		F45CA6FB229980EE00D4D6D0 /* Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6FA229980EE00D4D6D0 /* Alerts.m */; };
 		F45CA6FE229989D800D4D6D0 /* STPathControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6FD229989D800D4D6D0 /* STPathControl.m */; };
+		F45CA7012299BA3000D4D6D0 /* MutableDictProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA7002299BA3000D4D6D0 /* MutableDictProxy.m */; };
 		F45D8BBC20FA6FCC00D6E8F6 /* PasteboardPathControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */; };
 		F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A25E20E111CF0062B230 /* AppDelegate.m */; };
 		F462A26420E111D10062B230 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A26220E111D10062B230 /* MainMenu.xib */; };
@@ -37,7 +38,7 @@
 		F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */; };
 		F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */; };
 		F4CB199D2291064000265CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F462A26020E111D10062B230 /* Assets.xcassets */; };
-		F4CB19A022919A9200265CE8 /* SavedSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB199F22919A9200265CE8 /* SavedSearch.m */; };
+		F4CB19A022919A9200265CE8 /* SearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB199F22919A9200265CE8 /* SearchQuery.m */; };
 		F4CB19A22291A2E800265CE8 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CB19A12291A2E800265CE8 /* MASPreferences.framework */; };
 		F4CB19A42291A30A00265CE8 /* MASPreferences.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F4CB19A12291A2E800265CE8 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F4CB19AB2291A84400265CE8 /* GeneralPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CB19A52291A84300265CE8 /* GeneralPreferencesView.xib */; };
@@ -83,6 +84,8 @@
 		F45CA6FA229980EE00D4D6D0 /* Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alerts.m; sourceTree = "<group>"; };
 		F45CA6FC229989D800D4D6D0 /* STPathControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STPathControl.h; sourceTree = "<group>"; };
 		F45CA6FD229989D800D4D6D0 /* STPathControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STPathControl.m; sourceTree = "<group>"; };
+		F45CA6FF2299BA3000D4D6D0 /* MutableDictProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableDictProxy.h; sourceTree = "<group>"; };
+		F45CA7002299BA3000D4D6D0 /* MutableDictProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutableDictProxy.m; sourceTree = "<group>"; };
 		F45D8BBA20FA6FCC00D6E8F6 /* PasteboardPathControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasteboardPathControl.h; sourceTree = "<group>"; };
 		F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasteboardPathControl.m; sourceTree = "<group>"; };
 		F462A25A20E111CF0062B230 /* KatSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KatSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,8 +130,8 @@
 		F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STVolumesPopupButton.m; sourceTree = "<group>"; };
 		F4A7BA8320EC208F00083B48 /* NSTableView+PreserveSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+PreserveSelection.h"; sourceTree = "<group>"; };
 		F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+PreserveSelection.m"; sourceTree = "<group>"; };
-		F4CB199E22919A9200265CE8 /* SavedSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavedSearch.h; sourceTree = "<group>"; };
-		F4CB199F22919A9200265CE8 /* SavedSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavedSearch.m; sourceTree = "<group>"; };
+		F4CB199E22919A9200265CE8 /* SearchQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchQuery.h; sourceTree = "<group>"; };
+		F4CB199F22919A9200265CE8 /* SearchQuery.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchQuery.m; sourceTree = "<group>"; };
 		F4CB19A12291A2E800265CE8 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASPreferences.framework; sourceTree = "<group>"; };
 		F4CB19A52291A84300265CE8 /* GeneralPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GeneralPreferencesView.xib; sourceTree = "<group>"; };
 		F4CB19A62291A84300265CE8 /* SearchPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchPreferencesController.m; sourceTree = "<group>"; };
@@ -212,12 +215,12 @@
 				F462A25E20E111CF0062B230 /* AppDelegate.m */,
 				F462A27020E1122A0062B230 /* SearchController.h */,
 				F462A27120E1122A0062B230 /* SearchController.m */,
+				F4CB199E22919A9200265CE8 /* SearchQuery.h */,
+				F4CB199F22919A9200265CE8 /* SearchQuery.m */,
 				F462A27520E117760062B230 /* SearchTask.h */,
 				F462A27620E117760062B230 /* SearchTask.m */,
 				F462A27820E134EA0062B230 /* SearchItem.h */,
 				F462A27920E134EA0062B230 /* SearchItem.m */,
-				F4CB199E22919A9200265CE8 /* SavedSearch.h */,
-				F4CB199F22919A9200265CE8 /* SavedSearch.m */,
 				F45CA6F2229861BF00D4D6D0 /* Launch Prompt */,
 				F4CB19AF2291A85700265CE8 /* Preferences */,
 				F471DF6120F52A200057E667 /* Util */,
@@ -246,6 +249,8 @@
 			children = (
 				F45CA6F9229980EE00D4D6D0 /* Alerts.h */,
 				F45CA6FA229980EE00D4D6D0 /* Alerts.m */,
+				F45CA6FF2299BA3000D4D6D0 /* MutableDictProxy.h */,
+				F45CA7002299BA3000D4D6D0 /* MutableDictProxy.m */,
 				F45CA6F62298B80500D4D6D0 /* LSUIElementApp.h */,
 				F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */,
 				F45CA6FC229989D800D4D6D0 /* STPathControl.h */,
@@ -418,9 +423,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4CB19A022919A9200265CE8 /* SavedSearch.m in Sources */,
+				F4CB19A022919A9200265CE8 /* SearchQuery.m in Sources */,
 				F462A27720E117760062B230 /* SearchTask.m in Sources */,
 				F4CB19CC2294770D00265CE8 /* OptScrollView.m in Sources */,
+				F45CA7012299BA3000D4D6D0 /* MutableDictProxy.m in Sources */,
 				F4CB19C92294769700265CE8 /* OptClipView.m in Sources */,
 				F498ADF62267988000CB6A6E /* STPrivilegedTask.m in Sources */,
 				F462A26720E111D10062B230 /* main.m in Sources */,

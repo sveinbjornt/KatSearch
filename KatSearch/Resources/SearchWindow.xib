@@ -140,7 +140,7 @@ DQ
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Dhn-xV-clw">
-                                                    <rect key="frame" x="267" y="1" width="100" height="17"/>
+                                                    <rect key="frame" x="266.5" y="1" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="A9v-Dv-gzl">
@@ -173,7 +173,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="dateModified"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="99j-Ne-kGR">
-                                                    <rect key="frame" x="370" y="1" width="128" height="17"/>
+                                                    <rect key="frame" x="369.5" y="1" width="128" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="gOe-2v-Sx2">
@@ -206,7 +206,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="dateCreated"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="Qor-BE-CPb">
-                                                    <rect key="frame" x="501" y="1" width="128" height="17"/>
+                                                    <rect key="frame" x="500.5" y="1" width="128" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="N0p-uG-Yxv">
@@ -239,7 +239,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="dateAccessed"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="nQk-7E-jZ6">
-                                                    <rect key="frame" x="632" y="1" width="128" height="17"/>
+                                                    <rect key="frame" x="631.5" y="1" width="128" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Q6s-gL-9ST" userLabel="Date Accessed">
@@ -272,7 +272,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="size"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="wLv-os-SgI">
-                                                    <rect key="frame" x="763" y="1" width="75" height="17"/>
+                                                    <rect key="frame" x="762.5" y="1" width="75" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="h1H-hw-ejo">
@@ -305,7 +305,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="userGroupString"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="CJ0-Hr-7x4">
-                                                    <rect key="frame" x="841" y="1" width="100" height="17"/>
+                                                    <rect key="frame" x="840.5" y="1" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="3uG-FG-9XF" userLabel="User/Group">
@@ -338,7 +338,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="permissionsNumber"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="s6A-7s-NDr">
-                                                    <rect key="frame" x="944" y="1" width="100" height="17"/>
+                                                    <rect key="frame" x="943.5" y="1" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="Kp9-AY-Owk" userLabel="Permissions">
@@ -371,7 +371,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="UTI"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="y8I-ZF-3fu">
-                                                    <rect key="frame" x="1047" y="1" width="100" height="17"/>
+                                                    <rect key="frame" x="1046.5" y="1" width="100" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="GJI-tN-2Mn">
@@ -404,7 +404,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="HFSType"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="nf2-gp-wcg">
-                                                    <rect key="frame" x="1150" y="1" width="70" height="17"/>
+                                                    <rect key="frame" x="1149.5" y="1" width="70" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="qe1-R2-k6A" userLabel="HFS Type">
@@ -437,7 +437,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="creatorType"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="GHS-f1-uNI">
-                                                    <rect key="frame" x="1223" y="1" width="60" height="17"/>
+                                                    <rect key="frame" x="1222.5" y="1" width="60" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="y5S-oX-tss" userLabel="Creator Type">
@@ -470,7 +470,7 @@ DQ
                                             <sortDescriptor key="sortDescriptorPrototype" selector="caseInsensitiveCompare:" sortKey="MIMEType"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="gNc-Ai-BVh">
-                                                    <rect key="frame" x="1286" y="1" width="130" height="17"/>
+                                                    <rect key="frame" x="1285.5" y="1" width="130" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="w7a-Tv-bTU" userLabel="MIME Type">
@@ -669,32 +669,20 @@ DQ
             </connections>
             <point key="canvasLocation" x="732" y="7.5"/>
         </window>
-        <menu id="4Bj-Tq-H8Z" userLabel="Search Options Menu">
+        <menu autoenablesItems="NO" id="4Bj-Tq-H8Z" userLabel="Search Options Menu">
             <items>
                 <menuItem title="Case Sensitive" id="gxq-uw-k2R">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.SearchCaseSensitive" id="X9a-5p-BSC"/>
-                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="uHE-F4-nvm"/>
                 <menuItem title="Skip Package Contents" id="OAU-zq-soe">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.SearchSkipPackages" id="zy3-cE-hft"/>
-                    </connections>
                 </menuItem>
                 <menuItem title="Skip Invisible Files" id="KlK-Ua-qf3">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.SearchSkipInvisibleFiles" id="zRU-tg-jZD"/>
-                    </connections>
                 </menuItem>
                 <menuItem title="Skip System Folder" id="XrI-xh-wyj">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.SearchSkipSystemFolder" id="Nhk-ln-8na"/>
-                    </connections>
                 </menuItem>
             </items>
             <point key="canvasLocation" x="14" y="317"/>

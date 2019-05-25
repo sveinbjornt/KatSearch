@@ -31,6 +31,7 @@
 #import <Foundation/Foundation.h>
 
 @class SearchTask;
+@class SearchQuery;
 
 @protocol SearchTaskDelegate <NSObject>
 @required
@@ -57,7 +58,9 @@
 @property (readonly) BOOL wasKilled;
 @property (readonly) BOOL isAuthenticated;
 
-- (instancetype)initWithDelegate:(id<SearchTaskDelegate>)delegate searchString:(NSString *)searchStr;
+- (instancetype)initWithSearchQuery:(SearchQuery *)query delegate:(id<SearchTaskDelegate>)delegate;
+- (instancetype)initWithSearchString:(NSString *)searchStr delegate:(id<SearchTaskDelegate>)delegate;
+
 - (void)start;
 - (void)stop;
 - (void)setAuthorizationRef:(AuthorizationRef)authRef;

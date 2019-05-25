@@ -28,13 +28,40 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Cocoa/Cocoa.h>
-#import "SearchTask.h"
-#import "PasteboardDelegate.h"
+#import "SearchQuery.h"
+#import "Common.h"
 
-@interface SearchController : NSWindowController <  NSTableViewDelegate,
-                                                    NSTableViewDataSource,
-                                                    NSMenuDelegate,
-                                                    SearchTaskDelegate,
-                                                    PasteboardDelegate>
+@implementation SearchQuery
+
++ (instancetype)defaultQuery {
+    NSDictionary *sd = @{
+        @"filetype": [DEFAULTS stringForKey:@"FindItemTypes"],
+        @"matchtype": [DEFAULTS stringForKey:@"FindNameMatch"],
+        @"searchstring": @"",
+        @"volume": [DEFAULTS stringForKey:@"FindOnVolume"],
+        @"casesensitive": [DEFAULTS objectForKey:@"CaseSensitive"],
+        @"skippackages": [DEFAULTS objectForKey:@"SkipPackageContents"],
+        @"skipinvisibles": [DEFAULTS objectForKey:@"SkipInvisibleFiles"],
+        @"skipsystemfolder": [DEFAULTS objectForKey:@"SkipSystemFolder"]
+    };
+    return [[[self class] alloc] initWithDictionary:sd];
+}
+
+//- (instancetype)initWithDictionary:(NSDictionary *)dict {
+//    self = [super init];
+//    if (self) {
+//
+//    }
+//    return self;
+//}
+//
+//- (instancetype)init {
+//    return [self initWithDictionary:@{}];
+//}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Find %@ where %@ '%@' on '%@'",
+            self[@"items"], self[@"match"], self[@"search"], self[@"volume"]];
+}
+
 @end

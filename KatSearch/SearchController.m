@@ -31,8 +31,10 @@
 #import "SearchController.h"
 #import "AppDelegate.h"
 #import "SearchItem.h"
+#import "SearchQuery.h"
 #import "NSTableView+PreserveSelection.h"
 #import "NSWorkspace+Additions.h"
+#import "STVolumesPopupButton.h"
 #import "Common.h"
 
 @interface SearchController ()
@@ -40,7 +42,7 @@
     IBOutlet NSPopUpButton *itemTypePopupButton;
     IBOutlet NSPopUpButton *matchCriterionPopupButton;
     IBOutlet NSTextField *searchField;
-    IBOutlet NSPopUpButton *volumesPopupButton;
+    IBOutlet STVolumesPopupButton *volumesPopupButton;
     IBOutlet NSButton *searchOptionsButton;
     IBOutlet NSButton *authenticateButton;
     
@@ -107,6 +109,8 @@
     
     [self.window setInitialFirstResponder:searchField];
     [self.window makeFirstResponder:searchField];
+    
+    [self loadQuery:[SearchQuery defaultQuery]];
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
@@ -124,6 +128,22 @@
 - (BOOL)window:(NSWindow *)window shouldDragDocumentWithEvent:(NSEvent *)event from:(NSPoint)dragImageLocation withPasteboard:(NSPasteboard *)pasteboard {
     // Prevent dragging of title bar icon
     return NO;
+}
+
+#pragma mark - Load
+
+- (void)loadQuery:(SearchQuery *)query {
+    // Configure interface controls according to the values
+    // contained in the SearchQuery object
+    [itemTypePopupButton selectItemWithTitle:query[@"filetype"]];
+    [matchCriterionPopupButton selectItemWithTitle:query[@"matchtype"]];
+    [searchField setStringValue:query[@"searchstring"]];
+    [volumesPopupButton selectItemWithMountPoint:query[@"volume"]];
+    
+    [[searchOptionsMenu itemWithTitle:@"Case Sensitive"] setState:[query[@"casesensitive"] boolValue]];
+    [[searchOptionsMenu itemWithTitle:@"Skip Package Contents"] setState:[query[@"skippackages"] boolValue]];
+    [[searchOptionsMenu itemWithTitle:@"Skip Invisible Files"] setState:[query[@"skipinvisibles"] boolValue]];
+    [[searchOptionsMenu itemWithTitle:@"Skip System Folder"] setState:[query[@"skipsystemfolder"] boolValue]];
 }
 
 #pragma mark - Save to file
@@ -242,7 +262,7 @@
     [tableView reloadData];
     
     // Configure task
-    task = [[SearchTask alloc] initWithDelegate:self searchString:[searchField stringValue]];
+    task = [[SearchTask alloc] initWithSearchString:[searchField stringValue] delegate:self];
     task.volume = [[volumesPopupButton selectedItem] toolTip];
     
     if ([itemTypePopupButton selectedTag] == 1) {

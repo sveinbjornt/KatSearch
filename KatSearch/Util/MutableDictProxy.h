@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019, Sveinbjorn Thordarson <sveinbjorn@sveinbjorn.org>
+    Copyright (c) 2003-2019, Sveinbjorn Thordarson <sveinbjorn@sveinbjorn.org>
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification,
@@ -28,25 +28,8 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "SavedSearch.h"
+#import <Foundation/Foundation.h>
 
-@implementation SavedSearch
-
-- (instancetype)initWithDictionary:(NSDictionary *)dict {
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
-
-- (instancetype)init {
-    return [self initWithDictionary:@{}];
-}
-
-- (NSString *)description {
-    return [NSString stringWithFormat:@"Find %@ where %@ '%@' on '%@'",
-            self.itemType, self.matchType, self.searchString, self.volume];
-}
+@interface MutableDictProxy : NSMutableDictionary
 
 @end

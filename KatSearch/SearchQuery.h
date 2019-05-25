@@ -28,13 +28,11 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Cocoa/Cocoa.h>
-#import "SearchTask.h"
-#import "PasteboardDelegate.h"
+#import <Foundation/Foundation.h>
+#import "MutableDictProxy.h"
 
-@interface SearchController : NSWindowController <  NSTableViewDelegate,
-                                                    NSTableViewDataSource,
-                                                    NSMenuDelegate,
-                                                    SearchTaskDelegate,
-                                                    PasteboardDelegate>
+@interface SearchQuery : MutableDictProxy
+
++ (instancetype)defaultQuery;
+
 @end
