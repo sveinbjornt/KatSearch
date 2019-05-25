@@ -63,6 +63,19 @@
     [self populateMenu];
 }
 
+- (void)selectItemWithMountPoint:(NSString *)mountPoint {
+    for (NSMenuItem *item in [[self menu] itemArray]) {
+        if ([[item toolTip] isEqualToString:mountPoint]) {
+            [self selectItem:item];
+            return;
+        }
+    }
+}
+
+- (NSString *)mountPointOfSelectedItem {
+    return [[self selectedItem] toolTip];
+}
+
 - (void)volumesChanged:(NSNotification *)notification {
     [self populateMenu];
 }
@@ -78,8 +91,8 @@
     [volumesMenu removeAllItems];
     
     NSArray *props = @[NSURLVolumeNameKey];
-    NSArray *urls = [[NSFileManager defaultManager] mountedVolumeURLsIncludingResourceValuesForKeys:props
-                                                                                            options:NSVolumeEnumerationSkipHiddenVolumes];
+    NSArray *urls = [[NSFileManager defaultManager] mountedVolumeURLsIncludingResourceValuesForKeys:props options:NSVolumeEnumerationSkipHiddenVolumes];
+    
     // Add all volumes as menu items
     for (NSURL *url in urls) {
         

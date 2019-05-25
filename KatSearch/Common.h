@@ -31,7 +31,7 @@
 #define PROGRAM_NAME            @"KatSearch"
 
 #define PROGRAM_VERSION_MAJ     0
-#define PROGRAM_VERSION_MIN     1
+#define PROGRAM_VERSION_MIN     2
 #define PROGRAM_VERSION_STRING  @[NSString stringWithFormat:@"%d.%d",\
                                 PROGRAM_VERSION_MAJ, PROGRAM_VERSION_MIN]
 
@@ -42,6 +42,9 @@
 #define SHORTCUT_DEFAULT_NAME       @"GlobalShortcut"
 #define SHORTCUT_DEFAULT_KEYCODE    0
 
+#define CLT_INSTALL_PATH        @"/usr/local/bin/searchfs"
+#define CLT_MAN_PATH            @""
+
 #define NUM_RECENT_SEARCHES     10
 
 #define VALUES_KEYPATH(X)       [NSString stringWithFormat:@"values.%@", (X)]
@@ -50,14 +53,9 @@
 
 #define COL_DEFAULT_PREFIX      @"ShowColumn"
 
-#define COLUMNS                 @[@"Kind", @"Size", @"DateCreated", @"DateModified", \
-                                  @"DateAccessed", @"UserGroup", @"Permissions", @"UTI"]
-
-#define CORE_TYPES_RESOURCE(X)  [NSString stringWithFormat:\
-@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/%@",(X)]
-
-#define EXEC_ICON_PATH          CORE_TYPES_RESOURCE(@"ExecutableBinaryIcon.icns")
-
+#define COLUMNS                 @[  @"Kind", @"Size", @"DateCreated", @"DateModified", \
+                                    @"DateAccessed", @"UserGroup", @"Permissions", @"UTI", \
+                                    @"MIMEType", @"FileType", @"CreatorType" ]
 
 // Logging
 #ifdef DEBUG

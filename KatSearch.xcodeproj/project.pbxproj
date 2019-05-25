@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F45CA6EF229859EF00D4D6D0 /* LaunchPromptController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6ED229859EF00D4D6D0 /* LaunchPromptController.m */; };
+		F45CA6F0229859EF00D4D6D0 /* LaunchPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45CA6EE229859EF00D4D6D0 /* LaunchPrompt.xib */; };
+		F45CA6F52298629700D4D6D0 /* SelectableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6F42298629700D4D6D0 /* SelectableImageView.m */; };
+		F45CA6F82298B80500D4D6D0 /* LSUIElementApp.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */; };
 		F45D8BBC20FA6FCC00D6E8F6 /* PasteboardPathControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */; };
 		F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A25E20E111CF0062B230 /* AppDelegate.m */; };
 		F462A26420E111D10062B230 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A26220E111D10062B230 /* MainMenu.xib */; };
@@ -66,6 +70,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F45CA6EC229859EF00D4D6D0 /* LaunchPromptController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchPromptController.h; sourceTree = "<group>"; };
+		F45CA6ED229859EF00D4D6D0 /* LaunchPromptController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchPromptController.m; sourceTree = "<group>"; };
+		F45CA6EE229859EF00D4D6D0 /* LaunchPrompt.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchPrompt.xib; sourceTree = "<group>"; };
+		F45CA6F32298629700D4D6D0 /* SelectableImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectableImageView.h; sourceTree = "<group>"; };
+		F45CA6F42298629700D4D6D0 /* SelectableImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectableImageView.m; sourceTree = "<group>"; };
+		F45CA6F62298B80500D4D6D0 /* LSUIElementApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSUIElementApp.h; sourceTree = "<group>"; };
+		F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSUIElementApp.m; sourceTree = "<group>"; };
 		F45D8BBA20FA6FCC00D6E8F6 /* PasteboardPathControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasteboardPathControl.h; sourceTree = "<group>"; };
 		F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasteboardPathControl.m; sourceTree = "<group>"; };
 		F462A25A20E111CF0062B230 /* KatSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KatSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +163,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F45CA6F2229861BF00D4D6D0 /* Launch Prompt */ = {
+			isa = PBXGroup;
+			children = (
+				F45CA6EC229859EF00D4D6D0 /* LaunchPromptController.h */,
+				F45CA6ED229859EF00D4D6D0 /* LaunchPromptController.m */,
+				F45CA6EE229859EF00D4D6D0 /* LaunchPrompt.xib */,
+				F45CA6F32298629700D4D6D0 /* SelectableImageView.h */,
+				F45CA6F42298629700D4D6D0 /* SelectableImageView.m */,
+			);
+			path = "Launch Prompt";
+			sourceTree = "<group>";
+		};
 		F462A25120E111CF0062B230 = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +212,7 @@
 				F462A27920E134EA0062B230 /* SearchItem.m */,
 				F4CB199E22919A9200265CE8 /* SavedSearch.h */,
 				F4CB199F22919A9200265CE8 /* SavedSearch.m */,
+				F45CA6F2229861BF00D4D6D0 /* Launch Prompt */,
 				F4CB19AF2291A85700265CE8 /* Preferences */,
 				F471DF6120F52A200057E667 /* Util */,
 				F462A26F20E111FB0062B230 /* Resources */,
@@ -199,13 +223,13 @@
 		F462A26F20E111FB0062B230 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F471DF5F20F4DAE70057E667 /* Credits.rtf */,
-				F48DC10420FCD16400B21222 /* AppIcon.icns */,
+				F462A26520E111D10062B230 /* Info.plist */,
 				F481834D22720145002738AE /* Defaults.plist */,
 				F462A26020E111D10062B230 /* Assets.xcassets */,
 				F462A26220E111D10062B230 /* MainMenu.xib */,
 				F462A27220E1122A0062B230 /* SearchWindow.xib */,
-				F462A26520E111D10062B230 /* Info.plist */,
+				F471DF5F20F4DAE70057E667 /* Credits.rtf */,
+				F48DC10420FCD16400B21222 /* AppIcon.icns */,
 				F4A5CF0020ED7E15008D0A06 /* searchfs */,
 			);
 			path = Resources;
@@ -214,6 +238,8 @@
 		F471DF6120F52A200057E667 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F45CA6F62298B80500D4D6D0 /* LSUIElementApp.h */,
+				F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */,
 				F4CB19CA2294770C00265CE8 /* OptScrollView.h */,
 				F4CB19CB2294770C00265CE8 /* OptScrollView.m */,
 				F4CB19C72294769700265CE8 /* OptClipView.h */,
@@ -351,6 +377,7 @@
 				F48DC10520FCD16400B21222 /* AppIcon.icns in Resources */,
 				F4CB19B42291AA4A00265CE8 /* ToolPreferencesView.xib in Resources */,
 				F462A27420E1122A0062B230 /* SearchWindow.xib in Resources */,
+				F45CA6F0229859EF00D4D6D0 /* LaunchPrompt.xib in Resources */,
 				F462A26420E111D10062B230 /* MainMenu.xib in Resources */,
 				F4CB199D2291064000265CE8 /* Assets.xcassets in Resources */,
 				F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */,
@@ -389,6 +416,8 @@
 				F462A26720E111D10062B230 /* main.m in Sources */,
 				F48451E820F8E4CB005797C1 /* PasteboardTableView.m in Sources */,
 				F4CB19B92291BB0300265CE8 /* AdvancedPreferencesController.m in Sources */,
+				F45CA6EF229859EF00D4D6D0 /* LaunchPromptController.m in Sources */,
+				F45CA6F82298B80500D4D6D0 /* LSUIElementApp.m in Sources */,
 				F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */,
 				F462A27320E1122A0062B230 /* SearchController.m in Sources */,
 				F4CB19BC229330BC00265CE8 /* PrefsController.m in Sources */,
@@ -400,6 +429,7 @@
 				F4CB19AD2291A84400265CE8 /* GeneralPreferencesController.m in Sources */,
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
+				F45CA6F52298629700D4D6D0 /* SelectableImageView.m in Sources */,
 				F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */,
 				F4CB19C62294450900265CE8 /* DateFormatter.m in Sources */,
 			);
@@ -556,7 +586,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = org.sveinbjorn.KatSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -585,7 +615,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = org.sveinbjorn.KatSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

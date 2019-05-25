@@ -49,13 +49,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSImage *execIcon = [[NSImage alloc] initWithContentsOfFile:EXEC_ICON_PATH];
-    [execImageView setImage:execIcon];
     [self updateInstallStatusMessage];
 }
 
 - (void)updateInstallStatusMessage {
-    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:CLT_INSTALL_PATH]) {
+        [execImageView setAlphaValue:1.0f];
+        [statusTextField setStringValue:@"Command line tool is installed"];
+        [installButton setTitle:@"Uninstall"];
+    }
 }
 
 - (IBAction)buttonPressed:(id)sender {
@@ -69,7 +71,7 @@
 }
 
 - (NSImage *)toolbarItemImage {
-    return [[NSImage alloc] initWithContentsOfFile:EXEC_ICON_PATH];
+    return [NSImage imageNamed:@"CommandLineTool"];
 }
 
 - (NSString *)toolbarItemLabel {

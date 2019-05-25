@@ -32,9 +32,15 @@
 #import "Common.h"
 #import "SDOpenAtLogin.h"
 #import <MASShortcut/Shortcut.h>
+#import "SelectableImageView.h"
 
 @interface GeneralPreferencesController ()
-@property (nonatomic, weak) IBOutlet MASShortcutView *shortcutView;
+{
+    IBOutlet SelectableImageView *appModeImageView;
+    IBOutlet SelectableImageView *statusItemModeImageView;
+
+    IBOutlet MASShortcutView *shortcutView;
+}
 @end
 
 @implementation GeneralPreferencesController
@@ -44,7 +50,13 @@
 }
 
 - (void)viewDidLoad {
-    self.shortcutView.associatedUserDefaultsKey = @"GlobalShortcut";
+//    [shortcutView setStyle:MASShortcutViewStyleRounded];
+    [shortcutView setAssociatedUserDefaultsKey:@"GlobalShortcut"];
+    if ([DEFAULTS boolForKey:@"StatusItemMode"]) {
+        statusItemModeImageView.selected = YES;
+    } else {
+        appModeImageView.selected = YES;
+    }
 }
 
 - (IBAction)restoreDefaults:(id)sender {
@@ -54,6 +66,13 @@
         [DEFAULTS setObject:def[key] forKey:key];
     }
     [DEFAULTS synchronize];
+}
+
+- (IBAction)imageViewClicked:(id)sender {
+    [appModeImageView setSelected:NO];
+    [statusItemModeImageView setSelected:NO];
+    [sender setSelected:YES];
+    [DEFAULTS setBool:(sender == statusItemModeImageView) forKey:@"StatusItemMode"];
 }
 
 - (IBAction)toggleLaunchAtLogin:(id)sender {

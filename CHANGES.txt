@@ -18,11 +18,8 @@
 * Search history (Recent searches)
 * Override Cmd-F to show filter field
 * Use STPriviledTask when authenticated (global app-wide shared authentication)
-* Show/hide columns according to prefs
 * Status Menu mode
 * Show volumes which don't have catalog but have them disabled
-* Fix rounding of even size numbers (17 MB, not 17.0 MB)
-* Create status menu icon
 * Path bar with string option
 * Regex option for filter
 * Filter menu with fields
@@ -33,6 +30,15 @@
 * "Show Original" for aliases/symlinks
 * Versions for identical apps in Open With menu
 * Drag and drop folder/volume on window to make it target of search
+
+
+For next release:
+DONE * Support more column types (file, creator, mime etc.)
+DONE * Use proper Preferences
+DONE * Show/hide columns according to prefs
+DONE * Fix rounding of even size numbers (17 MB, not 17.0 MB)
+DONE * Create status menu icon
+DONE * Create Setup launch prompt
 
 
 ## Version History

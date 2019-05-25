@@ -28,52 +28,37 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "SearchPreferencesController.h"
-#import "STVolumesPopupButton.h"
-#import "Common.h"
+#import "SelectableImageView.h"
 
-@interface SearchPreferencesController ()
-{
-    IBOutlet STVolumesPopupButton *volumesPopupButton;
-}
-@end
+@implementation SelectableImageView
 
-@implementation SearchPreferencesController
-
-#pragma mark -
-
-- (id)init {
-    return [super initWithNibName:@"SearchPreferencesView" bundle:nil];
+- (void)drawRect:(NSRect)dirtyRect {
+    [super drawRect:dirtyRect];
+    if (_selected) {
+        [self drawFocusRingMask];
+        [[NSColor orangeColor] set];
+        NSBezierPath *path = [NSBezierPath bezierPath];
+        [path appendBezierPathWithRoundedRect:NSInsetRect([self bounds], 3, 3) xRadius:4 yRadius:4];
+        [path setLineWidth:4.0f];
+        [path stroke];
+    }
 }
 
-- (void)viewDidLoad {
-    [volumesPopupButton selectItemWithMountPoint:[DEFAULTS stringForKey:@"FindOnVolume"]];
+- (void)mouseUp:(NSEvent *)theEvent {
+    if (theEvent.type == NSLeftMouseUp) {
+        NSPoint pt = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        if (NSPointInRect(pt, self.bounds) && self.delegate) {
+            [self.delegate imageViewClicked:self];
+        }
+    } else {
+        // This should never be called, but...
+        [super mouseUp:theEvent];
+    }
 }
 
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)viewIdentifier {
-    return @"SearchPreferences";
-}
-
-- (NSImage *)toolbarItemImage {
-    return [NSImage imageNamed:@"SearchCatIcon"];
-}
-
-- (NSString *)toolbarItemLabel {
-    return NSLocalizedString(@"Search", @"Toolbar item name for the Search preference pane");
-}
-
-- (NSView *)initialKeyView {
-    return nil;
-}
-
-- (BOOL)hasResizableWidth {
-    return NO;
-}
-
-- (BOOL)hasResizableHeight {
-    return NO;
+- (void)setSelected:(BOOL)selected {
+    _selected = selected;
+    [self setNeedsDisplay:YES];
 }
 
 @end

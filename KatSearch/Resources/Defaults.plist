@@ -18,21 +18,47 @@
 	<false/>
 	<key>ShowColumnUTI</key>
 	<false/>
+	<key>ShowColumnMIMEType</key>
+	<false/>
+	<key>ShowColumnFileType</key>
+	<false/>
+	<key>ShowColumnCreatorType</key>
+	<false/>
 	<key>ShowPathBar</key>
 	<true/>
 	<key>ShowFilter</key>
 	<true/>
-	<key>MenuOnlyMode</key>
+	<key>StatusItemMode</key>
 	<false/>
+	<key>SearchMethod</key>
+	<string>Automatic</string>
 	<key>AuthenticateOnLaunch</key>
 	<false/>
 	<key>HumanFriendlyDates</key>
 	<true/>
 	<key>HumanFriendlyFileSize</key>
 	<true/>
+	<key>HumanFriendlyPermissions</key>
+	<true/>
 	<key>RememberRecentSearches</key>
 	<true/>
-	<key>LaunchAtLogin</key>
+	<key>LaunchOnLogin</key>
+	<true/>
+	<key>SUEnableAutomaticChecks</key>
+	<false/>
+	<key>FindItemTypes</key>
+	<string>items</string>
+	<key>FindNameMatch</key>
+	<string>name contains</string>
+	<key>FindOnVolume</key>
+	<string>/</string>
+	<key>CaseSensitive</key>
+	<false/>
+	<key>SkipPackageContents</key>
+	<false/>
+	<key>SkipInvisibleFiles</key>
+	<false/>
+	<key>SkipSystemFolder</key>
 	<false/>
 </dict>
 </plist>

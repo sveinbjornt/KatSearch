@@ -28,52 +28,8 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "SearchPreferencesController.h"
-#import "STVolumesPopupButton.h"
-#import "Common.h"
+#import <Cocoa/Cocoa.h>
 
-@interface SearchPreferencesController ()
-{
-    IBOutlet STVolumesPopupButton *volumesPopupButton;
-}
-@end
-
-@implementation SearchPreferencesController
-
-#pragma mark -
-
-- (id)init {
-    return [super initWithNibName:@"SearchPreferencesView" bundle:nil];
-}
-
-- (void)viewDidLoad {
-    [volumesPopupButton selectItemWithMountPoint:[DEFAULTS stringForKey:@"FindOnVolume"]];
-}
-
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)viewIdentifier {
-    return @"SearchPreferences";
-}
-
-- (NSImage *)toolbarItemImage {
-    return [NSImage imageNamed:@"SearchCatIcon"];
-}
-
-- (NSString *)toolbarItemLabel {
-    return NSLocalizedString(@"Search", @"Toolbar item name for the Search preference pane");
-}
-
-- (NSView *)initialKeyView {
-    return nil;
-}
-
-- (BOOL)hasResizableWidth {
-    return NO;
-}
-
-- (BOOL)hasResizableHeight {
-    return NO;
-}
+@interface LSUIElementApp : NSApplication
 
 @end

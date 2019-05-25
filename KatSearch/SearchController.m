@@ -94,6 +94,14 @@
 //        [tableColumn setSortDescriptorPrototype:sortDescriptor];
 //    }
     
+    for (NSTableColumn *col in [tableView tableColumns]) {
+        NSString *identifier = [col identifier];
+        if ([COLUMNS containsObject:identifier]) {
+            NSString *defKey = [NSString stringWithFormat:@"%@%@", COL_DEFAULT_PREFIX, identifier];
+            [col setHidden:![DEFAULTS boolForKey:defKey]];
+        }
+    }
+    
     
     [pathControl setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
 
@@ -169,8 +177,11 @@
     }
     else if ([def hasPrefix:COL_DEFAULT_PREFIX]) {
         NSString *colName = [def substringFromIndex:[COL_DEFAULT_PREFIX length]];
-        DLog(@"Default %@ changed", colName);
+        NSTableColumn *col = [tableView tableColumnWithIdentifier:colName];
+        [col setHidden:![DEFAULTS boolForKey:def]];
     }
+    DLog(@"Default %@ changed", keyPath);
+
 }
 
 - (void)setObserveDefaults:(BOOL)observeDefaults {
@@ -253,7 +264,7 @@
     task.skipPackages = [DEFAULTS boolForKey:@"SearchSkipPackages"];
     task.skipInvisibles = [DEFAULTS boolForKey:@"SearchSkipInvisibles"];
     task.skipInappropriate = [DEFAULTS boolForKey:@"SearchSkipSystemFolder"];
-    task.negateSearchParams = [DEFAULTS boolForKey:@"SearchInvertSearch"];
+//    task.negateSearchParams = [DEFAULTS boolForKey:@"SearchInvertSearch"];
     
     if (authorizationRef) {
         [task setAuthorizationRef:authorizationRef];
@@ -765,7 +776,7 @@
     
     SearchItem *item = results[row];
     
-    id colStr = nil;
+    id colStr = @"";
     if ([colID isEqualToString:@"Items"]) {
         colStr = item.name;
         cellView.imageView.objectValue = item.icon;
@@ -779,23 +790,27 @@
         colStr = item.kind;
     } else if ([colID isEqualToString:@"Size"]) {
         colStr = [item sizeString];
-    } else if ([colID isEqualToString:@"Date Created"]) {
+    } else if ([colID isEqualToString:@"DateCreated"]) {
         colStr = item.dateCreatedString;
-    } else if ([colID isEqualToString:@"Date Modified"]) {
+    } else if ([colID isEqualToString:@"DateModified"]) {
         colStr = item.dateModifiedString;
-    } else if ([colID isEqualToString:@"Date Accessed"]) {
+    } else if ([colID isEqualToString:@"DateAccessed"]) {
         colStr = item.dateAccessedString;
-    } else if ([colID isEqualToString:@"User/Group"]) {
+    } else if ([colID isEqualToString:@"UserGroup"]) {
         colStr = item.userGroupString;
     } else if ([colID isEqualToString:@"Permissions"]) {
-        colStr = item.permissionsString;
+        // Use monospace font for permissions
+        NSDictionary *attr = @{ NSFontAttributeName: [NSFont userFixedPitchFontOfSize:[NSFont systemFontSize]] };
+        colStr = [[NSAttributedString alloc] initWithString:item.permissionsString attributes:attr];
     } else if ([colID isEqualToString:@"UTI"]) {
         colStr = item.UTI;
-    } else if ([colID isEqualToString:@"HFS Type"]) {
-        colStr = item.HFSType;
-    } else if ([colID isEqualToString:@"Creator Type"]) {
-        colStr = item.creatorType;
-    } else if ([colID isEqualToString:@"MIME Type"]) {
+    } else if ([colID isEqualToString:@"FileType"]) {
+        NSDictionary *attr = @{ NSFontAttributeName: [NSFont userFixedPitchFontOfSize:[NSFont systemFontSize]] };
+        colStr = [[NSAttributedString alloc] initWithString:item.HFSType attributes:attr];
+    } else if ([colID isEqualToString:@"CreatorType"]) {
+        NSDictionary *attr = @{ NSFontAttributeName: [NSFont userFixedPitchFontOfSize:[NSFont systemFontSize]] };
+        colStr = [[NSAttributedString alloc] initWithString:item.creatorType attributes:attr];
+    } else if ([colID isEqualToString:@"MIMEType"]) {
         colStr = item.MIMEType;
     }
     

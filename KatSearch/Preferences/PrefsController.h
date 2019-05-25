@@ -31,5 +31,7 @@
 #import <MASPreferences/MASPreferences.h>
 
 @interface PrefsController : MASPreferencesWindowController
+
 + (instancetype)newController;
+
 @end

@@ -33,15 +33,19 @@
 #import "SearchController.h"
 #import <MASShortcut/Shortcut.h>
 #import "PrefsController.h"
+#import "LaunchPromptController.h"
 
 @interface AppDelegate ()
 {
     NSMutableArray *windowControllers;
     MASPreferencesWindowController *prefsController;
+    LaunchPromptController *promptController;
     
+    IBOutlet NSMenu *mainMenu;
     IBOutlet NSMenu *openRecentMenu;
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem *newMenuItem;
+    IBOutlet NSMenuItem *menuBarItem;
     
     NSStatusItem *statusItem;
 }
@@ -56,13 +60,21 @@
 
 - (void)awakeFromNib {
     [NSApp setServicesProvider:self];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:VALUES_KEYPATH(@"StatusItemMode")
+                                                                 options:NSKeyValueObservingOptionNew
+                                                                 context:NULL];
+    // TODO: Set shortcut to New Search menu item
+//    [newMenuItem set
+//    MASShortcut
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [self setAppMode:[DEFAULTS boolForKey:@"StatusItemMode"]];
     // Set and remember the shortcut
-    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:SHORTCUT_DEFAULT_KEYCODE modifierFlags:0];
-    NSData *shortcutData = [NSKeyedArchiver archivedDataWithRootObject:shortcut];
-    [DEFAULTS setObject:shortcutData forKey:SHORTCUT_DEFAULT_NAME];
+    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:SHORTCUT_DEFAULT_KEYCODE modifierFlags:NSCommandKeyMask|NSAlternateKeyMask];
+//    NSData *shortcutData = [NSKeyedArchiver archivedDataWithRootObject:shortcut];
+//    [DEFAULTS setObject:shortcutData forKey:SHORTCUT_DEFAULT_NAME];
     
     // Associate the shortcut key key with an action
     [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:SHORTCUT_DEFAULT_NAME
@@ -73,11 +85,19 @@
      }];
     
     windowControllers = [NSMutableArray new];
-    
-    if (1) { // TODO: Not in status mode
+
+    if ([DEFAULTS boolForKey:@"StatusItemMode"]) {
+        [self showStatusItem];
+    } else {
         [self newWindow:self];
     }
-    [self showStatusItem];
+//    [self showLaunchPrompt];
+
+//    } else {
+//        // On first launch, show prompt window with basic settings
+//        [DEFAULTS setBool:YES forKey:@"PreviouslyLaunched"];
+//    }
+    
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
@@ -88,6 +108,40 @@
     [self newWindow:self];
     
     return YES;
+}
+
+#pragma mark - Key/value observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSString *def = [keyPath substringFromIndex:[@"values." length]];
+    if ([def hasSuffix:@"StatusItemMode"]) {
+        [self setAppMode:[DEFAULTS boolForKey:@"StatusItemMode"]];
+    }
+}
+
+- (void)setAppMode:(BOOL)backgroundMode {
+    ProcessSerialNumber psn = { 0, kCurrentProcess };
+    OSStatus returnCode;
+    BOOL prefsVisible = [[prefsController window] isVisible];
+    
+    if (backgroundMode) {
+        [self showStatusItem];
+        // kProcessTransformToUIElementApplication = 4L;
+        returnCode = TransformProcessType(&psn, kProcessTransformToUIElementApplication);
+        if (prefsVisible) {
+            [self performSelector:@selector(showPreferences:) withObject:self afterDelay:0.25f];
+        }        
+    } else {
+        [self hideStatusItem];
+        returnCode = TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+            ProcessSerialNumber psn = { 0, kCurrentProcess };
+            SetFrontProcess(&psn);
+
+    }
+    if (returnCode != 0) {
+        DLog(@"Failed to change application mode. Error %d", (int)returnCode);
+    }
 }
 
 #pragma mark - Services
@@ -164,6 +218,9 @@
     NSImage *icon = [NSImage imageNamed:@"StatusItemIcon"];
     [icon setSize:NSMakeSize(18, 18)];
     [statusItem setImage:icon];
+    
+    [menuBarItem setSubmenu:[mainMenu copy]];
+    
     [statusItem setMenu:statusMenu];
 }
 
@@ -181,20 +238,28 @@
     }
     // Briefly highlight status item
     [statusItem.button setHighlighted:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.20 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.17 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [statusItem.button setHighlighted:NO];
     });
 }
 
 #pragma mark -
 
+- (void)showLaunchPrompt {
+    if (promptController == nil) {
+        promptController = [LaunchPromptController newController];
+    }    
+    [promptController showWindow:nil];
+}
+
 - (IBAction)showPreferences:(id)sender {
     if (prefsController == nil) {
         prefsController = [PrefsController newController];
     }
-
-    [[prefsController window] center];
     [prefsController showWindow:nil];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+    
+    NSLog(@"%@", NSStringFromClass([[NSApplication sharedApplication] class]));
 }
 
 #pragma mark -

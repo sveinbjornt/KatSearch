@@ -149,24 +149,30 @@
 
 - (NSString *)HFSType {
     if (!cachedHFSType) {
-        cachedHFSType = NSHFSTypeOfFile(self.path);
-        if (cachedHFSType == nil) {
-            cachedHFSType = @"";
-        }
+        [self getLegacyFileAndCreatorTypes];
     }
     return cachedHFSType;
 }
 
+- (void)getLegacyFileAndCreatorTypes {
+    NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:self.path error:nil];
+    if (attr) {
+        OSType hfsType = [attr fileHFSTypeCode];
+        if (hfsType) {
+            cachedHFSType = (__bridge NSString *)UTCreateStringForOSType(hfsType);
+        }
+        OSType ccType = [attr fileHFSCreatorCode];
+        if (ccType) {
+            cachedCreatorType = (__bridge NSString *)UTCreateStringForOSType(ccType);
+        }
+    }
+    cachedHFSType = cachedHFSType ? cachedHFSType : @"";
+    cachedCreatorType = cachedCreatorType ? cachedCreatorType : @"";
+}
+
 - (NSString *)creatorType {
     if (!cachedCreatorType) {
-        NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:self.path error:nil];
-        if (attr) {
-            OSType ccType = [attr fileHFSCreatorCode];
-            if (ccType) {
-                cachedCreatorType = (__bridge NSString *)UTCreateStringForOSType(ccType);
-            }
-        }
-        cachedCreatorType = cachedCreatorType ? cachedCreatorType : @"";
+        [self getLegacyFileAndCreatorTypes];
     }
     return cachedCreatorType;
 }
@@ -174,9 +180,7 @@
 - (NSString *)MIMEType {
     if (!cachedMIMEType) {
         CFStringRef mType = UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)[self UTI], kUTTagClassMIMEType);
-        
         cachedMIMEType = mType ? (__bridge_transfer NSString *)mType : @"";
-        
     }
     return cachedMIMEType;
 }

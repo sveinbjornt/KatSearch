@@ -20,10 +20,10 @@
             <rect key="frame" x="0.0" y="0.0" width="520" height="260"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="LHh-Xq-1Ty">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" alphaValue="0.29999999999999999" id="LHh-Xq-1Ty">
                     <rect key="frame" x="212" y="138" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSApplicationIcon" id="3vt-NH-LWZ"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="CommandLineTool" id="3vt-NH-LWZ"/>
                 </imageView>
                 <button verticalHuggingPriority="750" id="P5L-qb-pBR">
                     <rect key="frame" x="161" y="49" width="197" height="32"/>
@@ -50,6 +50,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="NSApplicationIcon" width="32" height="32"/>
+        <image name="CommandLineTool" width="512" height="512"/>
     </resources>
 </document>

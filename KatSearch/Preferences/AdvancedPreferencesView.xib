@@ -18,31 +18,40 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" id="m4j-N6-olf">
-                    <rect key="frame" x="174" y="134" width="191" height="18"/>
+                    <rect key="frame" x="168" y="98" width="191" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Human-friendly date format" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pdt-O7-f60">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <binding destination="KsH-bZ-JKv" name="value" keyPath="values.HumanFriendlyDates" id="nm8-yf-kde"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="Tpd-dY-U4W">
-                    <rect key="frame" x="174" y="107" width="166" height="18"/>
+                    <rect key="frame" x="168" y="70" width="166" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Human-friendly file size" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FiU-nf-kF9">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <binding destination="KsH-bZ-JKv" name="value" keyPath="values.HumanFriendlyFileSize" id="c4m-CQ-Yuh"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="bk7-zS-Vtd">
-                    <rect key="frame" x="174" y="161" width="162" height="18"/>
+                    <rect key="frame" x="168" y="126" width="193" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Authenticate on launch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="m1E-BS-tgR">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <binding destination="KsH-bZ-JKv" name="value" keyPath="values.AuthenticateOnLaunch" id="9Pg-wa-z4g"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="DGu-o7-Plj">
-                    <rect key="frame" x="155" y="193" width="211" height="32"/>
+                    <rect key="frame" x="161" y="155" width="211" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Check for Updates..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lJ0-Jd-VzT">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -52,8 +61,19 @@
                         <action selector="checkForUpdates:" target="-2" id="lPo-hU-JRa"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" id="M2o-0C-PK0">
+                    <rect key="frame" x="168" y="42" width="193" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Human-friendly permissions" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vlc-J7-k8v">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="KsH-bZ-JKv" name="value" keyPath="values.HumanFriendlyPermissions" id="dcH-Yk-13R"/>
+                    </connections>
+                </button>
                 <popUpButton verticalHuggingPriority="750" id="Fh4-RV-NQF">
-                    <rect key="frame" x="159" y="30" width="204" height="25"/>
+                    <rect key="frame" x="165" y="203" width="204" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Automatic" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="FYx-D8-jDc" id="8at-Cm-gQk">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -61,26 +81,32 @@
                         <menu key="menu" id="tm3-tp-WAe">
                             <items>
                                 <menuItem title="Automatic" state="on" id="FYx-D8-jDc"/>
-                                <menuItem title="Catalog (searchfs)" id="JYd-lU-ST6"/>
-                                <menuItem title="Filesystem Traversal (find)" id="bJN-of-S0p">
+                                <menuItem title="Catalog (searchfs)" enabled="NO" id="JYd-lU-ST6"/>
+                                <menuItem title="Filesystem Traversal (find)" enabled="NO" id="bJN-of-S0p">
                                     <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                                 </menuItem>
-                                <menuItem title="Spotlight (mdfind)" id="Fgl-3w-Ask">
+                                <menuItem title="Spotlight (mdfind)" enabled="NO" id="Fgl-3w-Ask">
                                     <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                                 </menuItem>
                             </items>
                         </menu>
                     </popUpButtonCell>
+                    <connections>
+                        <binding destination="KsH-bZ-JKv" name="selectedValue" keyPath="values.SearchMethod" id="s99-aO-WCF"/>
+                    </connections>
                 </popUpButton>
-                <button verticalHuggingPriority="750" id="M2o-0C-PK0">
-                    <rect key="frame" x="174" y="80" width="193" height="18"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Human-friendly permissions" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vlc-J7-k8v">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="HyN-c2-glH">
+                    <rect key="frame" x="61" y="209" width="100" height="17"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Search Method:" id="Vcu-by-HDe">
                         <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
+            <point key="canvasLocation" x="178" y="81"/>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="KsH-bZ-JKv"/>
     </objects>
 </document>
