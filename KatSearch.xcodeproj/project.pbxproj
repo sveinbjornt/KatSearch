@@ -11,6 +11,7 @@
 		F45CA6F0229859EF00D4D6D0 /* LaunchPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45CA6EE229859EF00D4D6D0 /* LaunchPrompt.xib */; };
 		F45CA6F52298629700D4D6D0 /* SelectableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6F42298629700D4D6D0 /* SelectableImageView.m */; };
 		F45CA6F82298B80500D4D6D0 /* LSUIElementApp.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */; };
+		F45CA6FB229980EE00D4D6D0 /* Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6FA229980EE00D4D6D0 /* Alerts.m */; };
 		F45D8BBC20FA6FCC00D6E8F6 /* PasteboardPathControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */; };
 		F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A25E20E111CF0062B230 /* AppDelegate.m */; };
 		F462A26420E111D10062B230 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A26220E111D10062B230 /* MainMenu.xib */; };
@@ -77,6 +78,8 @@
 		F45CA6F42298629700D4D6D0 /* SelectableImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectableImageView.m; sourceTree = "<group>"; };
 		F45CA6F62298B80500D4D6D0 /* LSUIElementApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSUIElementApp.h; sourceTree = "<group>"; };
 		F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSUIElementApp.m; sourceTree = "<group>"; };
+		F45CA6F9229980EE00D4D6D0 /* Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alerts.h; sourceTree = "<group>"; };
+		F45CA6FA229980EE00D4D6D0 /* Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alerts.m; sourceTree = "<group>"; };
 		F45D8BBA20FA6FCC00D6E8F6 /* PasteboardPathControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasteboardPathControl.h; sourceTree = "<group>"; };
 		F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasteboardPathControl.m; sourceTree = "<group>"; };
 		F462A25A20E111CF0062B230 /* KatSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KatSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,6 +241,8 @@
 		F471DF6120F52A200057E667 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				F45CA6F9229980EE00D4D6D0 /* Alerts.h */,
+				F45CA6FA229980EE00D4D6D0 /* Alerts.m */,
 				F45CA6F62298B80500D4D6D0 /* LSUIElementApp.h */,
 				F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */,
 				F4CB19CA2294770C00265CE8 /* OptScrollView.h */,
@@ -425,6 +430,7 @@
 				F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */,
 				F4CB19AC2291A84400265CE8 /* SearchPreferencesController.m in Sources */,
 				F4CB19B32291AA4A00265CE8 /* ToolPreferencesController.m in Sources */,
+				F45CA6FB229980EE00D4D6D0 /* Alerts.m in Sources */,
 				F481835122726366002738AE /* SDOpenAtLogin.m in Sources */,
 				F4CB19AD2291A84400265CE8 /* GeneralPreferencesController.m in Sources */,
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,

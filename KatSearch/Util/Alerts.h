@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2018-2019, Sveinbjorn Thordarson <sveinbjorn@sveinbjorn.org>
+    Copyright (c) 2003-2019, Sveinbjorn Thordarson <sveinbjorn@sveinbjorn.org>
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification,
@@ -28,40 +28,18 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#define PROGRAM_NAME            @"KatSearch"
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
-#define PROGRAM_VERSION_MAJ     0
-#define PROGRAM_VERSION_MIN     2
-#define PROGRAM_VERSION_STRING  @[NSString stringWithFormat:@"%d.%d",\
-                                PROGRAM_VERSION_MAJ, PROGRAM_VERSION_MIN]
+@interface Alerts : NSObject
 
-#define PROGRAM_WEBSITE_URL     @"https://sveinbjorn.org/katsearch"
-#define PROGRAM_DONATIONS_URL   @"https://sveinbjorn.org/donations"
-#define PROGRAM_GITHUB_URL      @"https://github.com/sveinbjornt/KatSearch"
++ (void)alert:(NSString *)message subText:(NSString *)subtext style:(NSAlertStyle)style;
++ (void)alert:(NSString *)message subText:(NSString *)subtext;
++ (void)alert:(NSString *)message subTextFormat:(NSString *)formatString, ...;
 
-#define SHORTCUT_DEFAULT_NAME       @"GlobalShortcut"
-#define SHORTCUT_DEFAULT_KEYCODE    0
++ (void)fatalAlert:(NSString *)message subText:(NSString *)subtext;
++ (void)fatalAlert:(NSString *)message subTextFormat:(NSString *)formatString, ...;
 
-#define CLT_BIN_NAME            @"searchfs"
-#define CLT_MAN_NAME            @"searchfs.1"
-#define CLT_INSTALL_PATH        @"/usr/local/bin/searchfs"
-#define CLT_MAN_PATH            @""
++ (BOOL)proceedAlert:(NSString *)message subText:(NSString *)subtext withActionNamed:(NSString *)action;
 
-#define NUM_RECENT_SEARCHES     10
-
-#define VALUES_KEYPATH(X)       [NSString stringWithFormat:@"values.%@", (X)]
-
-#define DEFAULTS                [NSUserDefaults standardUserDefaults]
-
-#define COL_DEFAULT_PREFIX      @"ShowColumn"
-
-#define COLUMNS                 @[  @"Kind", @"Size", @"DateCreated", @"DateModified", \
-                                    @"DateAccessed", @"UserGroup", @"Permissions", @"UTI", \
-                                    @"MIMEType", @"FileType", @"CreatorType" ]
-
-// Logging
-#ifdef DEBUG
-    #define DLog(...) NSLog(__VA_ARGS__)
-#else
-    #define DLog(...)
-#endif
+@end

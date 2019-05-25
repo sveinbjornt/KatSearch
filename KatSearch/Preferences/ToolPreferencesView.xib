@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="execImageView" destination="LHh-Xq-1Ty" id="905-6q-Nwv"/>
                 <outlet property="installButton" destination="P5L-qb-pBR" id="2wl-Oj-Ck3"/>
+                <outlet property="progressIndicator" destination="92y-ti-zK8" id="Ry7-xV-hAc"/>
                 <outlet property="statusTextField" destination="Ven-ub-yFT" id="dLw-JV-Cvn"/>
                 <outlet property="view" destination="1" id="11"/>
             </connections>
@@ -20,22 +21,11 @@
             <rect key="frame" x="0.0" y="0.0" width="520" height="260"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" alphaValue="0.29999999999999999" id="LHh-Xq-1Ty">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" alphaValue="0.20000000000000001" id="LHh-Xq-1Ty">
                     <rect key="frame" x="212" y="138" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="CommandLineTool" id="3vt-NH-LWZ"/>
                 </imageView>
-                <button verticalHuggingPriority="750" id="P5L-qb-pBR">
-                    <rect key="frame" x="161" y="49" width="197" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="Install &quot;searchfs&quot; tool" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZnT-KD-a25">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="buttonPressed:" target="-2" id="Rb1-6b-dpZ"/>
-                    </connections>
-                </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Ven-ub-yFT">
                     <rect key="frame" x="98" y="105" width="323" height="17"/>
                     <autoresizingMask key="autoresizingMask"/>
@@ -45,6 +35,21 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="92y-ti-zK8">
+                    <rect key="frame" x="158" y="59" width="16" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </progressIndicator>
+                <button verticalHuggingPriority="750" id="P5L-qb-pBR">
+                    <rect key="frame" x="176" y="49" width="169" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Install &quot;searchfs&quot; tool" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZnT-KD-a25">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="buttonPressed:" target="-2" id="hmI-dZ-Wez"/>
+                    </connections>
+                </button>
             </subviews>
             <point key="canvasLocation" x="127" y="73"/>
         </customView>

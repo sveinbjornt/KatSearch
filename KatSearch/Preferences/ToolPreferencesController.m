@@ -36,6 +36,7 @@
     IBOutlet NSImageView *execImageView;
     IBOutlet NSTextField *statusTextField;
     IBOutlet NSButton *installButton;
+    IBOutlet NSProgressIndicator *progressIndicator;
 }
 @end
 
@@ -49,19 +50,53 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear {
     [self updateInstallStatusMessage];
 }
 
 - (void)updateInstallStatusMessage {
-    if ([[NSFileManager defaultManager] fileExistsAtPath:CLT_INSTALL_PATH]) {
+    if ([self isInstalled]) {
         [execImageView setAlphaValue:1.0f];
         [statusTextField setStringValue:@"Command line tool is installed"];
         [installButton setTitle:@"Uninstall"];
+    } else {
+        [execImageView setAlphaValue:0.2f];
+        [statusTextField setStringValue:@"Command line tool is not installed"];
+        [installButton setTitle:@"Install"];
     }
 }
 
 - (IBAction)buttonPressed:(id)sender {
-    [self updateInstallStatusMessage];
+    [progressIndicator setUsesThreadedAnimation:YES];
+    [progressIndicator startAnimation:self];
+    
+    if ([self isInstalled]) {
+        [self uninstallTool];
+    } else {
+        [self installTool];
+    }
+    [self performSelector:@selector(updateInstallStatusMessage) withObject:nil afterDelay:0.5f];
+    [progressIndicator performSelector:@selector(stopAnimation:) withObject:self afterDelay:0.5f];
+}
+
+#pragma mark - Install/Uninstall
+
+- (BOOL)installTool {
+    NSString *path = [[NSBundle mainBundle] pathForResource:CLT_BIN_NAME ofType:nil];
+    return [[NSFileManager defaultManager] copyItemAtPath:path
+                                                   toPath:CLT_INSTALL_PATH
+                                                    error:nil];
+}
+
+- (BOOL)uninstallTool {
+    return [[NSFileManager defaultManager] removeItemAtPath:CLT_INSTALL_PATH
+                                                      error:nil];
+}
+
+- (BOOL)isInstalled {
+    return [[NSFileManager defaultManager] fileExistsAtPath:CLT_INSTALL_PATH];
 }
 
 #pragma mark - MASPreferencesViewController
