@@ -33,6 +33,7 @@
 * Sort by permissions should use 755 etc. instead of display string
 * Smarter CLT install status (version etc.)
 * Interpret '*' search string as request to find all files
+* Implement custom Cmd-H to hide
 
 For next release:
 DONE * Install CLT via Preferences

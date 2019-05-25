@@ -30,9 +30,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DateFormatter : NSObject
+@interface SharedDateFormatter : NSObject
 
 +(id)formatter;
-- (NSString *)stringFromDate:(NSDate *)date;
+- (NSString *)friendlyStringFromDate:(NSDate *)date;
+- (NSString *)isoStringFromDate:(NSDate *)date;
 
 @end

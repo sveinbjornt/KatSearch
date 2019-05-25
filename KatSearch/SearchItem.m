@@ -30,7 +30,7 @@
 
 #import "SearchItem.h"
 #import "NSWorkspace+Additions.h"
-#import "DateFormatter.h"
+#import "SharedDateFormatter.h"
 #include <sys/stat.h>
 #include <pwd.h>
 #include <grp.h>
@@ -48,16 +48,20 @@
     
     NSString *cachedMIMEType;
     
+    NSString *cachedRawSizeString;
     NSString *cachedSizeString;
     
     NSDate *cachedDateAccessed;
     NSString *cachedDateAccessedString;
+    NSString *cachedDateAccessedISOString;
     
     NSDate *cachedDateCreated;
     NSString *cachedDateCreatedString;
+    NSString *cachedDateCreatedISOString;
     
     NSDate *cachedDateModified;
     NSString *cachedDateModifiedString;
+    NSString *cachedDateModifiedISOString;
     
     NSString *cachedUTI;
     
@@ -122,6 +126,45 @@
     return cachedIcon;
 }
 
+#pragma mark -
+
+- (BOOL)stat {
+    if (cachedStatPtr) {
+        return YES;
+    }
+    //    NSLog(@"Stat");
+    
+    if (lstat([self.path fileSystemRepresentation], &cachedStat)) {
+        NSLog(@"Stat failed: %@", self.description);
+        return NO;
+    }
+    
+    cachedStatPtr = &cachedStat;
+    
+    return YES;
+}
+
+- (UInt64)size {
+    if ([self stat] && S_ISREG(cachedStat.st_mode)) {
+        return cachedStatPtr->st_size;
+    }
+    return -1;
+}
+
+
+- (NSString *)rawSizeString {
+    if (!cachedRawSizeString) {
+        UInt64 size = self.size;
+        if (size == -1) {
+            cachedRawSizeString = @"-";
+        } else {
+            cachedRawSizeString = [NSString stringWithFormat:@"%u", (unsigned int)size];
+        }
+    }
+    
+    return cachedRawSizeString;
+}
+
 - (NSString *)sizeString {
     if (!cachedSizeString) {
         UInt64 size = self.size;
@@ -134,6 +177,8 @@
     
     return cachedSizeString;
 }
+
+#pragma mark -
 
 - (NSString *)kind {
     if (!cachedKindString) {
@@ -150,59 +195,7 @@
     return cachedKindString;
 }
 
-- (NSString *)HFSType {
-    if (!cachedHFSType) {
-        [self getLegacyFileAndCreatorTypes];
-    }
-    return cachedHFSType;
-}
-
-- (void)getLegacyFileAndCreatorTypes {
-    NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:self.path error:nil];
-    if (attr) {
-        OSType hfsType = [attr fileHFSTypeCode];
-        if (hfsType) {
-            cachedHFSType = (__bridge NSString *)UTCreateStringForOSType(hfsType);
-        }
-        OSType ccType = [attr fileHFSCreatorCode];
-        if (ccType) {
-            cachedCreatorType = (__bridge NSString *)UTCreateStringForOSType(ccType);
-        }
-    }
-    cachedHFSType = cachedHFSType ? cachedHFSType : @"";
-    cachedCreatorType = cachedCreatorType ? cachedCreatorType : @"";
-}
-
-- (NSString *)creatorType {
-    if (!cachedCreatorType) {
-        [self getLegacyFileAndCreatorTypes];
-    }
-    return cachedCreatorType;
-}
-
-- (NSString *)MIMEType {
-    if (!cachedMIMEType) {
-        CFStringRef mType = UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)[self UTI], kUTTagClassMIMEType);
-        cachedMIMEType = mType ? (__bridge_transfer NSString *)mType : @"";
-    }
-    return cachedMIMEType;
-}
-
-- (BOOL)stat {
-    if (cachedStatPtr) {
-        return YES;
-    }
-//    NSLog(@"Stat");
-
-    if (lstat([self.path fileSystemRepresentation], &cachedStat)) {
-        NSLog(@"Stat failed: %@", self.description);
-        return NO;
-    }
-    
-    cachedStatPtr = &cachedStat;
-    
-    return YES;
-}
+#pragma mark -
 
 - (NSDate *)dateAccessed {
     if (![self stat]) {
@@ -217,11 +210,25 @@
     }
     
     if (!cachedDateAccessedString) {
-        cachedDateAccessedString = [self relativeDateStringForTimestamp:cachedStatPtr->st_atimespec.tv_sec];
+        cachedDateAccessedString = [self friendlyDateStringForTimestamp:cachedStatPtr->st_atimespec.tv_sec];
     }
     
     return cachedDateAccessedString;
 }
+
+- (NSString *)dateAccessedISOString {
+    if (![self stat]) {
+        return SI_UNKNOWN;
+    }
+    
+    if (!cachedDateAccessedISOString) {
+        cachedDateAccessedISOString = [self isoDateStringForTimestamp:cachedStatPtr->st_atimespec.tv_sec];
+    }
+    
+    return cachedDateAccessedISOString;
+}
+
+#pragma mark -
 
 - (NSDate *)dateCreated {
     if (![self stat]) {
@@ -236,11 +243,25 @@
     }
     
     if (!cachedDateCreatedString) {
-        cachedDateCreatedString = [self relativeDateStringForTimestamp:cachedStatPtr->st_ctimespec.tv_sec];
+        cachedDateCreatedString = [self friendlyDateStringForTimestamp:cachedStatPtr->st_ctimespec.tv_sec];
     }
     
     return cachedDateCreatedString;
 }
+
+- (NSString *)dateCreatedISOString {
+    if (![self stat]) {
+        return SI_UNKNOWN;
+    }
+    
+    if (!cachedDateCreatedISOString) {
+        cachedDateCreatedISOString = [self isoDateStringForTimestamp:cachedStatPtr->st_ctimespec.tv_sec];
+    }
+    
+    return cachedDateCreatedISOString;
+}
+
+#pragma mark -
 
 - (NSDate *)dateModified {
     if (![self stat]) {
@@ -255,16 +276,37 @@
     }
     
     if (!cachedDateModifiedString) {
-        cachedDateModifiedString = [self relativeDateStringForTimestamp:cachedStatPtr->st_mtimespec.tv_sec];
+        cachedDateModifiedString = [self friendlyDateStringForTimestamp:cachedStatPtr->st_mtimespec.tv_sec];
     }
     
     return cachedDateModifiedString;
 }
 
-- (NSString *)relativeDateStringForTimestamp:(__darwin_time_t)time {
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
-    return [[DateFormatter formatter] stringFromDate:date];
+- (NSString *)dateModifiedISOString {
+    if (![self stat]) {
+        return SI_UNKNOWN;
+    }
+    
+    if (!cachedDateModifiedISOString) {
+        cachedDateModifiedISOString = [self isoDateStringForTimestamp:cachedStatPtr->st_mtimespec.tv_sec];
+    }
+    
+    return cachedDateModifiedISOString;
 }
+
+#pragma mark -
+
+- (NSString *)friendlyDateStringForTimestamp:(__darwin_time_t)time {
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+    return [[SharedDateFormatter formatter] friendlyStringFromDate:date];
+}
+
+- (NSString *)isoDateStringForTimestamp:(__darwin_time_t)time {
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+    return [[SharedDateFormatter formatter] isoStringFromDate:date];
+}
+
+#pragma mark -
 
 - (NSString *)user {
     if (![self stat]) {
@@ -298,6 +340,8 @@
     return cachedUserGroupString;
 }
 
+#pragma mark -
+
 - (NSUInteger)permissionsNumber {
     if (cachedPermissionsNumber == -1) {
         NSString *numStr = [self permissionsNumberString];
@@ -322,7 +366,6 @@
         } else {
             cachedPermissionsNumberString = SI_UNKNOWN;
         }
-        
     }
     
     return cachedPermissionsNumberString;
@@ -335,7 +378,6 @@
     
     if (!cachedPermissionsString) {
         char buf[20];
-        
         strmode(cachedStatPtr->st_mode, (char *)&buf);
         cachedPermissionsString = @((char *)&buf);
     }
@@ -343,12 +385,7 @@
     return cachedPermissionsString;
 }
 
-- (UInt64)size {
-    if ([self stat] && S_ISREG(cachedStat.st_mode)) {
-        return cachedStatPtr->st_size;
-    }
-    return -1;
-}
+#pragma mark -
 
 - (NSString *)UTI {
     if (cachedUTI) {
@@ -363,12 +400,53 @@
     return cachedUTI;
 }
 
+- (NSString *)MIMEType {
+    if (!cachedMIMEType) {
+        CFStringRef mType = UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)[self UTI], kUTTagClassMIMEType);
+        cachedMIMEType = mType ? (__bridge_transfer NSString *)mType : @"";
+    }
+    return cachedMIMEType;
+}
+
+#pragma mark -
+
+- (NSString *)HFSType {
+    if (!cachedHFSType) {
+        [self getLegacyFileAndCreatorTypes];
+    }
+    return cachedHFSType;
+}
+
+- (void)getLegacyFileAndCreatorTypes {
+    NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:self.path error:nil];
+    if (attr) {
+        OSType hfsType = [attr fileHFSTypeCode];
+        if (hfsType) {
+            cachedHFSType = (__bridge NSString *)UTCreateStringForOSType(hfsType);
+        }
+        OSType ccType = [attr fileHFSCreatorCode];
+        if (ccType) {
+            cachedCreatorType = (__bridge NSString *)UTCreateStringForOSType(ccType);
+        }
+    }
+    
+    cachedHFSType = cachedHFSType ? cachedHFSType : @"";
+    cachedCreatorType = cachedCreatorType ? cachedCreatorType : @"";
+}
+
+- (NSString *)creatorType {
+    if (!cachedCreatorType) {
+        [self getLegacyFileAndCreatorTypes];
+    }
+    return cachedCreatorType;
+}
+
+#pragma mark -
+
 - (BOOL)isBookmark {
     if (bookmark == -1) { // Indeterminate
         NSNumber *number = nil;
-        [self.url getResourceValue:&number
-                            forKey:NSURLIsAliasFileKey
-                             error:nil];
+        [self.url getResourceValue:&number forKey:NSURLIsAliasFileKey error:nil];
         bookmark = [number boolValue];
     }
     return bookmark;

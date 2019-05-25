@@ -779,19 +779,19 @@
     }
     // Size
     else if ([colID isEqualToString:@"Size"]) {
-        colStr = [item sizeString];
+        colStr = [DEFAULTS boolForKey:@"HumanFriendlyFileSize"] ? item.sizeString : item.rawSizeString;
     }
     // Date Created
     else if ([colID isEqualToString:@"DateCreated"]) {
-        colStr = item.dateCreatedString;
+        colStr = [DEFAULTS boolForKey:@"HumanFriendlyDates"] ?  item.dateCreatedString : item.dateCreatedISOString;
     }
     // Date Modified
     else if ([colID isEqualToString:@"DateModified"]) {
-        colStr = item.dateModifiedString;
+        colStr = [DEFAULTS boolForKey:@"HumanFriendlyDates"] ? item.dateModifiedString : item.dateModifiedISOString;
     }
     // Date Accessed
     else if ([colID isEqualToString:@"DateAccessed"]) {
-        colStr = item.dateAccessedString;
+        colStr = [DEFAULTS boolForKey:@"HumanFriendlyDates"] ? item.dateAccessedString : item.dateAccessedISOString;
     }
     // User:Group
     else if ([colID isEqualToString:@"UserGroup"]) {
@@ -800,7 +800,7 @@
     // POSIX permissions
     else if ([colID isEqualToString:@"Permissions"]) {
         // Use monospace font for permissions
-        NSString *pStr = [DEFAULTS boolForKey:@"HumanFriendlyPermissions"] ?item.permissionsString : item.permissionsNumberString;
+        NSString *pStr = [DEFAULTS boolForKey:@"HumanFriendlyPermissions"] ? item.permissionsString : item.permissionsNumberString;
         NSDictionary *attr = @{ NSFontAttributeName: [NSFont userFixedPitchFontOfSize:[NSFont systemFontSize]] };
         colStr = [[NSAttributedString alloc] initWithString:pStr attributes:attr];
     }
@@ -841,34 +841,34 @@
     return cellView;
 }
 
-- (NSAttributedString *)attr:(NSString *)title {
-    NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor whiteColor] };
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:title attributes:attr];
-    
-    NSRange mRange = [[title lowercaseString] rangeOfString:@"test"];
-    if (mRange.location != NSNotFound) {
-        NSDictionary *mattr = @{ NSForegroundColorAttributeName: [NSColor blackColor],
-                                 NSBackgroundColorAttributeName: [NSColor yellowColor],
-                                 };
-        
-        [attrStr setAttributes:mattr range:mRange];
-
-        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-        [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
-        [attrStr addAttribute:NSParagraphStyleAttributeName
-                        value:paragraphStyle
-                        range:NSMakeRange(0,[title length])];
-        
-        
-//        [attrStr beginEditing];
-//        [attrStr applyFontTraits:NSBoldFontMask
-//                           range:mRange];
-//        [attrStr endEditing];
-
-    }
-    
-    return attrStr;
-}
+//- (NSAttributedString *)attr:(NSString *)title {
+//    NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor whiteColor] };
+//    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:title attributes:attr];
+//
+//    NSRange mRange = [[title lowercaseString] rangeOfString:@"test"];
+//    if (mRange.location != NSNotFound) {
+//        NSDictionary *mattr = @{ NSForegroundColorAttributeName: [NSColor blackColor],
+//                                 NSBackgroundColorAttributeName: [NSColor yellowColor],
+//                                 };
+//
+//        [attrStr setAttributes:mattr range:mRange];
+//
+//        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+//        [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+//        [attrStr addAttribute:NSParagraphStyleAttributeName
+//                        value:paragraphStyle
+//                        range:NSMakeRange(0,[title length])];
+//
+//
+////        [attrStr beginEditing];
+////        [attrStr applyFontTraits:NSBoldFontMask
+////                           range:mRange];
+////        [attrStr endEditing];
+//
+//    }
+//
+//    return attrStr;
+//}
 
 - (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
     NSMutableArray *filenames = [NSMutableArray arrayWithCapacity:[rowIndexes count]];

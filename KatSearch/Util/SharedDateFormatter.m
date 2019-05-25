@@ -34,19 +34,20 @@
     from the table view. 
 */
 
-#import "DateFormatter.h"
+#import "SharedDateFormatter.h"
 #import <Cocoa/Cocoa.h>
 
-@interface DateFormatter()
+@interface SharedDateFormatter()
 {
-    NSDateFormatter *formatter;
+    NSDateFormatter *friendlyFormatter;
+    NSDateFormatter *isoFormatter;
 }
 @end
 
-@implementation DateFormatter
+@implementation SharedDateFormatter
 
-+ (id)formatter {
-    static DateFormatter *instance = nil; // Local static variable
++ (instancetype)formatter {
+    static SharedDateFormatter *instance = nil; // Local static variable
     // All access to this local static variable must go through +formatter
     
     static dispatch_once_t onceToken;
@@ -60,17 +61,36 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        formatter = [NSDateFormatter new];
-        formatter.doesRelativeDateFormatting = YES;
-        formatter.locale = [NSLocale currentLocale];
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterShortStyle;
+        friendlyFormatter = [self createFriendlyFormatter];
+        isoFormatter = [self createISOFormatter];
     }
     return self;
 }
 
-- (NSString *)stringFromDate:(NSDate *)date {
-    return [formatter stringFromDate:date];
+- (NSDateFormatter *)createFriendlyFormatter {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.doesRelativeDateFormatting = YES;
+    formatter.locale = [NSLocale currentLocale];
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    formatter.timeStyle = NSDateFormatterShortStyle;
+    return formatter;
+}
+
+- (NSDateFormatter *)createISOFormatter {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+    [formatter setLocale:enUSPOSIXLocale];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    [formatter setCalendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
+    return formatter;
+}
+
+- (NSString *)friendlyStringFromDate:(NSDate *)date {
+    return [friendlyFormatter stringFromDate:date];
+}
+
+- (NSString *)isoStringFromDate:(NSDate *)date {
+    return [isoFormatter stringFromDate:date];
 }
 
 @end

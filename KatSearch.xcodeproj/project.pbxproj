@@ -50,7 +50,7 @@
 		F4CB19B92291BB0300265CE8 /* AdvancedPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19B72291BB0300265CE8 /* AdvancedPreferencesController.m */; };
 		F4CB19BC229330BC00265CE8 /* PrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19BB229330BC00265CE8 /* PrefsController.m */; };
 		F4CB19BE2294399B00265CE8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CB19BD2294399B00265CE8 /* QuartzCore.framework */; };
-		F4CB19C62294450900265CE8 /* DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19C52294450900265CE8 /* DateFormatter.m */; };
+		F4CB19C62294450900265CE8 /* SharedDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19C52294450900265CE8 /* SharedDateFormatter.m */; };
 		F4CB19C92294769700265CE8 /* OptClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19C82294769700265CE8 /* OptClipView.m */; };
 		F4CB19CC2294770D00265CE8 /* OptScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19CB2294770C00265CE8 /* OptScrollView.m */; };
 /* End PBXBuildFile section */
@@ -145,8 +145,8 @@
 		F4CB19BA229330BC00265CE8 /* PrefsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefsController.h; sourceTree = "<group>"; };
 		F4CB19BB229330BC00265CE8 /* PrefsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrefsController.m; sourceTree = "<group>"; };
 		F4CB19BD2294399B00265CE8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		F4CB19C42294450900265CE8 /* DateFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DateFormatter.h; sourceTree = "<group>"; };
-		F4CB19C52294450900265CE8 /* DateFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DateFormatter.m; sourceTree = "<group>"; };
+		F4CB19C42294450900265CE8 /* SharedDateFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedDateFormatter.h; sourceTree = "<group>"; };
+		F4CB19C52294450900265CE8 /* SharedDateFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedDateFormatter.m; sourceTree = "<group>"; };
 		F4CB19C72294769700265CE8 /* OptClipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptClipView.h; sourceTree = "<group>"; };
 		F4CB19C82294769700265CE8 /* OptClipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptClipView.m; sourceTree = "<group>"; };
 		F4CB19CA2294770C00265CE8 /* OptScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptScrollView.h; sourceTree = "<group>"; };
@@ -254,8 +254,8 @@
 				F4CB19CB2294770C00265CE8 /* OptScrollView.m */,
 				F4CB19C72294769700265CE8 /* OptClipView.h */,
 				F4CB19C82294769700265CE8 /* OptClipView.m */,
-				F4CB19C42294450900265CE8 /* DateFormatter.h */,
-				F4CB19C52294450900265CE8 /* DateFormatter.m */,
+				F4CB19C42294450900265CE8 /* SharedDateFormatter.h */,
+				F4CB19C52294450900265CE8 /* SharedDateFormatter.m */,
 				F498ADF32266A91500CB6A6E /* PasteboardDelegate.h */,
 				F45D8BBA20FA6FCC00D6E8F6 /* PasteboardPathControl.h */,
 				F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */,
@@ -443,7 +443,7 @@
 				F45CA6F52298629700D4D6D0 /* SelectableImageView.m in Sources */,
 				F45CA6FE229989D800D4D6D0 /* STPathControl.m in Sources */,
 				F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */,
-				F4CB19C62294450900265CE8 /* DateFormatter.m in Sources */,
+				F4CB19C62294450900265CE8 /* SharedDateFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

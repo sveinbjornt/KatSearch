@@ -35,37 +35,44 @@
 
 @interface SearchItem : NSObject
 
-@property (retain, nonatomic) NSString *path;
-@property (retain, nonatomic) NSURL *url;
 @property (readonly, nonatomic) NSString *name;
+@property (readonly, nonatomic) NSString *path;
+@property (readonly, nonatomic) NSURL *url;
 @property (readonly, nonatomic) NSImage *icon;
+
+@property (readonly) UInt64 size;
+@property (readonly, nonatomic) NSString *rawSizeString;
+@property (readonly, nonatomic) NSString *sizeString;
+
 @property (readonly, nonatomic) NSString *kind;
 @property (readonly, nonatomic) NSString *HFSType;
 @property (readonly, nonatomic) NSString *creatorType;
 @property (readonly, nonatomic) NSString *MIMEType;
 @property (readonly, nonatomic) NSString *UTI;
 @property (readonly, nonatomic) NSString *label;
+
 @property (readonly, nonatomic) NSString *user;
 @property (readonly, nonatomic) NSString *group;
 @property (readonly, nonatomic) NSString *userGroupString;
+
+@property (readonly, nonatomic) NSUInteger permissionsNumber;
 @property (readonly, nonatomic) NSString *permissionsString;
 @property (readonly, nonatomic) NSString *permissionsNumberString;
-@property (readonly, nonatomic) NSUInteger permissionsNumber;
 
 @property (readonly, nonatomic) BOOL isBookmark;
 @property (readonly, nonatomic) BOOL isSymlink;
 
-@property (readonly) UInt64 size;
-@property (readonly, nonatomic) NSString *sizeString;
-
 @property (readonly) NSDate *dateAccessed;
 @property (readonly, nonatomic) NSString *dateAccessedString;
+@property (readonly, nonatomic) NSString *dateAccessedISOString;
 
 @property (readonly) NSDate *dateCreated;
 @property (readonly, nonatomic) NSString *dateCreatedString;
+@property (readonly, nonatomic) NSString *dateCreatedISOString;
 
 @property (readonly) NSDate *dateModified;
 @property (readonly, nonatomic) NSString *dateModifiedString;
+@property (readonly, nonatomic) NSString *dateModifiedISOString;
 
 @property (readonly, nonatomic) NSString *defaultHandlerApplication;
 @property (readonly, nonatomic) NSArray<NSString *> *handlerApplications;
