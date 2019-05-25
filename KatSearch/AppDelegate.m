@@ -60,19 +60,25 @@
 
 - (void)awakeFromNib {
     [NSApp setServicesProvider:self];
-    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
-                                                              forKeyPath:VALUES_KEYPATH(@"StatusItemMode")
-                                                                 options:NSKeyValueObservingOptionNew
-                                                                 context:NULL];
+    
+    [self startObservingDefaults];
+
     // TODO: Set shortcut to New Search menu item
-//    [newMenuItem set
+    if (0) {
+//        keyCodeStringForKeyEquivalent
+//        [newMenuItem setKeyEquivalent:@""];
+//        [newMenuItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+    } else {
+        [newMenuItem setKeyEquivalent:@"N"];
+        [newMenuItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+    }
 //    MASShortcut
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [self setAppMode:[DEFAULTS boolForKey:@"StatusItemMode"]];
     // Set and remember the shortcut
-    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:SHORTCUT_DEFAULT_KEYCODE modifierFlags:NSCommandKeyMask|NSAlternateKeyMask];
+//    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:SHORTCUT_DEFAULT_KEYCODE modifierFlags:NSCommandKeyMask|NSAlternateKeyMask];
 //    NSData *shortcutData = [NSKeyedArchiver archivedDataWithRootObject:shortcut];
 //    [DEFAULTS setObject:shortcutData forKey:SHORTCUT_DEFAULT_NAME];
     
@@ -112,21 +118,34 @@
 
 #pragma mark - Key/value observation
 
+- (void)startObservingDefaults {
+    NSArray *obsDef = @[@"StatusItemMode", @"GlobalShortcut", @"RememberRecentSearches"];
+    for (NSString *def in obsDef) {
+        [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                                  forKeyPath:VALUES_KEYPATH(def)
+                                                                     options:NSKeyValueObservingOptionNew
+                                                                     context:NULL];
+    }
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     NSString *def = [keyPath substringFromIndex:[@"values." length]];
     if ([def hasSuffix:@"StatusItemMode"]) {
         [self setAppMode:[DEFAULTS boolForKey:@"StatusItemMode"]];
+    } else if ([def hasSuffix:@"GlobalShortcut"]) {
+        // TODO: Set shortcut for menu items
+    } else if ([def hasSuffix:@"RememberRecentSearches"]) {
+        [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
     }
 }
 
 - (void)setAppMode:(BOOL)backgroundMode {
     ProcessSerialNumber psn = { 0, kCurrentProcess };
-    OSStatus returnCode;
+    OSStatus returnCode = noErr;
     BOOL prefsVisible = [[prefsController window] isVisible];
     
     if (backgroundMode) {
         [self showStatusItem];
-        // kProcessTransformToUIElementApplication = 4L;
         returnCode = TransformProcessType(&psn, kProcessTransformToUIElementApplication);
         if (prefsVisible) {
             [self performSelector:@selector(showPreferences:) withObject:self afterDelay:0.25f];
@@ -135,11 +154,8 @@
         [self hideStatusItem];
         returnCode = TransformProcessType(&psn, kProcessTransformToForegroundApplication);
         [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-            ProcessSerialNumber psn = { 0, kCurrentProcess };
-            SetFrontProcess(&psn);
-
     }
-    if (returnCode != 0) {
+    if (returnCode != noErr) {
         DLog(@"Failed to change application mode. Error %d", (int)returnCode);
     }
 }
@@ -258,8 +274,6 @@
     }
     [prefsController showWindow:nil];
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-    
-    NSLog(@"%@", NSStringFromClass([[NSApplication sharedApplication] class]));
 }
 
 #pragma mark -

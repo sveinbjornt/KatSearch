@@ -12,6 +12,7 @@
 		F45CA6F52298629700D4D6D0 /* SelectableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6F42298629700D4D6D0 /* SelectableImageView.m */; };
 		F45CA6F82298B80500D4D6D0 /* LSUIElementApp.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */; };
 		F45CA6FB229980EE00D4D6D0 /* Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6FA229980EE00D4D6D0 /* Alerts.m */; };
+		F45CA6FE229989D800D4D6D0 /* STPathControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6FD229989D800D4D6D0 /* STPathControl.m */; };
 		F45D8BBC20FA6FCC00D6E8F6 /* PasteboardPathControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */; };
 		F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A25E20E111CF0062B230 /* AppDelegate.m */; };
 		F462A26420E111D10062B230 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A26220E111D10062B230 /* MainMenu.xib */; };
@@ -80,6 +81,8 @@
 		F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSUIElementApp.m; sourceTree = "<group>"; };
 		F45CA6F9229980EE00D4D6D0 /* Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alerts.h; sourceTree = "<group>"; };
 		F45CA6FA229980EE00D4D6D0 /* Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alerts.m; sourceTree = "<group>"; };
+		F45CA6FC229989D800D4D6D0 /* STPathControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STPathControl.h; sourceTree = "<group>"; };
+		F45CA6FD229989D800D4D6D0 /* STPathControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STPathControl.m; sourceTree = "<group>"; };
 		F45D8BBA20FA6FCC00D6E8F6 /* PasteboardPathControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasteboardPathControl.h; sourceTree = "<group>"; };
 		F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasteboardPathControl.m; sourceTree = "<group>"; };
 		F462A25A20E111CF0062B230 /* KatSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KatSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +248,8 @@
 				F45CA6FA229980EE00D4D6D0 /* Alerts.m */,
 				F45CA6F62298B80500D4D6D0 /* LSUIElementApp.h */,
 				F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */,
+				F45CA6FC229989D800D4D6D0 /* STPathControl.h */,
+				F45CA6FD229989D800D4D6D0 /* STPathControl.m */,
 				F4CB19CA2294770C00265CE8 /* OptScrollView.h */,
 				F4CB19CB2294770C00265CE8 /* OptScrollView.m */,
 				F4CB19C72294769700265CE8 /* OptClipView.h */,
@@ -436,6 +441,7 @@
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
 				F45CA6F52298629700D4D6D0 /* SelectableImageView.m in Sources */,
+				F45CA6FE229989D800D4D6D0 /* STPathControl.m in Sources */,
 				F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */,
 				F4CB19C62294450900265CE8 /* DateFormatter.m in Sources */,
 			);

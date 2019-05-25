@@ -9,9 +9,9 @@
     * Kind filters
     * Matches regex - Should highlight strings that match
     * Only filter by columns that are enabled
+* Smarter priming of search item caches
 * Use CoreData & NSArrayController to populate table view
 * Detect when file no longer exists at path
-* Install CLT via Preferences
 * Smart columns (estimate min-max size, calc. length of filenames to estimate etc.)
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
 * Add "Move to Trash" to contextual menu (with confirmation prompt)
@@ -30,9 +30,12 @@
 * "Show Original" for aliases/symlinks
 * Versions for identical apps in Open With menu
 * Drag and drop folder/volume on window to make it target of search
-
+* Sort by permissions should use 755 etc. instead of display string
+* Smarter CLT install status (version etc.)
+* Interpret '*' search string as request to find all files
 
 For next release:
+DONE * Install CLT via Preferences
 DONE * Support more column types (file, creator, mime etc.)
 DONE * Use proper Preferences
 DONE * Show/hide columns according to prefs

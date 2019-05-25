@@ -25,6 +25,9 @@
 
 @implementation SDOpenAtLogin
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 + (LSSharedFileListRef)sharedFileList {
     static LSSharedFileListRef sharedFileList;
     static dispatch_once_t onceToken;
@@ -87,5 +90,7 @@
     
     return NO;
 }
+
+#pragma GCC diagnostic pop
 
 @end

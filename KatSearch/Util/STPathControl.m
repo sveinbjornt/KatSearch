@@ -28,13 +28,17 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Cocoa/Cocoa.h>
+#import "STPathControl.h"
 
-@protocol SelectableImageViewDelegate <NSObject>
-- (IBAction)imageViewClicked:(id)sender;
-@end
+@implementation STPathControl
 
-@interface SelectableImageView : NSImageView
-@property (nonatomic) BOOL selected;
-@property IBOutlet id delegate;
+- (void)drawRect:(NSRect)dirtyRect {
+    [super drawRect:dirtyRect];
+    // Drawing code here.
+}
+
+- (void)setPath:(NSString *)path {
+    
+}
+
 @end

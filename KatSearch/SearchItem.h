@@ -49,6 +49,8 @@
 @property (readonly, nonatomic) NSString *group;
 @property (readonly, nonatomic) NSString *userGroupString;
 @property (readonly, nonatomic) NSString *permissionsString;
+@property (readonly, nonatomic) NSString *permissionsNumberString;
+@property (readonly, nonatomic) NSUInteger permissionsNumber;
 
 @property (readonly, nonatomic) BOOL isBookmark;
 @property (readonly, nonatomic) BOOL isSymlink;

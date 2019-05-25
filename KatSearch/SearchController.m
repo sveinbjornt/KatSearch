@@ -50,7 +50,7 @@
     
     IBOutlet NSTableView *tableView;
     IBOutlet NSScrollView *scrollView;
-    IBOutlet NSPathControl *pathControl;
+    IBOutlet NSPathControl *pathBar;
     IBOutlet NSTextField *filterTextField;
     
     IBOutlet NSButton *searchButton;
@@ -83,16 +83,10 @@
     [self.window setRepresentedURL:[NSURL URLWithString:@""]];
     [[self.window standardWindowButton:NSWindowDocumentIconButton] setImage:[NSApp applicationIconImage]];
     
-    
     // Configure table view
     [tableView setRowHeight:18.0f];
     [tableView setDoubleAction:@selector(rowDoubleClicked:)];
     [tableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
-//    for (NSTableColumn *tableColumn in [tableView tableColumns]) {
-//        
-//        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(compare:)];
-//        [tableColumn setSortDescriptorPrototype:sortDescriptor];
-//    }
     
     for (NSTableColumn *col in [tableView tableColumns]) {
         NSString *identifier = [col identifier];
@@ -102,8 +96,7 @@
         }
     }
     
-    
-    [pathControl setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
+    [pathBar setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
 
     // Load system lock image as icon for button
     NSImage *lockIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kLockedIcon)];
@@ -118,7 +111,7 @@
 
 - (void)windowWillClose:(NSNotification *)notification {
     [task stop];
-    
+    [self setObserveDefaults:NO];
     AppDelegate *delegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     [delegate performSelector:@selector(windowDidClose:) withObject:self afterDelay:0.05];
 }
@@ -133,13 +126,14 @@
     return NO;
 }
 
-#pragma mark -
+#pragma mark - Save to file
 
 - (IBAction)saveDocument:(id)sender {
     
     NSSavePanel *sPanel = [NSSavePanel savePanel];
     [sPanel setPrompt:@"Save"];
-    [sPanel setNameFieldStringValue:@"SearchResults.txt"];
+    
+    [sPanel setNameFieldStringValue:[NSString stringWithFormat:@"SearchResults-%@.txt", [searchField stringValue]]];
     
     NSMutableArray *res = results;
     [sPanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
@@ -176,11 +170,13 @@
         }
     }
     else if ([def hasPrefix:COL_DEFAULT_PREFIX]) {
+        DLog(@"Default %@ changed", keyPath);
+
         NSString *colName = [def substringFromIndex:[COL_DEFAULT_PREFIX length]];
         NSTableColumn *col = [tableView tableColumnWithIdentifier:colName];
         [col setHidden:![DEFAULTS boolForKey:def]];
     }
-    DLog(@"Default %@ changed", keyPath);
+//    DLog(@"Default %@ changed", keyPath);
 
 }
 
@@ -219,7 +215,7 @@
     
     // Path bar
     [self hidePathBar];
-    [pathControl setURL:nil];
+    [pathBar setURL:nil];
     
     [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:@"Items"];
     
@@ -461,12 +457,12 @@
 #pragma mark - Path Bar
 
 - (void)showPathBar {
-    if ([pathControl isHidden] == NO) {
+    if ([pathBar isHidden] == NO) {
         return;
     }
     
     NSView *borderView = [[tableView superview] superview];
-    NSRect pathCtrlRect = [pathControl frame];
+    NSRect pathCtrlRect = [pathBar frame];
     NSRect borderViewRect = [borderView frame];
     CGFloat height = pathCtrlRect.size.height + 3;
     
@@ -474,17 +470,17 @@
     borderViewRect.size.height -= height;
     
     [borderView setFrame:borderViewRect];
-    [pathControl setHidden:NO];
+    [pathBar setHidden:NO];
 }
 
 - (void)hidePathBar {
-    if ([pathControl isHidden]) {
+    if ([pathBar isHidden]) {
         return;
     }
     
     NSView *borderView = [[tableView superview] superview];
     
-    NSRect pathCtrlRect = [pathControl frame];
+    NSRect pathCtrlRect = [pathBar frame];
     NSRect borderViewRect = [borderView frame];
     CGFloat height = pathCtrlRect.size.height + 3;
     
@@ -492,7 +488,7 @@
     borderViewRect.size.height += height;
     
     [borderView setFrame:borderViewRect];
-    [pathControl setHidden:YES];
+    [pathBar setHidden:YES];
 }
 
 - (void)showFilter {
@@ -510,8 +506,8 @@
 - (NSMutableArray *)selectedItems {
     NSMutableArray *items = [NSMutableArray array];
     
-    if ([pathControl clickedPathItem]) {
-        NSString *path = [[[pathControl clickedPathItem] URL] path];
+    if ([pathBar clickedPathItem]) {
+        NSString *path = [[[pathBar clickedPathItem] URL] path];
         SearchItem *item = [[SearchItem alloc] initWithPath:path];
         [items addObject:item];
     }
@@ -745,6 +741,9 @@
     if ([menuItem action] == @selector(search:) && [task isRunning]) {
         return NO;
     }
+    if ([menuItem action] == @selector(saveDocument:) && ![results count]) {
+        return NO;
+    }
     return YES;
 }
 
@@ -755,77 +754,89 @@
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)col row:(NSInteger)row {
-//    if (row < 0 || row >= [results count]) {
-//        return nil;
-//    }
+    if (row < 0 || row >= [results count]) {
+        return nil;
+    }
     
     NSString *colID = [col identifier];
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:colID owner:self];
-//    NSTextField *cellView = [tableView makeViewWithIdentifier:@"MyView"
-//                                                      owner:self];
-//    if (cellView == nil) {
-//        cellView = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
-//        cellView.identifier = @"MyView";
-//        cellView.drawsBackground = NO;
-//        cellView.bordered = NO;
-//        cellView.bezeled = NO;
-//        cellView.selectable = NO;
-//    }
-    
-    
     
     SearchItem *item = results[row];
-    
     id colStr = @"";
+    
+    // File name / path
     if ([colID isEqualToString:@"Items"]) {
-        colStr = item.name;
+        colStr = [DEFAULTS boolForKey:@"ShowFullPath"] ? item.path : item.name;
         cellView.imageView.objectValue = item.icon;
-//        NSLog(@"UPDATING ROW %d", row);
     }
 //    else if (1) {
 //        cellView = [tableView makeViewWithIdentifier:@"Kind" owner:self];
-//        colStr = @"SomethingReallyLongStuff";
+//        colStr = @"SomethingReallyLongAndBoring";
 //    }
+    // Kind
     else if ([colID isEqualToString:@"Kind"]) {
         colStr = item.kind;
-    } else if ([colID isEqualToString:@"Size"]) {
+    }
+    // Size
+    else if ([colID isEqualToString:@"Size"]) {
         colStr = [item sizeString];
-    } else if ([colID isEqualToString:@"DateCreated"]) {
+    }
+    // Date Created
+    else if ([colID isEqualToString:@"DateCreated"]) {
         colStr = item.dateCreatedString;
-    } else if ([colID isEqualToString:@"DateModified"]) {
+    }
+    // Date Modified
+    else if ([colID isEqualToString:@"DateModified"]) {
         colStr = item.dateModifiedString;
-    } else if ([colID isEqualToString:@"DateAccessed"]) {
+    }
+    // Date Accessed
+    else if ([colID isEqualToString:@"DateAccessed"]) {
         colStr = item.dateAccessedString;
-    } else if ([colID isEqualToString:@"UserGroup"]) {
+    }
+    // User:Group
+    else if ([colID isEqualToString:@"UserGroup"]) {
         colStr = item.userGroupString;
-    } else if ([colID isEqualToString:@"Permissions"]) {
+    }
+    // POSIX permissions
+    else if ([colID isEqualToString:@"Permissions"]) {
         // Use monospace font for permissions
+        NSString *pStr = [DEFAULTS boolForKey:@"HumanFriendlyPermissions"] ?item.permissionsString : item.permissionsNumberString;
         NSDictionary *attr = @{ NSFontAttributeName: [NSFont userFixedPitchFontOfSize:[NSFont systemFontSize]] };
-        colStr = [[NSAttributedString alloc] initWithString:item.permissionsString attributes:attr];
-    } else if ([colID isEqualToString:@"UTI"]) {
+        colStr = [[NSAttributedString alloc] initWithString:pStr attributes:attr];
+    }
+    // Uniform Type Identifier
+    else if ([colID isEqualToString:@"UTI"]) {
         colStr = item.UTI;
-    } else if ([colID isEqualToString:@"FileType"]) {
+    }
+    // HFS File Type
+    else if ([colID isEqualToString:@"FileType"]) {
         NSDictionary *attr = @{ NSFontAttributeName: [NSFont userFixedPitchFontOfSize:[NSFont systemFontSize]] };
         colStr = [[NSAttributedString alloc] initWithString:item.HFSType attributes:attr];
-    } else if ([colID isEqualToString:@"CreatorType"]) {
+    }
+    // HFS Creator Type
+    else if ([colID isEqualToString:@"CreatorType"]) {
         NSDictionary *attr = @{ NSFontAttributeName: [NSFont userFixedPitchFontOfSize:[NSFont systemFontSize]] };
         colStr = [[NSAttributedString alloc] initWithString:item.creatorType attributes:attr];
-    } else if ([colID isEqualToString:@"MIMEType"]) {
+    }
+    // MIME Type
+    else if ([colID isEqualToString:@"MIMEType"]) {
         colStr = item.MIMEType;
     }
     
+    // TODO: Visually mark non-existent files
 //    if ([[NSFileManager defaultManager] fileExistsAtPath:item.path] == NO) {
 //        NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
 //        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:colStr
 //                                                                      attributes:attr];
-//    [cellView.textField setAttributedStringValue:[self attr:colStr]];
-//    } else {
+//      [cellView.textField setAttributedStringValue:[self attr:colStr]];
+//    }
+    
+    // Set text field string
     if (![colStr isKindOfClass:[NSAttributedString class]]) {
         cellView.textField.stringValue = colStr;
     } else {
         [cellView.textField setAttributedStringValue:colStr];
     }
-    
     
     return cellView;
 }
@@ -886,12 +897,12 @@
     if (selectedRow >= 0 && selectedRow < [results count] && [results count]) {
         SearchItem *item = results[selectedRow];
         NSURL *fileURL = [NSURL fileURLWithPath:item.path];
-        [pathControl setURL:fileURL];
+        [pathBar setURL:fileURL];
         if ([DEFAULTS boolForKey:@"ShowPathBar"]) {
             [self showPathBar];
         }
     } else {
-        [pathControl setURL:nil];
+        [pathBar setURL:nil];
         [self hidePathBar];
     }
 }

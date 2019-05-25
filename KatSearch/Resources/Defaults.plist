@@ -60,5 +60,9 @@
 	<false/>
 	<key>SkipSystemFolder</key>
 	<false/>
+	<key>ShowFullPath</key>
+	<false/>
+	<key>UsePathControl</key>
+	<false/>
 </dict>
 </plist>

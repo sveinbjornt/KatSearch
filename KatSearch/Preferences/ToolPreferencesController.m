@@ -64,7 +64,7 @@
     } else {
         [execImageView setAlphaValue:0.2f];
         [statusTextField setStringValue:@"Command line tool is not installed"];
-        [installButton setTitle:@"Install"];
+        [installButton setTitle:@"Install “searchfs” tool"];
     }
 }
 

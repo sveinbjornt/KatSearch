@@ -81,11 +81,11 @@
                         <menu key="menu" id="tm3-tp-WAe">
                             <items>
                                 <menuItem title="Automatic" state="on" id="FYx-D8-jDc"/>
-                                <menuItem title="Catalog (searchfs)" enabled="NO" id="JYd-lU-ST6"/>
-                                <menuItem title="Filesystem Traversal (find)" enabled="NO" id="bJN-of-S0p">
+                                <menuItem title="Catalog (searchfs)" hidden="YES" enabled="NO" id="JYd-lU-ST6"/>
+                                <menuItem title="Filesystem Traversal (find)" hidden="YES" enabled="NO" id="bJN-of-S0p">
                                     <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                                 </menuItem>
-                                <menuItem title="Spotlight (mdfind)" enabled="NO" id="Fgl-3w-Ask">
+                                <menuItem title="Spotlight (mdfind)" hidden="YES" enabled="NO" id="Fgl-3w-Ask">
                                     <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                                 </menuItem>
                             </items>

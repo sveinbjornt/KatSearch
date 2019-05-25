@@ -30,11 +30,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol SelectableImageViewDelegate <NSObject>
-- (IBAction)imageViewClicked:(id)sender;
-@end
+@interface STPathControl : NSTextField
 
-@interface SelectableImageView : NSImageView
-@property (nonatomic) BOOL selected;
-@property IBOutlet id delegate;
+@property (nonatomic) NSString *path;
+
 @end

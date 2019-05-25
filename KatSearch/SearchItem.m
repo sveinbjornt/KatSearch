@@ -65,6 +65,8 @@
     NSString *cachedGroup;
     NSString *cachedUserGroupString;
     
+    NSUInteger cachedPermissionsNumber;
+    NSString *cachedPermissionsNumberString;
     NSString *cachedPermissionsString;
     
     NSURL *cachedURL;
@@ -80,6 +82,7 @@
     if (self) {
         _path = path;
         bookmark = -1; // Unknown
+        cachedPermissionsNumber = -1; // Unknown
     }
     return self;
 }
@@ -295,6 +298,36 @@
     return cachedUserGroupString;
 }
 
+- (NSUInteger)permissionsNumber {
+    if (cachedPermissionsNumber == -1) {
+        NSString *numStr = [self permissionsNumberString];
+        if (!numStr || [numStr isEqualToString:SI_UNKNOWN]) {
+            return -1;
+        } else {
+            cachedPermissionsNumber = [numStr intValue];
+        }
+    }
+    return cachedPermissionsNumber;
+}
+
+- (NSString *)permissionsNumberString {
+    if (![self stat]) {
+        return SI_UNKNOWN;
+    }
+    
+    if (!cachedPermissionsNumberString) {
+        NSString *s = [NSString stringWithFormat:@"%07o", cachedStatPtr->st_mode];
+        if ([s length] >= 3) {
+            cachedPermissionsNumberString = [s substringWithRange:NSMakeRange([s length]-3, 3)];
+        } else {
+            cachedPermissionsNumberString = SI_UNKNOWN;
+        }
+        
+    }
+    
+    return cachedPermissionsNumberString;
+}
+
 - (NSString *)permissionsString {
     if (![self stat]) {
         return SI_UNKNOWN;
@@ -302,7 +335,7 @@
     
     if (!cachedPermissionsString) {
         char buf[20];
-//        NSLog(@"%07o", cachedStatPtr->st_mode);
+        
         strmode(cachedStatPtr->st_mode, (char *)&buf);
         cachedPermissionsString = @((char *)&buf);
     }
