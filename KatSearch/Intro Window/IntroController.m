@@ -63,7 +63,6 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    [[self window] center];
     
     zeroFrame = CGRectOffset(firstBox.frame, -firstBox.frame.size.width, 0);
     firstFrame = firstBox.frame;
@@ -71,7 +70,12 @@
     
     statusItemModeImageView.selected = YES;
     
+    [shortcutView setAssociatedUserDefaultsKey:@"GlobalShortcut"];
+    
     [DEFAULTS setBool:YES forKey:@"SUEnableAutomaticChecks"];
+    
+    [[self window] center];
+    [[self window] makeKeyAndOrderFront:self];
 }
 
 #pragma mark - SelectableImageViewDelegate

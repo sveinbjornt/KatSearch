@@ -13,13 +13,14 @@
                 <outlet property="continueButton" destination="7fC-iT-Fzs" id="Qyo-W8-A6d"/>
                 <outlet property="firstBox" destination="LdH-Lo-nzJ" id="mgF-b8-svR"/>
                 <outlet property="secondBox" destination="qH6-FU-QA6" id="pNg-iA-hiP"/>
+                <outlet property="shortcutView" destination="mFK-nS-oNu" id="Ysi-zF-wm1"/>
                 <outlet property="statusItemModeImageView" destination="CEy-VG-kOb" id="QRt-sG-frC"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="196" y="240" width="400" height="335"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
