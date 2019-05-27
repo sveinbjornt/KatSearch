@@ -28,36 +28,39 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#define PROGRAM_NAME            @"KatSearch"
+#define PROGRAM_NAME                @"KatSearch"
 
-#define PROGRAM_VERSION_MAJ     0
-#define PROGRAM_VERSION_MIN     2
-#define PROGRAM_VERSION_STRING  @[NSString stringWithFormat:@"%d.%d",\
-                                PROGRAM_VERSION_MAJ, PROGRAM_VERSION_MIN]
+#define PROGRAM_VERSION_MAJ         0
+#define PROGRAM_VERSION_MIN         2
+#define PROGRAM_VERSION_STRING      @[NSString stringWithFormat:@"%d.%d",\
+                                    PROGRAM_VERSION_MAJ, PROGRAM_VERSION_MIN]
 
-#define PROGRAM_WEBSITE_URL     @"https://sveinbjorn.org/katsearch"
-#define PROGRAM_DONATIONS_URL   @"https://sveinbjorn.org/donations"
-#define PROGRAM_GITHUB_URL      @"https://github.com/sveinbjornt/KatSearch"
+#define PROGRAM_WEBSITE_URL         @"https://sveinbjorn.org/katsearch"
+#define PROGRAM_DONATIONS_URL       @"https://sveinbjorn.org/donations"
+#define PROGRAM_GITHUB_URL          @"https://github.com/sveinbjornt/KatSearch"
+#define PROGRAM_LICENSE_FILE        @"License.html"
+#define PROGRAM_MAN_PAGE_FILE       @"searchfs.1.html"
+#define PROGRAM_DOCUMENTATION_FILE  @"Documentation.html"
 
 #define SHORTCUT_DEFAULT_NAME       @"GlobalShortcut"
 #define SHORTCUT_DEFAULT_KEYCODE    0
 
-#define CLT_BIN_NAME            @"searchfs"
-#define CLT_MAN_NAME            @"searchfs.1"
-#define CLT_INSTALL_PATH        @"/usr/local/bin/searchfs"
-#define CLT_MAN_PATH            @""
+#define CLT_BIN_NAME                @"searchfs"
+#define CLT_MAN_NAME                @"searchfs.1.gz"
+#define CLT_INSTALL_PATH            @"/usr/local/bin/searchfs"
+#define CLT_MAN_INSTALL_PATH        @"/usr/local/share/man/man1/searchfs.1.gz"
 
-#define NUM_RECENT_SEARCHES     10
+#define NUM_RECENT_SEARCHES         10
 
-#define VALUES_KEYPATH(X)       [NSString stringWithFormat:@"values.%@", (X)]
+#define VALUES_KEYPATH(X)           [NSString stringWithFormat:@"values.%@", (X)]
 
-#define DEFAULTS                [NSUserDefaults standardUserDefaults]
+#define DEFAULTS                    [NSUserDefaults standardUserDefaults]
 
-#define COL_DEFAULT_PREFIX      @"ShowColumn"
+#define COL_DEFAULT_PREFIX          @"ShowColumn"
 
-#define COLUMNS                 @[  @"Kind", @"Size", @"DateCreated", @"DateModified", \
-                                    @"DateAccessed", @"UserGroup", @"Permissions", @"UTI", \
-                                    @"MIMEType", @"FileType", @"CreatorType" ]
+#define COLUMNS                     @[@"Kind", @"Size", @"DateCreated", @"DateModified", \
+                                      @"DateAccessed", @"UserGroup", @"Permissions", @"UTI", \
+                                      @"MIMEType", @"FileType", @"CreatorType" ]
 
 // Logging
 #ifdef DEBUG

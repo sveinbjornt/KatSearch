@@ -32,6 +32,6 @@
 
 @interface PrefsController : MASPreferencesWindowController
 
-+ (instancetype)newController;
++ (instancetype)new;
 
 @end

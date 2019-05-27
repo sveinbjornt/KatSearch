@@ -28,37 +28,18 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "SelectableImageView.h"
+#import <Cocoa/Cocoa.h>
 
-@implementation SelectableImageView
+@protocol SelectableImageViewDelegate <NSObject>
+- (IBAction)imageViewClicked:(id)sender;
+@end
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    if (_selected) {
-        [self drawFocusRingMask];
-        [[NSColor orangeColor] set];
-        NSBezierPath *path = [NSBezierPath bezierPath];
-        [path appendBezierPathWithRoundedRect:NSInsetRect([self bounds], 3, 3) xRadius:4 yRadius:4];
-        [path setLineWidth:4.0f];
-        [path stroke];
-    }
-}
+#define kSelectableImageViewDefaultColor [NSColor orangeColor]
 
-- (void)mouseUp:(NSEvent *)theEvent {
-    if (theEvent.type == NSLeftMouseUp) {
-        NSPoint pt = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-        if (NSPointInRect(pt, self.bounds) && self.delegate) {
-            [self.delegate imageViewClicked:self];
-        }
-    } else {
-        // This should never be called, but...
-        [super mouseUp:theEvent];
-    }
-}
+@interface SelectableImageView : NSImageView
 
-- (void)setSelected:(BOOL)selected {
-    _selected = selected;
-    [self setNeedsDisplay:YES];
-}
+@property (nonatomic) BOOL selected;
+@property IBOutlet id delegate;
+@property NSColor *borderColor;
 
 @end

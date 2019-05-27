@@ -28,7 +28,6 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
 @interface Alerts : NSObject

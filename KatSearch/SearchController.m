@@ -35,6 +35,9 @@
 #import "NSTableView+PreserveSelection.h"
 #import "NSWorkspace+Additions.h"
 #import "STVolumesPopupButton.h"
+#import "STPathControl.h"
+#import "Alerts.h"
+#import "NSSharingServicePicker+ESSSharingServicePickerMenu.h"
 #import "Common.h"
 
 @interface SearchController ()
@@ -53,6 +56,7 @@
     IBOutlet NSTableView *tableView;
     IBOutlet NSScrollView *scrollView;
     IBOutlet NSPathControl *pathBar;
+    IBOutlet STPathControl *pathControl;
     IBOutlet NSTextField *filterTextField;
     
     IBOutlet NSButton *searchButton;
@@ -237,7 +241,7 @@
     [self hidePathBar];
     [pathBar setURL:nil];
     
-    [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:@"Items"];
+//    [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:@"Items"];
     
     // Configure progress indicator, move to centre of table view and set it off
     [tableView addSubview:progressIndicator];
@@ -276,10 +280,10 @@
         task.exactNameOnly = YES;
     }
     
-    task.caseSensitive = [DEFAULTS boolForKey:@"SearchCaseSensitive"];
-    task.skipPackages = [DEFAULTS boolForKey:@"SearchSkipPackages"];
-    task.skipInvisibles = [DEFAULTS boolForKey:@"SearchSkipInvisibles"];
-    task.skipInappropriate = [DEFAULTS boolForKey:@"SearchSkipSystemFolder"];
+    task.caseSensitive = [[searchOptionsMenu itemWithTitle:@"Case Sensitive"] state];
+    task.skipPackages = [[searchOptionsMenu itemWithTitle:@"Skip Packages"] state];
+    task.skipInvisibles = [[searchOptionsMenu itemWithTitle:@"Skip Invisible Files"] state];
+    task.skipInappropriate = [[searchOptionsMenu itemWithTitle:@"Skip System Folder"] state];
 //    task.negateSearchParams = [DEFAULTS boolForKey:@"SearchInvertSearch"];
     
     if (authorizationRef) {
@@ -298,6 +302,10 @@
     [volumesPopupButton setEnabled:enabled];
     [authenticateButton setEnabled:enabled];
     [searchOptionsButton setEnabled:enabled];
+}
+
+- (IBAction)searchOptionChanged:(id)sender {
+    [sender setState:![sender state]];
 }
 
 #pragma mark - SearchTaskDelegate
@@ -620,8 +628,21 @@
 }
 
 - (IBAction)moveToTrash:(id)sender {
-    for (SearchItem *item in [self selectedItems]) {
-        // TODO: Confirm prompt
+    NSArray *selItems = [self selectedItems];
+    NSUInteger num = [selItems count];
+    
+    // Potentially destructive operation, ask user to confirm
+    NSString *q = [NSString stringWithFormat:@"Move %lu items to the Trash?", num];
+    if (num == 1) {
+        SearchItem *item = selItems[0];
+        q = [NSString stringWithFormat:@"Move “%@” to the Trash?", item.name];
+    }
+    if (![Alerts proceedAlert:q subText:@"" withActionNamed:@"Move to Trash"]) {
+        return;
+    }
+
+    // Move items to Trash
+    for (SearchItem *item in selItems) {
         [[NSWorkspace sharedWorkspace] moveFileToTrash:item.path];
     }
 }
@@ -683,17 +704,23 @@
         }
         [[menu itemWithTag:1] setTitle:copyTitle];
         
-//        BOOL bookmarksOnly = YES;
-//        for (SearchItem *item in items) {
-//            if ([item isBookmark] == NO) {
-//                bookmarksOnly = NO;
-//            }
-//        }
-//        if (bookmarksOnly) {
-//            [menu addItemWithTitle:@"Show Original" action:nil keyEquivalent:@""];
-//        } else {
-//            [menu removeItemAtIndex:[[menu itemArray] count]-1];
-//        }
+        // TODO: Get Share menu working
+        // Only show Share menu if a single item is selected
+        if (numSelectedFiles == 1) {
+            NSMenu *shareMenu = [NSSharingServicePicker menuForSharingItems:items
+                                                                 withTarget:self
+                                                                   selector:@selector(redString:)
+                                                            serviceDelegate:nil];
+            [[menu itemWithTitle:@"Share"] setSubmenu:shareMenu];
+        } else {
+            [[menu itemWithTitle:@"Share"] setHidden:YES];
+        }
+        
+        // Only show Show Original menu if a single item is selected and the item in
+        // question is in fact a symlink/alias (or in Apple's parlance, a "bookmark")
+        BOOL singleBookmark = (numSelectedFiles == 1 && [items[0] isBookmark]);
+        [[menu itemWithTitle:@"Show Original"] setHidden:!singleBookmark];
+        [[menu itemWithTitle:@"Open With"] setHidden:singleBookmark];
     }
     else if (menu == openWithSubMenu) {
     
@@ -781,6 +808,8 @@
     NSString *colID = [col identifier];
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:colID owner:self];
     
+    cellView.textField.textColor = [NSColor systemGrayColor];
+    
     SearchItem *item = results[row];
     id colStr = @"";
     
@@ -788,11 +817,8 @@
     if ([colID isEqualToString:@"Items"]) {
         colStr = [DEFAULTS boolForKey:@"ShowFullPath"] ? item.path : item.name;
         cellView.imageView.objectValue = item.icon;
+        cellView.textField.textColor = [NSColor textColor];
     }
-//    else if (1) {
-//        cellView = [tableView makeViewWithIdentifier:@"Kind" owner:self];
-//        colStr = @"SomethingReallyLongAndBoring";
-//    }
     // Kind
     else if ([colID isEqualToString:@"Kind"]) {
         colStr = item.kind;
@@ -815,14 +841,13 @@
     }
     // User:Group
     else if ([colID isEqualToString:@"UserGroup"]) {
-        colStr = item.userGroupString;
+        colStr = [self monospacedString:item.userGroupString];;
     }
     // POSIX permissions
     else if ([colID isEqualToString:@"Permissions"]) {
         // Use monospace font for permissions
         NSString *pStr = [DEFAULTS boolForKey:@"HumanFriendlyPermissions"] ? item.permissionsString : item.permissionsNumberString;
-        NSDictionary *attr = @{ NSFontAttributeName: [NSFont userFixedPitchFontOfSize:[NSFont systemFontSize]] };
-        colStr = [[NSAttributedString alloc] initWithString:pStr attributes:attr];
+        colStr = [self monospacedString:pStr];
     }
     // Uniform Type Identifier
     else if ([colID isEqualToString:@"UTI"]) {
@@ -843,12 +868,9 @@
         colStr = item.MIMEType;
     }
     
-    // TODO: Visually mark non-existent files
-//    if ([[NSFileManager defaultManager] fileExistsAtPath:item.path] == NO) {
-//        NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
-//        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:colStr
-//                                                                      attributes:attr];
-//      [cellView.textField setAttributedStringValue:[self attr:colStr]];
+    // Visually mark non-existent files
+//    if (item.exists == NO) {
+//        colStr = [self redString:colStr];
 //    }
     
     // Set text field string
@@ -859,6 +881,18 @@
     }
     
     return cellView;
+}
+
+- (NSAttributedString *)redString:(id)str {
+    NSString *s = [str isKindOfClass:[NSAttributedString class]] ? [str string] : str;
+    NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor redColor] };
+    return [[NSAttributedString alloc] initWithString:s attributes:attr];
+}
+
+- (NSAttributedString *)monospacedString:(NSString *)str {
+    NSDictionary *attr = @{ NSFontAttributeName: [NSFont userFixedPitchFontOfSize:[NSFont systemFontSize]] };
+    return [[NSAttributedString alloc] initWithString:str attributes:attr];
+
 }
 
 //- (NSAttributedString *)attr:(NSString *)title {
@@ -930,10 +964,8 @@
 #pragma mark - NSPathControlDelegate
 
 - (BOOL)pathControl:(NSPathControl *)pathControl shouldDragItem:(NSPathControlItem *)pathItem withPasteboard:(NSPasteboard *)pboard {
-    
     NSString *draggedFile = [[pathItem URL] path];
     [self copyFiles:@[draggedFile] toPasteboard:pboard];
-
     return YES;
 }
 

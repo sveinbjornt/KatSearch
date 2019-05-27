@@ -46,8 +46,4 @@
     return self;
 }
 
-//- (BOOL)compatibleWithResponsiveScrolling {
-//    return NO;
-//}
-
 @end

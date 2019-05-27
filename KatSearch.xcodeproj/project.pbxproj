@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F45CA6EF229859EF00D4D6D0 /* LaunchPromptController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6ED229859EF00D4D6D0 /* LaunchPromptController.m */; };
-		F45CA6F0229859EF00D4D6D0 /* LaunchPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45CA6EE229859EF00D4D6D0 /* LaunchPrompt.xib */; };
+		F45CA6EF229859EF00D4D6D0 /* IntroController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6ED229859EF00D4D6D0 /* IntroController.m */; };
+		F45CA6F0229859EF00D4D6D0 /* IntroWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45CA6EE229859EF00D4D6D0 /* IntroWindow.xib */; };
 		F45CA6F52298629700D4D6D0 /* SelectableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6F42298629700D4D6D0 /* SelectableImageView.m */; };
 		F45CA6F82298B80500D4D6D0 /* LSUIElementApp.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */; };
 		F45CA6FB229980EE00D4D6D0 /* Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6FA229980EE00D4D6D0 /* Alerts.m */; };
 		F45CA6FE229989D800D4D6D0 /* STPathControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA6FD229989D800D4D6D0 /* STPathControl.m */; };
 		F45CA7012299BA3000D4D6D0 /* MutableDictProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA7002299BA3000D4D6D0 /* MutableDictProxy.m */; };
+		F45CA704229B4E5400D4D6D0 /* NSSharingServicePicker+ESSSharingServicePickerMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F45CA702229B4E5400D4D6D0 /* NSSharingServicePicker+ESSSharingServicePickerMenu.m */; };
+		F45CA707229BFB0E00D4D6D0 /* searchfs.1.html in Resources */ = {isa = PBXBuildFile; fileRef = F45CA705229BFB0E00D4D6D0 /* searchfs.1.html */; };
+		F45CA70A229BFB3400D4D6D0 /* searchfs.1.gz in Resources */ = {isa = PBXBuildFile; fileRef = F45CA709229BFB3400D4D6D0 /* searchfs.1.gz */; };
 		F45D8BBC20FA6FCC00D6E8F6 /* PasteboardPathControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */; };
 		F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A25E20E111CF0062B230 /* AppDelegate.m */; };
 		F462A26420E111D10062B230 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462A26220E111D10062B230 /* MainMenu.xib */; };
@@ -73,9 +76,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F45CA6EC229859EF00D4D6D0 /* LaunchPromptController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchPromptController.h; sourceTree = "<group>"; };
-		F45CA6ED229859EF00D4D6D0 /* LaunchPromptController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchPromptController.m; sourceTree = "<group>"; };
-		F45CA6EE229859EF00D4D6D0 /* LaunchPrompt.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchPrompt.xib; sourceTree = "<group>"; };
+		F45CA6EC229859EF00D4D6D0 /* IntroController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroController.h; sourceTree = "<group>"; };
+		F45CA6ED229859EF00D4D6D0 /* IntroController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroController.m; sourceTree = "<group>"; };
+		F45CA6EE229859EF00D4D6D0 /* IntroWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroWindow.xib; sourceTree = "<group>"; };
 		F45CA6F32298629700D4D6D0 /* SelectableImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectableImageView.h; sourceTree = "<group>"; };
 		F45CA6F42298629700D4D6D0 /* SelectableImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectableImageView.m; sourceTree = "<group>"; };
 		F45CA6F62298B80500D4D6D0 /* LSUIElementApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSUIElementApp.h; sourceTree = "<group>"; };
@@ -86,6 +89,10 @@
 		F45CA6FD229989D800D4D6D0 /* STPathControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STPathControl.m; sourceTree = "<group>"; };
 		F45CA6FF2299BA3000D4D6D0 /* MutableDictProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableDictProxy.h; sourceTree = "<group>"; };
 		F45CA7002299BA3000D4D6D0 /* MutableDictProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutableDictProxy.m; sourceTree = "<group>"; };
+		F45CA702229B4E5400D4D6D0 /* NSSharingServicePicker+ESSSharingServicePickerMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSharingServicePicker+ESSSharingServicePickerMenu.m"; sourceTree = "<group>"; };
+		F45CA703229B4E5400D4D6D0 /* NSSharingServicePicker+ESSSharingServicePickerMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSharingServicePicker+ESSSharingServicePickerMenu.h"; sourceTree = "<group>"; };
+		F45CA705229BFB0E00D4D6D0 /* searchfs.1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = searchfs.1.html; sourceTree = "<group>"; };
+		F45CA709229BFB3400D4D6D0 /* searchfs.1.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = searchfs.1.gz; sourceTree = "<group>"; };
 		F45D8BBA20FA6FCC00D6E8F6 /* PasteboardPathControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasteboardPathControl.h; sourceTree = "<group>"; };
 		F45D8BBB20FA6FCC00D6E8F6 /* PasteboardPathControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasteboardPathControl.m; sourceTree = "<group>"; };
 		F462A25A20E111CF0062B230 /* KatSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KatSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,16 +179,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F45CA6F2229861BF00D4D6D0 /* Launch Prompt */ = {
+		F45CA6F2229861BF00D4D6D0 /* Intro Window */ = {
 			isa = PBXGroup;
 			children = (
-				F45CA6EC229859EF00D4D6D0 /* LaunchPromptController.h */,
-				F45CA6ED229859EF00D4D6D0 /* LaunchPromptController.m */,
-				F45CA6EE229859EF00D4D6D0 /* LaunchPrompt.xib */,
+				F45CA6EC229859EF00D4D6D0 /* IntroController.h */,
+				F45CA6ED229859EF00D4D6D0 /* IntroController.m */,
+				F45CA6EE229859EF00D4D6D0 /* IntroWindow.xib */,
 				F45CA6F32298629700D4D6D0 /* SelectableImageView.h */,
 				F45CA6F42298629700D4D6D0 /* SelectableImageView.m */,
 			);
-			path = "Launch Prompt";
+			path = "Intro Window";
 			sourceTree = "<group>";
 		};
 		F462A25120E111CF0062B230 = {
@@ -221,7 +228,7 @@
 				F462A27620E117760062B230 /* SearchTask.m */,
 				F462A27820E134EA0062B230 /* SearchItem.h */,
 				F462A27920E134EA0062B230 /* SearchItem.m */,
-				F45CA6F2229861BF00D4D6D0 /* Launch Prompt */,
+				F45CA6F2229861BF00D4D6D0 /* Intro Window */,
 				F4CB19AF2291A85700265CE8 /* Preferences */,
 				F471DF6120F52A200057E667 /* Util */,
 				F462A26F20E111FB0062B230 /* Resources */,
@@ -240,6 +247,8 @@
 				F471DF5F20F4DAE70057E667 /* Credits.rtf */,
 				F48DC10420FCD16400B21222 /* AppIcon.icns */,
 				F4A5CF0020ED7E15008D0A06 /* searchfs */,
+				F45CA709229BFB3400D4D6D0 /* searchfs.1.gz */,
+				F45CA705229BFB0E00D4D6D0 /* searchfs.1.html */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -276,6 +285,8 @@
 				F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */,
 				F481835022726366002738AE /* SDOpenAtLogin.h */,
 				F481834F22726366002738AE /* SDOpenAtLogin.m */,
+				F45CA703229B4E5400D4D6D0 /* NSSharingServicePicker+ESSSharingServicePickerMenu.h */,
+				F45CA702229B4E5400D4D6D0 /* NSSharingServicePicker+ESSSharingServicePickerMenu.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -296,8 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				F4CB19BD2294399B00265CE8 /* QuartzCore.framework */,
-				F4CB19A12291A2E800265CE8 /* MASPreferences.framework */,
 				F498ADEE22666D2200CB6A6E /* Sparkle.framework */,
+				F4CB19A12291A2E800265CE8 /* MASPreferences.framework */,
 				F498ADED22666CDB00CB6A6E /* MASShortcut.framework */,
 			);
 			path = Frameworks;
@@ -389,10 +400,12 @@
 				F4CB19B82291BB0300265CE8 /* AdvancedPreferencesView.xib in Resources */,
 				F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */,
 				F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */,
+				F45CA70A229BFB3400D4D6D0 /* searchfs.1.gz in Resources */,
 				F48DC10520FCD16400B21222 /* AppIcon.icns in Resources */,
 				F4CB19B42291AA4A00265CE8 /* ToolPreferencesView.xib in Resources */,
+				F45CA707229BFB0E00D4D6D0 /* searchfs.1.html in Resources */,
 				F462A27420E1122A0062B230 /* SearchWindow.xib in Resources */,
-				F45CA6F0229859EF00D4D6D0 /* LaunchPrompt.xib in Resources */,
+				F45CA6F0229859EF00D4D6D0 /* IntroWindow.xib in Resources */,
 				F462A26420E111D10062B230 /* MainMenu.xib in Resources */,
 				F4CB199D2291064000265CE8 /* Assets.xcassets in Resources */,
 				F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */,
@@ -428,11 +441,12 @@
 				F4CB19CC2294770D00265CE8 /* OptScrollView.m in Sources */,
 				F45CA7012299BA3000D4D6D0 /* MutableDictProxy.m in Sources */,
 				F4CB19C92294769700265CE8 /* OptClipView.m in Sources */,
+				F45CA704229B4E5400D4D6D0 /* NSSharingServicePicker+ESSSharingServicePickerMenu.m in Sources */,
 				F498ADF62267988000CB6A6E /* STPrivilegedTask.m in Sources */,
 				F462A26720E111D10062B230 /* main.m in Sources */,
 				F48451E820F8E4CB005797C1 /* PasteboardTableView.m in Sources */,
 				F4CB19B92291BB0300265CE8 /* AdvancedPreferencesController.m in Sources */,
-				F45CA6EF229859EF00D4D6D0 /* LaunchPromptController.m in Sources */,
+				F45CA6EF229859EF00D4D6D0 /* IntroController.m in Sources */,
 				F45CA6F82298B80500D4D6D0 /* LSUIElementApp.m in Sources */,
 				F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */,
 				F462A27320E1122A0062B230 /* SearchController.m in Sources */,

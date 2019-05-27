@@ -35,6 +35,12 @@
                                     <action selector="orderFrontStandardAboutPanel:" target="-1" id="Exp-CZ-Vem"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="KatSearch License" id="FxD-AS-qH4">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openLicense:" target="Voe-Tx-rLC" id="7US-Dg-TIi"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                             <menuItem title="Check for Updates…" id="lK8-Ph-f2r">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -515,10 +521,22 @@ DQ
                                     <action selector="openDonations:" target="Voe-Tx-rLC" id="vYl-jU-zfO"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="License" id="DlV-38-wLS">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openLicense:" target="Voe-Tx-rLC" id="all-A1-ijn"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="searchfs Man Page" id="nKS-U6-hcR">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openCommandLineToolManPage:" target="Voe-Tx-rLC" id="Bra-rv-vL5"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="61R-FP-cS1"/>
                             <menuItem title="KatSearch Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
-                                    <action selector="openWebsite:" target="Voe-Tx-rLC" id="Upg-yB-hFG"/>
+                                    <action selector="showHelp:" target="Voe-Tx-rLC" id="lp5-BP-c6r"/>
                                 </connections>
                             </menuItem>
                         </items>

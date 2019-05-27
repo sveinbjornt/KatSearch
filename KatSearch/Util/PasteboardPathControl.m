@@ -46,12 +46,15 @@
 
 - (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray *)types {
     id<PasteboardDelegate> pbDel = (id)[[self window] windowController];
-    if ([pbDel respondsToSelector:@selector(copySelectedFilesToPasteboard:)]) {
-        [pbDel performSelector:@selector(copySelectedFilesToPasteboard:) withObject:pboard];
-        return YES;
+    if (pbDel) {
+        if ([pbDel respondsToSelector:@selector(copySelectedFilesToPasteboard:)]) {
+            [pbDel performSelector:@selector(copySelectedFilesToPasteboard:) withObject:pboard];
+            return YES;
+        } else {
+            NSLog(@"Delegate does not conform to PasteboardDelegate protocol.");
+        }
     }
     return NO;
 }
-
 
 @end

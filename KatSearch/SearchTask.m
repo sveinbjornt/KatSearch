@@ -47,6 +47,7 @@
     if (self) {
         _delegate = delegate;
         authorizationRef = NULL;
+        _searchString = query[@"searchstring"];
         // TODO: Configure the search task according to query properties
     }
     return self;
@@ -75,6 +76,7 @@
     
     NSMutableArray *args = [@[@"-v", self.volume] mutableCopy];
     
+    // TODO: Map flag to selector
     if (self.exactNameOnly) {
         [args addObject:@"-e"];
     }
@@ -123,6 +125,7 @@
 
 - (void)stop {
     if (!task) {
+        DLog(@"Tried to stop task that is no longer running.");
         return;
     }
     

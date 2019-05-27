@@ -62,7 +62,7 @@
         [statusTextField setStringValue:@"Command line tool is installed"];
         [installButton setTitle:@"Uninstall"];
     } else {
-        [execImageView setAlphaValue:0.2f];
+        [execImageView setAlphaValue:0.3f];
         [statusTextField setStringValue:@"Command line tool is not installed"];
         [installButton setTitle:@"Install “searchfs” tool"];
     }
@@ -84,19 +84,26 @@
 #pragma mark - Install/Uninstall
 
 - (BOOL)installTool {
-    NSString *path = [[NSBundle mainBundle] pathForResource:CLT_BIN_NAME ofType:nil];
-    return [[NSFileManager defaultManager] copyItemAtPath:path
-                                                   toPath:CLT_INSTALL_PATH
+    NSString *binPath = [[NSBundle mainBundle] pathForResource:CLT_BIN_NAME ofType:nil];
+    int res = [[NSFileManager defaultManager] copyItemAtPath:binPath
+                                                      toPath:CLT_INSTALL_PATH
+                                                       error:nil];
+    NSString *manPath = [[NSBundle mainBundle] pathForResource:CLT_MAN_NAME ofType:nil];
+    res += [[NSFileManager defaultManager] copyItemAtPath:manPath
+                                                   toPath:CLT_MAN_INSTALL_PATH
                                                     error:nil];
+    return (res == 2);
 }
 
 - (BOOL)uninstallTool {
-    return [[NSFileManager defaultManager] removeItemAtPath:CLT_INSTALL_PATH
-                                                      error:nil];
+    int res = [[NSFileManager defaultManager] removeItemAtPath:CLT_INSTALL_PATH error:nil];
+    res += [[NSFileManager defaultManager] removeItemAtPath:CLT_MAN_INSTALL_PATH error:nil];
+    return (res == 2);
 }
 
 - (BOOL)isInstalled {
-    return [[NSFileManager defaultManager] fileExistsAtPath:CLT_INSTALL_PATH];
+    return [[NSFileManager defaultManager] fileExistsAtPath:CLT_INSTALL_PATH] &&
+    [[NSFileManager defaultManager] fileExistsAtPath:CLT_MAN_INSTALL_PATH];
 }
 
 #pragma mark - MASPreferencesViewController
@@ -110,7 +117,7 @@
 }
 
 - (NSString *)toolbarItemLabel {
-    return NSLocalizedString(@"Tool", @"Toolbar item name for the Tool preference pane");
+    return @"Tool";
 }
 
 - (NSView *)initialKeyView {

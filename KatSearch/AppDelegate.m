@@ -33,13 +33,14 @@
 #import "SearchController.h"
 #import <MASShortcut/Shortcut.h>
 #import "PrefsController.h"
-#import "LaunchPromptController.h"
+#import "IntroController.h"
+#import "NSWorkspace+Additions.h"
 
 @interface AppDelegate ()
 {
     NSMutableArray *windowControllers;
     MASPreferencesWindowController *prefsController;
-    LaunchPromptController *promptController;
+    IntroController *introWindowController;
     
     IBOutlet NSMenu *mainMenu;
     IBOutlet NSMenu *openRecentMenu;
@@ -92,18 +93,16 @@
     
     windowControllers = [NSMutableArray new];
 
-    if ([DEFAULTS boolForKey:@"StatusItemMode"]) {
-        [self showStatusItem];
+    if ([DEFAULTS boolForKey:@"PreviouslyLaunched"]) {
+        if ([DEFAULTS boolForKey:@"StatusItemMode"]) {
+            [self showStatusItem];
+        } else {
+            [self newWindow:self];
+        }
     } else {
-        [self newWindow:self];
+        [DEFAULTS setBool:YES forKey:@"PreviouslyLaunched"];
+        [self showIntroWindow:self];
     }
-//    [self showLaunchPrompt];
-
-//    } else {
-//        // On first launch, show prompt window with basic settings
-//        [DEFAULTS setBool:YES forKey:@"PreviouslyLaunched"];
-//    }
-    
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
@@ -220,7 +219,7 @@
 }
 
 - (IBAction)openRecentSearch:(id)sender {
-    // TODO: Implement me!
+    // TODO: Implement me
 }
 
 - (IBAction)clearRecentSearches:(id)sender {
@@ -261,16 +260,17 @@
 
 #pragma mark -
 
-- (void)showLaunchPrompt {
-    if (promptController == nil) {
-        promptController = [LaunchPromptController newController];
-    }    
-    [promptController showWindow:nil];
+- (IBAction)showIntroWindow:(id)sender {
+    if (introWindowController == nil) {
+        introWindowController = [IntroController newController];
+    }
+    [introWindowController showWindow:nil];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
 - (IBAction)showPreferences:(id)sender {
     if (prefsController == nil) {
-        prefsController = [PrefsController newController];
+        prefsController = [PrefsController new];
     }
     [prefsController showWindow:nil];
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
@@ -278,16 +278,37 @@
 
 #pragma mark -
 
+// Open Documentation.html file within app bundle
+- (IBAction)showHelp:(id)sender {
+    NSString *path = [[NSBundle mainBundle] pathForResource:PROGRAM_DOCUMENTATION_FILE ofType:nil];
+    [[NSWorkspace sharedWorkspace] openPathInDefaultBrowser:path];
+}
+
+// Open donations website
 - (IBAction)openDonations:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:PROGRAM_DONATIONS_URL]];
 }
 
+// Open program website
 - (IBAction)openWebsite:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:PROGRAM_WEBSITE_URL]];
 }
 
+// Open program GitHub website
 - (IBAction)openGitHubWebsite:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:PROGRAM_GITHUB_URL]];
+}
+
+// Open License HTML file
+- (IBAction)openLicense:(id)sender {
+    NSString *path = [[NSBundle mainBundle] pathForResource:PROGRAM_LICENSE_FILE ofType:nil];
+    [[NSWorkspace sharedWorkspace] openPathInDefaultBrowser:path];
+}
+
+// Open HTML version of command line tool man page
+- (IBAction)openCommandLineToolManPage:(id)sender {
+    NSString *path = [[NSBundle mainBundle] pathForResource:PROGRAM_MAN_PAGE_FILE ofType:nil];
+    [[NSWorkspace sharedWorkspace] openPathInDefaultBrowser:path];
 }
 
 @end

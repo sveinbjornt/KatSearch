@@ -29,12 +29,10 @@
 */
 
 #import <Cocoa/Cocoa.h>
+#import "SelectableImageView.h"
 
-@protocol SelectableImageViewDelegate <NSObject>
-- (IBAction)imageViewClicked:(id)sender;
-@end
+@interface IntroController : NSWindowController <SelectableImageViewDelegate>
 
-@interface SelectableImageView : NSImageView
-@property (nonatomic) BOOL selected;
-@property IBOutlet id delegate;
++ (instancetype)newController;
+
 @end

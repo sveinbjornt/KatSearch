@@ -1,0 +1,108 @@
+<html><head></head><body><pre><font face="Courier">
+<b>SEARCHFS(1)               BSD General Commands Manual              SEARCHFS(1)</b>
+
+<b>NAME</b>
+
+     <b>searchfs</b> -- fast filename search on HFS+ and APFS volumes
+
+<b>SYNOPSIS</b>
+
+     <b>searchfs</b> [<b>-ldfespixnmoh</b>] [<b>-v</b> <u>mount</u><b>_<u></b>point/device</u><b>_<u></b>namelist</u><b>_<u></b>volumes</u>]
+              <u>search</u><b>_<u></b>term</u>
+
+<b>DESCRIPTION</b>
+
+     <b>searchfs</b> searches for files by name on APFS and HFS+ volumes. Searching
+     takes place at the driver level using the file system catalog via the
+     low-level searchfs() kernel call. This means the volume's entire direc-
+     tory tree can be scanned much faster than with a standard recursive
+     directory search using /usr/bin/find.
+
+     The paths to all files and directories with names matching the search
+     term are printed to the standard output, one path per line. Search is
+     case-insensitive by default.
+
+     The following flags are supported:
+
+     <b>-l,</b> <b>--list</b>
+              List all mounted filesystems that support catalog search.
+
+     <b>-v,</b> <b>--volume</b> <u>path</u>
+              Specify volume to search, either by mount path (e.g. &quot;/Vol-
+              umes/SomeVol&quot;) or device name (e.g. &quot;/dev/disk2s1&quot;). Default is
+              the root file system mounted at /.
+
+     <b>-d,</b> <b>--dirs-only</b>
+              Match directories only.
+
+     <b>-f,</b> <b>--files-only</b>
+              Match files only.
+
+     <b>-e,</b> <b>--exact-match</b>
+              Exact filename matches only.
+
+     <b>-s,</b> <b>--case-sensitive</b>
+              Case sensitive matching.
+
+     <b>-p,</b> <b>--skip-packages</b>
+              Don't match file system objects that are inside a package. A
+              package is defined as a directory whose extension matches one of
+              the extensions that are configured into the kernel by Launch
+              Services.
+
+     <b>-i,</b> <b>--skip-invisibles</b>
+              Don't match invisible file system objects (that is, objects with
+              the Finder attribute &quot;Invisible&quot; set) or any objects within
+              invisible directories.
+
+     <b>-x,</b> <b>--skip-inappropriate</b>
+              Don't match any file system objects that are within an &quot;inappro-
+              priate&quot; directory.  Apple's current list of inappropriate direc-
+              tories contains one item: /System.
+
+     <b>-n,</b> <b>--negate-params</b>
+              Show all file system objects that do *not* match the search
+              term.
+
+     <b>-m,</b> <b>--limit</b> <u>number</u>
+              Terminate when the specified number of matching items has been
+              found.
+
+     <b>-o,</b> <b>--version</b>
+              Print program version and exit.
+
+     <b>-h,</b> <b>--help</b>
+              Print usage and exit.
+
+<b>EXAMPLES</b>
+
+     Find directories with name matching 'something' on root volume:
+
+           searchfs -d something
+
+     Find file with the exact name 'file.txt' on volume 'SomeHD':
+
+           searchfs -v /Volumes/SomeHD -e file.txt
+
+     The regular expression characters ^ and $ can be used to match only the
+     beginning or only the end of a string, respectively.
+
+     For example, find all filenames ending with the suffix '.txt':
+
+           searchfs '.txt$'
+
+     Find all filenames starting with &quot;CHANGES&quot;:
+
+           searchfs ^CHANGES
+
+<b>SEE ALSO</b>
+
+     find(1), locate(1), mdfind(1), searchfs(2)
+
+<b>AUTHORS</b>
+
+     Sveinbjorn Thordarson &lt;sveinbjorn@sveinbjorn.org&gt;
+
+Darwin                           May 16, 2019                           Darwin
+</font></pre>
+</body></html>

@@ -31,7 +31,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SelectableImageView.h"
 
-@interface LaunchPromptController : NSWindowController <SelectableImageViewDelegate>
+@interface IntroController : NSWindowController <SelectableImageViewDelegate>
 
 + (instancetype)newController;
 

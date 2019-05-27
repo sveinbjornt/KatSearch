@@ -35,8 +35,6 @@
 - (void)orderFrontStandardAboutPanel:(id)sender {
     [super orderFrontStandardAboutPanel:sender];
     [self activateIgnoringOtherApps:YES];
-//    ProcessSerialNumber psn = { 0, kCurrentProcess };
-//    SetFrontProcess(&psn);
 }
 
 @end

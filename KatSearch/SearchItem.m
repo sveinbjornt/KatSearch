@@ -360,7 +360,7 @@
     if (!cachedPermissionsString) {
         char buf[20];
         strmode(cachedStatPtr->st_mode, (char *)&buf);
-        cachedPermissionsString = @((char *)&buf);
+        cachedPermissionsString = [@((char *)&buf) substringFromIndex:1];
     }
     
     return cachedPermissionsString;
@@ -445,6 +445,10 @@
         return NO;
     }
     return S_ISDIR(cachedStatPtr->st_mode);
+}
+
+- (BOOL)exists {
+    return [[NSFileManager defaultManager] fileExistsAtPath:self.path];
 }
 
 #pragma mark - Handler apps

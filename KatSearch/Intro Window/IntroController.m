@@ -28,13 +28,13 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "LaunchPromptController.h"
+#import "IntroController.h"
 #import <MASShortcut/Shortcut.h>
 #import "AppDelegate.h"
 #import "SDOpenAtLogin.h"
 #import "Common.h"
 
-@interface LaunchPromptController ()
+@interface IntroController ()
 {
     IBOutlet NSBox *firstBox;
     IBOutlet NSBox *secondBox;
@@ -53,10 +53,10 @@
 }
 @end
 
-@implementation LaunchPromptController
+@implementation IntroController
 
 + (instancetype)newController {
-    return [[self alloc] initWithWindowNibName:@"LaunchPrompt"];
+    return [[self alloc] initWithWindowNibName:@"IntroWindow"];
 }
 
 #pragma mark -

@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="LaunchPromptController">
+        <customObject id="-2" userLabel="File's Owner" customClass="IntroController">
             <connections>
                 <outlet property="appModeImageView" destination="GYo-aM-e5s" id="LwI-4J-gJA"/>
                 <outlet property="backButton" destination="WU1-hC-5dU" id="y8D-h1-XnD"/>

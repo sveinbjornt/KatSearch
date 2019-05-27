@@ -1,41 +1,46 @@
 
 # TODO LIST
 
-* Export results to text file
-* Columns adjust size with window
-* Handle aliases/symlinks intelligently
-* Extensive search filters?
+FUTURE VERSION:
+* Smarter CLT install status (version etc.)
+* Use CoreData & NSArrayController to populate table view
+* Filter menu with togglable search in diff. fields
+
+FOR 1.0
+
+* Extensive master search filters?
     * Date filters
     * Kind filters
     * Matches regex - Should highlight strings that match
     * Only filter by columns that are enabled
-* Smarter priming of search item caches
-* Use CoreData & NSArrayController to populate table view
+
+* Regex option for filter
+* Show/hide filter
+
+* Support selecting folder to search (add home folder preset)
+    * Support using /usr/bin/find
+
+
 * Detect when file no longer exists at path
-* Smart columns (estimate min-max size, calc. length of filenames to estimate etc.)
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
-* Add "Move to Trash" to contextual menu (with confirmation prompt)
 * Search history (Recent searches)
 * Override Cmd-F to show filter field
 * Use STPriviledTask when authenticated (global app-wide shared authentication)
-* Status Menu mode
 * Show volumes which don't have catalog but have them disabled
 * Path bar with string option
-* Regex option for filter
-* Filter menu with fields
-* Show/hide filter
 * Highlight matching string when filter active
-* Support using /usr/bin/find
-* Support selecting folder to search (add home folder preset)
-* "Show Original" for aliases/symlinks
 * Versions for identical apps in Open With menu
 * Drag and drop folder/volume on window to make it target of search
-* Sort by permissions should use 755 etc. instead of display string
-* Smarter CLT install status (version etc.)
 * Interpret '*' search string as request to find all files
-* Implement custom Cmd-H to hide
+* Implement custom Cmd-H to hide while in Status Item mode
+* Get Quick Look working in-app (esp. for images)
+* Distinction between Alias/Symlink should be clear in "Kind"
+* Smarter priming of search item caches
+* "Show Original" for aliases/symlinks
 
 For next release:
+DONE * Add "Move to Trash" to contextual menu w. confirmation prompt
+DONE * Sort by permissions should use 755 etc. instead of display string
 DONE * Install CLT via Preferences
 DONE * Support more column types (file, creator, mime etc.)
 DONE * Use proper Preferences
@@ -43,6 +48,10 @@ DONE * Show/hide columns according to prefs
 DONE * Fix rounding of even size numbers (17 MB, not 17.0 MB)
 DONE * Create status menu icon
 DONE * Create Setup launch prompt
+DONE * Export results to text file
+DONE * Columns adjust size with window
+DONE * Handle aliases/symlinks intelligently
+DONE * Status Menu mode
 
 
 ## Version History

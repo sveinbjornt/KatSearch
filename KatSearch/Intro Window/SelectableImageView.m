@@ -28,45 +28,45 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "AdvancedPreferencesController.h"
-#import <Sparkle/Sparkle.h>
+#import "SelectableImageView.h"
 
-@implementation AdvancedPreferencesController
+@implementation SelectableImageView
 
-#pragma mark -
-
-- (id)init {
-    return [super initWithNibName:@"AdvancedPreferencesView" bundle:nil];
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _borderColor = kSelectableImageViewDefaultColor;
+    }
+    return self;
 }
 
-- (IBAction)checkForUpdates:(id)sender {
-    [[SUUpdater sharedUpdater] checkForUpdates:nil];
+- (void)drawRect:(NSRect)dirtyRect {
+    [super drawRect:dirtyRect];
+    if (_selected) {
+        [self drawFocusRingMask];
+        [kSelectableImageViewDefaultColor set];
+        NSBezierPath *path = [NSBezierPath bezierPath];
+        [path appendBezierPathWithRoundedRect:NSInsetRect([self bounds], 3, 3) xRadius:4 yRadius:4];
+        [path setLineWidth:4.0f];
+        [path stroke];
+    }
 }
 
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)viewIdentifier {
-    return @"AdvancedPreferences";
+- (void)mouseUp:(NSEvent *)theEvent {
+    // TODO: Reimplement with target/action pattern instead of delegate
+    if (theEvent.type == NSLeftMouseUp) {
+        NSPoint pt = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+        if (NSPointInRect(pt, self.bounds) && self.delegate) {
+            [self.delegate imageViewClicked:self];
+        }
+    } else {
+        [super mouseUp:theEvent];
+    }
 }
 
-- (NSImage *)toolbarItemImage {
-    return [NSImage imageNamed:NSImageNameAdvanced];
-}
-
-- (NSString *)toolbarItemLabel {
-    return @"Advanced";
-}
-
-- (NSView *)initialKeyView {
-    return nil;
-}
-
-- (BOOL)hasResizableWidth {
-    return NO;
-}
-
-- (BOOL)hasResizableHeight {
-    return NO;
+- (void)setSelected:(BOOL)selected {
+    _selected = selected;
+    [self setNeedsDisplay:YES];
 }
 
 @end

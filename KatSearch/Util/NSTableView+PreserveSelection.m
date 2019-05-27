@@ -37,18 +37,11 @@
 //    NSLog(@"Reloading %d->%d", idx1, idx2);
 //    [self reloadDataPreservingSelection];
 //    return;
-//    [self beginUpdates];
-//    [self beginUpdates];
     [self noteNumberOfRowsChanged];
 //    [self reloadDataForRowIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.numberOfRows)]
 //                    columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.numberOfColumns)]];
 //    [self selectRowIndexes:selected byExtendingSelection:NO];
-//    [self endUpdates];
 }
-
-//- (id)animationForKey:(NSString *)key {
-//    return nil;
-//}
 
 - (void)reloadDataPreservingSelection {
     NSIndexSet *selected = [self selectedRowIndexes];

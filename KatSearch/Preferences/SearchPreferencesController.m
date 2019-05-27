@@ -61,7 +61,7 @@
 }
 
 - (NSString *)toolbarItemLabel {
-    return NSLocalizedString(@"Search", @"Toolbar item name for the Search preference pane");
+    return @"Search";
 }
 
 - (NSView *)initialKeyView {

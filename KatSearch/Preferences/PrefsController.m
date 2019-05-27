@@ -29,7 +29,6 @@
 */
 
 #import "PrefsController.h"
-#import <MASPreferences/MASPreferences.h>
 #import "Common.h"
 #import "GeneralPreferencesController.h"
 #import "SearchPreferencesController.h"
@@ -38,14 +37,12 @@
 
 @implementation PrefsController
 
-+ (instancetype)newController {
-    NSViewController *generalController = [GeneralPreferencesController new];
-    NSViewController *advancedController = [AdvancedPreferencesController new];
-    NSViewController *searchPrefsController = [SearchPreferencesController new];
-    NSViewController *toolController = [ToolPreferencesController new];
-    NSArray *controllers = @[generalController, searchPrefsController, advancedController, toolController];
-    // Note: To add a flexible space between preference panes insert [NSNull null]:
-    
++ (instancetype)new {
+    NSArray *controllers = @[[GeneralPreferencesController new],
+                             [SearchPreferencesController new],
+                             [AdvancedPreferencesController new],
+                             //[NSNull null],
+                             [ToolPreferencesController new]];
     NSString *title = [NSString stringWithFormat:@"%@ Preferences", PROGRAM_NAME];
     return [[PrefsController alloc] initWithViewControllers:controllers title:title];
 }
