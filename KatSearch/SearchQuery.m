@@ -34,17 +34,32 @@
 @implementation SearchQuery
 
 + (instancetype)defaultQuery {
-    NSDictionary *sd = @{
-        @"filetype": [DEFAULTS stringForKey:@"FindItemTypes"],
-        @"matchtype": [DEFAULTS stringForKey:@"FindNameMatch"],
-        @"searchstring": @"",
-        @"volume": [DEFAULTS stringForKey:@"FindOnVolume"],
-        @"casesensitive": [DEFAULTS objectForKey:@"CaseSensitive"],
-        @"skippackages": [DEFAULTS objectForKey:@"SkipPackageContents"],
-        @"skipinvisibles": [DEFAULTS objectForKey:@"SkipInvisibleFiles"],
-        @"skipsystemfolder": [DEFAULTS objectForKey:@"SkipSystemFolder"]
-    };
-    return [[[self class] alloc] initWithDictionary:sd];
+    return [[[self class] alloc] initWithDictionary:[self defaultDict]];
+}
+
++ (NSDictionary *)defaultDict {
+    NSDictionary *dd = @{
+                         @"filetype": [DEFAULTS stringForKey:@"FindItemTypes"],
+                         @"matchtype": [DEFAULTS stringForKey:@"FindNameMatch"],
+                         @"searchstring": @"",
+                         @"volume": [DEFAULTS stringForKey:@"FindOnVolume"],
+                         @"casesensitive": [DEFAULTS objectForKey:@"CaseSensitive"],
+                         @"skippackages": [DEFAULTS objectForKey:@"SkipPackageContents"],
+                         @"skipinvisibles": [DEFAULTS objectForKey:@"SkipInvisibleFiles"],
+                         @"skipsystemfolder": [DEFAULTS objectForKey:@"SkipSystemFolder"]
+                         };
+    return dd;
+}
+
+- (void)saveAsRecentSearch {
+    NSMutableArray *recent = [[DEFAULTS objectForKey:@"RecentSearches"] mutableCopy];
+    if ([recent count] >= NUM_RECENT_SEARCHES) {
+        while ([recent count] >= NUM_RECENT_SEARCHES) {
+            [recent removeLastObject];
+        }
+    }
+    [recent addObject:[NSDictionary dictionaryWithDictionary:self]];
+    [DEFAULTS setObject:[recent copy] forKey:@"RecentSearches"];
 }
 
 //- (instancetype)initWithDictionary:(NSDictionary *)dict {
@@ -58,10 +73,10 @@
 //- (instancetype)init {
 //    return [self initWithDictionary:@{}];
 //}
-
-- (NSString *)description {
-    return [NSString stringWithFormat:@"Find %@ where %@ '%@' on '%@'",
-            self[@"items"], self[@"match"], self[@"search"], self[@"volume"]];
-}
+//
+//- (NSString *)description {
+//    return [NSString stringWithFormat:@"Find %@ where %@ '%@' on '%@'",
+//            self[@"items"], self[@"match"], self[@"search"], self[@"volume"]];
+//}
 
 @end

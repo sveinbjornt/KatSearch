@@ -156,6 +156,15 @@
     [[searchOptionsMenu itemWithTitle:@"Skip System Folder"] setState:[query[@"skipsystemfolder"] boolValue]];
 }
 
+- (void)saveQuery:(SearchQuery *)query {
+    [query saveAsRecentSearch];
+}
+
+- (SearchQuery *)queryFromControls {
+    // TODO: Configure query according to control status
+    return [SearchQuery defaultQuery];
+}
+
 #pragma mark - Save to file
 
 - (IBAction)saveDocument:(id)sender {
@@ -236,6 +245,8 @@
         [task stop];
         return;
     }
+    
+    [self saveQuery:[self queryFromControls]];
     
     [self.window setTitle:[NSString stringWithFormat:@"“%@” on %@ - KatSearch", [searchField stringValue], [volumesPopupButton titleOfSelectedItem]]];
     
@@ -532,7 +543,7 @@
 }
 
 - (void)hideFilter {
-    
+    [self.window makeFirstResponder:searchField];
 }
 
 #pragma mark - Item actions

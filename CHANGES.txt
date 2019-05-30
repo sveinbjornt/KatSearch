@@ -6,8 +6,8 @@ FUTURE VERSION:
 * Use CoreData & NSArrayController to populate table view
 * Filter search field menu with togglable matching of the various fields
 * Extensive master search filters?
-* Date filters
-* Kind filters
+    * Date filters
+    * Kind filters
 * Only filter by columns that are enabled
 * Show label color in result list
 
@@ -32,13 +32,14 @@ FOR 1.0
 * Highlight matching string when filter active
 * Versions for identical apps in Open With menu
 * Drag and drop folder/volume on window to make it target of search
-* Interpret '*' search string as request to find all files
+* Interpret empty search string as request to find all files (find out how to list ALL files via searchfs function)
 * Implement custom Cmd-H to hide windows while in Status Item mode. Reveal when any window selected in menu or menu triggered.
 * Distinction between Alias/Symlink should be clear in "Kind" even if LS don't distinguish between them
 * Smarter priming of search item caches
 * "Show Original" for aliases/symlinks
 * Get Skip Package Contents working
 * Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
+
 
 For next release:
 DONE * Override Cmd-F to show filter field
@@ -62,3 +63,4 @@ DONE * Status Menu mode
 0.1a - 25/04/2019
 
     * Initial release alpha release
+

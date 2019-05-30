@@ -34,5 +34,6 @@
 @interface SearchQuery : MutableDictProxy
 
 + (instancetype)defaultQuery;
+- (void)saveAsRecentSearch;
 
 @end
