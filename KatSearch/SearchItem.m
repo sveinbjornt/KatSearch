@@ -447,6 +447,14 @@
     return S_ISDIR(cachedStatPtr->st_mode);
 }
 
+- (BOOL)isHidden {
+    CFURLRef inURL = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (CFStringRef)self.path, kCFURLPOSIXPathStyle, !self.isDirectory);
+    LSItemInfoRecord itemInfo;
+    LSCopyItemInfoForURL(inURL, kLSRequestAllFlags, &itemInfo);
+    BOOL isInvisible = itemInfo.flags & kLSItemInfoIsInvisible;
+    return (isInvisible != 0);
+}
+
 - (BOOL)exists {
     return [[NSFileManager defaultManager] fileExistsAtPath:self.path];
 }

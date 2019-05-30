@@ -94,12 +94,18 @@
     [tableView setDoubleAction:@selector(rowDoubleClicked:)];
     [tableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
     
+    // Hide columns not enabled in Defaults
     for (NSTableColumn *col in [tableView tableColumns]) {
         NSString *identifier = [col identifier];
         if ([COLUMNS containsObject:identifier]) {
             NSString *defKey = [NSString stringWithFormat:@"%@%@", COL_DEFAULT_PREFIX, identifier];
             [col setHidden:![DEFAULTS boolForKey:defKey]];
         }
+    }
+    if ([DEFAULTS boolForKey:@"PreviouslyLaunched"] == NO) {
+        NSTableColumn *itemsCol = [tableView tableColumnWithIdentifier:@"Items"];
+        [itemsCol setWidth:200.f];
+        [self.window center];
     }
     
     [pathBar setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
@@ -426,7 +432,7 @@
 #pragma mark - Authentication
 
 - (IBAction)toggleAuthentication:(id)sender {
-    
+    // TODO: Move this over to app delegate. Authorization should be shared by all search windows.
     if (!authorizationRef) {
         OSStatus err = [self authenticate];
         if (err != errAuthorizationSuccess) {
@@ -686,9 +692,10 @@
 - (void)menuWillOpen:(NSMenu *)menu {
     
     if (menu == itemContextualMenu) {
-
+        
         NSMutableArray *items = [self selectedItems];
         NSUInteger numSelectedFiles = [items count];
+        BOOL single = (numSelectedFiles == 1);
         NSString *copyTitle = @"";
         
         if (numSelectedFiles == 0) {
@@ -706,7 +713,7 @@
         
         // TODO: Get Share menu working
         // Only show Share menu if a single item is selected
-        if (numSelectedFiles == 1) {
+        if (single) {
             NSMenu *shareMenu = [NSSharingServicePicker menuForSharingItems:items
                                                                  withTarget:self
                                                                    selector:@selector(redString:)
@@ -716,14 +723,24 @@
             [[menu itemWithTitle:@"Share"] setHidden:YES];
         }
         
+        NSLog(@"Hidden: %d", [items[0] isHidden]);
+        
+        // Unless its defaults have been changed, the Finder is
+        // unable to perform any operations on hidden files
+        BOOL singleHidden = (single && [items[0] isHidden]);
+        [[menu itemWithTitle:@"Get Info"] setEnabled:!singleHidden];
+        [[menu itemWithTitle:@"Show in Finder"] setEnabled:!singleHidden];
+        [[menu itemWithTitle:@"Quick Look"] setEnabled:!singleHidden];
+        
         // Only show Show Original menu if a single item is selected and the item in
         // question is in fact a symlink/alias (or in Apple's parlance, a "bookmark")
-        BOOL singleBookmark = (numSelectedFiles == 1 && [items[0] isBookmark]);
+        BOOL singleBookmark = (single && [items[0] isBookmark]);
         [[menu itemWithTitle:@"Show Original"] setHidden:!singleBookmark];
         [[menu itemWithTitle:@"Open With"] setHidden:singleBookmark];
     }
     else if (menu == openWithSubMenu) {
     
+        // TODO: Use better code e.g. the NSWorkspace additions stuff incorporated into Vienna
         NSMutableArray *items = [self selectedItems];
         if ([items count] == 0) {
             return;
@@ -869,6 +886,7 @@
     }
     
     // Visually mark non-existent files
+    // TODO: Do something about non-existent files?
 //    if (item.exists == NO) {
 //        colStr = [self redString:colStr];
 //    }

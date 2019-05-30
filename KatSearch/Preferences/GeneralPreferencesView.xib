@@ -29,7 +29,7 @@
                     </buttonCell>
                 </button>
                 <box titlePosition="noTitle" id="HMa-rB-8T2">
-                    <rect key="frame" x="238" y="105" width="247" height="101"/>
+                    <rect key="frame" x="238" y="107" width="247" height="101"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="6fg-sJ-M2H">
                         <rect key="frame" x="3" y="3" width="241" height="95"/>

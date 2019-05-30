@@ -37,4 +37,8 @@
     [self activateIgnoringOtherApps:YES];
 }
 
+- (void)hideApp:(id)sender {
+    NSLog(@"Hiding");
+}
+
 @end

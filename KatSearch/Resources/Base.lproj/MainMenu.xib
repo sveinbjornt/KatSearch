@@ -188,7 +188,8 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Find" id="1b7-l0-nxx">
                                     <items>
-                                        <menuItem title="Find…" tag="1" keyEquivalent="f" id="Xz5-n4-O0W">
+                                        <menuItem title="Find…" tag="1" id="Xz5-n4-O0W">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="performFindPanelAction:" target="-1" id="cD7-Qs-BN4"/>
                                             </connections>
@@ -364,7 +365,7 @@
                                     <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowPathBar" id="Ftt-bJ-BBd"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Show Filter" keyEquivalent="F" id="US5-57-Khe">
+                            <menuItem title="Show Filter" keyEquivalent="f" id="US5-57-Khe">
                                 <connections>
                                     <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowFilter" id="ZHw-N3-vnX"/>
                                 </connections>
@@ -519,12 +520,6 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="openDonations:" target="Voe-Tx-rLC" id="vYl-jU-zfO"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="License" id="DlV-38-wLS">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="openLicense:" target="Voe-Tx-rLC" id="all-A1-ijn"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="searchfs Man Page" id="nKS-U6-hcR">

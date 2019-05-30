@@ -76,6 +76,8 @@
 //    MASShortcut
 }
 
+#pragma mark - NSApplicationDelegate
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [self setAppMode:[DEFAULTS boolForKey:@"StatusItemMode"]];
     // Set and remember the shortcut
@@ -100,7 +102,6 @@
             [self newWindow:self];
         }
     } else {
-        [DEFAULTS setBool:YES forKey:@"PreviouslyLaunched"];
         [self showIntroWindow:self];
     }
 }
@@ -138,6 +139,8 @@
     }
 }
 
+#pragma mark - App Mode
+
 - (void)setAppMode:(BOOL)backgroundMode {
     ProcessSerialNumber psn = { 0, kCurrentProcess };
     OSStatus returnCode = noErr;
@@ -169,7 +172,7 @@
     DLog(@"Received search in folder request");
 }
 
-#pragma mark -
+#pragma mark - Window controllers
 
 - (IBAction)newWindow:(id)sender {
     [self animateStatusItem];
@@ -177,11 +180,30 @@
     SearchController *controller = [[SearchController alloc] initWithWindowNibName:@"SearchWindow"];
     [windowControllers addObject:controller];
     [controller showWindow:self];
+    [DEFAULTS setBool:YES forKey:@"PreviouslyLaunched"];
 }
 
 - (void)windowDidClose:(id)sender {
     [windowControllers removeObject:sender];
 }
+
+- (IBAction)showIntroWindow:(id)sender {
+    if (introWindowController == nil) {
+        introWindowController = [IntroController newController];
+    }
+    [introWindowController showWindow:nil];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+}
+
+- (IBAction)showPreferences:(id)sender {
+    if (prefsController == nil) {
+        prefsController = [PrefsController new];
+    }
+    [prefsController showWindow:nil];
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+}
+
+#pragma mark - Recent Searches
 
 - (void)noteRecentSearch:(SearchTask *)task {
     if ([DEFAULTS boolForKey:@"RememberRecentSearches"] == NO) {
@@ -196,26 +218,8 @@
         [recent removeLastObject];
     }
     [recent insertObject:[task description] atIndex:0];
-
+    
     [DEFAULTS setObject:[recent copy] forKey:@"RecentSearches"];
-}
-
-- (void)menuWillOpen:(NSMenu *)menu {
-    if (menu == statusMenu) {
-    }
-    else if (menu == openRecentMenu) {
-        [menu removeAllItems];
-        
-        if ([DEFAULTS boolForKey:@"RememberRecentSearches"] == NO) {
-            // Construct menu with list of recent searches
-            NSArray *recent = [DEFAULTS objectForKey:@"RecentSearches"];
-            for (NSString *n in recent) {
-                [menu addItemWithTitle:n action:@selector(openRecentSearch:) keyEquivalent: @""];
-            }
-        }
-        [menu addItem:[NSMenuItem separatorItem]];
-        [menu addItemWithTitle:@"Clear Menu" action:@selector(clearRecentSearches:) keyEquivalent: @""];
-    }
 }
 
 - (IBAction)openRecentSearch:(id)sender {
@@ -226,15 +230,16 @@
     [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
 }
 
-#pragma mark - Status Menu
+#pragma mark - Status Item
 
 - (void)showStatusItem {
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     NSImage *icon = [NSImage imageNamed:@"StatusItemIcon"];
-    [icon setSize:NSMakeSize(18, 18)];
+    [icon setSize:NSMakeSize(16, 16)];
     [statusItem setImage:icon];
     
-    [menuBarItem setSubmenu:[mainMenu copy]];
+    NSMenu *menuBar = [mainMenu copy];
+    [menuBarItem setSubmenu:menuBar];
     
     [statusItem setMenu:statusMenu];
 }
@@ -258,25 +263,25 @@
     });
 }
 
-#pragma mark -
+#pragma mark - NSMenuDelegate
 
-- (IBAction)showIntroWindow:(id)sender {
-    if (introWindowController == nil) {
-        introWindowController = [IntroController newController];
+- (void)menuWillOpen:(NSMenu *)menu {
+    if (menu == statusMenu) {
     }
-    [introWindowController showWindow:nil];
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-}
-
-- (IBAction)showPreferences:(id)sender {
-    if (prefsController == nil) {
-        prefsController = [PrefsController new];
+    else if (menu == openRecentMenu) {
+        [menu removeAllItems];
+        
+        if ([DEFAULTS boolForKey:@"RememberRecentSearches"] == NO) {
+            // Construct menu with list of recent searches
+            NSArray *recent = [DEFAULTS objectForKey:@"RecentSearches"];
+            for (NSString *n in recent) {
+                [menu addItemWithTitle:n action:@selector(openRecentSearch:) keyEquivalent: @""];
+            }
+        }
+        [menu addItem:[NSMenuItem separatorItem]];
+        [menu addItemWithTitle:@"Clear Menu" action:@selector(clearRecentSearches:) keyEquivalent: @""];
     }
-    [prefsController showWindow:nil];
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
-
-#pragma mark -
 
 // Open Documentation.html file within app bundle
 - (IBAction)showHelp:(id)sender {

@@ -73,6 +73,7 @@
 @property (readonly, nonatomic) BOOL isBookmark;
 @property (readonly, nonatomic) BOOL isSymlink;
 @property (readonly, nonatomic) BOOL isDirectory;
+@property (readonly, nonatomic) BOOL isHidden;
 @property (readonly, nonatomic) BOOL exists;
 
 @property (readonly, nonatomic) NSString *defaultHandlerApplication;

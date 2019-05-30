@@ -4,27 +4,28 @@
 FUTURE VERSION:
 * Smarter CLT install status (version etc.)
 * Use CoreData & NSArrayController to populate table view
-* Filter menu with togglable search in diff. fields
+* Filter search field menu with togglable matching of the various fields
+* Extensive master search filters?
+* Date filters
+* Kind filters
+* Only filter by columns that are enabled
+* Show label color in result list
 
 FOR 1.0
 
-* Extensive master search filters?
-    * Date filters
-    * Kind filters
-    * Matches regex - Should highlight strings that match
-    * Only filter by columns that are enabled
-
 * Regex option for filter
 * Show/hide filter
+* Filter regex support - Should highlight strings that match
+* Filter should search either all cols or name
+* Hide and clear filter by pressing X
+* Pressing Esc key should clear and close filter
 
 * Support selecting folder to search (add home folder preset)
     * Support using /usr/bin/find
 
-
 * Detect when file no longer exists at path
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
-* Search history (Recent searches)
-* Override Cmd-F to show filter field
+* Search history (Recent searches)t
 * Use STPriviledTask when authenticated (global app-wide shared authentication)
 * Show volumes which don't have catalog but have them disabled
 * Path bar with string option
@@ -32,13 +33,15 @@ FOR 1.0
 * Versions for identical apps in Open With menu
 * Drag and drop folder/volume on window to make it target of search
 * Interpret '*' search string as request to find all files
-* Implement custom Cmd-H to hide while in Status Item mode
-* Get Quick Look working in-app (esp. for images)
-* Distinction between Alias/Symlink should be clear in "Kind"
+* Implement custom Cmd-H to hide windows while in Status Item mode. Reveal when any window selected in menu or menu triggered.
+* Distinction between Alias/Symlink should be clear in "Kind" even if LS don't distinguish between them
 * Smarter priming of search item caches
 * "Show Original" for aliases/symlinks
+* Get Skip Package Contents working
+* Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
 
 For next release:
+DONE * Override Cmd-F to show filter field
 DONE * Add "Move to Trash" to contextual menu w. confirmation prompt
 DONE * Sort by permissions should use 755 etc. instead of display string
 DONE * Install CLT via Preferences

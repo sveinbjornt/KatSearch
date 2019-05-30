@@ -17,4 +17,4 @@ xcuserdata
 *.xcuserstate
 *.xcworkspace
 dsa_priv.pem
-.xcbkptlist
+*.xcbkptlist
