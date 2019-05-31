@@ -32,15 +32,19 @@
 
 @implementation LSUIElementApp
 
+// Override to make sure app is brought to the front
+// when About window is shown
 - (void)orderFrontStandardAboutPanel:(id)sender {
     [super orderFrontStandardAboutPanel:sender];
     [self activateIgnoringOtherApps:YES];
 }
 
+// To make a LSUIElement app hide like regular apps
 - (void)hideApp:(id)sender {
     [NSApp hide:self];
 }
 
+// Intercept Cmd-H keyboard shortcut to hide app
 - (void)sendEvent:(NSEvent *)event {
     if ([event type] == NSKeyDown) {
         if (([event modifierFlags] & NSDeviceIndependentModifierFlagsMask) == NSCommandKeyMask) {

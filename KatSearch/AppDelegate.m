@@ -30,7 +30,9 @@
 
 #import "Common.h"
 #import "AppDelegate.h"
+#import "LSUIElementApp.h"
 #import "SearchController.h"
+#import "SearchQuery.h"
 #import <MASShortcut/Shortcut.h>
 #import "PrefsController.h"
 #import "IntroController.h"
@@ -134,7 +136,7 @@
         [self setAppMode:[DEFAULTS boolForKey:@"StatusItemMode"]];
     } else if ([def hasSuffix:@"GlobalShortcut"]) {
         // TODO: Set shortcut for menu items
-    } else if ([def hasSuffix:@"RememberRecentSearches"]) {
+    } else if ([def hasSuffix:@"RememberRecentSearches"] && ![DEFAULTS boolForKey:@"RememberRecentSearches"]) {
         [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
     }
 }
@@ -174,13 +176,14 @@
 
 #pragma mark - Window controllers
 
-- (IBAction)newWindow:(id)sender {
+- (id)newWindow:(id)sender {
     [self animateStatusItem];
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-    SearchController *controller = [[SearchController alloc] initWithWindowNibName:@"SearchWindow"];
+    SearchController *controller = [SearchController newController];
     [windowControllers addObject:controller];
     [controller showWindow:self];
     [DEFAULTS setBool:YES forKey:@"PreviouslyLaunched"];
+    return controller;
 }
 
 - (void)windowDidClose:(id)sender {
@@ -205,25 +208,16 @@
 
 #pragma mark - Recent Searches
 
-- (void)noteRecentSearch:(SearchTask *)task {
-    if ([DEFAULTS boolForKey:@"RememberRecentSearches"] == NO) {
-        return;
-    }
-    
-    NSMutableArray *recent = [[DEFAULTS objectForKey:@"RecentSearches"] mutableCopy];
-    if (!recent) {
-        recent = [NSMutableArray new];
-    }
-    else if ([recent count] >= NUM_RECENT_SEARCHES) {
-        [recent removeLastObject];
-    }
-    [recent insertObject:[task description] atIndex:0];
-    
-    [DEFAULTS setObject:[recent copy] forKey:@"RecentSearches"];
-}
-
 - (IBAction)openRecentSearch:(id)sender {
-    // TODO: Implement me
+    SearchQuery *sq = [sender representedObject];
+    if (sq) {
+        SearchController *c = [SearchController newControllerWithSearchQuery:sq];
+        [windowControllers addObject:c];
+        [c showWindow:self];
+    }
+    else {
+        DLog(@"No search query associated with item.");
+    }
 }
 
 - (IBAction)clearRecentSearches:(id)sender {
@@ -239,12 +233,12 @@
     [statusItem.button setImage:icon];
     
     // Behaviour can only be set on 10.12+
-    NSOperatingSystemVersion sysver = [[NSProcessInfo processInfo] operatingSystemVersion];
-    if (sysver.majorVersion > 10 || sysver.minorVersion >= 12) {
-        if (@available(macOS 10.12, *)) {
-            [statusItem setBehavior:NSStatusItemBehaviorRemovalAllowed|NSStatusItemBehaviorTerminationOnRemoval];
-        }
-    }
+//    NSOperatingSystemVersion sysver = [[NSProcessInfo processInfo] operatingSystemVersion];
+//    if (sysver.majorVersion > 10 || sysver.minorVersion >= 12) {
+//        if (@available(macOS 10.12, *)) {
+//            [statusItem setBehavior:NSStatusItemBehaviorRemovalAllowed|NSStatusItemBehaviorTerminationOnRemoval];
+//        }
+//    }
     NSMenu *menuBar = [mainMenu copy];
     [menuBarItem setSubmenu:menuBar];
     
@@ -280,14 +274,20 @@
 - (void)menuWillOpen:(NSMenu *)menu {
     if (menu == statusMenu) {
     }
+    // Construct open recent menu
     else if (menu == openRecentMenu) {
         [menu removeAllItems];
-        
-        if ([DEFAULTS boolForKey:@"RememberRecentSearches"] == NO) {
+        if ([DEFAULTS boolForKey:@"RememberRecentSearches"]) {
             // Construct menu with list of recent searches
             NSArray *recent = [DEFAULTS objectForKey:@"RecentSearches"];
-            for (NSString *n in recent) {
-                [menu addItemWithTitle:n action:@selector(openRecentSearch:) keyEquivalent: @""];
+            for (NSDictionary *d in recent) {
+                SearchQuery *sq = [SearchQuery searchQueryFromDictionary:d];
+                NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[sq menuDescription] action:@selector(openRecentSearch:) keyEquivalent:@""];
+                [item setRepresentedObject:sq];
+                NSImage *img = [NSApp applicationIconImage];
+                [img setSize:NSMakeSize(16,16)];
+                [item setImage:img];
+                [menu addItem:item];
             }
         }
         [menu addItem:[NSMenuItem separatorItem]];

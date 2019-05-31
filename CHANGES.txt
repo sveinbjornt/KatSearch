@@ -41,7 +41,8 @@ FOR 1.0
 * Get Skip Package Contents working
 * Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
 * Make Status Item icon thinner. It's 16x16, should be 16x14 or something.
-
+* Fix state of Action menu items when hidden files selected, to match contextual action menu
+* Order recent by date, remove oldest when adding, deduplicate identical saved searches
 
 For next release:
 DONE * Implement custom Cmd-H to hide windows while in Status Item mode. Reveal when any window selected in menu or menu triggered.

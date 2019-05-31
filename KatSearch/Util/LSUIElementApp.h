@@ -32,4 +32,6 @@
 
 @interface LSUIElementApp : NSApplication
 
+- (void)hideApp:(id)sender;
+
 @end

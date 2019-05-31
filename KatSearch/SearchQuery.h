@@ -34,6 +34,9 @@
 @interface SearchQuery : MutableDictProxy
 
 + (instancetype)defaultQuery;
++ (instancetype)searchQueryFromDictionary:(NSDictionary *)dict;
+- (instancetype)initWithSearchQueryDictionary:(NSDictionary *)dict;
 - (void)saveAsRecentSearch;
+- (id)menuDescription;
 
 @end

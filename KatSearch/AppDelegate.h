@@ -34,9 +34,8 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate>
 
-- (IBAction)newWindow:(id)sender;
+- (id)newWindow:(id)sender;
 - (void)windowDidClose:(id)sender;
-- (void)noteRecentSearch:(SearchTask *)task;
 - (void)setAppMode:(BOOL)backgroundMode;
 
 @end

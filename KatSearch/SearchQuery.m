@@ -34,24 +34,41 @@
 @implementation SearchQuery
 
 + (instancetype)defaultQuery {
-    return [[[self class] alloc] initWithDictionary:[self defaultDict]];
+    return [[[self class] alloc] initWithDictionary:[[self class] defaultDict]];
+}
+
++ (instancetype)searchQueryFromDictionary:(NSDictionary *)dict {
+    return [[[self class] alloc] initWithSearchQueryDictionary:dict];
+}
+
+- (instancetype)initWithSearchQueryDictionary:(NSDictionary *)dict {
+    self = [super init];
+    if (self) {
+        [self addEntriesFromDictionary:[[self class] defaultDict]];
+        [self addEntriesFromDictionary:dict];
+    }
+    return self;
 }
 
 + (NSDictionary *)defaultDict {
-    NSDictionary *dd = @{
-                         @"filetype": [DEFAULTS stringForKey:@"FindItemTypes"],
-                         @"matchtype": [DEFAULTS stringForKey:@"FindNameMatch"],
-                         @"searchstring": @"",
-                         @"volume": [DEFAULTS stringForKey:@"FindOnVolume"],
-                         @"casesensitive": [DEFAULTS objectForKey:@"CaseSensitive"],
-                         @"skippackages": [DEFAULTS objectForKey:@"SkipPackageContents"],
-                         @"skipinvisibles": [DEFAULTS objectForKey:@"SkipInvisibleFiles"],
-                         @"skipsystemfolder": [DEFAULTS objectForKey:@"SkipSystemFolder"]
-                         };
-    return dd;
+    return @{
+        @"filetype": [DEFAULTS stringForKey:@"FindItemTypes"],
+        @"matchtype": [DEFAULTS stringForKey:@"FindNameMatch"],
+        @"searchstring": @"",
+        @"volume": [DEFAULTS stringForKey:@"FindOnVolume"],
+        @"casesensitive": [DEFAULTS objectForKey:@"CaseSensitive"],
+        @"skippackages": [DEFAULTS objectForKey:@"SkipPackageContents"],
+        @"skipinvisibles": [DEFAULTS objectForKey:@"SkipInvisibleFiles"],
+        @"skipsystemfolder": [DEFAULTS objectForKey:@"SkipSystemFolder"]
+    };
 }
 
+#pragma mark -
+
 - (void)saveAsRecentSearch {
+    if (![DEFAULTS objectForKey:@"RecentSearches"]) {
+        [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
+    }
     NSMutableArray *recent = [[DEFAULTS objectForKey:@"RecentSearches"] mutableCopy];
     if ([recent count] >= NUM_RECENT_SEARCHES) {
         while ([recent count] >= NUM_RECENT_SEARCHES) {
@@ -60,23 +77,18 @@
     }
     [recent addObject:[NSDictionary dictionaryWithDictionary:self]];
     [DEFAULTS setObject:[recent copy] forKey:@"RecentSearches"];
+    [DEFAULTS synchronize];
 }
 
-//- (instancetype)initWithDictionary:(NSDictionary *)dict {
-//    self = [super init];
-//    if (self) {
-//
-//    }
-//    return self;
-//}
-//
-//- (instancetype)init {
-//    return [self initWithDictionary:@{}];
-//}
-//
-//- (NSString *)description {
-//    return [NSString stringWithFormat:@"Find %@ where %@ '%@' on '%@'",
-//            self[@"items"], self[@"match"], self[@"search"], self[@"volume"]];
-//}
+#pragma mark -
+
+- (id)menuDescription {
+    return [self description];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ where %@ '%@' on '%@'",
+            self[@"filetype"], self[@"matchtype"], self[@"searchstring"], self[@"volume"]];
+}
 
 @end

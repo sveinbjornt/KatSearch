@@ -70,16 +70,34 @@
     SearchTask *task;
     AuthorizationRef authorizationRef;
     NSTimer *filterTimer;
+    
+    SearchQuery *startingQuery;
 }
 @end
 
 @implementation SearchController
 
++ (instancetype)newController {
+    return [[SearchController alloc] initWithWindowNibName:@"SearchWindow"];
+}
+
++ (instancetype)newControllerWithSearchQuery:(SearchQuery *)sq {
+    return [[SearchController alloc] initWithSearchQuery:sq];
+}
+
+- (instancetype)initWithSearchQuery:(SearchQuery *)sq {
+    self = [[[self class] alloc] initWithWindowNibName:@"SearchWindow"];
+    if (self) {
+        startingQuery = sq;
+    }
+    return self;
+}
+
 #pragma mark - NSWindowDelegate
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-
+    
 //    [[self.window contentView] setWantsLayer:YES];
 //    [scrollView setWantsLayer:YES];
 //    [tableView setCanDrawSubviewsIntoLayer:YES];
@@ -120,7 +138,11 @@
     [self.window setInitialFirstResponder:searchField];
     [self.window makeFirstResponder:searchField];
     
-    [self loadQuery:[SearchQuery defaultQuery]];
+    SearchQuery *sq = startingQuery ? startingQuery : [SearchQuery defaultQuery];
+    [self loadQuery:sq];
+    if (startingQuery) {
+        [self search:self];
+    }
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
@@ -161,8 +183,17 @@
 }
 
 - (SearchQuery *)queryFromControls {
-    // TODO: Configure query according to control status
-    return [SearchQuery defaultQuery];
+    // Create search query dict from the state of search controls
+    return [[SearchQuery alloc] initWithSearchQueryDictionary:@{
+        @"filetype": [itemTypePopupButton titleOfSelectedItem],
+        @"matchtype": [matchCriterionPopupButton titleOfSelectedItem],
+        @"searchstring": [searchField stringValue],
+        @"volume": [volumesPopupButton mountPointOfSelectedItem],
+        @"casesensitive": @((BOOL)[[searchOptionsMenu itemWithTitle:@"Case Sensitive"] state]),
+        @"skippackages": @((BOOL)[[searchOptionsMenu itemWithTitle:@"Skip Package Contents"] state]),
+        @"skipinvisibles": @((BOOL)[[searchOptionsMenu itemWithTitle:@"Skip Invisible Files"] state]),
+        @"skipsystemfolder": @((BOOL)[[searchOptionsMenu itemWithTitle:@"Skip System Folder"] state]),
+    }];
 }
 
 #pragma mark - Save to file
@@ -306,9 +337,7 @@
     if (authorizationRef) {
         [task setAuthorizationRef:authorizationRef];
     }
-    
-    [(AppDelegate *)[[NSApplication sharedApplication] delegate] noteRecentSearch:task];
-    
+        
     [task start];
 }
 

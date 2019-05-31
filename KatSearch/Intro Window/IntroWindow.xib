@@ -51,10 +51,10 @@
                                         <outlet property="delegate" destination="-2" id="bht-9o-kEe"/>
                                     </connections>
                                 </imageView>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aD-ZT-XIi">
-                                    <rect key="frame" x="25" y="176" width="342" height="34"/>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aD-ZT-XIi">
+                                    <rect key="frame" x="25" y="186" width="342" height="24"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" selectable="YES" alignment="center" title="Please select your preferred interface mode:" id="X81-ge-0VI">
+                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" alignment="center" title="Please select your preferred interface mode:" usesSingleLineMode="YES" id="X81-ge-0VI">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

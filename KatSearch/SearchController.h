@@ -32,9 +32,13 @@
 #import "SearchTask.h"
 #import "PasteboardDelegate.h"
 
+@class SearchQuery;
+
 @interface SearchController : NSWindowController <  NSTableViewDelegate,
                                                     NSTableViewDataSource,
                                                     NSMenuDelegate,
                                                     SearchTaskDelegate,
                                                     PasteboardDelegate>
++ (instancetype)newController;
++ (instancetype)newControllerWithSearchQuery:(SearchQuery *)sq;
 @end
