@@ -28,29 +28,13 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "LSUIElementApp.h"
+#import "LSUIElementWindow.h"
 
-@implementation LSUIElementApp
+@implementation LSUIElementWindow
 
-- (void)orderFrontStandardAboutPanel:(id)sender {
-    [super orderFrontStandardAboutPanel:sender];
-    [self activateIgnoringOtherApps:YES];
+- (void)makeKeyAndOrderFront:(id)sender {
+    [NSApp activateIgnoringOtherApps:YES];
+    [super makeKeyAndOrderFront:sender];
 }
-
-- (void)hideApp:(id)sender {
-    [NSApp hide:self];
-}
-
-- (void)sendEvent:(NSEvent *)event {
-    if ([event type] == NSKeyDown) {
-        if (([event modifierFlags] & NSDeviceIndependentModifierFlagsMask) == NSCommandKeyMask) {
-            if ([[event charactersIgnoringModifiers] isEqualToString:@"h"]) {
-                [self hideApp:self];
-            }
-        }
-    }
-    [super sendEvent:event];
-}
-
 
 @end

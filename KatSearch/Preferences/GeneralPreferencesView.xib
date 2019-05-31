@@ -88,7 +88,7 @@
                         <binding destination="Yso-iW-DKf" name="value" keyPath="values.ShowFullPath" id="58V-6Q-cLI"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" id="nzk-au-7PV">
+                <button hidden="YES" verticalHuggingPriority="750" id="nzk-au-7PV">
                     <rect key="frame" x="241" y="65" width="245" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Show Path String Instead of Bar" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vJ4-v3-brh">

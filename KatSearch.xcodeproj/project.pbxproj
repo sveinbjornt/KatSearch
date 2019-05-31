@@ -32,6 +32,7 @@
 		F48451E820F8E4CB005797C1 /* PasteboardTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* PasteboardTableView.m */; };
 		F48451F020F8F91C005797C1 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F48451EF20F8F914005797C1 /* dsa_pub.pem */; };
 		F48DC10520FCD16400B21222 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = F48DC10420FCD16400B21222 /* AppIcon.icns */; };
+		F497BB2822A17ED800F66BD4 /* LSUIElementWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F497BB2722A17ED800F66BD4 /* LSUIElementWindow.m */; };
 		F498ADEF22666D2200CB6A6E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F498ADEE22666D2200CB6A6E /* Sparkle.framework */; };
 		F498ADF022666D4300CB6A6E /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F498ADED22666CDB00CB6A6E /* MASShortcut.framework */; };
 		F498ADF122666D4E00CB6A6E /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F498ADEE22666D2200CB6A6E /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -127,6 +128,8 @@
 		F48451EE20F8F914005797C1 /* dsa_priv.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = dsa_priv.pem; sourceTree = "<group>"; };
 		F48451EF20F8F914005797C1 /* dsa_pub.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		F48DC10420FCD16400B21222 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		F497BB2622A17ED800F66BD4 /* LSUIElementWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSUIElementWindow.h; sourceTree = "<group>"; };
+		F497BB2722A17ED800F66BD4 /* LSUIElementWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSUIElementWindow.m; sourceTree = "<group>"; };
 		F498ADED22666CDB00CB6A6E /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MASShortcut.framework; sourceTree = "<group>"; };
 		F498ADEE22666D2200CB6A6E /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		F498ADF32266A91500CB6A6E /* PasteboardDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasteboardDelegate.h; sourceTree = "<group>"; };
@@ -262,6 +265,8 @@
 				F45CA7002299BA3000D4D6D0 /* MutableDictProxy.m */,
 				F45CA6F62298B80500D4D6D0 /* LSUIElementApp.h */,
 				F45CA6F72298B80500D4D6D0 /* LSUIElementApp.m */,
+				F497BB2622A17ED800F66BD4 /* LSUIElementWindow.h */,
+				F497BB2722A17ED800F66BD4 /* LSUIElementWindow.m */,
 				F45CA6FC229989D800D4D6D0 /* STPathControl.h */,
 				F45CA6FD229989D800D4D6D0 /* STPathControl.m */,
 				F4CB19CA2294770C00265CE8 /* OptScrollView.h */,
@@ -460,6 +465,7 @@
 				F4CB19AD2291A84400265CE8 /* GeneralPreferencesController.m in Sources */,
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
+				F497BB2822A17ED800F66BD4 /* LSUIElementWindow.m in Sources */,
 				F45CA6F52298629700D4D6D0 /* SelectableImageView.m in Sources */,
 				F45CA6FE229989D800D4D6D0 /* STPathControl.m in Sources */,
 				F462A25F20E111CF0062B230 /* AppDelegate.m in Sources */,

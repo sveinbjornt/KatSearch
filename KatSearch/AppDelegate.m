@@ -235,12 +235,24 @@
 - (void)showStatusItem {
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     NSImage *icon = [NSImage imageNamed:@"StatusItemIcon"];
-    [icon setSize:NSMakeSize(16, 16)];
-    [statusItem setImage:icon];
+    [icon setSize:NSMakeSize(16, 14)];
+    [statusItem.button setImage:icon];
     
+    // Behaviour can only be set on 10.12+
+    NSOperatingSystemVersion sysver = [[NSProcessInfo processInfo] operatingSystemVersion];
+    if (sysver.majorVersion > 10 || sysver.minorVersion >= 12) {
+        if (@available(macOS 10.12, *)) {
+            [statusItem setBehavior:NSStatusItemBehaviorRemovalAllowed|NSStatusItemBehaviorTerminationOnRemoval];
+        }
+    }
     NSMenu *menuBar = [mainMenu copy];
     [menuBarItem setSubmenu:menuBar];
     
+    NSMenu *appMenu = [[menuBar itemWithTitle:@"KatSearch"] submenu];
+    NSMenuItem *hideMenuItem = [appMenu itemWithTitle:@"Hide KatSearch"];
+    [hideMenuItem setAction:@selector(hideApp:)];
+    [hideMenuItem setTarget:NSApp];
+    [hideMenuItem setEnabled:YES];
     [statusItem setMenu:statusMenu];
 }
 

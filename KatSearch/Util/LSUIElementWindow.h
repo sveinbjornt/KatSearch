@@ -28,29 +28,12 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "LSUIElementApp.h"
+#import <Cocoa/Cocoa.h>
 
-@implementation LSUIElementApp
+NS_ASSUME_NONNULL_BEGIN
 
-- (void)orderFrontStandardAboutPanel:(id)sender {
-    [super orderFrontStandardAboutPanel:sender];
-    [self activateIgnoringOtherApps:YES];
-}
-
-- (void)hideApp:(id)sender {
-    [NSApp hide:self];
-}
-
-- (void)sendEvent:(NSEvent *)event {
-    if ([event type] == NSKeyDown) {
-        if (([event modifierFlags] & NSDeviceIndependentModifierFlagsMask) == NSCommandKeyMask) {
-            if ([[event charactersIgnoringModifiers] isEqualToString:@"h"]) {
-                [self hideApp:self];
-            }
-        }
-    }
-    [super sendEvent:event];
-}
-
+@interface LSUIElementWindow : NSWindow
 
 @end
+
+NS_ASSUME_NONNULL_END

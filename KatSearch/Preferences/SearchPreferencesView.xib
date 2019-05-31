@@ -9,7 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="SearchPreferencesController">
             <connections>
                 <outlet property="view" destination="1" id="11"/>
-                <outlet property="volumesPopupButton" destination="KIq-Gm-B2y" id="gpz-sK-pBW"/>
+                <outlet property="volumesPopupButton" destination="KIq-Gm-B2y" id="i97-Qi-4zY"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -93,6 +93,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="searchfsCapableVolumesOnly" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="defaultVolumeChanged:" target="-2" id="LAz-99-jZA"/>
+                                </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" id="SUU-s8-5N2">
                                 <rect key="frame" x="240" y="119" width="174" height="18"/>
