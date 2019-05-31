@@ -130,14 +130,15 @@
     }
     
     pid_t pid = [task processIdentifier];
+    task = nil;
+    remnants = nil;
+    readHandle = nil;
+
     if (pid) {
         kill(pid, SIGKILL);
         killed = YES;
     }
     
-    task = nil;
-    remnants = nil;
-    readHandle = nil;
     
     if (self.delegate) {
         [self.delegate taskDidFinish:self];
@@ -169,6 +170,9 @@
         
         NSMutableArray *items = [NSMutableArray array];
         for (NSString *path in paths) {
+            if (![path hasPrefix:@"/"]) {
+                continue;
+            }
             SearchItem *item = [[SearchItem alloc] initWithPath:path];
             if (item) {
                 [items addObject:item];

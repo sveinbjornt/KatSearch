@@ -27,7 +27,6 @@ FOR 1.0
 
 * Detect when file no longer exists at path
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
-* Search history (Recent searches)t
 * Use STPriviledTask when authenticated (global app-wide shared authentication)
 * Show volumes that don't have a catalog but visually identify them
 
@@ -40,11 +39,11 @@ FOR 1.0
 * "Show Original" for aliases/symlinks
 * Get Skip Package Contents working
 * Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
-* Make Status Item icon thinner. It's 16x16, should be 16x14 or something.
 * Order recent by date, remove oldest when adding, deduplicate identical saved searches
 * Open recent for status item menu
 
 For next release:
+DONE * Search history (Recent searches)t
 DONE * Fix state of Action menu items when hidden files selected, to match contextual action menu
 DONE * Implement custom Cmd-H to hide windows while in Status Item mode. Reveal when any window selected in menu or menu triggered.
 DONE * Override Cmd-F to show filter field

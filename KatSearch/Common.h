@@ -50,7 +50,7 @@
 #define CLT_INSTALL_PATH            @"/usr/local/bin/searchfs"
 #define CLT_MAN_INSTALL_PATH        @"/usr/local/share/man/man1/searchfs.1.gz"
 
-#define NUM_RECENT_SEARCHES         10
+#define NUM_RECENT_SEARCHES         15
 
 #define VALUES_KEYPATH(X)           [NSString stringWithFormat:@"values.%@", (X)]
 

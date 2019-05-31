@@ -132,12 +132,19 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     NSString *def = [keyPath substringFromIndex:[@"values." length]];
+    
     if ([def hasSuffix:@"StatusItemMode"]) {
         [self setAppMode:[DEFAULTS boolForKey:@"StatusItemMode"]];
-    } else if ([def hasSuffix:@"GlobalShortcut"]) {
+    }
+    else if ([def hasSuffix:@"GlobalShortcut"]) {
         // TODO: Set shortcut for menu items
-    } else if ([def hasSuffix:@"RememberRecentSearches"] && ![DEFAULTS boolForKey:@"RememberRecentSearches"]) {
-        [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
+    }
+    else if ([def hasSuffix:@"RememberRecentSearches"]) {
+        if (![DEFAULTS boolForKey:@"RememberRecentSearches"]) {
+            // Purge search history
+            [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
+            [DEFAULTS synchronize];
+        }
     }
 }
 

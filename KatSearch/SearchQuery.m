@@ -75,7 +75,7 @@
             [recent removeLastObject];
         }
     }
-    [recent addObject:[NSDictionary dictionaryWithDictionary:self]];
+    [recent insertObject:[NSDictionary dictionaryWithDictionary:self] atIndex:0];
     [DEFAULTS setObject:[recent copy] forKey:@"RecentSearches"];
     [DEFAULTS synchronize];
 }
