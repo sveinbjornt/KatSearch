@@ -36,6 +36,7 @@
 
 @interface SearchController : NSWindowController <  NSTableViewDelegate,
                                                     NSTableViewDataSource,
+                                                    NSMenuItemValidation,
                                                     NSMenuDelegate,
                                                     SearchTaskDelegate,
                                                     PasteboardDelegate>

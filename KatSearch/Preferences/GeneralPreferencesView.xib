@@ -49,6 +49,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <binding destination="Yso-iW-DKf" name="value" keyPath="values.RememberRecentSearches" id="6yA-Bp-sxn"/>
+                    </connections>
                 </button>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Mta-tP-DYT" customClass="SelectableImageView">
                     <rect key="frame" x="37" y="127" width="80" height="80"/>
@@ -78,7 +81,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="4Dq-yh-mn9">
-                    <rect key="frame" x="241" y="31" width="245" height="18"/>
+                    <rect key="frame" x="241" y="31" width="243" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Show Full Item Path" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0j1-NA-LGc">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

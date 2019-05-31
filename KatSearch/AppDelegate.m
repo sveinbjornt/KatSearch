@@ -227,6 +227,7 @@
 #pragma mark - Status Item
 
 - (void)showStatusItem {
+    // Create status item
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     NSImage *icon = [NSImage imageNamed:@"StatusItemIcon"];
     [icon setSize:NSMakeSize(16, 14)];
@@ -239,14 +240,18 @@
 //            [statusItem setBehavior:NSStatusItemBehaviorRemovalAllowed|NSStatusItemBehaviorTerminationOnRemoval];
 //        }
 //    }
+    
+    // Duplicate main menu, insert it as submenu in the status item menu
     NSMenu *menuBar = [mainMenu copy];
     [menuBarItem setSubmenu:menuBar];
     
+    // Enable Hide menu item
     NSMenu *appMenu = [[menuBar itemWithTitle:@"KatSearch"] submenu];
     NSMenuItem *hideMenuItem = [appMenu itemWithTitle:@"Hide KatSearch"];
     [hideMenuItem setAction:@selector(hideApp:)];
     [hideMenuItem setTarget:NSApp];
     [hideMenuItem setEnabled:YES];
+    
     [statusItem setMenu:statusMenu];
 }
 

@@ -848,6 +848,15 @@
     if ([menuItem action] == @selector(saveDocument:) && ![results count]) {
         return NO;
     }
+    // Disable the relevant action menu items if no search items are selected
+    BOOL itemsSelected = ([[self selectedItems] count] > 0);
+    if (([menuItem action] == @selector(getInfo:) ||
+         [menuItem action] == @selector(showInFinder:) ||
+         [menuItem action] == @selector(open:))
+         && !itemsSelected) {
+        return NO;
+    }
+    
     return YES;
 }
 
