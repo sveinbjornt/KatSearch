@@ -370,8 +370,26 @@
 //        [progressIndicator setControlSize:NSControlSizeSmall];
 //    }
     
+    // Find item properties for visible columns
+    NSMutableArray *properties = [NSMutableArray new];
+    for (NSTableColumn *col in [tableView tableColumns]) {
+        if ([col isHidden]) {
+            continue;
+        }
+        NSSortDescriptor *sortDesc = [col sortDescriptorPrototype];
+        NSString *sortKey = [sortDesc key];
+        if ([sortKey length]) {
+            [properties addObject:sortKey];
+        }
+    }
+    
+    // Call each of the item properties to prime the cache
     for (SearchItem *item in items) {
-        [item prime];
+        for (NSString *p in properties) {
+            SEL prop = NSSelectorFromString(p);
+            [item performSelector:prop];
+        }
+//        [item prime];
     }
     
     if ([progressIndicator isHidden] == NO) {

@@ -28,6 +28,7 @@
 		F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */; };
 		F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F471DF5F20F4DAE70057E667 /* Credits.rtf */; };
 		F47F586422A209DD00AD0D3F /* MenuImageAttachmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F586322A209DD00AD0D3F /* MenuImageAttachmentCell.m */; };
+		F47F586522A2106200AD0D3F /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = F471DF6520F7AF6D0057E667 /* License.txt */; };
 		F481834E22720145002738AE /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = F481834D22720145002738AE /* Defaults.plist */; };
 		F481835122726366002738AE /* SDOpenAtLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = F481834F22726366002738AE /* SDOpenAtLogin.m */; };
 		F48451E820F8E4CB005797C1 /* PasteboardTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* PasteboardTableView.m */; };
@@ -416,6 +417,7 @@
 				F45CA707229BFB0E00D4D6D0 /* searchfs.1.html in Resources */,
 				F462A27420E1122A0062B230 /* SearchWindow.xib in Resources */,
 				F45CA6F0229859EF00D4D6D0 /* IntroWindow.xib in Resources */,
+				F47F586522A2106200AD0D3F /* License.txt in Resources */,
 				F462A26420E111D10062B230 /* MainMenu.xib in Resources */,
 				F4CB199D2291064000265CE8 /* Assets.xcassets in Resources */,
 				F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */,

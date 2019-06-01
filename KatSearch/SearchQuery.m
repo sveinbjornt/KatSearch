@@ -52,6 +52,14 @@
     return self;
 }
 
+//- (BOOL)isEqual:(id)obj {
+//    BOOL sup = [super isEqual:obj];
+//    if (sup) {
+//        return YES;
+//    }
+//
+//}
+
 + (NSDictionary *)defaultDict {
     return @{
         @"filetype": [DEFAULTS stringForKey:@"FindItemTypes"],
@@ -71,13 +79,29 @@
     if (![DEFAULTS objectForKey:@"RecentSearches"]) {
         [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
     }
+    // Insert as latest search
     NSMutableArray *recent = [[DEFAULTS objectForKey:@"RecentSearches"] mutableCopy];
+    [recent insertObject:[NSDictionary dictionaryWithDictionary:self] atIndex:0];
+
+    // Remove duplicate entries
+    NSMutableSet *seenObjects = [NSMutableSet set];
+    NSPredicate *dupPred = [NSPredicate predicateWithBlock:^BOOL(id obj, NSDictionary *bind) {
+        BOOL seen = [seenObjects containsObject:obj];
+        if (!seen) {
+            [seenObjects addObject:obj];
+        }
+        return !seen;
+    }];
+    [recent filterUsingPredicate:dupPred];
+    
+    // Remove older searches
     if ([recent count] >= NUM_RECENT_SEARCHES) {
         while ([recent count] >= NUM_RECENT_SEARCHES) {
             [recent removeLastObject];
         }
     }
-    [recent insertObject:[NSDictionary dictionaryWithDictionary:self] atIndex:0];
+
+    // Save
     [DEFAULTS setObject:[recent copy] forKey:@"RecentSearches"];
     [DEFAULTS synchronize];
 }

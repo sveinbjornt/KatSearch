@@ -15,6 +15,7 @@ FUTURE VERSION:
 * Customize interface size: small (like iTunes), normal (current) and large (w. previews f. images)
 * Regex option for filter
 * Customise drag items from table view (don't drag entire line, just icon w. name)
+* Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
 
 FOR 1.0
 
@@ -37,16 +38,16 @@ FOR 1.0
 * Drag and drop folder/volume on window to make it target of search
 * Interpret empty search string as request to find all files (find out how to list ALL files via searchfs function)
 * Distinction between Alias/Symlink should be clear in "Kind" even if LS don't distinguish between them
-* Smarter priming of search item caches
 * "Show Original" for aliases/symlinks
 * Get Skip Package Contents working
-* Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
-* Order recent by date, remove oldest when adding, deduplicate identical saved searches
 * Open recent for status item menu
 * Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
 * Recent search item title search string should show regex-style modifiers (=~^$)
+* Show Volume Name, not mount path, in search history menu
 
 For next release:
+DONE * Smarter priming of search item cache
+DONE * Order recent by date, remove oldest when adding, deduplicate identical saved searches
 DONE * Search history (Recent searches)t
 DONE * Fix state of Action menu items when hidden files selected, to match contextual action menu
 DONE * Implement custom Cmd-H to hide windows while in Status Item mode. Reveal when any window selected in menu or menu triggered.

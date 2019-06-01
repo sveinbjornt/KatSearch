@@ -38,7 +38,7 @@
 #define PROGRAM_WEBSITE_URL         @"https://sveinbjorn.org/katsearch"
 #define PROGRAM_DONATIONS_URL       @"https://sveinbjorn.org/donations"
 #define PROGRAM_GITHUB_URL          @"https://github.com/sveinbjornt/KatSearch"
-#define PROGRAM_LICENSE_FILE        @"License.html"
+#define PROGRAM_LICENSE_FILE        @"License.txt"
 #define PROGRAM_MAN_PAGE_FILE       @"searchfs.1.html"
 #define PROGRAM_DOCUMENTATION_FILE  @"Documentation.html"
 
