@@ -199,7 +199,6 @@
 			children = (
 				F471DF6620F7AF6D0057E667 /* README.md */,
 				F48451E520F8DE31005797C1 /* CHANGES.txt */,
-				F47F586122A1ED7B00AD0D3F /* New Group */,
 				F471DF6520F7AF6D0057E667 /* License.txt */,
 				F4E32305225BDB1300C89C81 /* Makefile */,
 				F462A25C20E111CF0062B230 /* KatSearch */,
@@ -295,13 +294,6 @@
 				F45CA702229B4E5400D4D6D0 /* NSSharingServicePicker+ESSSharingServicePickerMenu.m */,
 			);
 			path = Util;
-			sourceTree = "<group>";
-		};
-		F47F586122A1ED7B00AD0D3F /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		F48451E920F8F914005797C1 /* Sparkle */ = {

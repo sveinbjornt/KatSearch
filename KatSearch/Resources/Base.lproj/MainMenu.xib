@@ -466,6 +466,11 @@ DQ
                                     <action selector="getInfo:" target="-1" id="QzR-5S-cvn"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Quick Look" keyEquivalent="y" id="CXK-wd-PWU" userLabel="Copy">
+                                <connections>
+                                    <action selector="quickLook:" target="-1" id="asy-wV-1b6"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="5GP-nS-Kq9">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>

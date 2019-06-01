@@ -30,8 +30,8 @@
 
 #define PROGRAM_NAME                @"KatSearch"
 
-#define PROGRAM_VERSION_MAJ         0
-#define PROGRAM_VERSION_MIN         2
+#define PROGRAM_VERSION_MAJ         1
+#define PROGRAM_VERSION_MIN         0
 #define PROGRAM_VERSION_STRING      @[NSString stringWithFormat:@"%d.%d",\
                                     PROGRAM_VERSION_MAJ, PROGRAM_VERSION_MIN]
 
@@ -60,7 +60,7 @@
 
 #define COLUMNS                     @[@"Kind", @"Size", @"DateCreated", @"DateModified", \
                                       @"DateAccessed", @"UserGroup", @"Permissions", @"UTI", \
-                                      @"MIMEType", @"FileType", @"CreatorType" ]
+                                      @"MIMEType", @"FileType", @"CreatorType"]
 
 // Logging
 #ifdef DEBUG

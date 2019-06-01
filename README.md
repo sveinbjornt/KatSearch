@@ -31,6 +31,14 @@ This is an early **alpha** release for testing purposes only. Some things will b
 
 *  **[⇩ Download KatSearch 0.1a](https://sveinbjorn.org/files/software/katsearch.zip)** (~0.8 MB, Intel 64-bit, 10.10 or later)
 
+To test the absolutely latest in-development version, clone this repository and run the following command from the repo root:
+
+```
+$ make
+```
+
+The built application can then be found at  `products/KatSearch.app`.
+
 ## Screenshots
 
 <img src="screenshots/katsearch_screenshot1.jpg" align="center">

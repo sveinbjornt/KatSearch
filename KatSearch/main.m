@@ -31,6 +31,7 @@
 #import <Cocoa/Cocoa.h>
 
 void exceptionHandler(NSException *exception) {
+    NSLog(@"%@", [exception description]);
     NSLog(@"%@", [exception reason]);
     NSLog(@"%@", [exception userInfo]);
     NSLog(@"%@", [exception callStackReturnAddresses]);

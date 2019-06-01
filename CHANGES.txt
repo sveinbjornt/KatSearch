@@ -12,11 +12,12 @@ FUTURE VERSION:
 * Show label color in result list
 * Make label first class sort property. But how to rationally order multiple?
 * Path bar with string option
+* Customize interface size: small (like iTunes), normal (current) and large (w. previews f. images)
+* Regex option for filter
+* Customise drag items from table view (don't drag entire line, just icon w. name)
 
 FOR 1.0
 
-* Regex option for filter
-* Show/hide filter
 * Filter regex support - Should highlight strings that match
 * Filter should search either all cols or name
 * Hide and clear filter by pressing X
@@ -25,6 +26,7 @@ FOR 1.0
 * Support selecting folder to search (add home folder preset)
     * Support using /usr/bin/find
 
+* Action menu item titles should alter based on no. selected items etc.
 * Detect when file no longer exists at path
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
 * Use STPriviledTask when authenticated (global app-wide shared authentication)
@@ -41,6 +43,8 @@ FOR 1.0
 * Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
 * Order recent by date, remove oldest when adding, deduplicate identical saved searches
 * Open recent for status item menu
+* Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
+
 
 For next release:
 DONE * Search history (Recent searches)t

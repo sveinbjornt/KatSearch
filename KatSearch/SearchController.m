@@ -681,7 +681,8 @@
     NSString *q = [NSString stringWithFormat:@"Move %lu items to the Trash?", num];
     if (num == 1) {
         SearchItem *item = selItems[0];
-        q = [NSString stringWithFormat:@"Move “%@” to the Trash?", item.name];
+        NSString *type = item.isDirectory ? @"folder" : @"file";
+        q = [NSString stringWithFormat:@"Move the %@ “%@” to the Trash?", type, item.name];
     }
     if (![Alerts proceedAlert:q subText:@"" withActionNamed:@"Move to Trash"]) {
         return;
@@ -852,7 +853,8 @@
     BOOL itemsSelected = ([[self selectedItems] count] > 0);
     if (([menuItem action] == @selector(getInfo:) ||
          [menuItem action] == @selector(showInFinder:) ||
-         [menuItem action] == @selector(open:))
+         [menuItem action] == @selector(open:) ||
+         [menuItem action] == @selector(quickLook:))
          && !itemsSelected) {
         return NO;
     }
