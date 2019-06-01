@@ -27,6 +27,7 @@
 		F462A27A20E134EA0062B230 /* SearchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F462A27920E134EA0062B230 /* SearchItem.m */; };
 		F471DF5E20F4D7060057E667 /* NSWorkspace+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F471DF5C20F4D7060057E667 /* NSWorkspace+Additions.m */; };
 		F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F471DF5F20F4DAE70057E667 /* Credits.rtf */; };
+		F47F586422A209DD00AD0D3F /* MenuImageAttachmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F586322A209DD00AD0D3F /* MenuImageAttachmentCell.m */; };
 		F481834E22720145002738AE /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = F481834D22720145002738AE /* Defaults.plist */; };
 		F481835122726366002738AE /* SDOpenAtLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = F481834F22726366002738AE /* SDOpenAtLogin.m */; };
 		F48451E820F8E4CB005797C1 /* PasteboardTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* PasteboardTableView.m */; };
@@ -116,6 +117,8 @@
 		F471DF6520F7AF6D0057E667 /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		F471DF6620F7AF6D0057E667 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F47967392250102900CA0746 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		F47F586222A209DD00AD0D3F /* MenuImageAttachmentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuImageAttachmentCell.h; sourceTree = "<group>"; };
+		F47F586322A209DD00AD0D3F /* MenuImageAttachmentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuImageAttachmentCell.m; sourceTree = "<group>"; };
 		F481834D22720145002738AE /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		F481834F22726366002738AE /* SDOpenAtLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDOpenAtLogin.m; sourceTree = "<group>"; };
 		F481835022726366002738AE /* SDOpenAtLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDOpenAtLogin.h; sourceTree = "<group>"; };
@@ -292,6 +295,8 @@
 				F481834F22726366002738AE /* SDOpenAtLogin.m */,
 				F45CA703229B4E5400D4D6D0 /* NSSharingServicePicker+ESSSharingServicePickerMenu.h */,
 				F45CA702229B4E5400D4D6D0 /* NSSharingServicePicker+ESSSharingServicePickerMenu.m */,
+				F47F586222A209DD00AD0D3F /* MenuImageAttachmentCell.h */,
+				F47F586322A209DD00AD0D3F /* MenuImageAttachmentCell.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -452,6 +457,7 @@
 				F48451E820F8E4CB005797C1 /* PasteboardTableView.m in Sources */,
 				F4CB19B92291BB0300265CE8 /* AdvancedPreferencesController.m in Sources */,
 				F45CA6EF229859EF00D4D6D0 /* IntroController.m in Sources */,
+				F47F586422A209DD00AD0D3F /* MenuImageAttachmentCell.m in Sources */,
 				F45CA6F82298B80500D4D6D0 /* LSUIElementApp.m in Sources */,
 				F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */,
 				F462A27320E1122A0062B230 /* SearchController.m in Sources */,

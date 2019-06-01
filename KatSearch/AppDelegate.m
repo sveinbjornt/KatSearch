@@ -294,11 +294,14 @@
             NSArray *recent = [DEFAULTS objectForKey:@"RecentSearches"];
             for (NSDictionary *d in recent) {
                 SearchQuery *sq = [SearchQuery searchQueryFromDictionary:d];
-                NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[sq menuDescription] action:@selector(openRecentSearch:) keyEquivalent:@""];
+                NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@""
+                                                              action:@selector(openRecentSearch:)
+                                                       keyEquivalent:@""];
                 [item setRepresentedObject:sq];
-                NSImage *img = [NSApp applicationIconImage];
-                [img setSize:NSMakeSize(16,16)];
-                [item setImage:img];
+                [item setAttributedTitle:[sq menuDescription]];
+//                NSImage *img = [NSImage imageNamed:@"NSGenericDocument"];
+//                [img setSize:NSMakeSize(16,16)];
+//                [item setImage:img];
                 [menu addItem:item];
             }
         }

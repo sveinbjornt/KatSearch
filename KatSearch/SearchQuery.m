@@ -28,7 +28,9 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
+#import <AppKit/AppKit.h>
 #import "SearchQuery.h"
+#import "MenuImageAttachmentCell.h"
 #import "Common.h"
 
 @implementation SearchQuery
@@ -83,7 +85,31 @@
 #pragma mark -
 
 - (id)menuDescription {
-    return [self description];
+    NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:@"/"];
+    [icon setSize:NSMakeSize(16, 16)];
+    id<NSTextAttachmentCell> cell = [[MenuImageAttachmentCell alloc] initImageCell:icon];
+//    [(NSTextAttachmentCell *)cell setCellBaselineOffset:-10];
+    
+    NSTextAttachment *textAttachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    [textAttachment setAttachmentCell:cell];
+
+    // Create text attachment
+//    NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
+//    textAttachment.image = icon;//[NSImage imageNamed:@"NSApplicationIcon"];
+//    textAttachment.bounds = CGRectMake(0, 0, 16, 16);
+    
+    // Attribute
+    NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithAttributedString:attrStringWithImage];
+
+    NSString *title = [NSString stringWithFormat:@"“%@” on ", self[@"searchstring"]];
+    NSAttributedString *attrTitle = [[NSAttributedString alloc] initWithString:title];
+    [str insertAttributedString:attrTitle atIndex:0];
+    NSAttributedString *postStr = [[NSAttributedString alloc] initWithString:self[@"volume"]];
+    [str appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+    [str appendAttributedString:postStr];
+    return [str copy];
+//    return [self description];
 }
 
 - (NSString *)description {

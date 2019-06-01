@@ -44,7 +44,7 @@ FOR 1.0
 * Order recent by date, remove oldest when adding, deduplicate identical saved searches
 * Open recent for status item menu
 * Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
-
+* Recent search item title search string should show regex-style modifiers (=~^$)
 
 For next release:
 DONE * Search history (Recent searches)t
