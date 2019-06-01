@@ -23,17 +23,17 @@ FOR 1.0
 * Filter should search either all cols or name
 * Hide and clear filter by pressing X
 * Pressing Esc key should clear and close filter
+* Highlight matching string when filter active
 
 * Support selecting folder to search (add home folder preset)
     * Support using /usr/bin/find
+* Use STPriviledTask when authenticated (global app-wide shared authentication)
 
 * Action menu item titles should alter based on no. selected items etc.
 * Detect when file no longer exists at path
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
-* Use STPriviledTask when authenticated (global app-wide shared authentication)
 * Show volumes that don't have a catalog but visually identify them
 
-* Highlight matching string when filter active
 * Versions for identical apps in Open With menu
 * Drag and drop folder/volume on window to make it target of search
 * Interpret empty search string as request to find all files (find out how to list ALL files via searchfs function)

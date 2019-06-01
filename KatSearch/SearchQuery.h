@@ -37,6 +37,6 @@
 + (instancetype)searchQueryFromDictionary:(NSDictionary *)dict;
 - (instancetype)initWithSearchQueryDictionary:(NSDictionary *)dict;
 - (void)saveAsRecentSearch;
-- (id)menuDescription;
+- (NSAttributedString *)menuItemString;
 
 @end

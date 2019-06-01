@@ -22,8 +22,7 @@ Unlike Spotlight, KatSearch performs *no indexing* and only looks at filenames, 
 
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BDT58J7HYKAEE"><img align="right" src="https://www.paypalobjects.com/WEBSCR-640-20110306-1/en_US/i/btn/btn_donate_LG.gif" ></a>
 
-If you find this program useful, please support continued development by [making a donation](https://sveinbjorn.org/donations).
-
+**If you find this program useful, please support continued development by [making a donation](https://sveinbjorn.org/donations).**
 
 ## Downloads
 

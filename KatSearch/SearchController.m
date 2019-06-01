@@ -370,24 +370,29 @@
 //        [progressIndicator setControlSize:NSControlSizeSmall];
 //    }
     
-    // Find item properties for visible columns
-    NSMutableArray *properties = [NSMutableArray new];
-    for (NSTableColumn *col in [tableView tableColumns]) {
+    
+    // Find item property selectors for visible columns
+    NSArray *columns = [tableView tableColumns];
+    SEL selectors[[columns count]];
+    int num = 0;
+    for (NSTableColumn *col in columns) {
         if ([col isHidden]) {
             continue;
         }
         NSSortDescriptor *sortDesc = [col sortDescriptorPrototype];
         NSString *sortKey = [sortDesc key];
         if ([sortKey length]) {
-            [properties addObject:sortKey];
+            selectors[num] = NSSelectorFromString(sortKey);
+            num++;
         }
     }
     
-    // Call each of the item properties to prime the cache
+    // Call these selectors on the items to prime the cache
     for (SearchItem *item in items) {
-        for (NSString *p in properties) {
-            SEL prop = NSSelectorFromString(p);
-            [item performSelector:prop];
+        for (int i = 0; i < num; i++) {
+            SEL sel = selectors[i];
+            NSLog(@"%@", NSStringFromSelector(sel));
+            [item performSelector:sel];
         }
 //        [item prime];
     }
@@ -582,6 +587,8 @@
     [borderView setFrame:borderViewRect];
     [pathBar setHidden:YES];
 }
+
+#pragma mark - Filter
 
 - (void)showFilter {
     [self.window makeFirstResponder:filterTextField];
@@ -867,6 +874,11 @@
     if ([menuItem action] == @selector(saveDocument:) && ![results count]) {
         return NO;
     }
+    
+    if ([menuItem action] == @selector(copy:) && ![[tableView selectedRowIndexes] count]) {
+        return NO;
+    }
+    
     // Disable the relevant action menu items if no search items are selected
     BOOL itemsSelected = ([[self selectedItems] count] > 0);
     if (([menuItem action] == @selector(getInfo:) ||

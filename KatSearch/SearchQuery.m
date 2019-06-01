@@ -46,21 +46,17 @@
 - (instancetype)initWithSearchQueryDictionary:(NSDictionary *)dict {
     self = [super init];
     if (self) {
+        // First add entries from default. This makes us future-proof since
+        // it allows us to safely read history items from a prior version.
         [self addEntriesFromDictionary:[[self class] defaultDict]];
+        // Overwrite with the provided dict
         [self addEntriesFromDictionary:dict];
     }
     return self;
 }
 
-//- (BOOL)isEqual:(id)obj {
-//    BOOL sup = [super isEqual:obj];
-//    if (sup) {
-//        return YES;
-//    }
-//
-//}
-
 + (NSDictionary *)defaultDict {
+    // Default search settings
     return @{
         @"filetype": [DEFAULTS stringForKey:@"FindItemTypes"],
         @"matchtype": [DEFAULTS stringForKey:@"FindNameMatch"],
@@ -77,8 +73,10 @@
 
 - (void)saveAsRecentSearch {
     if (![DEFAULTS objectForKey:@"RecentSearches"]) {
+        // Clear
         [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
     }
+    
     // Insert as latest search
     NSMutableArray *recent = [[DEFAULTS objectForKey:@"RecentSearches"] mutableCopy];
     [recent insertObject:[NSDictionary dictionaryWithDictionary:self] atIndex:0];
@@ -94,7 +92,7 @@
     }];
     [recent filterUsingPredicate:dupPred];
     
-    // Remove older searches
+    // Remove older searches if we have exceeded maximum no. to store
     if ([recent count] >= NUM_RECENT_SEARCHES) {
         while ([recent count] >= NUM_RECENT_SEARCHES) {
             [recent removeLastObject];
@@ -108,36 +106,46 @@
 
 #pragma mark -
 
-- (id)menuDescription {
+- (NSString *)matchTypeChar {
+    // Return a single character string describing the match type of the query
+    if ([self[@"matchtype"] isEqualToString:@"name is"]) {
+        return @"=";
+    }
+    if ([self[@"matchtype"] isEqualToString:@"name starts with"]) {
+        return @"^";
+    }
+    if ([self[@"matchtype"] isEqualToString:@"name ends with"]) {
+        return @"$";
+    }
+    return @"~";
+}
+
+- (NSAttributedString *)menuItemString {    
+    // Create volume icon image cell
     NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:@"/"];
     [icon setSize:NSMakeSize(16, 16)];
     id<NSTextAttachmentCell> cell = [[MenuImageAttachmentCell alloc] initImageCell:icon];
-//    [(NSTextAttachmentCell *)cell setCellBaselineOffset:-10];
-    
     NSTextAttachment *textAttachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
     [textAttachment setAttachmentCell:cell];
-
-    // Create text attachment
-//    NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
-//    textAttachment.image = icon;//[NSImage imageNamed:@"NSApplicationIcon"];
-//    textAttachment.bounds = CGRectMake(0, 0, 16, 16);
     
-    // Attribute
+    // Create attributed string with image
     NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithAttributedString:attrStringWithImage];
 
-    NSString *title = [NSString stringWithFormat:@"“%@” on ", self[@"searchstring"]];
+    // Prepend
+    NSString *title = [NSString stringWithFormat:@"%@ “%@” on ", [self matchTypeChar], self[@"searchstring"]];
     NSAttributedString *attrTitle = [[NSAttributedString alloc] initWithString:title];
     [str insertAttributedString:attrTitle atIndex:0];
+    // Append
     NSAttributedString *postStr = [[NSAttributedString alloc] initWithString:self[@"volume"]];
     [str appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
     [str appendAttributedString:postStr];
-    return [str copy];
-//    return [self description];
+    
+    return str;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ where %@ '%@' on '%@'",
+    return [NSString stringWithFormat:@"Find %@ where %@ '%@' on '%@'",
             self[@"filetype"], self[@"matchtype"], self[@"searchstring"], self[@"volume"]];
 }
 

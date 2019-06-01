@@ -298,7 +298,7 @@
                                                               action:@selector(openRecentSearch:)
                                                        keyEquivalent:@""];
                 [item setRepresentedObject:sq];
-                [item setAttributedTitle:[sq menuDescription]];
+                [item setAttributedTitle:[sq menuItemString]];
 //                NSImage *img = [NSImage imageNamed:@"NSGenericDocument"];
 //                [img setSize:NSMakeSize(16,16)];
 //                [item setImage:img];
