@@ -34,9 +34,18 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate>
 
+// Window handling
 - (id)newWindow:(id)sender;
 - (void)windowDidClose:(id)sender;
+
+// Transition between LSUIElement and regular app
 - (void)setAppMode:(BOOL)backgroundMode;
+
+// App-wide root authorization
+- (BOOL)isAuthenticated;
+- (OSErr)authenticate;
+- (void)deauthenticate;
+- (AuthorizationRef)authorization;
 
 @end
 

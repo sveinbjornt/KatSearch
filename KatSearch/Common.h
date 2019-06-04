@@ -62,6 +62,10 @@
                                       @"DateAccessed", @"UserGroup", @"Permissions", @"UTI", \
                                       @"MIMEType", @"FileType", @"CreatorType"]
 
+#define APP_DELEGATE                (AppDelegate *)[NSApp delegate]
+#define AUTHCHANGE_NOTIFICATION     @"KSAuthorizationChanged"
+
+
 // Logging
 #ifdef DEBUG
     #define DLog(...) NSLog(__VA_ARGS__)

@@ -646,7 +646,7 @@ DQ
                             <outlet property="menu" destination="4Bj-Tq-H8Z" id="ewV-La-LDL"/>
                         </connections>
                     </button>
-                    <button hidden="YES" toolTip="Authenticate to view all system processes" verticalHuggingPriority="750" id="Mqr-y6-S2s">
+                    <button toolTip="Authenticate to view all system processes" verticalHuggingPriority="750" id="Mqr-y6-S2s">
                         <rect key="frame" x="562" y="14" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSLockLockedTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="f2T-53-tzW">

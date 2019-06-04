@@ -44,6 +44,7 @@ FOR 1.0
 * Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
 
 For next release:
+DONE * Authentication now global, done via app delegate
 DONE * Show Volume Name, not mount path, in search history menu
 DONE * Recent search item title search string should show regex-style modifiers (=~^$)
 DONE * Smarter priming of search item cache

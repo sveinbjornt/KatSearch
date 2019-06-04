@@ -71,25 +71,23 @@
     NSTimer *filterTimer;
     
     SearchQuery *startingQuery;
-    
-    AuthorizationRef authorizationRef;
 }
 @end
 
 @implementation SearchController
 
 + (instancetype)newController {
-    return [[SearchController alloc] initWithWindowNibName:@"SearchWindow"];
+    return [[[self class] alloc] initWithWindowNibName:@"SearchWindow"];
 }
 
-+ (instancetype)newControllerWithSearchQuery:(SearchQuery *)sq {
-    return [[SearchController alloc] initWithSearchQuery:sq];
++ (instancetype)newControllerWithSearchQuery:(SearchQuery *)query {
+    return [[[self class] alloc] initWithSearchQuery:query];
 }
 
-- (instancetype)initWithSearchQuery:(SearchQuery *)sq {
+- (instancetype)initWithSearchQuery:(SearchQuery *)query {
     self = [[[self class] alloc] initWithWindowNibName:@"SearchWindow"];
     if (self) {
-        startingQuery = sq;
+        startingQuery = query;
     }
     return self;
 }
@@ -128,7 +126,16 @@
     }
     
     [pathBar setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
-
+    
+    // Register to receive authorization change notifications
+    [[NSNotificationCenter defaultCenter] addObserverForName:AUTHCHANGE_NOTIFICATION
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      NSLog(@"Authorized: %d", [APP_DELEGATE isAuthenticated]);
+                                                      [self authenticationStatusChanged];
+                                                  }];
+    
     // Load system lock image as icon for button
     NSImage *lockIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kLockedIcon)];
     [lockIcon setSize:NSMakeSize(16, 16)];
@@ -138,6 +145,9 @@
     
     [self.window setInitialFirstResponder:searchField];
     [self.window makeFirstResponder:searchField];
+    [self.window setMovableByWindowBackground:YES];
+    
+    [self authenticationStatusChanged];
     
     SearchQuery *sq = startingQuery ? startingQuery : [SearchQuery defaultQuery];
     [self loadQuery:sq];
@@ -335,8 +345,8 @@
     task.skipInappropriate = [[searchOptionsMenu itemWithTitle:@"Skip System Folder"] state];
 //    task.negateSearchParams = [DEFAULTS boolForKey:@"SearchInvertSearch"];
     
-    if (authorizationRef) {
-        [task setAuthorizationRef:authorizationRef];
+    if ([APP_DELEGATE isAuthenticated]) {
+        [task setAuthorizationRef:[APP_DELEGATE authorization]];
     }
         
     [task start];
@@ -392,7 +402,7 @@
     for (SearchItem *item in items) {
         for (int i = 0; i < num; i++) {
             SEL sel = selectors[i];
-            NSLog(@"%@", NSStringFromSelector(sel));
+//            NSLog(@"%@", NSStringFromSelector(sel));
             [item performSelector:sel];
         }
 //        [item prime];
@@ -496,60 +506,34 @@
 #pragma mark - Authentication
 
 - (IBAction)toggleAuthentication:(id)sender {
-    // TODO: Move this over to app delegate. Authorization should be shared by all search windows.
-    if (!authorizationRef) {
-        OSStatus err = [self authenticate];
+    BOOL authenticated = [APP_DELEGATE isAuthenticated];
+    
+    if (!authenticated) {
+        OSStatus err = [APP_DELEGATE authenticate];
         if (err != errAuthorizationSuccess) {
             if (err != errAuthorizationCanceled) {
                 NSBeep();
                 DLog(@"Authentication failed: %d", err);
             }
-            authorizationRef = NULL;
             return;
         }
     } else {
-        [self deauthenticate];
+        [APP_DELEGATE deauthenticate];
     }
     
-    BOOL authenticated = (authorizationRef != NULL);
+}
 
+- (void)authenticationStatusChanged {
+    BOOL authenticated = [APP_DELEGATE isAuthenticated];
+    
     OSType iconID = authenticated ? kUnlockedIcon : kLockedIcon;
     NSImage *img = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(iconID)];
     [img setSize:NSMakeSize(16, 16)];
-    NSString *ttip = authenticated ? @"Deauthenticate" : @"Authenticate to search as root";
-
+    NSString *ttip = authenticated ? @"Deauthenticate" : \
+    @"Authenticate to search with root privileges";
+    
     [authenticateButton setImage:img];
     [authenticateButton setToolTip:ttip];
-}
-
-- (OSStatus)authenticate {
-    OSStatus err = noErr;
-    const char *toolPath = [[[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil] fileSystemRepresentation];
-    
-    AuthorizationItem myItems = { kAuthorizationRightExecute, strlen(toolPath), &toolPath, 0 };
-    AuthorizationRights myRights = { 1, &myItems };
-    AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
-    
-    // Create authorization reference
-    err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
-    if (err != errAuthorizationSuccess) {
-        return err;
-    }
-    
-    // Pre-authorize the privileged operation
-    err = AuthorizationCopyRights(authorizationRef, &myRights, kAuthorizationEmptyEnvironment, flags, NULL);
-    if (err != errAuthorizationSuccess) {
-        return err;
-    }
-    
-    return noErr;
-}
-
-- (void)deauthenticate {
-    if (authorizationRef) {
-        AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
-        authorizationRef = NULL;
-    }
 }
 
 #pragma mark - Path Bar

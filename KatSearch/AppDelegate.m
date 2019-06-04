@@ -49,8 +49,11 @@
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem *newMenuItem;
     IBOutlet NSMenuItem *menuBarItem;
+    IBOutlet NSMenuItem *authenticateMenuItem;
     
     NSStatusItem *statusItem;
+    
+    AuthorizationRef authorizationRef;
 }
 @end
 
@@ -96,7 +99,17 @@
      }];
     
     windowControllers = [NSMutableArray new];
-
+    
+    [authenticateMenuItem setTarget:self];
+    [authenticateMenuItem setAction:@selector(authenticate)];
+    NSImage *img = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kLockedIcon)];
+    [img setSize:NSMakeSize(16, 16)];
+    [authenticateMenuItem setImage:img];
+    
+    if ([DEFAULTS boolForKey:@"AuthenticateOnLaunch"]) {
+        [self authenticate];
+    }
+    
     if ([DEFAULTS boolForKey:@"PreviouslyLaunched"]) {
         if ([DEFAULTS boolForKey:@"StatusItemMode"]) {
             [self showStatusItem];
@@ -183,7 +196,65 @@
 
 #pragma mark - Authorization
 
+- (BOOL)isAuthenticated {
+    return (authorizationRef != NULL);
+}
 
+- (OSErr)authenticate {
+    OSStatus err = noErr;
+    const char *toolPath = [[[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil] fileSystemRepresentation];
+    
+    AuthorizationItem myItems = { kAuthorizationRightExecute, strlen(toolPath), &toolPath, 0 };
+    AuthorizationRights myRights = { 1, &myItems };
+    AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
+    
+    // Create authorization reference
+    err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
+    if (err != errAuthorizationSuccess) {
+        authorizationRef = NULL;
+        return err;
+    }
+    
+    // Pre-authorize the privileged operation
+    err = AuthorizationCopyRights(authorizationRef, &myRights, kAuthorizationEmptyEnvironment, flags, NULL);
+    if (err != errAuthorizationSuccess) {
+        authorizationRef = NULL;
+        return err;
+    }
+    
+    [self setLocked:0];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AUTHCHANGE_NOTIFICATION object:self];
+
+    return noErr;
+}
+
+- (void)deauthenticate {
+    // Destroy authorization reference
+    if (authorizationRef) {
+        AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
+        authorizationRef = NULL;
+        [self setLocked:1];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:AUTHCHANGE_NOTIFICATION object:self];
+}
+
+- (AuthorizationRef)authorization {
+    return authorizationRef;
+}
+
+- (void)setLocked:(BOOL)locked {
+    NSString *title = locked ? @"Authenticate" : @"Deauthenticate";
+    SEL action = locked ? @selector(authenticate) : @selector(deauthenticate);
+    OSType iconID = locked ? kLockedIcon : kUnlockedIcon;
+    NSImage *img = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(iconID)];
+    [img setSize:NSMakeSize(16, 16)];
+    
+    [authenticateMenuItem setTitle:title];
+    [authenticateMenuItem setAction:action];
+    [authenticateMenuItem setTarget:self];
+    [authenticateMenuItem setImage:img];
+}
 
 #pragma mark - Window controllers
 

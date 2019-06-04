@@ -15,6 +15,7 @@
         <userDefaultsController representsSharedInstance="YES" id="aad-Ka-dzA"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="authenticateMenuItem" destination="Cvl-zu-hPB" id="cNg-HI-DDu"/>
                 <outlet property="mainMenu" destination="AYu-sK-qS6" id="Bdd-CK-wOh"/>
                 <outlet property="menuBarItem" destination="KCr-2i-4AI" id="yL5-I4-TDQ"/>
                 <outlet property="newMenuItem" destination="LfL-5u-XLd" id="hbD-SF-RKB"/>
