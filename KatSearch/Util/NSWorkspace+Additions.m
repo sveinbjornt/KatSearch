@@ -406,6 +406,7 @@
     
     NSURL *fileURL = [NSURL fileURLWithPath:path];
     NSError *error;
+    // TODO: Control finder via AppleScript, multiple files at once
     BOOL result = [[NSFileManager defaultManager] trashItemAtURL:fileURL
                                                 resultingItemURL:nil
                                                            error:&error];

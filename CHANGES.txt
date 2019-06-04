@@ -21,7 +21,7 @@ FOR 1.0
 
 * Filter regex support - Should highlight strings that match
 * Filter should search either all cols or name
-* Hide and clear filter by pressing X
+* Hide and clear filter by pressing rightmost X button
 * Pressing Esc key should clear and close filter
 * Highlight matching string when filter active
 
@@ -32,20 +32,20 @@ FOR 1.0
 * Action menu item titles should alter based on no. selected items etc.
 * Detect when file no longer exists at path
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
-* Show volumes that don't have a catalog but visually identify them
-
-* Versions for identical apps in Open With menu
+* Show volumes that don't have a catalog in volumes popup menu but visually identify them in some way
+* Concatenate ultra-long filenames when they're shown in item contextual menu
+* Versions for multiple identical apps in Open With menu
 * Drag and drop folder/volume on window to make it target of search
 * Interpret empty search string as request to find all files (find out how to list ALL files via searchfs function)
-* Distinction between Alias/Symlink should be clear in "Kind" even if LS don't distinguish between them
+* Distinction between Alias/Symlink should be clear in "Kind" even if LaunchServices doesn't distinguish between them
 * "Show Original" for aliases/symlinks
 * Get Skip Package Contents working
 * Open recent for status item menu
 * Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
-* Recent search item title search string should show regex-style modifiers (=~^$)
-* Show Volume Name, not mount path, in search history menu
 
 For next release:
+DONE * Show Volume Name, not mount path, in search history menu
+DONE * Recent search item title search string should show regex-style modifiers (=~^$)
 DONE * Smarter priming of search item cache
 DONE * Order recent by date, remove oldest when adding, deduplicate identical saved searches
 DONE * Search history (Recent searches)t

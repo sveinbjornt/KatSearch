@@ -181,6 +181,10 @@
     DLog(@"Received search in folder request");
 }
 
+#pragma mark - Authorization
+
+
+
 #pragma mark - Window controllers
 
 - (id)newWindow:(id)sender {

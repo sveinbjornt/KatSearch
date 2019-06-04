@@ -107,9 +107,9 @@
                                     <action selector="newWindow:" target="Voe-Tx-rLC" id="RQy-hf-XGb"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Recent Searches" id="tXI-mr-wws">
+                            <menuItem title="Open Recent" id="tXI-mr-wws">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" id="kkF-xs-mwP">
+                                <menu key="submenu" title="Open Recent" id="kkF-xs-mwP">
                                     <connections>
                                         <outlet property="delegate" destination="Voe-Tx-rLC" id="QgX-sL-26u"/>
                                     </connections>
@@ -471,6 +471,14 @@ DQ
                                     <action selector="quickLook:" target="-1" id="asy-wV-1b6"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Move to Trash" id="UlG-3N-kW4" userLabel="Copy">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                <connections>
+                                    <action selector="moveToTrash:" target="-1" id="I2v-UR-0d4"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="5GP-nS-Kq9">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -552,9 +560,9 @@ DQ
                         <action selector="newWindow:" target="Voe-Tx-rLC" id="zAD-mt-zZU"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Recent Searches" id="beO-Db-yVv">
+                <menuItem title="Open Recent" id="beO-Db-yVv">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" id="xvW-Ew-jBd">
+                    <menu key="submenu" title="Open Recent" id="xvW-Ew-jBd">
                         <connections>
                             <outlet property="delegate" destination="Voe-Tx-rLC" id="6HS-le-0LJ"/>
                         </connections>

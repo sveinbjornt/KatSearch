@@ -29,6 +29,8 @@
 		F471DF6020F4DAE70057E667 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F471DF5F20F4DAE70057E667 /* Credits.rtf */; };
 		F47F586422A209DD00AD0D3F /* MenuImageAttachmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F47F586322A209DD00AD0D3F /* MenuImageAttachmentCell.m */; };
 		F47F586522A2106200AD0D3F /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = F471DF6520F7AF6D0057E667 /* License.txt */; };
+		F47F586722A6BB1900AD0D3F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47F586622A6BB1900AD0D3F /* Security.framework */; };
+		F47F586922A6BB2900AD0D3F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47F586822A6BB2900AD0D3F /* Cocoa.framework */; };
 		F481834E22720145002738AE /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = F481834D22720145002738AE /* Defaults.plist */; };
 		F481835122726366002738AE /* SDOpenAtLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = F481834F22726366002738AE /* SDOpenAtLogin.m */; };
 		F48451E820F8E4CB005797C1 /* PasteboardTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48451E720F8E4CB005797C1 /* PasteboardTableView.m */; };
@@ -120,6 +122,8 @@
 		F47967392250102900CA0746 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		F47F586222A209DD00AD0D3F /* MenuImageAttachmentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuImageAttachmentCell.h; sourceTree = "<group>"; };
 		F47F586322A209DD00AD0D3F /* MenuImageAttachmentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuImageAttachmentCell.m; sourceTree = "<group>"; };
+		F47F586622A6BB1900AD0D3F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F47F586822A6BB2900AD0D3F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F481834D22720145002738AE /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		F481834F22726366002738AE /* SDOpenAtLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDOpenAtLogin.m; sourceTree = "<group>"; };
 		F481835022726366002738AE /* SDOpenAtLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDOpenAtLogin.h; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F47F586922A6BB2900AD0D3F /* Cocoa.framework in Frameworks */,
+				F47F586722A6BB1900AD0D3F /* Security.framework in Frameworks */,
 				F4CB19BE2294399B00265CE8 /* QuartzCore.framework in Frameworks */,
 				F4CB19A22291A2E800265CE8 /* MASPreferences.framework in Frameworks */,
 				F498ADF022666D4300CB6A6E /* MASShortcut.framework in Frameworks */,
@@ -317,6 +323,8 @@
 		F498ADEC22666CDB00CB6A6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F47F586822A6BB2900AD0D3F /* Cocoa.framework */,
+				F47F586622A6BB1900AD0D3F /* Security.framework */,
 				F4CB19BD2294399B00265CE8 /* QuartzCore.framework */,
 				F498ADEE22666D2200CB6A6E /* Sparkle.framework */,
 				F4CB19A12291A2E800265CE8 /* MASPreferences.framework */,

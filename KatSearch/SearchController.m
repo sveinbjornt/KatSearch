@@ -68,10 +68,11 @@
     
     NSMutableArray *results;
     SearchTask *task;
-    AuthorizationRef authorizationRef;
     NSTimer *filterTimer;
     
     SearchQuery *startingQuery;
+    
+    AuthorizationRef authorizationRef;
 }
 @end
 
@@ -703,16 +704,20 @@
     NSUInteger num = [selItems count];
     
     // Potentially destructive operation, ask user to confirm
-    NSString *q = [NSString stringWithFormat:@"Move %lu items to the Trash?", num];
-    if (num == 1) {
-        SearchItem *item = selItems[0];
-        NSString *type = item.isDirectory ? @"folder" : @"file";
-        q = [NSString stringWithFormat:@"Move the %@ “%@” to the Trash?", type, item.name];
+    BOOL optionKeyDown = (([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask) == NSAlternateKeyMask);
+    if (!optionKeyDown) {
+        NSString *q = [NSString stringWithFormat:@"Move %lu items to the Trash?", num];
+        NSString *st = @"Hold the option key (⌥) to avoid this prompt.";
+        if (num == 1) {
+            SearchItem *item = selItems[0];
+            NSString *type = item.isDirectory ? @"folder" : @"file";
+            q = [NSString stringWithFormat:@"Move the %@ “%@” to the Trash?", type, item.name];
+        }
+        if (![Alerts proceedAlert:q subText:st withActionNamed:@"Move to Trash"]) {
+            return;
+        }
     }
-    if (![Alerts proceedAlert:q subText:@"" withActionNamed:@"Move to Trash"]) {
-        return;
-    }
-
+    
     // Move items to Trash
     for (SearchItem *item in selItems) {
         [[NSWorkspace sharedWorkspace] moveFileToTrash:item.path];
@@ -868,25 +873,29 @@
 #pragma mark - NSMenuItemValidation
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
-    if ([menuItem action] == @selector(search:) && [task isRunning]) {
-        return NO;
-    }
-    if ([menuItem action] == @selector(saveDocument:) && ![results count]) {
-        return NO;
+    if ([menuItem action] == @selector(search:)) {
+        return ![task isRunning];
     }
     
-    if ([menuItem action] == @selector(copy:) && ![[tableView selectedRowIndexes] count]) {
-        return NO;
+    if ([menuItem action] == @selector(saveDocument:)) {
+        return ([results count] > 0);
+    }
+    
+    if ([menuItem action] == @selector(copy:)) {
+        return ([[self selectedItems] count] > 0);
+    }
+    
+    if ([menuItem action] == @selector(search:)) {
+        return [searchButton isEnabled];
     }
     
     // Disable the relevant action menu items if no search items are selected
-    BOOL itemsSelected = ([[self selectedItems] count] > 0);
-    if (([menuItem action] == @selector(getInfo:) ||
-         [menuItem action] == @selector(showInFinder:) ||
-         [menuItem action] == @selector(open:) ||
-         [menuItem action] == @selector(quickLook:))
-         && !itemsSelected) {
-        return NO;
+    if ([menuItem action] == @selector(getInfo:) ||
+        [menuItem action] == @selector(showInFinder:) ||
+        [menuItem action] == @selector(open:) ||
+        [menuItem action] == @selector(quickLook:) ||
+        [menuItem action] == @selector(moveToTrash:)) {
+        return ([[self selectedItems] count] > 0);
     }
     
     return YES;
@@ -1049,8 +1058,7 @@
     NSInteger selectedRow = [tableView selectedRow];
     if (selectedRow >= 0 && selectedRow < [results count] && [results count]) {
         SearchItem *item = results[selectedRow];
-        NSURL *fileURL = [NSURL fileURLWithPath:item.path];
-        [pathBar setURL:fileURL];
+        [pathBar setURL:item.url];
         if ([DEFAULTS boolForKey:@"ShowPathBar"]) {
             [self showPathBar];
         }

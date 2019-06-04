@@ -120,12 +120,15 @@
     return @"~";
 }
 
-- (NSAttributedString *)menuItemString {    
+- (NSAttributedString *)menuItemString {
+    // Generate an attributed string representation of the query,
+    // suitable for display in an Open Recent menu
+    
     // Create volume icon image cell
-    NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:@"/"];
+    NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:self[@"volume"]];
     [icon setSize:NSMakeSize(16, 16)];
     id<NSTextAttachmentCell> cell = [[MenuImageAttachmentCell alloc] initImageCell:icon];
-    NSTextAttachment *textAttachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    NSTextAttachment *textAttachment = [[NSTextAttachment alloc] init];
     [textAttachment setAttachmentCell:cell];
     
     // Create attributed string with image
@@ -137,7 +140,8 @@
     NSAttributedString *attrTitle = [[NSAttributedString alloc] initWithString:title];
     [str insertAttributedString:attrTitle atIndex:0];
     // Append
-    NSAttributedString *postStr = [[NSAttributedString alloc] initWithString:self[@"volume"]];
+    NSString *volDisplayName = [[NSFileManager defaultManager] displayNameAtPath:self[@"volume"]];
+    NSAttributedString *postStr = [[NSAttributedString alloc] initWithString:volDisplayName];
     [str appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
     [str appendAttributedString:postStr];
     
