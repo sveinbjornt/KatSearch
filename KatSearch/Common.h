@@ -65,6 +65,7 @@
 #define APP_DELEGATE                (AppDelegate *)[NSApp delegate]
 #define AUTHCHANGE_NOTIFICATION     @"KSAuthorizationChanged"
 
+#define OLD_LOCK_ICON               0
 
 // Logging
 #ifdef DEBUG

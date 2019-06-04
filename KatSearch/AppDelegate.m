@@ -84,13 +84,10 @@
 #pragma mark - NSApplicationDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    // Transition from LSUIElement to regular app if needed
     [self setAppMode:[DEFAULTS boolForKey:@"StatusItemMode"]];
-    // Set and remember the shortcut
-//    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:SHORTCUT_DEFAULT_KEYCODE modifierFlags:NSCommandKeyMask|NSAlternateKeyMask];
-//    NSData *shortcutData = [NSKeyedArchiver archivedDataWithRootObject:shortcut];
-//    [DEFAULTS setObject:shortcutData forKey:SHORTCUT_DEFAULT_NAME];
     
-    // Associate the shortcut key key with an action
+    // Associate the shortcut hotkey combo with a new window / bring to front action
     [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:SHORTCUT_DEFAULT_NAME
                                                          toAction:^{
          if ([[NSApplication sharedApplication] isActive] || ![windowControllers count]) {
@@ -100,11 +97,15 @@
     
     windowControllers = [NSMutableArray new];
     
-    [authenticateMenuItem setTarget:self];
-    [authenticateMenuItem setAction:@selector(authenticate)];
-    NSImage *img = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kLockedIcon)];
-    [img setSize:NSMakeSize(16, 16)];
-    [authenticateMenuItem setImage:img];
+    // Register to receive authorization change notifications
+    [[NSNotificationCenter defaultCenter] addObserverForName:AUTHCHANGE_NOTIFICATION
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      NSLog(@"Authorized: %d", [APP_DELEGATE isAuthenticated]);
+                                                      [self authenticationStatusChanged];
+                                                  }];
+    [self authenticationStatusChanged];
     
     if ([DEFAULTS boolForKey:@"AuthenticateOnLaunch"]) {
         [self authenticate];
@@ -222,7 +223,6 @@
         return err;
     }
     
-    [self setLocked:0];
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTHCHANGE_NOTIFICATION object:self];
 
     return noErr;
@@ -233,7 +233,6 @@
     if (authorizationRef) {
         AuthorizationFree(authorizationRef, kAuthorizationFlagDestroyRights);
         authorizationRef = NULL;
-        [self setLocked:1];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTHCHANGE_NOTIFICATION object:self];
@@ -243,13 +242,13 @@
     return authorizationRef;
 }
 
-- (void)setLocked:(BOOL)locked {
+- (void)authenticationStatusChanged {
+    BOOL locked = ![self isAuthenticated];
+
     NSString *title = locked ? @"Authenticate" : @"Deauthenticate";
     SEL action = locked ? @selector(authenticate) : @selector(deauthenticate);
-    OSType iconID = locked ? kLockedIcon : kUnlockedIcon;
-    NSImage *img = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(iconID)];
-    [img setSize:NSMakeSize(16, 16)];
-    
+    NSImage *img = [NSImage imageNamed:(locked ? @"NSLockLockedTemplate" : @"NSLockUnlockedTemplate")];
+
     [authenticateMenuItem setTitle:title];
     [authenticateMenuItem setAction:action];
     [authenticateMenuItem setTarget:self];

@@ -27,7 +27,7 @@ FOR 1.0
 
 * Support selecting folder to search (add home folder preset)
     * Support using /usr/bin/find
-* Use STPriviledTask when authenticated (global app-wide shared authentication)
+* Use STPriviledTask when authenticated
 
 * Action menu item titles should alter based on no. selected items etc.
 * Detect when file no longer exists at path
@@ -42,6 +42,8 @@ FOR 1.0
 * Get Skip Package Contents working
 * Open recent for status item menu
 * Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
+* Fix sorting issue (why does col. sort require two clicks to kick in?)
+* Monospace font option
 
 For next release:
 DONE * Authentication now global, done via app delegate

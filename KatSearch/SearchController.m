@@ -515,22 +515,18 @@
                 NSBeep();
                 DLog(@"Authentication failed: %d", err);
             }
-            return;
         }
     } else {
         [APP_DELEGATE deauthenticate];
     }
-    
+    [self.window makeKeyAndOrderFront:self];
 }
 
 - (void)authenticationStatusChanged {
-    BOOL authenticated = [APP_DELEGATE isAuthenticated];
+    BOOL auth = [APP_DELEGATE isAuthenticated];
     
-    OSType iconID = authenticated ? kUnlockedIcon : kLockedIcon;
-    NSImage *img = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(iconID)];
-    [img setSize:NSMakeSize(16, 16)];
-    NSString *ttip = authenticated ? @"Deauthenticate" : \
-    @"Authenticate to search with root privileges";
+    NSImage *img = [NSImage imageNamed:(auth ?  @"NSLockUnlockedTemplate" : @"NSLockLockedTemplate")];
+    NSString *ttip = auth ? @"Deauthenticate" : @"Authenticate to search with root privileges";
     
     [authenticateButton setImage:img];
     [authenticateButton setToolTip:ttip];
