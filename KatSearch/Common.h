@@ -43,7 +43,7 @@
 #define PROGRAM_DOCUMENTATION_FILE  @"Documentation.html"
 
 #define SHORTCUT_DEFAULT_NAME       @"GlobalShortcut"
-#define SHORTCUT_DEFAULT_KEYCODE    0
+//#define SHORTCUT_DEFAULT_KEYCODE    0
 
 #define CLT_BIN_NAME                @"searchfs"
 #define CLT_MAN_NAME                @"searchfs.1.gz"
@@ -64,8 +64,6 @@
 
 #define APP_DELEGATE                (AppDelegate *)[NSApp delegate]
 #define AUTHCHANGE_NOTIFICATION     @"KSAuthorizationChanged"
-
-#define OLD_LOCK_ICON               0
 
 // Logging
 #ifdef DEBUG

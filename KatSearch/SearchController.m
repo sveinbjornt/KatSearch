@@ -97,6 +97,7 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
+    [self.window registerForDraggedTypes:@[NSFilenamesPboardType]];
 //    [[self.window contentView] setWantsLayer:YES];
 //    [scrollView setWantsLayer:YES];
 //    [tableView setCanDrawSubviewsIntoLayer:YES];
@@ -848,6 +849,33 @@
         
         [menu addItemWithTitle:@"Select..." action:@selector(openWith:) keyEquivalent:@""];
     }
+}
+
+#pragma mark - Drag and drop
+
+- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
+    // Prevent dragging from NSOpenPanels
+    // draggingSource returns nil if the source is not in the same application
+    // as the destination. We decline any drags from within the app.
+    NSArray *files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
+    if ([sender draggingSource] || [files count] > 1) {
+        return NSDragOperationNone;
+    }
+    
+    // Only allow single folder
+    NSString *path = files[0];
+    BOOL isDir;
+    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir];
+    if (exists && isDir) {
+        return NSDragOperationLink;
+    }
+    
+    return NSDragOperationNone;
+}
+
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
+    NSPasteboard *pboard = [sender draggingPasteboard];
+    return YES;
 }
 
 #pragma mark - NSMenuItemValidation

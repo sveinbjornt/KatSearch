@@ -66,6 +66,7 @@
 
 - (void)awakeFromNib {
     [NSApp setServicesProvider:self];
+    [NSApp registerServicesMenuSendTypes:@[NSFilenamesPboardType] returnTypes:@[]];
     
     [self startObservingDefaults];
 
@@ -132,6 +133,23 @@
     return YES;
 }
 
+- (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {
+    DLog(@"%@ dropped", filename);
+    BOOL isDir;
+    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:filename isDirectory:&isDir];
+    if (exists && isDir) {
+        // TODO: Create custom search with folder as target "volume"
+        [self newWindow:self];
+        return YES;
+    }
+    return NO;
+}
+
+// Handles multiple files dragged on app icon / opened at once
+//- (void)application:(NSApplication *)theApplication openFiles:(NSArray *)filenames {
+//    DLog(@"%@ dropped", [filenames description]);
+//}
+
 #pragma mark - Key/value observation
 
 - (void)startObservingDefaults {
@@ -189,10 +207,12 @@
 
 - (void)searchByName:(NSPasteboard *)pb userData:(NSString *)userData error:(NSString **)err {
     DLog(@"Received search by name request");
+    [self newWindow:self];
 }
 
 - (void)searchFolder:(NSPasteboard *)pb userData:(NSString *)userData error:(NSString **)err {
     DLog(@"Received search in folder request");
+    [self newWindow:self];
 }
 
 #pragma mark - Authorization

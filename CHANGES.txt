@@ -34,7 +34,7 @@ FOR 1.0
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
 * Show volumes that don't have a catalog in volumes popup menu but visually identify them in some way
 * Versions for multiple identical apps in Open With menu
-* Drag and drop folder/volume on window to make it target of search
+* Drag and drop folder/volume on window/app icon to make it the target of a new search
 * Interpret empty search string as request to find all files (find out how to list ALL files via searchfs function)
 * Distinction between Alias/Symlink should be clear in "Kind" even if LaunchServices doesn't distinguish between them
 * "Show Original" for aliases/symlinks
