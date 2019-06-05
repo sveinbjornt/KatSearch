@@ -756,7 +756,7 @@
             copyTitle = [NSString stringWithFormat:@"Copy %lu files", (unsigned long)numSelectedFiles];
         } else {
             SearchItem *item = items[0];
-            NSString *name = item.name;
+            NSString *name = [item truncatedName:35];
             
             copyTitle = [NSString stringWithFormat:@"Copy “%@”", name];
         }
@@ -774,7 +774,7 @@
             [[menu itemWithTitle:@"Share"] setHidden:YES];
         }
         
-        NSLog(@"Hidden: %d", [items[0] isHidden]);
+//       DLog(@"Hidden: %d", [items[0] isHidden]);
         
         // Unless its defaults have been changed, the Finder is
         // unable to perform any operations on hidden files

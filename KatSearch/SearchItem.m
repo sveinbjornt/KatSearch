@@ -108,6 +108,18 @@
     return cachedName;
 }
 
+- (NSString *)truncatedName:(NSUInteger)maxChars {
+    if ([self.name length] <= maxChars) {
+        return self.name;
+    }
+    
+    NSUInteger half = maxChars/2;
+    NSString *truncStr = [NSString stringWithFormat:@"%@…%@",
+                          [self.name substringToIndex:half-1],
+                          [self.name substringFromIndex:half+1]];
+    return truncStr;
+}
+
 - (NSURL *)url {
     if (!cachedURL) {
         cachedURL = [NSURL fileURLWithPath:self.path];

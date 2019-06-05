@@ -81,6 +81,8 @@
 
 - (instancetype)initWithPath:(NSString *)path;
 
+- (NSString *)truncatedName:(NSUInteger)maxChars;
+
 - (void)prime;
 - (void)open;
 - (void)showInFinder;

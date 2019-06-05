@@ -33,7 +33,6 @@ FOR 1.0
 * Detect when file no longer exists at path
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
 * Show volumes that don't have a catalog in volumes popup menu but visually identify them in some way
-* Concatenate ultra-long filenames when they're shown in item contextual menu
 * Versions for multiple identical apps in Open With menu
 * Drag and drop folder/volume on window to make it target of search
 * Interpret empty search string as request to find all files (find out how to list ALL files via searchfs function)
@@ -46,6 +45,7 @@ FOR 1.0
 * Monospace font option
 
 For next release:
+DONE * Truncate ultra-long filenames when they're shown in item contextual menu
 DONE * Authentication now global, done via app delegate
 DONE * Show Volume Name, not mount path, in search history menu
 DONE * Recent search item title search string should show regex-style modifiers (=~^$)
