@@ -371,6 +371,12 @@
                                     <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowFilter" id="ZHw-N3-vnX"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Show Full Path" id="kKd-bR-JhP">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowFullPath" id="hSw-ER-cNM"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="D2T-07-NSd"/>
                             <menuItem title="Show Kind" keyEquivalent="1" id="Y4S-zk-wYB">
                                 <connections>

@@ -268,7 +268,8 @@
     NSString *title = locked ? @"Authenticate" : @"Deauthenticate";
     SEL action = locked ? @selector(authenticate) : @selector(deauthenticate);
     NSImage *img = [NSImage imageNamed:(locked ? @"NSLockLockedTemplate" : @"NSLockUnlockedTemplate")];
-
+//    [img setSize:NSMakeSize(9, 12)];
+    
     [authenticateMenuItem setTitle:title];
     [authenticateMenuItem setAction:action];
     [authenticateMenuItem setTarget:self];

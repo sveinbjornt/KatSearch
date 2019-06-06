@@ -148,6 +148,10 @@
     [self.window makeFirstResponder:searchField];
     [self.window setMovableByWindowBackground:YES];
     
+    NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    [tableView setSortDescriptors:@[sortDescriptor]];
+
+    
     [self authenticationStatusChanged];
     
     SearchQuery *sq = startingQuery ? startingQuery : [SearchQuery defaultQuery];
@@ -251,6 +255,9 @@
             [self hideFilter];
         }
     }
+    else if ([def hasSuffix:@"ShowFullPath"]) {
+        [tableView reloadData];
+    }
     else if ([def hasPrefix:COL_DEFAULT_PREFIX]) {
         DLog(@"Default %@ changed", keyPath);
 
@@ -263,7 +270,7 @@
 }
 
 - (void)setObserveDefaults:(BOOL)observeDefaults {
-    NSMutableArray *defaults = [@[@"ShowPathBar", @"ShowFilter"] mutableCopy];
+    NSMutableArray *defaults = [@[@"ShowPathBar", @"ShowFilter", @"ShowFullPath"] mutableCopy];
     for (NSString *colString in COLUMNS) {
         [defaults addObject:[NSString stringWithFormat:@"%@%@", COL_DEFAULT_PREFIX, colString]];
     }
@@ -858,24 +865,23 @@
     // draggingSource returns nil if the source is not in the same application
     // as the destination. We decline any drags from within the app.
     NSArray *files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
-    if ([sender draggingSource] || [files count] > 1) {
-        return NSDragOperationNone;
-    }
-    
-    // Only allow single folder
-    NSString *path = files[0];
-    BOOL isDir;
-    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir];
-    if (exists && isDir) {
-        return NSDragOperationLink;
+    if ([files count] == 1) {
+        // Only allow single folder
+        NSString *path = files[0];
+        BOOL isDir;
+        BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir];
+        if (exists && isDir) {
+            return NSDragOperationLink;
+        }
     }
     
     return NSDragOperationNone;
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
-    NSPasteboard *pboard = [sender draggingPasteboard];
-    return YES;
+    NSDragOperation op = [self draggingEntered:sender];
+    // TODO: Load folder to search
+    return (op == NSDragOperationLink);
 }
 
 #pragma mark - NSMenuItemValidation

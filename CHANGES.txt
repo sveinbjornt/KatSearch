@@ -43,6 +43,7 @@ FOR 1.0
 * Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
 * Fix sorting issue (why does col. sort require two clicks to kick in?)
 * Monospace font option
+* Show Filter should not be a global defaults option
 
 For next release:
 DONE * Truncate ultra-long filenames when they're shown in item contextual menu
