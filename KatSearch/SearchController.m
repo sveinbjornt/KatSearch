@@ -579,14 +579,22 @@
 
 #pragma mark - Filter
 
+- (IBAction)toggleFilter:(id)sender {
+    if ([filterTextField isHidden]) {
+        [self showFilter];
+    } else {
+        [self hideFilter];
+    }
+}
+
 - (void)showFilter {
+    [filterTextField setHidden:NO];
     [self.window makeFirstResponder:filterTextField];
-    //[ becomeFirstResponder];
-    DLog(@"Hey");
 }
 
 - (void)hideFilter {
     [self.window makeFirstResponder:searchField];
+    [filterTextField setHidden:YES];
 }
 
 #pragma mark - Item actions
@@ -901,6 +909,11 @@
     
     if ([menuItem action] == @selector(search:)) {
         return [searchButton isEnabled];
+    }
+    
+    if ([menuItem action] == @selector(toggleFilter:)) {
+        NSString *title = [filterTextField isHidden] ? @"Filter Results" : @"Hide Filter";
+        [menuItem setTitle:title];
     }
     
     // Disable the relevant action menu items if no search items are selected

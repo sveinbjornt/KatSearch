@@ -593,12 +593,8 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </searchFieldCell>
                         <connections>
-                            <binding destination="7VI-tp-uBM" name="hidden" keyPath="values.ShowFilter" id="mpd-6r-YuD">
-                                <dictionary key="options">
-                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                </dictionary>
-                            </binding>
                             <outlet property="delegate" destination="-2" id="To8-dW-8ch"/>
+                            <outlet property="menu" destination="fcC-ke-Mkp" id="k6u-on-YOn"/>
                         </connections>
                     </searchField>
                     <popUpButton verticalHuggingPriority="750" id="D96-yX-Ge6" customClass="STVolumesPopupButton">
@@ -676,6 +672,16 @@ DQ
             </connections>
             <point key="canvasLocation" x="732" y="7.5"/>
         </window>
+        <menu id="fcC-ke-Mkp" userLabel="Filter Menu">
+            <items>
+                <menuItem title="Regular Expressions" id="a4a-Lo-kbU">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Filter by All Columns" id="9sA-gD-11r">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+            </items>
+        </menu>
         <menu autoenablesItems="NO" id="4Bj-Tq-H8Z" userLabel="Search Options Menu">
             <items>
                 <menuItem title="Case Sensitive" id="gxq-uw-k2R">

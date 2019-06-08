@@ -366,11 +366,6 @@
                                     <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowPathBar" id="Ftt-bJ-BBd"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Show Filter" keyEquivalent="f" id="US5-57-Khe">
-                                <connections>
-                                    <binding destination="aad-Ka-dzA" name="value" keyPath="values.ShowFilter" id="ZHw-N3-vnX"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Show Full Path" id="kKd-bR-JhP">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -487,6 +482,14 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="5GP-nS-Kq9">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Filter Results" keyEquivalent="f" id="t7L-rV-ieg">
+                                <connections>
+                                    <action selector="toggleFilter:" target="-1" id="gYy-X4-8rU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="4R9-mA-0fG">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Authenticate" id="Cvl-zu-hPB">

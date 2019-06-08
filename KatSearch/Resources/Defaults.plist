@@ -26,8 +26,6 @@
 	<false/>
 	<key>ShowPathBar</key>
 	<true/>
-	<key>ShowFilter</key>
-	<true/>
 	<key>StatusItemMode</key>
 	<false/>
 	<key>SearchMethod</key>
