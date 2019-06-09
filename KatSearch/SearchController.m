@@ -36,6 +36,7 @@
 #import "NSWorkspace+Additions.h"
 #import "STVolumesPopupButton.h"
 #import "STPathControl.h"
+#import "SearchFilterField.h"
 #import "Alerts.h"
 #import "NSSharingServicePicker+ESSSharingServicePickerMenu.h"
 #import "Common.h"
@@ -57,7 +58,7 @@
     IBOutlet NSScrollView *scrollView;
     IBOutlet NSPathControl *pathBar;
     IBOutlet STPathControl *pathControl;
-    IBOutlet NSTextField *filterTextField;
+    IBOutlet SearchFilterField *filterTextField;
     
     IBOutlet NSButton *searchButton;
     
@@ -461,7 +462,7 @@
 #pragma mark - Sort
 
 - (void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
-    [results sortUsingDescriptors:oldDescriptors];
+    [results sortUsingDescriptors:[aTableView sortDescriptors]];
     [tableView reloadData];
 }
 
@@ -469,10 +470,6 @@
 
 - (void)updateFiltering {
     DLog(@"Filtering...");
-//    if (isRefreshing) {
-//        return;
-//    }
-    
 //    // Filter content
 //    int matchingFilesCount = 0;
 //    self.content = [self filterContent:self.unfilteredContent numberOfMatchingFiles:&matchingFilesCount];
@@ -488,24 +485,18 @@
 //    [numItemsTextField setStringValue:str];
 //
 //    [outlineView reloadData];
-//
-//    if ([DEFAULTS boolForKey:@"disclosure"]) {
-//        [outlineView expandItem:nil expandChildren:YES];
-//    } else {
-//        [outlineView collapseItem:nil collapseChildren:YES];
-//    }
 }
 
 // User typed in search filter
 - (void)controlTextDidChange:(NSNotification *)aNotification {
     id o = [aNotification object];
-    if (o == filterTextField) {
+    if (o == filterTextField || o == nil) {
         if (filterTimer) {
             [filterTimer invalidate];
         }
         filterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateFiltering) userInfo:nil repeats:NO];
     }
-    else if (o == searchField) {
+    if (o == searchField || o == nil) {
         [searchButton setEnabled:[[searchField stringValue] length]];
     }
 }

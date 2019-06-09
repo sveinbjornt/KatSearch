@@ -584,8 +584,8 @@ DQ
                         <rect key="frame" x="785" y="6" width="32" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </progressIndicator>
-                    <searchField hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="RMp-6N-DDK">
-                        <rect key="frame" x="14" y="12" width="104" height="22"/>
+                    <searchField hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="RMp-6N-DDK" customClass="SearchFilterField">
+                        <rect key="frame" x="14" y="12" width="112" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter..." usesSingleLineMode="YES" bezelStyle="round" id="O9V-3y-Gce">
                             <font key="font" metaFont="system"/>

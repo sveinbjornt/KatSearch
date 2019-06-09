@@ -62,6 +62,7 @@
 		F4CB19C62294450900265CE8 /* SharedDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19C52294450900265CE8 /* SharedDateFormatter.m */; };
 		F4CB19C92294769700265CE8 /* OptClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19C82294769700265CE8 /* OptClipView.m */; };
 		F4CB19CC2294770D00265CE8 /* OptScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB19CB2294770C00265CE8 /* OptScrollView.m */; };
+		F4E160FF22AD3DE80019EDE7 /* SearchFilterField.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E160FE22AD3DE80019EDE7 /* SearchFilterField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -172,6 +173,8 @@
 		F4CB19C82294769700265CE8 /* OptClipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptClipView.m; sourceTree = "<group>"; };
 		F4CB19CA2294770C00265CE8 /* OptScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptScrollView.h; sourceTree = "<group>"; };
 		F4CB19CB2294770C00265CE8 /* OptScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OptScrollView.m; sourceTree = "<group>"; };
+		F4E160FD22AD3DE80019EDE7 /* SearchFilterField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchFilterField.h; sourceTree = "<group>"; };
+		F4E160FE22AD3DE80019EDE7 /* SearchFilterField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchFilterField.m; sourceTree = "<group>"; };
 		F4E32305225BDB1300C89C81 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,6 +274,8 @@
 			children = (
 				F45CA6F9229980EE00D4D6D0 /* Alerts.h */,
 				F45CA6FA229980EE00D4D6D0 /* Alerts.m */,
+				F4E160FD22AD3DE80019EDE7 /* SearchFilterField.h */,
+				F4E160FE22AD3DE80019EDE7 /* SearchFilterField.m */,
 				F45CA6FF2299BA3000D4D6D0 /* MutableDictProxy.h */,
 				F45CA7002299BA3000D4D6D0 /* MutableDictProxy.m */,
 				F45CA6F62298B80500D4D6D0 /* LSUIElementApp.h */,
@@ -481,6 +486,7 @@
 				F4CB19AD2291A84400265CE8 /* GeneralPreferencesController.m in Sources */,
 				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
+				F4E160FF22AD3DE80019EDE7 /* SearchFilterField.m in Sources */,
 				F497BB2822A17ED800F66BD4 /* LSUIElementWindow.m in Sources */,
 				F45CA6F52298629700D4D6D0 /* SelectableImageView.m in Sources */,
 				F45CA6FE229989D800D4D6D0 /* STPathControl.m in Sources */,

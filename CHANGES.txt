@@ -22,7 +22,6 @@ FOR 1.0
 * Filter regex support - Should highlight strings that match
 * Filter should search either all cols or name
 * Hide and clear filter by pressing rightmost X button
-* Pressing Esc key should clear and close filter
 * Highlight matching string when filter active
 
 * Support selecting folder to search (add home folder preset)
@@ -41,11 +40,14 @@ FOR 1.0
 * Get Skip Package Contents working
 * Open recent for status item menu
 * Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
-* Fix sorting issue (why does col. sort require two clicks to kick in?)
 * Monospace font option
-* Show Filter should not be a global defaults option
+* Status Item app mode selection image should have a counterpart for non-dark mode
+* Add tooltips for all controls, esp. in Prefs
 
 For next release:
+DONE * Fix sorting issue (why does col. sort require two clicks to kick in?)
+DONE * Pressing Esc key should clear and close filter
+DONE * Show Filter should not be a global defaults option
 DONE * Truncate ultra-long filenames when they're shown in item contextual menu
 DONE * Authentication now global, done via app delegate
 DONE * Show Volume Name, not mount path, in search history menu
