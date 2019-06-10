@@ -294,6 +294,7 @@
     if ([task isRunning]) {
         DLog(@"Stopping task");
         [task stop];
+        [self.window makeFirstResponder:searchField];
         return;
     }
     
@@ -403,7 +404,7 @@
 //        [item prime];
     }
     
-    // Make sure we've transition to small progress indicator
+    // Make sure we've transitioned to a small progress indicator
     if ([progressIndicator isHidden] == NO) {
         [smallProgressIndicator setUsesThreadedAnimation:TRUE];
         [smallProgressIndicator startAnimation:self];
@@ -439,23 +440,24 @@
 - (void)taskDidFinish:(SearchTask *)theTask {
     [self setSearchControlsEnabled:YES];
     
+    // Stop all progress indicators
     [progressIndicator stopAnimation:self];
     [progressIndicator setHidden:YES];
     [smallProgressIndicator stopAnimation:self];
     [smallProgressIndicator setUsesThreadedAnimation:NO];
     [smallProgressIndicator setHidden:YES];
-    
     [self adjustBottomControls];
     
     [searchButton setTitle:@"Search"];
     
-//    [tableView reloadDataPreservingSelection];
-    
+    // Update status text field
     NSString *cancelled = [task wasKilled] ? @"(cancelled)" : @"";
     NSString *desc = [NSString stringWithFormat:@"Found %lu %@ %@",
                       [results count], [itemTypePopupButton titleOfSelectedItem], cancelled];
     [numResultsTextField setStringValue:desc];
     DLog(@"Task finished");
+    
+    [self.window makeFirstResponder:searchField];
 }
 
 #pragma mark - Sort
