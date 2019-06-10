@@ -151,9 +151,9 @@
     
     NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     [tableView setSortDescriptors:@[sortDescriptor]];
-
     
     [self authenticationStatusChanged];
+    [self adjustBottomControls];
     
     SearchQuery *sq = startingQuery ? startingQuery : [SearchQuery defaultQuery];
     [self loadQuery:sq];
@@ -322,12 +322,11 @@
     [progressIndicator startAnimation:self];
     [progressIndicator setHidden:NO];
 
-//    CGPoint origin = [numResultsTextField frame].origin;
-//    origin.x += 30;
-//    [numResultsTextField setFrameOrigin:origin];
     [numResultsTextField setStringValue:@"Searching..."];
     
     [searchButton setTitle:@"Stop"];
+    
+    [self adjustBottomControls];
     
     // Clear results
     results = [NSMutableArray array];
@@ -378,19 +377,6 @@
 
 - (void)taskResultsFound:(NSArray *)items {
     
-//    if ([progressIndicator controlSize] != NSControlSizeSmall) {
-//        [progressIndicator setFrameOrigin:NSMakePoint(16, 16)];
-//        [[self.window contentView] addSubview:progressIndicator];
-////        NSRect frame = [progressIndicator frame];
-////        NSSize size = frame.size;
-////        size.width = size.width/2;
-////        size.height = size.height/2;
-////        frame.size = size;
-////        [progressIndicator setFrame:frame];
-//        [progressIndicator setControlSize:NSControlSizeSmall];
-//    }
-    
-    
     // Find item property selectors for visible columns
     NSArray *columns = [tableView tableColumns];
     SEL selectors[[columns count]];
@@ -417,12 +403,17 @@
 //        [item prime];
     }
     
+    // Make sure we've transition to small progress indicator
     if ([progressIndicator isHidden] == NO) {
         [smallProgressIndicator setUsesThreadedAnimation:TRUE];
         [smallProgressIndicator startAnimation:self];
+        [smallProgressIndicator setHidden:NO];
         [progressIndicator setHidden:YES];
     }
     
+    [self adjustBottomControls];
+    
+    // Add items, refresh tbale view
     if ([results count] == 0) {
         [results addObjectsFromArray:items];
         [tableView reloadData];
@@ -430,11 +421,19 @@
         NSInteger idx1 = [results count];
         [results addObjectsFromArray:items];
         NSInteger idx2 = [results count];
+        // TODO: Rethink
         [tableView reloadDataPreservingSelectionFromIndex:idx1 toIndex:idx2];
     }
-    [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu %@", [results count], [itemTypePopupButton titleOfSelectedItem]]];
+    
+    // Update no. items label
+    NSString *cancelled = [task wasKilled] ? @"(cancelled)" : @"";
+    NSString *desc = [NSString stringWithFormat:@"Found %lu %@ %@",
+                      [results count], [itemTypePopupButton titleOfSelectedItem], cancelled];
+    [numResultsTextField setStringValue:desc];
     
 //    [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:[NSString stringWithFormat:@"Items (%lu)", [results count]]];
+    
+    DLog(@"Task results (%d)", (int)[items count]);
 }
 
 - (void)taskDidFinish:(SearchTask *)theTask {
@@ -444,18 +443,18 @@
     [progressIndicator setHidden:YES];
     [smallProgressIndicator stopAnimation:self];
     [smallProgressIndicator setUsesThreadedAnimation:NO];
+    [smallProgressIndicator setHidden:YES];
     
-//    CGPoint origin = [numResultsTextField frame].origin;
-//    origin.x -= 30;
-//    [numResultsTextField setFrameOrigin:origin];
+    [self adjustBottomControls];
     
     [searchButton setTitle:@"Search"];
     
 //    [tableView reloadDataPreservingSelection];
     
-    NSString *killed = [theTask wasKilled] ? @"(cancelled)" : @"";
-    [numResultsTextField setStringValue:[NSString stringWithFormat:@"Found %lu items %@", [results count], killed]];
-    task = nil;
+    NSString *cancelled = [task wasKilled] ? @"(cancelled)" : @"";
+    NSString *desc = [NSString stringWithFormat:@"Found %lu %@ %@",
+                      [results count], [itemTypePopupButton titleOfSelectedItem], cancelled];
+    [numResultsTextField setStringValue:desc];
     DLog(@"Task finished");
 }
 
@@ -581,11 +580,34 @@
 - (void)showFilter {
     [filterTextField setHidden:NO];
     [self.window makeFirstResponder:filterTextField];
+    [self adjustBottomControls];
 }
 
 - (void)hideFilter {
     [self.window makeFirstResponder:searchField];
     [filterTextField setHidden:YES];
+    [self adjustBottomControls];
+}
+
+- (void)adjustBottomControls {
+    NSRect filterFrame = [filterTextField frame];
+    NSRect spinFrame = [smallProgressIndicator frame];
+    NSRect msgFrame = [numResultsTextField frame];
+
+    if ([filterTextField isHidden]) {
+        spinFrame.origin.x = filterFrame.origin.x;
+    } else {
+        spinFrame.origin.x = filterFrame.origin.x + filterFrame.size.width + 10;
+    }
+    [smallProgressIndicator setFrame:spinFrame];
+    
+    if ([smallProgressIndicator isHidden]) {
+        msgFrame.origin.x = spinFrame.origin.x;
+    } else {
+        msgFrame.origin.x = spinFrame.origin.x + spinFrame.size.width + 8;
+    }
+    [numResultsTextField setFrame:msgFrame];
+    
 }
 
 #pragma mark - Item actions

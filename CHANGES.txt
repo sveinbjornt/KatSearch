@@ -39,12 +39,12 @@ FOR 1.0
 * "Show Original" for aliases/symlinks
 * Get Skip Package Contents working
 * Open recent for status item menu
-* Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
 * Monospace font option
 * Status Item app mode selection image should have a counterpart for non-dark mode
 * Add tooltips for all controls, esp. in Prefs
 
 For next release:
+DONE * Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
 DONE * Fix sorting issue (why does col. sort require two clicks to kick in?)
 DONE * Pressing Esc key should clear and close filter
 DONE * Show Filter should not be a global defaults option
