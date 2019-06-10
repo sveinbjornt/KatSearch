@@ -362,7 +362,7 @@ DQ
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="UTI" editable="NO" width="100" minWidth="100" maxWidth="100" id="LG7-3g-shv" userLabel="UTI">
+                                        <tableColumn identifier="UTI" editable="NO" width="100" minWidth="100" maxWidth="300" id="LG7-3g-shv" userLabel="UTI">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="UTI">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -821,7 +821,7 @@ DQ
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnPermissions" id="vXx-bI-nrN"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Show UTI" id="V2Q-KB-eMF">
+                <menuItem title="Show Uniform Type Identifier" id="V2Q-KB-eMF">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <binding destination="7VI-tp-uBM" name="value" keyPath="values.ShowColumnUTI" id="DeZ-xI-lJm"/>

@@ -492,10 +492,7 @@
 - (void)controlTextDidChange:(NSNotification *)aNotification {
     id o = [aNotification object];
     if (o == filterTextField || o == nil) {
-        if (filterTimer) {
-            [filterTimer invalidate];
-        }
-        filterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateFiltering) userInfo:nil repeats:NO];
+        [self filterTextChanged:NO];
     }
     if (o == searchField || o == nil) {
         [searchButton setEnabled:[[searchField stringValue] length]];
@@ -571,24 +568,34 @@
 
 #pragma mark - Filter
 
+- (void)filterTextChanged:(BOOL)updateNow {
+    if (filterTimer) {
+        [filterTimer invalidate];
+    }
+    CGFloat interval = updateNow ? 0.0f : 0.1f;
+    filterTimer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(updateFiltering) userInfo:nil repeats:NO];
+    [self adjustBottomControls];
+}
+
 - (IBAction)toggleFilter:(id)sender {
     if ([filterTextField isHidden]) {
         [self showFilter];
     } else {
         [self hideFilter];
     }
+    [self adjustBottomControls];
 }
 
 - (void)showFilter {
     [filterTextField setHidden:NO];
     [self.window makeFirstResponder:filterTextField];
-    [self adjustBottomControls];
 }
 
 - (void)hideFilter {
     [self.window makeFirstResponder:searchField];
     [filterTextField setHidden:YES];
-    [self adjustBottomControls];
+    [filterTextField setStringValue:@""];
+    [self filterTextChanged:YES];
 }
 
 - (void)adjustBottomControls {
