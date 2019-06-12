@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="authenticateButton" destination="Mqr-y6-S2s" id="VMr-pG-7fC"/>
                 <outlet property="columnsMenu" destination="Y72-8T-8y7" id="WP5-Lw-2Ft"/>
+                <outlet property="filterOptionsMenu" destination="fcC-ke-Mkp" id="aeA-32-9us"/>
                 <outlet property="filterTextField" destination="RMp-6N-DDK" id="8Lq-f7-DXR"/>
                 <outlet property="itemContextualMenu" destination="tCS-El-m2x" id="VK7-ok-q7f"/>
                 <outlet property="itemTypePopupButton" destination="ZFf-6d-eZi" id="F8B-6R-uOW"/>
@@ -672,18 +673,33 @@ DQ
             </connections>
             <point key="canvasLocation" x="732" y="7.5"/>
         </window>
-        <menu id="fcC-ke-Mkp" userLabel="Search Filter Menu">
+        <menu id="fcC-ke-Mkp" userLabel="Filter Options Menu">
             <items>
                 <menuItem title="Case Sensitive" id="a4a-Lo-kbU">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="filterSettingsChanged:" target="-2" id="vq6-iO-M16"/>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.FilterCaseSensitive" id="Ags-bO-YP1"/>
+                    </connections>
                 </menuItem>
                 <menuItem title="Regular Expressions" id="W7h-q8-ofw">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="filterSettingsChanged:" target="-2" id="SAx-PD-K1R"/>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.FilterRegularExpressions" id="XWs-fS-YUX"/>
+                    </connections>
                 </menuItem>
-                <menuItem title="Filter by All Columns" id="9sA-gD-11r">
+                <menuItem title="All Columns" id="9sA-gD-11r">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="filterSettingsChanged:" target="-2" id="dP4-ei-bhY"/>
+                        <binding destination="7VI-tp-uBM" name="value" keyPath="values.FilterAllColumns" id="4D4-m7-P8y"/>
+                    </connections>
                 </menuItem>
             </items>
+            <connections>
+                <outlet property="delegate" destination="-2" id="HWm-Qb-3cH"/>
+            </connections>
         </menu>
         <menu autoenablesItems="NO" id="4Bj-Tq-H8Z" userLabel="Search Options Menu">
             <items>

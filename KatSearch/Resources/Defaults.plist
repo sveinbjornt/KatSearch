@@ -62,5 +62,11 @@
 	<false/>
 	<key>UsePathControl</key>
 	<false/>
+	<key>FilterCaseSensitive</key>
+	<false/>
+	<key>FilterRegularExpressions</key>
+	<false/>
+	<key>FilterAllColumns</key>
+	<false/>
 </dict>
 </plist>

@@ -66,6 +66,7 @@
     IBOutlet NSMenu *openWithSubMenu;
     IBOutlet NSMenu *columnsMenu;
     IBOutlet NSMenu *searchOptionsMenu;
+    IBOutlet NSMenu *filterOptionsMenu;
     
     NSMutableArray *results;
     NSMutableArray *filteredResults;
@@ -605,6 +606,15 @@
     [self filterTextChanged:YES];
 }
 
+- (IBAction)filterSettingsChanged:(id)sender {
+    NSString *title = [sender title];
+    NSString *suffix = [[title componentsSeparatedByString:@" "] componentsJoinedByString:@""];
+    NSString *defKey = [NSString stringWithFormat:@"Filter%@", suffix];
+    BOOL on = [DEFAULTS boolForKey:defKey];
+    [DEFAULTS setBool:!on forKey:defKey];
+    [sender setState:!on];
+}
+
 - (void)adjustBottomControls {
     NSRect filterFrame = [filterTextField frame];
     NSRect spinFrame = [smallProgressIndicator frame];
@@ -892,6 +902,11 @@
         }
         
         [menu addItemWithTitle:@"Select..." action:@selector(openWith:) keyEquivalent:@""];
+    }
+    else if (menu == filterOptionsMenu) {
+        [[filterOptionsMenu itemWithTitle:@"Case Sensitive"] setState:[DEFAULTS boolForKey:@"FilterCaseSensitive"]];
+        [[filterOptionsMenu itemWithTitle:@"Regular Expressions"] setState:[DEFAULTS boolForKey:@"FilterRegularExpressions"]];
+        [[filterOptionsMenu itemWithTitle:@"All Columns"] setState:[DEFAULTS boolForKey:@"FilterAllColumns"]];
     }
 }
 
