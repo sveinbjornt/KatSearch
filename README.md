@@ -36,7 +36,7 @@ To test the absolutely latest in-development version, clone this repository and 
 $ make
 ```
 
-The built application can then be found at  `products/KatSearch.app`.
+The built application can be found in  `products/`.
 
 ## Screenshots
 

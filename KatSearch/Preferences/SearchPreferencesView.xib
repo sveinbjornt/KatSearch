@@ -97,7 +97,7 @@
                                     <action selector="defaultVolumeChanged:" target="-2" id="LAz-99-jZA"/>
                                 </connections>
                             </popUpButton>
-                            <button verticalHuggingPriority="750" id="SUU-s8-5N2">
+                            <button toolTip="Perform case sensitive matching." verticalHuggingPriority="750" id="SUU-s8-5N2">
                                 <rect key="frame" x="240" y="119" width="174" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Case Sensitive" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="WIM-4C-bdW">
@@ -108,7 +108,7 @@
                                     <binding destination="Y7g-wU-BeG" name="value" keyPath="values.CaseSensitive" id="Osi-35-qYy"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" id="8Ty-5r-R6a">
+                            <button toolTip="Skip files within packages such as application bundles, etc." verticalHuggingPriority="750" id="8Ty-5r-R6a">
                                 <rect key="frame" x="240" y="88" width="174" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Skip Package Contents" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="UFl-ii-bvj">
@@ -119,10 +119,10 @@
                                     <binding destination="Y7g-wU-BeG" name="value" keyPath="values.SkipPackageContents" id="Zxb-Oo-FQq"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" id="EHU-Fc-Fcn">
+                            <button toolTip="Skip all hidden files, i.e. files with a name starting with a period (&quot;.&quot;) or with the Invisible filesystem metadata bit set." verticalHuggingPriority="750" id="EHU-Fc-Fcn">
                                 <rect key="frame" x="240" y="57" width="174" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Skip Invisible Files" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="xLe-6U-h5u">
+                                <buttonCell key="cell" type="check" title="Skip Hidden Files" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="xLe-6U-h5u">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -130,7 +130,7 @@
                                     <binding destination="Y7g-wU-BeG" name="value" keyPath="values.SkipInvisibleFiles" id="xw3-yM-eYu"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" id="nFb-TU-dvH">
+                            <button toolTip="Skip files within the /System folder." verticalHuggingPriority="750" id="nFb-TU-dvH">
                                 <rect key="frame" x="240" y="26" width="174" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Skip System Folder" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KQw-IJ-CNg">

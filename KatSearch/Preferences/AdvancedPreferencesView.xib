@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="520" height="260"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button verticalHuggingPriority="750" id="m4j-N6-olf">
+                <button toolTip="Show dates in a friendly, human readable format (e.g. &quot;Yesterday&quot;, &quot;2 weeks ago&quot; etc.)" verticalHuggingPriority="750" id="m4j-N6-olf">
                     <rect key="frame" x="162" y="81" width="200" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Human-friendly Dates" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pdt-O7-f60">
@@ -28,7 +28,7 @@
                         <binding destination="KsH-bZ-JKv" name="value" keyPath="values.HumanFriendlyDates" id="nm8-yf-kde"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" id="Tpd-dY-U4W">
+                <button toolTip="Show file sizes in a human-readable, friendly format (e.g. &quot;18.2 MB&quot;)" verticalHuggingPriority="750" id="Tpd-dY-U4W">
                     <rect key="frame" x="162" y="55" width="200" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Human-friendly File Size" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FiU-nf-kF9">
@@ -39,7 +39,7 @@
                         <binding destination="KsH-bZ-JKv" name="value" keyPath="values.HumanFriendlyFileSize" id="c4m-CQ-Yuh"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" id="bk7-zS-Vtd">
+                <button toolTip="Prompt for authentication immediately when KatSearch is launched." verticalHuggingPriority="750" id="bk7-zS-Vtd">
                     <rect key="frame" x="162" y="133" width="200" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Authenticate on Launch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="m1E-BS-tgR">
@@ -50,7 +50,7 @@
                         <binding destination="KsH-bZ-JKv" name="value" keyPath="values.AuthenticateOnLaunch" id="9Pg-wa-z4g"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" id="DGu-o7-Plj">
+                <button toolTip="Check if you are running the latest version of KatSearch." verticalHuggingPriority="750" id="DGu-o7-Plj">
                     <rect key="frame" x="155" y="161" width="211" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Check for Updates..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lJ0-Jd-VzT">
@@ -61,7 +61,7 @@
                         <action selector="checkForUpdates:" target="-2" id="lPo-hU-JRa"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" id="M2o-0C-PK0">
+                <button toolTip="Show permissions in string mode (e.g. &quot;rwxr-xr-x&quot;) instead of hex number (e.g. &quot;755&quot;)." verticalHuggingPriority="750" id="M2o-0C-PK0">
                     <rect key="frame" x="162" y="29" width="200" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Human-friendly Permissions" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vlc-J7-k8v">
@@ -72,7 +72,7 @@
                         <binding destination="KsH-bZ-JKv" name="value" keyPath="values.HumanFriendlyPermissions" id="dcH-Yk-13R"/>
                     </connections>
                 </button>
-                <popUpButton verticalHuggingPriority="750" id="Fh4-RV-NQF">
+                <popUpButton toolTip="Select which tool to use to scan the filesystem." verticalHuggingPriority="750" id="Fh4-RV-NQF">
                     <rect key="frame" x="159" y="205" width="204" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Automatic" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="FYx-D8-jDc" id="8at-Cm-gQk">
@@ -104,7 +104,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button hidden="YES" verticalHuggingPriority="750" id="pLE-nl-bxt">
+                <button toolTip="Use a monospace font in search windows instead of system default." verticalHuggingPriority="750" id="pLE-nl-bxt">
                     <rect key="frame" x="162" y="107" width="200" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Use Monospace Font" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ATg-tS-LNZ">

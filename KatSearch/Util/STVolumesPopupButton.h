@@ -35,7 +35,7 @@
 
 @property IBInspectable BOOL searchfsCapableVolumesOnly;
 
-- (void)selectItemWithMountPoint:(NSString *)mountPoint;
-- (NSString *)mountPointOfSelectedItem;
+- (void)selectPath:(NSString *)path;
+- (NSString *)pathOfSelectedItem;
 
 @end

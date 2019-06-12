@@ -20,12 +20,11 @@ FUTURE VERSION:
 FOR 1.0
 
 * Filter regex support - Should highlight strings that match
-* Filter should search either all cols or name
-* Hide and clear filter by pressing rightmost X button
-* Highlight matching string when filter active
+* Filter should search either all cols or name, menu option
+* Highlight matching string when filter active, this looks great and is useful
+* Update label when filter active ("Showing x out of y items")
 
-* Support selecting folder to search (add home folder preset)
-    * Support using /usr/bin/find
+* Support using /usr/bin/find for folders/non-searchfs-capable volumes
 * Use STPriviledTask when authenticated
 
 * Action menu item titles should alter based on no. selected items etc.
@@ -33,7 +32,6 @@ FOR 1.0
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
 * Show volumes that don't have a catalog in volumes popup menu but visually identify them in some way
 * Versions for multiple identical apps in Open With menu
-* Drag and drop folder/volume on window/app icon to make it the target of a new search
 * Interpret empty search string as request to find all files (find out how to list ALL files via searchfs function)
 * Distinction between Alias/Symlink should be clear in "Kind" even if LaunchServices doesn't distinguish between them
 * "Show Original" for aliases/symlinks
@@ -41,9 +39,21 @@ FOR 1.0
 * Open recent for status item menu
 * Monospace font option
 * Status Item app mode selection image should have a counterpart for non-dark mode
-* Add tooltips for all controls, esp. in Prefs
+* Run comparison on searchfs results and those picked up by KatSearch parsing subprocess output
+* Implement Search Filter menu options
+* Text in table view should invert when selected in non-dark-mode
+* Clear recent folders option
+* Should selecting folder to search automatically start search matching *all* files in directory structure
+* "Show Package Contents" option for packages
+* Esc should clear filter even if filter text field is not first responder
+* Detect whether volume or folder in recent search menu, show "in" for folder searches and "on" for volumes.
+* Keyboard shortcut for new search window should match hotkey shortcut.
 
 For next release:
+DONE * Drag and drop folder/volume on window/app icon to make it the target of a new search
+DONE * Support selecting folder to search (add home folder preset & recent folders)
+DONE * Add tooltips for all controls, esp. in Prefs
+DONE * Hide and clear filter by pressing rightmost X button of filter field
 DONE * Show/hide filter behaviour should be proper (shift prog. ind. & no. items text)
 DONE * Fix sorting issue (why does col. sort require two clicks to kick in?)
 DONE * Pressing Esc key should clear and close filter

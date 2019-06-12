@@ -56,6 +56,9 @@
 }
 
 - (void)setup {
+    
+    [[self menu] setDelegate:self];
+    
     [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector: @selector(volumesChanged:) name:NSWorkspaceDidMountNotification object: nil];
     [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector: @selector(volumesChanged:) name:NSWorkspaceDidUnmountNotification object:nil];
     [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector: @selector(volumesChanged:) name:NSWorkspaceDidRenameVolumeNotification object:nil];
@@ -63,17 +66,41 @@
     [self populateMenu];
 }
 
-- (void)selectItemWithMountPoint:(NSString *)mountPoint {
-    for (NSMenuItem *item in [[self menu] itemArray]) {
-        if ([[item toolTip] isEqualToString:mountPoint]) {
-            [self selectItem:item];
-            return;
-        }
-    }
+- (void)menuWillOpen:(NSMenu *)menu {
+    [self populateMenu];
 }
 
-- (NSString *)mountPointOfSelectedItem {
+- (BOOL)selectItemWithToolTip:(NSString *)tt {
+    for (NSMenuItem *item in [[self menu] itemArray]) {
+        if ([[item toolTip] isEqualToString:tt]) {
+            [self selectItem:item];
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (NSString *)pathOfSelectedItem {
     return [[self selectedItem] toolTip];
+}
+
+- (void)selectPath:(NSString *)path {
+    BOOL sel = [self selectItemWithToolTip:path];
+    if (!sel) {
+        NSArray *recent = [[NSUserDefaults standardUserDefaults] objectForKey:@"RecentFolders"];
+        if (recent == nil) {
+            recent = [NSArray new];
+        }
+        
+        // Add it to recent folders and save to defaults
+        NSMutableArray *folders = [recent mutableCopy];
+        [folders addObject:path];
+        [[NSUserDefaults standardUserDefaults] setObject:[folders copy] forKey:@"RecentFolders"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self populateMenu];
+        [self selectItemWithToolTip:path];
+    }
 }
 
 - (void)volumesChanged:(NSNotification *)notification {
@@ -112,6 +139,46 @@
         NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:[url path]];
         [icon setSize:NSMakeSize(16, 16)];
         [item setImage:icon];
+        
+        [volumesMenu addItem:item];
+    }
+    
+    // Separator
+    [volumesMenu addItem:[NSMenuItem separatorItem]];
+    
+    // Create recent folders list in defaults, if it doesn't exist
+    NSArray *recent = [[NSUserDefaults standardUserDefaults] objectForKey:@"RecentFolders"];
+    if (recent == nil) {
+        recent = [NSArray new];
+        [[NSUserDefaults standardUserDefaults] setObject:recent forKey:@"RecentFolders"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    // Always include home folder
+    NSMutableArray *folders = [recent mutableCopy];
+    [folders insertObject:NSHomeDirectory() atIndex:0];
+    // Add all folders as menu items
+    for (NSString *path in folders) {
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[path lastPathComponent]
+                                                      action:nil
+                                               keyEquivalent:@""];
+        [item setTarget:self];
+        [item setToolTip:path];
+        
+        NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:path];
+        [icon setSize:NSMakeSize(16, 16)];
+        [item setImage:icon];
+        
+        // Make the folder name red if it no longer exists at path
+        BOOL isDir;
+        if (![[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir] || !isDir) {
+            NSDictionary *attrs = @{ NSForegroundColorAttributeName: [NSColor redColor] };
+            NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:[path lastPathComponent]
+                                                                          attributes:attrs];
+            [item setAttributedTitle:attrStr];
+            NSImage *qmarkIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kQuestionMarkIcon)];
+            [qmarkIcon setSize:NSMakeSize(16, 16)];
+            [item setImage:qmarkIcon];
+        }
         
         [volumesMenu addItem:item];
     }

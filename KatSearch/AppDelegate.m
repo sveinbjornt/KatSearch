@@ -103,7 +103,7 @@
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note) {
-                                                      NSLog(@"Authorized: %d", [APP_DELEGATE isAuthenticated]);
+                                                      DLog(@"Authorized: %d", [APP_DELEGATE isAuthenticated]);
                                                       [self authenticationStatusChanged];
                                                   }];
     [self authenticationStatusChanged];
@@ -134,12 +134,13 @@
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {
-    DLog(@"%@ dropped", filename);
+    DLog(@"openFile: %@", filename);
     BOOL isDir;
     BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:filename isDirectory:&isDir];
     if (exists && isDir) {
-        // TODO: Create custom search with folder as target "volume"
-        [self newWindow:self];
+        SearchQuery *q = [SearchQuery defaultQuery];
+        q[@"volume"] = filename;
+        [self newWindowWithQuery:q];
         return YES;
     }
     return NO;
@@ -208,11 +209,22 @@
 - (void)searchByName:(NSPasteboard *)pb userData:(NSString *)userData error:(NSString **)err {
     DLog(@"Received search by name request");
     [self newWindow:self];
+    // TODO: Accept text string
 }
 
 - (void)searchFolder:(NSPasteboard *)pb userData:(NSString *)userData error:(NSString **)err {
     DLog(@"Received search in folder request");
-    [self newWindow:self];
+    if (![[pb types] containsObject:NSFilenamesPboardType]) {
+        return;
+    }
+    NSArray *files = [pb propertyListForType:NSFilenamesPboardType];
+    if (![files count]) {
+        return;
+    }
+    
+    SearchQuery *q = [SearchQuery defaultQuery];
+    q[@"volume"] = files[0];
+    [self newWindowWithQuery:q];
 }
 
 #pragma mark - Authorization
@@ -279,9 +291,13 @@
 #pragma mark - Window controllers
 
 - (id)newWindow:(id)sender {
+    return [self newWindowWithQuery:nil];
+}
+
+- (id)newWindowWithQuery:(SearchQuery *)query {
     [self animateStatusItem];
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-    SearchController *controller = [SearchController newController];
+    SearchController *controller = [SearchController newControllerWithSearchQuery:query];
     [windowControllers addObject:controller];
     [controller showWindow:self];
     [DEFAULTS setBool:YES forKey:@"PreviouslyLaunched"];

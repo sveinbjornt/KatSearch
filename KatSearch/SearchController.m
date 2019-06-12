@@ -68,6 +68,8 @@
     IBOutlet NSMenu *searchOptionsMenu;
     
     NSMutableArray *results;
+    NSMutableArray *filteredResults;
+    
     SearchTask *task;
     NSTimer *filterTimer;
     
@@ -78,7 +80,7 @@
 @implementation SearchController
 
 + (instancetype)newController {
-    return [[[self class] alloc] initWithWindowNibName:@"SearchWindow"];
+    return [[[self class] alloc] initWithSearchQuery:nil];
 }
 
 + (instancetype)newControllerWithSearchQuery:(SearchQuery *)query {
@@ -134,7 +136,7 @@
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note) {
-                                                      NSLog(@"Authorized: %d", [APP_DELEGATE isAuthenticated]);
+                                                      DLog(@"Authorized: %d", [APP_DELEGATE isAuthenticated]);
                                                       [self authenticationStatusChanged];
                                                   }];
     
@@ -187,7 +189,7 @@
     [itemTypePopupButton selectItemWithTitle:query[@"filetype"]];
     [matchCriterionPopupButton selectItemWithTitle:query[@"matchtype"]];
     [searchField setStringValue:query[@"searchstring"]];
-    [volumesPopupButton selectItemWithMountPoint:query[@"volume"]];
+    [volumesPopupButton selectPath:query[@"volume"]];
     
     [[searchOptionsMenu itemWithTitle:@"Case Sensitive"] setState:[query[@"casesensitive"] boolValue]];
     [[searchOptionsMenu itemWithTitle:@"Skip Package Contents"] setState:[query[@"skippackages"] boolValue]];
@@ -205,7 +207,7 @@
         @"filetype": [itemTypePopupButton titleOfSelectedItem],
         @"matchtype": [matchCriterionPopupButton titleOfSelectedItem],
         @"searchstring": [searchField stringValue],
-        @"volume": [volumesPopupButton mountPointOfSelectedItem],
+        @"volume": [volumesPopupButton pathOfSelectedItem],
         @"casesensitive": @((BOOL)[[searchOptionsMenu itemWithTitle:@"Case Sensitive"] state]),
         @"skippackages": @((BOOL)[[searchOptionsMenu itemWithTitle:@"Skip Package Contents"] state]),
         @"skipinvisibles": @((BOOL)[[searchOptionsMenu itemWithTitle:@"Skip Invisible Files"] state]),
@@ -251,9 +253,9 @@
     }
     else if ([def hasSuffix:@"ShowFilter"]) {
         if ([DEFAULTS boolForKey:@"ShowFilter"]) {
-            [self showFilter];
+            [self showFilter:self];
         } else {
-            [self hideFilter];
+            [self hideFilter:self];
         }
     }
     else if ([def hasSuffix:@"ShowFullPath"]) {
@@ -331,6 +333,7 @@
     
     // Clear results
     results = [NSMutableArray array];
+    filteredResults = results;
     [tableView reloadData];
     
     // Configure task
@@ -398,7 +401,7 @@
     for (SearchItem *item in items) {
         for (int i = 0; i < num; i++) {
             SEL sel = selectors[i];
-//            NSLog(@"%@", NSStringFromSelector(sel));
+//            DLog(@"%@", NSStringFromSelector(sel));
             [item performSelector:sel];
         }
 //        [item prime];
@@ -419,11 +422,8 @@
         [results addObjectsFromArray:items];
         [tableView reloadData];
     } else {
-        NSInteger idx1 = [results count];
         [results addObjectsFromArray:items];
-        NSInteger idx2 = [results count];
-        // TODO: Rethink
-        [tableView reloadDataPreservingSelectionFromIndex:idx1 toIndex:idx2];
+        [tableView noteNumberOfRowsChanged];
     }
     
     // Update no. items label
@@ -434,7 +434,7 @@
     
 //    [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:[NSString stringWithFormat:@"Items (%lu)", [results count]]];
     
-    DLog(@"Task results (%d)", (int)[items count]);
+//    DLog(@"Task results (%d)", (int)[items count]);
 }
 
 - (void)taskDidFinish:(SearchTask *)theTask {
@@ -463,42 +463,9 @@
 #pragma mark - Sort
 
 - (void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
-    [results sortUsingDescriptors:[aTableView sortDescriptors]];
+    [filteredResults sortUsingDescriptors:[aTableView sortDescriptors]];
     [tableView reloadData];
 }
-
-#pragma mark - Filter
-
-- (void)updateFiltering {
-    DLog(@"Filtering...");
-//    // Filter content
-//    int matchingFilesCount = 0;
-//    self.content = [self filterContent:self.unfilteredContent numberOfMatchingFiles:&matchingFilesCount];
-//
-//    // Update outline view header
-//    [self updateProcessCountHeader];
-//
-//    // Update num items label
-//    NSString *str = [NSString stringWithFormat:@"Showing %d out of %d items", matchingFilesCount, self.totalFileCount];
-//    if (matchingFilesCount == self.totalFileCount) {
-//        str = [NSString stringWithFormat:@"Showing all %d items", self.totalFileCount];
-//    }
-//    [numItemsTextField setStringValue:str];
-//
-//    [outlineView reloadData];
-}
-
-// User typed in search filter
-- (void)controlTextDidChange:(NSNotification *)aNotification {
-    id o = [aNotification object];
-    if (o == filterTextField || o == nil) {
-        [self filterTextChanged:NO];
-    }
-    if (o == searchField || o == nil) {
-        [searchButton setEnabled:[[searchField stringValue] length]];
-    }
-}
-
 
 #pragma mark - Authentication
 
@@ -568,30 +535,70 @@
 
 #pragma mark - Filter
 
+// Filter results
+- (void)updateFiltering {
+    DLog(@"Filtering...");
+    
+    NSString *filterStr = [filterTextField stringValue];
+    if ([filterStr length]) {
+        
+        NSMutableArray *matchingItems = [NSMutableArray new];
+        for (SearchItem *item in results) {
+            if ([[item.name lowercaseString] rangeOfString:[filterStr lowercaseString]].location == NSNotFound) {
+                continue;
+            }
+            [matchingItems addObject:item];
+        }
+        
+        filteredResults = matchingItems;
+        
+    } else {
+        filteredResults = results;
+    }
+    
+    [tableView reloadData];
+}
+
+// User typed in search field or filter
+- (void)controlTextDidChange:(NSNotification *)aNotification {
+    id o = [aNotification object];
+    if (o == filterTextField || o == nil) {
+        [self filterTextChanged:NO];
+    }
+    if (o == searchField || o == nil) {
+        [searchButton setEnabled:[[searchField stringValue] length]];
+    }
+}
+
 - (void)filterTextChanged:(BOOL)updateNow {
     if (filterTimer) {
         [filterTimer invalidate];
     }
     CGFloat interval = updateNow ? 0.0f : 0.1f;
-    filterTimer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(updateFiltering) userInfo:nil repeats:NO];
+    filterTimer = [NSTimer scheduledTimerWithTimeInterval:interval
+                                                   target:self
+                                                 selector:@selector(updateFiltering)
+                                                 userInfo:nil
+                                                  repeats:NO];
     [self adjustBottomControls];
 }
 
 - (IBAction)toggleFilter:(id)sender {
-    if ([filterTextField isHidden]) {
-        [self showFilter];
-    } else {
-        [self hideFilter];
-    }
+//    if ([filterTextField isHidden]) {
+    [self showFilter:sender];
+//    }
+//    } else {
+//        [self hideFilter];
+//    }
     [self adjustBottomControls];
 }
 
-- (void)showFilter {
+- (IBAction)showFilter:(id)sender {
     [filterTextField setHidden:NO];
     [self.window makeFirstResponder:filterTextField];
 }
 
-- (void)hideFilter {
+- (IBAction)hideFilter:(id)sender {
     [self.window makeFirstResponder:searchField];
     [filterTextField setHidden:YES];
     [filterTextField setStringValue:@""];
@@ -632,7 +639,7 @@
     else {
         NSIndexSet *sel = [tableView selectedRowIndexes];
         [sel enumerateIndexesUsingBlock:^(NSUInteger row, BOOL *stop){
-            SearchItem *item = results[row];
+            SearchItem *item = filteredResults[row];
             [items addObject:item];
         }];
     }
@@ -642,11 +649,11 @@
 
 - (void)rowDoubleClicked:(id)object {
     NSInteger row = [tableView clickedRow];
-    if (row < 0 || row >= [results count]) {
+    if (row < 0 || row >= [filteredResults count]) {
         return;
     }
     
-    SearchItem *item = results[row];
+    SearchItem *item = filteredResults[row];
     BOOL cmdKeyDown = (([[NSApp currentEvent] modifierFlags] & NSCommandKeyMask) == NSCommandKeyMask);
     
     if (cmdKeyDown) {
@@ -725,7 +732,7 @@
     BOOL optionKeyDown = (([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask) == NSAlternateKeyMask);
     if (!optionKeyDown) {
         NSString *q = [NSString stringWithFormat:@"Move %lu items to the Trash?", num];
-        NSString *st = @"Hold the option key (⌥) to avoid this prompt.";
+        NSString *st = @"Hold down the option key (⌥) to avoid this prompt.";
         if (num == 1) {
             SearchItem *item = selItems[0];
             NSString *type = item.isDirectory ? @"folder" : @"file";
@@ -910,8 +917,15 @@
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
     NSDragOperation op = [self draggingEntered:sender];
-    // TODO: Load folder to search
-    return (op == NSDragOperationLink);
+    
+    NSArray *files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
+    if ([files count] != 1 || op != NSDragOperationLink) {
+        return NO;
+    }
+    
+    [volumesPopupButton selectPath:files[0]];
+    
+    return YES;
 }
 
 #pragma mark - NSMenuItemValidation
@@ -953,11 +967,11 @@
 #pragma mark - NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return [results count];
+    return [filteredResults count];
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)col row:(NSInteger)row {
-    if (row < 0 || row >= [results count]) {
+    if (row < 0 || row >= [filteredResults count]) {
         return nil;
     }
     
@@ -966,7 +980,7 @@
     
     cellView.textField.textColor = [NSColor systemGrayColor];
     
-    SearchItem *item = results[row];
+    SearchItem *item = filteredResults[row];
     id colStr = @"";
     
     // File name / path
@@ -974,6 +988,10 @@
         colStr = [DEFAULTS boolForKey:@"ShowFullPath"] ? item.path : item.name;
         cellView.imageView.objectValue = item.icon;
         cellView.textField.textColor = [NSColor textColor];
+        
+        if ([[filterTextField stringValue] length]) {
+            colStr = [self highlightString:colStr match:[filterTextField stringValue]];
+        }
     }
     // Kind
     else if ([colID isEqualToString:@"Kind"]) {
@@ -1052,41 +1070,26 @@
 
 }
 
-//- (NSAttributedString *)attr:(NSString *)title {
-//    NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor whiteColor] };
-//    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:title attributes:attr];
-//
-//    NSRange mRange = [[title lowercaseString] rangeOfString:@"test"];
-//    if (mRange.location != NSNotFound) {
-//        NSDictionary *mattr = @{ NSForegroundColorAttributeName: [NSColor blackColor],
-//                                 NSBackgroundColorAttributeName: [NSColor yellowColor],
-//                                 };
-//
-//        [attrStr setAttributes:mattr range:mRange];
-//
-//        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-//        [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
-//        [attrStr addAttribute:NSParagraphStyleAttributeName
-//                        value:paragraphStyle
-//                        range:NSMakeRange(0,[title length])];
-//
-//
-////        [attrStr beginEditing];
-////        [attrStr applyFontTraits:NSBoldFontMask
-////                           range:mRange];
-////        [attrStr endEditing];
-//
-//    }
-//
-//    return attrStr;
-//}
+- (NSAttributedString *)highlightString:(NSString *)str match:(NSString *)toHighlight {
+    NSDictionary *attr = @{ NSForegroundColorAttributeName: [NSColor textColor] };
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str attributes:attr];
+
+    NSRange mRange = [[str lowercaseString] rangeOfString:[toHighlight lowercaseString]];
+    if (mRange.location != NSNotFound) {
+        NSDictionary *attrs = @{ NSForegroundColorAttributeName: [NSColor blackColor],
+                                 NSBackgroundColorAttributeName: [NSColor yellowColor] };
+        [attrStr setAttributes:attrs range:mRange];
+    }
+
+    return attrStr;
+}
 
 - (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
     NSMutableArray *filenames = [NSMutableArray arrayWithCapacity:[rowIndexes count]];
     NSInteger index = [rowIndexes firstIndex];
     
     while (NSNotFound != index) {
-        SearchItem *item = results[index];
+        SearchItem *item = filteredResults[index];
         if ([[NSFileManager defaultManager] fileExistsAtPath:item.path]) {
             [filenames addObject:item.path];
         } else {
@@ -1105,8 +1108,8 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
     NSInteger selectedRow = [tableView selectedRow];
-    if (selectedRow >= 0 && selectedRow < [results count] && [results count]) {
-        SearchItem *item = results[selectedRow];
+    if (selectedRow >= 0 && selectedRow < [filteredResults count] && [filteredResults count]) {
+        SearchItem *item = filteredResults[selectedRow];
         [pathBar setURL:item.url];
         if ([DEFAULTS boolForKey:@"ShowPathBar"]) {
             [self showPathBar];

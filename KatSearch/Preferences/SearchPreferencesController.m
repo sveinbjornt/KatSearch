@@ -47,11 +47,11 @@
 }
 
 - (void)viewDidLoad {
-    [volumesPopupButton selectItemWithMountPoint:[DEFAULTS stringForKey:@"FindOnVolume"]];
+    [volumesPopupButton selectPath:[DEFAULTS stringForKey:@"FindOnVolume"]];
 }
 
 - (IBAction)defaultVolumeChanged:(id)sender {
-    [DEFAULTS setObject:[volumesPopupButton mountPointOfSelectedItem] forKey:@"FindOnVolume"];
+    [DEFAULTS setObject:[volumesPopupButton pathOfSelectedItem] forKey:@"FindOnVolume"];
 }
 
 #pragma mark - MASPreferencesViewController
