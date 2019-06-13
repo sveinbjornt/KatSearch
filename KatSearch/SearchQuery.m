@@ -106,19 +106,19 @@
 
 #pragma mark -
 
-- (NSString *)matchTypeChar {
-    // Return a single character string describing the match type of the query
-    if ([self[@"matchtype"] isEqualToString:@"name is"]) {
-        return @"=";
-    }
-    if ([self[@"matchtype"] isEqualToString:@"name starts with"]) {
-        return @"^";
-    }
-    if ([self[@"matchtype"] isEqualToString:@"name ends with"]) {
-        return @"$";
-    }
-    return @"~";
-}
+//- (NSString *)matchTypeChar {
+//    // Return a single character string describing the match type of the query
+//    if ([self[@"matchtype"] isEqualToString:@"name is"]) {
+//        return @"=";
+//    }
+//    if ([self[@"matchtype"] isEqualToString:@"name starts with"]) {
+//        return @"^";
+//    }
+//    if ([self[@"matchtype"] isEqualToString:@"name ends with"]) {
+//        return @"$";
+//    }
+//    return @"~";
+//}
 
 - (NSAttributedString *)menuItemString {
     // Generate an attributed string representation of the query,
@@ -134,9 +134,9 @@
     // Create attributed string with image
     NSAttributedString *attrStringWithImage = [NSAttributedString attributedStringWithAttachment:textAttachment];
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithAttributedString:attrStringWithImage];
-
+    
     // Prepend
-    NSString *title = [NSString stringWithFormat:@"%@ “%@” on ", [self matchTypeChar], self[@"searchstring"]];
+    NSString *title = [NSString stringWithFormat:@"“%@” on ", self[@"searchstring"]];
     NSAttributedString *attrTitle = [[NSAttributedString alloc] initWithString:title];
     [str insertAttributedString:attrTitle atIndex:0];
     // Append

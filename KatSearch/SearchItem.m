@@ -467,8 +467,21 @@
     return (isInvisible != 0);
 }
 
+- (BOOL)isPackage {
+    return [[NSWorkspace sharedWorkspace] isFilePackageAtPath:self.path];
+}
+
+- (BOOL)isApp {
+    return ([self isPackage] && [self conformsToUTI:@"com.apple.application]"]);
+}
+
 - (BOOL)exists {
     return [[NSFileManager defaultManager] fileExistsAtPath:self.path];
+}
+
+- (BOOL)conformsToUTI:(NSString *)UTI {
+    NSString *type = [[NSWorkspace sharedWorkspace] typeOfFile:self.path error:nil];
+    return ([[NSWorkspace sharedWorkspace] type:type conformsToType:UTI]);
 }
 
 #pragma mark - Handler apps
@@ -494,6 +507,11 @@
 - (void)showInFinder {
     [[NSWorkspace sharedWorkspace] selectFile:self.path
                      inFileViewerRootedAtPath:[self.path stringByDeletingLastPathComponent]];
+}
+
+- (void)showPackageContents {
+    [[NSWorkspace sharedWorkspace] selectFile:[self.path stringByAppendingPathComponent:@"Contents"]
+                     inFileViewerRootedAtPath:self.path];
 }
 
 - (void)showOriginal {

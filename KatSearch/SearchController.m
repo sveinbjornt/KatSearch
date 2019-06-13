@@ -125,8 +125,7 @@
         }
     }
     if ([DEFAULTS boolForKey:@"PreviouslyLaunched"] == NO) {
-        NSTableColumn *itemsCol = [tableView tableColumnWithIdentifier:@"Items"];
-        [itemsCol setWidth:200.f];
+        [[tableView tableColumnWithIdentifier:@"Name"] setWidth:200.f];
         [self.window center];
     }
     
@@ -313,7 +312,7 @@
     [self hidePathBar];
     [pathBar setURL:nil];
     
-//    [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:@"Items"];
+//    [[[tableView tableColumnWithIdentifier:@"Name"] headerCell] setStringValue:@"Name"];
     
     // Configure progress indicator, move to centre of table view and set it off
     [tableView addSubview:progressIndicator];
@@ -403,7 +402,10 @@
         for (int i = 0; i < num; i++) {
             SEL sel = selectors[i];
 //            DLog(@"%@", NSStringFromSelector(sel));
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [item performSelector:sel];
+#pragma clang diagnostic pop
         }
 //        [item prime];
     }
@@ -428,12 +430,9 @@
     }
     
     // Update no. items label
-    NSString *cancelled = [task wasKilled] ? @"(cancelled)" : @"";
-    NSString *desc = [NSString stringWithFormat:@"Found %lu %@ %@",
-                      [results count], [itemTypePopupButton titleOfSelectedItem], cancelled];
-    [numResultsTextField setStringValue:desc];
+    [self updateStatusMessage];
     
-//    [[[tableView tableColumnWithIdentifier:@"Items"] headerCell] setStringValue:[NSString stringWithFormat:@"Items (%lu)", [results count]]];
+//    [[[tableView tableColumnWithIdentifier:@"Name"] headerCell] setStringValue:[NSString stringWithFormat:@"Items (%lu)", [results count]]];
     
 //    DLog(@"Task results (%d)", (int)[items count]);
 }
@@ -452,13 +451,24 @@
     [searchButton setTitle:@"Search"];
     
     // Update status text field
-    NSString *cancelled = [task wasKilled] ? @"(cancelled)" : @"";
-    NSString *desc = [NSString stringWithFormat:@"Found %lu %@ %@",
-                      [results count], [itemTypePopupButton titleOfSelectedItem], cancelled];
-    [numResultsTextField setStringValue:desc];
+    [self updateStatusMessage];
+    
     DLog(@"Task finished");
     
     [self.window makeFirstResponder:searchField];
+}
+
+- (void)updateStatusMessage {
+    NSString *desc;
+    if ([self isFiltering]) {
+        desc = [NSString stringWithFormat:@"Showing %lu of %lu items",
+                [filteredResults count], [results count]];
+    } else {
+        NSString *cancelled = [task wasKilled] ? @"(cancelled)" : @"";
+        desc = [NSString stringWithFormat:@"Found %lu %@ %@",
+                [results count], [itemTypePopupButton titleOfSelectedItem], cancelled];
+    }
+    [numResultsTextField setStringValue:desc];
 }
 
 #pragma mark - Sort
@@ -540,12 +550,11 @@
 - (void)updateFiltering {
     DLog(@"Filtering...");
     
-    NSString *filterStr = [filterTextField stringValue];
-    if ([filterStr length]) {
+    if ([self isFiltering]) {
         
         NSMutableArray *matchingItems = [NSMutableArray new];
         for (SearchItem *item in results) {
-            if ([[item.name lowercaseString] rangeOfString:[filterStr lowercaseString]].location == NSNotFound) {
+            if ([[item.name lowercaseString] rangeOfString:[[filterTextField stringValue] lowercaseString]].location == NSNotFound) {
                 continue;
             }
             [matchingItems addObject:item];
@@ -558,6 +567,12 @@
     }
     
     [tableView reloadData];
+    [self tableViewSelectionDidChange:[NSNotification notificationWithName:NSTableViewSelectionDidChangeNotification object:nil]];
+    [self updateStatusMessage];
+}
+
+- (BOOL)isFiltering {
+    return ([[filterTextField stringValue] length] > 0);
 }
 
 // User typed in search field or filter
@@ -657,6 +672,15 @@
     return items;
 }
 
+- (IBAction)showSelectedItem:(id)sender {
+    NSInteger selectedRow = [tableView selectedRow];
+    if (selectedRow > -1) {
+        [tableView scrollRowToVisible:selectedRow];
+    } else {
+        NSBeep();
+    }
+}
+
 - (void)rowDoubleClicked:(id)object {
     NSInteger row = [tableView clickedRow];
     if (row < 0 || row >= [filteredResults count]) {
@@ -711,6 +735,12 @@
 - (IBAction)showInFinder:(id)sender {
     for (SearchItem *item in [self selectedItems]) {
         [item showInFinder];
+    }
+}
+
+- (IBAction)showPackageContents:(id)sender {
+    for (SearchItem *item in [self selectedItems]) {
+        [item showPackageContents];
     }
 }
 
@@ -795,54 +825,64 @@
     [searchOptionsMenu popUpMenuPositioningItem:nil atLocation:[sender frame].origin inView:[sender superview]];
 }
 
+- (void)updateItemContextualMenu:(NSMenu *)menu {
+    // This method handles the logic involved in modifying
+    // the item contextual menu according to selected items
+    NSMutableArray *items = [self selectedItems];
+    NSUInteger numSelectedFiles = [items count];
+    BOOL single = (numSelectedFiles == 1);
+    NSString *copyTitle = @"";
+    
+    if (numSelectedFiles == 0) {
+        // TODO: Handle this better
+        return;
+    }
+    
+    SearchItem *firstItem = items[0];
+    
+    if (numSelectedFiles > 1) {
+        copyTitle = [NSString stringWithFormat:@"Copy %lu files", (unsigned long)numSelectedFiles];
+    } else {
+        NSString *name = [firstItem truncatedName:35];
+        
+        copyTitle = [NSString stringWithFormat:@"Copy “%@”", name];
+    }
+    [[menu itemWithTag:1] setTitle:copyTitle];
+    
+    // TODO: Get Share menu working
+    // Only show Share menu if a single item is selected
+    if (single) {
+        NSMenu *shareMenu = [NSSharingServicePicker menuForSharingItems:items
+                                                             withTarget:self
+                                                               selector:@selector(redString:)
+                                                        serviceDelegate:nil];
+        [[menu itemWithTitle:@"Share"] setSubmenu:shareMenu];
+    } else {
+        [[menu itemWithTitle:@"Share"] setHidden:YES];
+    }
+
+    BOOL singlePackage = (single && [firstItem isPackage]);
+    [[menu itemWithTitle:@"Show Package Contents"] setHidden:!singlePackage];
+//    [[menu itemWithTitle:@"Open With"] setHidden:(single && [firstItem isApp])];
+    
+    // Unless its defaults have been changed, the Finder is
+    // unable to perform any operations on hidden files
+    BOOL singleHidden = (single && [firstItem isHidden]);
+    [[menu itemWithTitle:@"Get Info"] setEnabled:!singleHidden];
+    [[menu itemWithTitle:@"Show in Finder"] setEnabled:!singleHidden];
+    [[menu itemWithTitle:@"Quick Look"] setEnabled:!singleHidden];
+    
+    // Only show Show Original menu if a single item is selected and the item in
+    // question is in fact a symlink/alias (or in Apple's parlance, a "bookmark")
+    BOOL singleBookmark = (single && [firstItem isBookmark]);
+    [[menu itemWithTitle:@"Show Original"] setHidden:!singleBookmark];
+    [[menu itemWithTitle:@"Open With"] setHidden:singleBookmark];
+}
+
 - (void)menuWillOpen:(NSMenu *)menu {
     
     if (menu == itemContextualMenu) {
-        
-        NSMutableArray *items = [self selectedItems];
-        NSUInteger numSelectedFiles = [items count];
-        BOOL single = (numSelectedFiles == 1);
-        NSString *copyTitle = @"";
-        
-        if (numSelectedFiles == 0) {
-            return;
-        }
-        else if (numSelectedFiles > 1) {
-            copyTitle = [NSString stringWithFormat:@"Copy %lu files", (unsigned long)numSelectedFiles];
-        } else {
-            SearchItem *item = items[0];
-            NSString *name = [item truncatedName:35];
-            
-            copyTitle = [NSString stringWithFormat:@"Copy “%@”", name];
-        }
-        [[menu itemWithTag:1] setTitle:copyTitle];
-        
-        // TODO: Get Share menu working
-        // Only show Share menu if a single item is selected
-        if (single) {
-            NSMenu *shareMenu = [NSSharingServicePicker menuForSharingItems:items
-                                                                 withTarget:self
-                                                                   selector:@selector(redString:)
-                                                            serviceDelegate:nil];
-            [[menu itemWithTitle:@"Share"] setSubmenu:shareMenu];
-        } else {
-            [[menu itemWithTitle:@"Share"] setHidden:YES];
-        }
-        
-//       DLog(@"Hidden: %d", [items[0] isHidden]);
-        
-        // Unless its defaults have been changed, the Finder is
-        // unable to perform any operations on hidden files
-        BOOL singleHidden = (single && [items[0] isHidden]);
-        [[menu itemWithTitle:@"Get Info"] setEnabled:!singleHidden];
-        [[menu itemWithTitle:@"Show in Finder"] setEnabled:!singleHidden];
-        [[menu itemWithTitle:@"Quick Look"] setEnabled:!singleHidden];
-        
-        // Only show Show Original menu if a single item is selected and the item in
-        // question is in fact a symlink/alias (or in Apple's parlance, a "bookmark")
-        BOOL singleBookmark = (single && [items[0] isBookmark]);
-        [[menu itemWithTitle:@"Show Original"] setHidden:!singleBookmark];
-        [[menu itemWithTitle:@"Open With"] setHidden:singleBookmark];
+        [self updateItemContextualMenu:menu];
     }
     else if (menu == openWithSubMenu) {
     
@@ -962,9 +1002,8 @@
         return [searchButton isEnabled];
     }
     
-    if ([menuItem action] == @selector(toggleFilter:)) {
-        NSString *title = [filterTextField isHidden] ? @"Filter Results" : @"Hide Filter";
-        [menuItem setTitle:title];
+    if ([menuItem action] == @selector(hideFilter:)) {
+        return ![filterTextField isHidden];
     }
     
     // Disable the relevant action menu items if no search items are selected
@@ -972,7 +1011,8 @@
         [menuItem action] == @selector(showInFinder:) ||
         [menuItem action] == @selector(open:) ||
         [menuItem action] == @selector(quickLook:) ||
-        [menuItem action] == @selector(moveToTrash:)) {
+        [menuItem action] == @selector(moveToTrash:) ||
+        [menuItem action] == @selector(showSelectedItem:)) {
         return ([[self selectedItems] count] > 0);
     }
     
@@ -999,7 +1039,7 @@
     id colStr = @"";
     
     // File name / path
-    if ([colID isEqualToString:@"Items"]) {
+    if ([colID isEqualToString:@"Name"]) {
         colStr = [DEFAULTS boolForKey:@"ShowFullPath"] ? item.path : item.name;
         cellView.imageView.objectValue = item.icon;
         cellView.textField.textColor = [NSColor textColor];

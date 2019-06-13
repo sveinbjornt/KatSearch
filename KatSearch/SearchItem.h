@@ -74,6 +74,8 @@
 @property (readonly, nonatomic) BOOL isSymlink;
 @property (readonly, nonatomic) BOOL isDirectory;
 @property (readonly, nonatomic) BOOL isHidden;
+@property (readonly, nonatomic) BOOL isPackage;
+@property (readonly, nonatomic) BOOL isApp;
 @property (readonly, nonatomic) BOOL exists;
 
 @property (readonly, nonatomic) NSString *defaultHandlerApplication;
@@ -86,6 +88,7 @@
 - (void)prime;
 - (void)open;
 - (void)showInFinder;
+- (void)showPackageContents;
 - (void)openWith:(NSString *)appIdentifier;
 - (void)getInfo;
 - (void)showOriginal;

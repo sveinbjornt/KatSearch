@@ -484,9 +484,23 @@ CA
                             <menuItem isSeparatorItem="YES" id="5GP-nS-Kq9">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
+                            <menuItem title="Show Selected Item(s)" keyEquivalent="l" id="IDr-Uc-YaJ">
+                                <connections>
+                                    <action selector="showSelectedItem:" target="-1" id="mxj-pD-zC3"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Filter Results" keyEquivalent="f" id="t7L-rV-ieg">
                                 <connections>
                                     <action selector="toggleFilter:" target="-1" id="gYy-X4-8rU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hide Filter" id="8hj-jN-2Zv">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="hideFilter:" target="-1" id="dtB-rh-AAn"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4R9-mA-0fG">

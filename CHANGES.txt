@@ -21,8 +21,6 @@ FOR 1.0
 
 * Filter regex support - Should highlight strings that match
 * Filter should search either all cols or name, menu option
-* Highlight matching string when filter active, this looks great and is useful
-* Update label when filter active ("Showing x out of y items")
 
 * Support using /usr/bin/find for folders/non-searchfs-capable volumes
 * Use STPriviledTask when authenticated
@@ -31,7 +29,7 @@ FOR 1.0
 * Detect when file no longer exists at path
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
 * Show volumes that don't have a catalog in volumes popup menu but visually identify them in some way
-* Versions for multiple identical apps in Open With menu
+* Versions for multiple identical apps in Open With menu, move that functionality to NSWorkspace additions
 * Interpret empty search string as request to find all files (find out how to list ALL files via searchfs function)
 * Distinction between Alias/Symlink should be clear in "Kind" even if LaunchServices doesn't distinguish between them
 * "Show Original" for aliases/symlinks
@@ -40,16 +38,21 @@ FOR 1.0
 * Monospace font option
 * Status Item app mode selection image should have a counterpart for non-dark mode
 * Run comparison on searchfs results and those picked up by KatSearch parsing subprocess output
-* Implement Search Filter menu options
+* Implement Search Filter menu options functionality
 * Text in table view should invert when selected in non-dark-mode
 * Clear recent folders option
-* Should selecting folder to search automatically start search matching *all* files in directory structure
-* "Show Package Contents" option for packages
+* Should selecting folder to search automatically start search matching *all* files in directory structure?
 * Esc should clear filter even if filter text field is not first responder
 * Detect whether volume or folder in recent search menu, show "in" for folder searches and "on" for volumes.
 * Keyboard shortcut for new search window should match hotkey shortcut.
+* Get Share in item contextual menu working
 
 For next release:
+DONE * "Show Package Contents" option for packages
+DONE * Highlight matching string when filter active, this looks great and is useful
+DONE * Programatically add "Hide Filter" menu item, don't change title of "Show Filter"
+DONE * Cmd-L to show selected item
+DONE * Update label when filter active ("Showing x out of y items")
 DONE * Drag and drop folder/volume on window/app icon to make it the target of a new search
 DONE * Support selecting folder to search (add home folder preset & recent folders)
 DONE * Add tooltips for all controls, esp. in Prefs

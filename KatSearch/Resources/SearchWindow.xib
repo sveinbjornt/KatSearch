@@ -87,7 +87,7 @@ DQ
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn identifier="Items" editable="NO" width="200" minWidth="200" maxWidth="2000" id="QWP-6f-Nbl" userLabel="Filename">
+                                        <tableColumn identifier="Name" editable="NO" width="200" minWidth="200" maxWidth="2000" id="QWP-6f-Nbl" userLabel="Filename">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Items">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -752,6 +752,12 @@ DQ
                             <outlet property="delegate" destination="-2" id="EZ7-MU-H34"/>
                         </connections>
                     </menu>
+                </menuItem>
+                <menuItem title="Show Package Contents" id="bgD-qF-oKH">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showPackageContents:" target="-2" id="iYW-lX-0H7"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="ANk-Pg-rwZ"/>
                 <menuItem title="Move to Trash" id="Zdp-8g-qKy">

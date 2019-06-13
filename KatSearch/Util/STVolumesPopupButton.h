@@ -31,7 +31,7 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
-@interface STVolumesPopupButton : NSPopUpButton
+@interface STVolumesPopupButton : NSPopUpButton <NSMenuDelegate>
 
 @property IBInspectable BOOL searchfsCapableVolumesOnly;
 
