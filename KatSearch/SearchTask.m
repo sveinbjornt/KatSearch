@@ -59,10 +59,6 @@
     return [self initWithSearchQuery:query delegate:delegate];
 }
 
-- (void)dealloc {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark -
 
 - (void)start {
@@ -127,6 +123,13 @@
     [task launch];
 }
 
+- (void)cleanUp {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    task = nil;
+    remnants = nil;
+    readHandle = nil;
+}
+
 - (void)stop {
     if (!task) {
         DLog(@"Tried to stop task that is no longer running.");
@@ -134,15 +137,12 @@
     }
     
     pid_t pid = [task processIdentifier];
-    task = nil;
-    remnants = nil;
-    readHandle = nil;
-
     if (pid) {
         kill(pid, SIGKILL);
         killed = YES;
     }
     
+    [self cleanUp];
     
     if (self.delegate) {
         [self.delegate taskDidFinish:self];
@@ -154,22 +154,23 @@
     
     if ([data length] == 0) {
         if (self.delegate && !killed) {
+            [self cleanUp];
             [self.delegate taskDidFinish:self];
         }
         return;
     }
-        
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ @autoreleasepool {
     
         NSMutableString *outputString = [[NSMutableString alloc] initWithData:data
                                                                      encoding:NSUTF8StringEncoding];
-        if (remnants && [remnants length]) {
-            [outputString insertString:remnants atIndex:0];
+        if (self->remnants && [self->remnants length]) {
+            [outputString insertString:self->remnants atIndex:0];
         }
         
         //DLog(@"%@", outputString);
         NSMutableArray *paths = [[outputString componentsSeparatedByString:@"\n"] mutableCopy];
-        remnants = [paths lastObject];
+        self->remnants = [paths lastObject];
         [paths removeLastObject];
         
         NSMutableArray *items = [NSMutableArray array];

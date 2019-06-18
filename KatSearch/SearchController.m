@@ -653,7 +653,7 @@
     else {
         NSIndexSet *sel = [tableView selectedRowIndexes];
         [sel enumerateIndexesUsingBlock:^(NSUInteger row, BOOL *stop){
-            SearchItem *item = filteredResults[row];
+            SearchItem *item = self->filteredResults[row];
             [items addObject:item];
         }];
     }

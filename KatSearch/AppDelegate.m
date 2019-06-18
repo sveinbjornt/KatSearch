@@ -89,9 +89,10 @@
     [self setAppMode:[DEFAULTS boolForKey:@"StatusItemMode"]];
     
     // Associate the shortcut hotkey combo with a new window / bring to front action
+    NSArray *wc = windowControllers;
     [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:SHORTCUT_DEFAULT_NAME
                                                          toAction:^{
-         if ([NSApp isActive] || ![windowControllers count]) {
+         if ([NSApp isActive] || ![wc count]) {
              [self newWindow:self];
          }
      }];
@@ -385,8 +386,9 @@
     }
     // Briefly highlight status item
     [statusItem.button setHighlighted:YES];
+    id itemButton = statusItem.button;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.17 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [statusItem.button setHighlighted:NO];
+        [itemButton setHighlighted:NO];
     });
 }
 

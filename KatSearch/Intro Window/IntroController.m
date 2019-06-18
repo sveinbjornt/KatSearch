@@ -90,10 +90,10 @@
     if ([[sender title] hasPrefix:@"Continue"]) {
         [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
             context.duration = 0.4f;
-            firstBox.animator.frame = zeroFrame;
-            secondBox.animator.frame = firstFrame;
-            backButton.hidden = NO;
-            continueButton.title = @"Start using KatSearch";
+            self->firstBox.animator.frame = self->zeroFrame;
+            self->secondBox.animator.frame = self->firstFrame;
+            self->backButton.hidden = NO;
+            self->continueButton.title = @"Start using KatSearch";
         } completionHandler:nil];
     } else {
         // Start using KatSearch...
@@ -104,10 +104,10 @@
 - (IBAction)back:(id)sender {
     [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
         context.duration = 0.4f;
-        firstBox.animator.frame = firstFrame;
-        secondBox.animator.frame = secondFrame;
-        backButton.hidden = YES;
-        continueButton.title = @"Continue →";
+        self->firstBox.animator.frame = self->firstFrame;
+        self->secondBox.animator.frame = self->secondFrame;
+        self->backButton.hidden = YES;
+        self->continueButton.title = @"Continue →";
     } completionHandler:nil];
 }
 
