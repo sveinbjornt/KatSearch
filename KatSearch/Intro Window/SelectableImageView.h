@@ -39,7 +39,7 @@
 @interface SelectableImageView : NSImageView
 
 @property (nonatomic) BOOL selected;
-@property IBOutlet id delegate;
+@property (weak) IBOutlet id delegate;
 @property NSColor *borderColor;
 
 @end

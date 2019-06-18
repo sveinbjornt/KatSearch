@@ -112,7 +112,7 @@
 }
 
 - (IBAction)start:(id)sender {
-    AppDelegate *delegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+    AppDelegate *delegate = (AppDelegate *)[NSApp delegate];
 
     if (shortcutView.shortcutValue) {
         // Set shortcut

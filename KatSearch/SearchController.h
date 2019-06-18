@@ -42,4 +42,6 @@
                                                     PasteboardDelegate>
 + (instancetype)newController;
 + (instancetype)newControllerWithSearchQuery:(SearchQuery *)sq;
+- (instancetype)initWithSearchQuery:(SearchQuery *)query;
+
 @end

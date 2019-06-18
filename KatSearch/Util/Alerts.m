@@ -56,7 +56,7 @@
 
 + (void)fatalAlert:(NSString *)message subText:(NSString *)subtext {
     [self alert:message subText:subtext style:NSCriticalAlertStyle];
-    [[NSApplication sharedApplication] terminate:self];
+    [NSApp terminate:self];
 }
 
 + (void)fatalAlert:(NSString *)message subTextFormat:(NSString *)formatString, ... {

@@ -66,6 +66,10 @@
     [self populateMenu];
 }
 
+- (void)dealloc {
+    [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
+}
+
 - (void)menuWillOpen:(NSMenu *)menu {
     [self populateMenu];
 }

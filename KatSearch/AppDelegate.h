@@ -35,7 +35,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate>
 
 // Window handling
-- (id)newWindow:(id)sender;
+- (void)newWindow:(id)sender;
 - (void)windowDidClose:(id)sender;
 
 // Transition between LSUIElement and regular app

@@ -45,7 +45,7 @@
 - (instancetype)initWithSearchQuery:(SearchQuery *)query delegate:(id<SearchTaskDelegate>)delegate {
     self = [super init];
     if (self) {
-        _delegate = delegate;
+        self.delegate = delegate;
         authorizationRef = NULL;
         _searchString = query[@"searchstring"];
         // TODO: Configure the search task according to query properties
@@ -57,6 +57,10 @@
     SearchQuery *query = [SearchQuery defaultQuery];
     query[@"searchstring"] = searchStr;
     return [self initWithSearchQuery:query delegate:delegate];
+}
+
+- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -

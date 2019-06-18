@@ -32,6 +32,6 @@
 
 @interface STPathControl : NSTextField
 
-@property (nonatomic) NSString *path;
+@property (nonatomic, copy) NSString *path;
 
 @end

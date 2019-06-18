@@ -57,9 +57,9 @@
     return @"Advanced";
 }
 
-- (NSView *)initialKeyView {
-    return nil;
-}
+//- (NSView *)initialKeyView {
+//    return nil;
+//}
 
 - (BOOL)hasResizableWidth {
     return NO;

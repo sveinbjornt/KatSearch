@@ -41,7 +41,7 @@
 
 @interface SearchTask : NSObject
 
-@property (nonatomic, assign) id<SearchTaskDelegate> delegate;
+@property (nonatomic, weak) id<SearchTaskDelegate> delegate;
 @property (nonatomic, copy) NSString *searchString;
 @property (nonatomic, copy) NSString *volume;
 @property BOOL exactNameOnly;

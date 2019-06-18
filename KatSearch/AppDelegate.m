@@ -91,7 +91,7 @@
     // Associate the shortcut hotkey combo with a new window / bring to front action
     [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:SHORTCUT_DEFAULT_NAME
                                                          toAction:^{
-         if ([[NSApplication sharedApplication] isActive] || ![windowControllers count]) {
+         if ([NSApp isActive] || ![windowControllers count]) {
              [self newWindow:self];
          }
      }];
@@ -127,7 +127,6 @@
     if (flag) {
         return NO;
     }
-
     [self newWindow:self];
     
     return YES;
@@ -197,7 +196,7 @@
     } else {
         [self hideStatusItem];
         returnCode = TransformProcessType(&psn, kProcessTransformToForegroundApplication);
-        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+        [NSApp activateIgnoringOtherApps:YES];
     }
     if (returnCode != noErr) {
         DLog(@"Failed to change application mode. Error %d", (int)returnCode);
@@ -290,18 +289,17 @@
 
 #pragma mark - Window controllers
 
-- (id)newWindow:(id)sender {
-    return [self newWindowWithQuery:nil];
+- (void)newWindow:(id)sender {
+    [self newWindowWithQuery:nil];
 }
 
-- (id)newWindowWithQuery:(SearchQuery *)query {
+- (void)newWindowWithQuery:(SearchQuery *)query {
     [self animateStatusItem];
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+    [NSApp activateIgnoringOtherApps:YES];
     SearchController *controller = [SearchController newControllerWithSearchQuery:query];
     [windowControllers addObject:controller];
     [controller showWindow:self];
     [DEFAULTS setBool:YES forKey:@"PreviouslyLaunched"];
-    return controller;
 }
 
 - (void)windowDidClose:(id)sender {
@@ -313,7 +311,7 @@
         introWindowController = [IntroController newController];
     }
     [introWindowController showWindow:nil];
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (IBAction)showPreferences:(id)sender {
@@ -321,7 +319,7 @@
         prefsController = [PrefsController new];
     }
     [prefsController showWindow:nil];
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 #pragma mark - Recent Searches

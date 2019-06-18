@@ -35,10 +35,9 @@
 
 - (id)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
-    if (self == nil) return nil;
-    
-    [self swapClipView];
-    
+    if (self) {
+        [self swapClipView];
+    }
     return self;
 }
 

@@ -472,6 +472,7 @@
     LSItemInfoRecord itemInfo;
     LSCopyItemInfoForURL(inURL, kLSRequestAllFlags, &itemInfo);
     BOOL isInvisible = itemInfo.flags & kLSItemInfoIsInvisible;
+    CFRelease(inURL);
     return (isInvisible != 0);
 }
 

@@ -97,7 +97,7 @@
 }
 
 - (void)dealloc {
-    DLog(@"Deallocing window controller. Retain count: %d");
+    DLog(@"Deallocing window controller %@", [self description]);
 }
 
 #pragma mark - NSWindowDelegate
@@ -120,6 +120,8 @@
     [tableView setDoubleAction:@selector(rowDoubleClicked:)];
     [tableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
     
+    [pathBar setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
+
     // Hide columns not enabled in Defaults
     for (NSTableColumn *col in [tableView tableColumns]) {
         NSString *identifier = [col identifier];
@@ -133,16 +135,9 @@
         [self.window center];
     }
     
-    [pathBar setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
     
     // Register to receive authorization change notifications
-    [[NSNotificationCenter defaultCenter] addObserverForName:AUTHCHANGE_NOTIFICATION
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      DLog(@"Authorized: %d", [APP_DELEGATE isAuthenticated]);
-                                                      [self authenticationStatusChanged];
-                                                  }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticationStatusChanged) name:AUTHCHANGE_NOTIFICATION object:nil];
     
     // Load system lock image as icon for button
     NSImage *lockIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kLockedIcon)];
@@ -170,9 +165,11 @@
 
 - (void)windowWillClose:(NSNotification *)notification {
     [task stop];
+    task = nil;
+    [self.window unregisterDraggedTypes];
     [self setObserveDefaults:NO];
-    AppDelegate *delegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
-    [delegate performSelector:@selector(windowDidClose:) withObject:self afterDelay:0.05];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [(AppDelegate *)[NSApp delegate] windowDidClose:self];
 }
 
 - (BOOL)window:(NSWindow *)window shouldPopUpDocumentPathMenu:(NSMenu *)menu {
@@ -222,10 +219,8 @@
 #pragma mark - Save to file
 
 - (IBAction)saveDocument:(id)sender {
-    
     NSSavePanel *sPanel = [NSSavePanel savePanel];
     [sPanel setPrompt:@"Save"];
-    
     [sPanel setNameFieldStringValue:[NSString stringWithFormat:@"SearchResults-%@.txt", [searchField stringValue]]];
     
     NSMutableArray *res = results;
@@ -273,7 +268,6 @@
         [col setHidden:![DEFAULTS boolForKey:def]];
     }
 //    DLog(@"Default %@ changed", keyPath);
-
 }
 
 - (void)setObserveDefaults:(BOOL)observeDefaults {
@@ -496,7 +490,7 @@
     } else {
         [APP_DELEGATE deauthenticate];
     }
-    [self.window makeKeyAndOrderFront:self];
+    [self.window makeKeyAndOrderFront:sender];
 }
 
 - (void)authenticationStatusChanged {
@@ -602,7 +596,6 @@
                                                  selector:@selector(updateFiltering)
                                                  userInfo:nil
                                                   repeats:NO];
-//    [self adjustBottomControls];
 }
 
 - (IBAction)showFilter:(id)sender {
@@ -645,7 +638,6 @@
         msgFrame.origin.x = spinFrame.origin.x + spinFrame.size.width + 8;
     }
     [numResultsTextField setFrame:msgFrame];
-    
 }
 
 #pragma mark - Item actions
