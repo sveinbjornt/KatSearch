@@ -81,11 +81,11 @@
 @implementation SearchController
 
 + (instancetype)newController {
-    return [[[self class] alloc] initWithSearchQuery:nil];
+    return [[self alloc] initWithSearchQuery:nil];
 }
 
 + (instancetype)newControllerWithSearchQuery:(SearchQuery *)query {
-    return [[[self class] alloc] initWithSearchQuery:query];
+    return [[self alloc] initWithSearchQuery:query];
 }
 
 - (instancetype)initWithSearchQuery:(SearchQuery *)query {
@@ -94,6 +94,10 @@
         startingQuery = query;
     }
     return self;
+}
+
+- (void)dealloc {
+    DLog(@"Deallocing window controller. Retain count: %d");
 }
 
 #pragma mark - NSWindowDelegate
@@ -446,20 +450,20 @@
     [smallProgressIndicator stopAnimation:self];
     [smallProgressIndicator setUsesThreadedAnimation:NO];
     [smallProgressIndicator setHidden:YES];
-    [self adjustBottomControls];
     
     [searchButton setTitle:@"Search"];
     
-    // Update status text field
+    [self adjustBottomControls];
     [self updateStatusMessage];
     
-    DLog(@"Task finished");
-    
     [self.window makeFirstResponder:searchField];
+    
+    DLog(@"Task finished");
 }
 
 - (void)updateStatusMessage {
     NSString *desc;
+    // TODO: Fix status message when filtering empty result set
     if ([self isFiltering]) {
         desc = [NSString stringWithFormat:@"Showing %lu of %lu items",
                 [filteredResults count], [results count]];
@@ -481,9 +485,7 @@
 #pragma mark - Authentication
 
 - (IBAction)toggleAuthentication:(id)sender {
-    BOOL authenticated = [APP_DELEGATE isAuthenticated];
-    
-    if (!authenticated) {
+    if ([APP_DELEGATE isAuthenticated] == NO) {
         OSStatus err = [APP_DELEGATE authenticate];
         if (err != errAuthorizationSuccess) {
             if (err != errAuthorizationCanceled) {
@@ -550,11 +552,17 @@
 - (void)updateFiltering {
     DLog(@"Filtering...");
     
+    filteredResults = results;
+    
     if ([self isFiltering]) {
+        BOOL cs = [DEFAULTS boolForKey:@"FilterCaseSensitive"];
+        NSString *f = cs ? [filterTextField stringValue] : [[filterTextField stringValue] lowercaseString];
         
         NSMutableArray *matchingItems = [NSMutableArray new];
         for (SearchItem *item in results) {
-            if ([[item.name lowercaseString] rangeOfString:[[filterTextField stringValue] lowercaseString]].location == NSNotFound) {
+            // TODO: Support All Columns & Regular Expressions options
+            NSString *n = cs ? item.name : item.lowercaseName;
+            if ([n rangeOfString:f].location == NSNotFound) {
                 continue;
             }
             [matchingItems addObject:item];
@@ -562,8 +570,6 @@
         
         filteredResults = matchingItems;
         
-    } else {
-        filteredResults = results;
     }
     
     [tableView reloadData];
@@ -596,21 +602,12 @@
                                                  selector:@selector(updateFiltering)
                                                  userInfo:nil
                                                   repeats:NO];
-    [self adjustBottomControls];
-}
-
-- (IBAction)toggleFilter:(id)sender {
-//    if ([filterTextField isHidden]) {
-    [self showFilter:sender];
-//    }
-//    } else {
-//        [self hideFilter];
-//    }
-    [self adjustBottomControls];
+//    [self adjustBottomControls];
 }
 
 - (IBAction)showFilter:(id)sender {
     [filterTextField setHidden:NO];
+    [self adjustBottomControls];
     [self.window makeFirstResponder:filterTextField];
 }
 

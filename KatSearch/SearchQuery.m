@@ -36,11 +36,11 @@
 @implementation SearchQuery
 
 + (instancetype)defaultQuery {
-    return [[[self class] alloc] initWithDictionary:[[self class] defaultDict]];
+    return [[self alloc] initWithDictionary:[[self class] defaultDict]];
 }
 
 + (instancetype)searchQueryFromDictionary:(NSDictionary *)dict {
-    return [[[self class] alloc] initWithSearchQueryDictionary:dict];
+    return [[self alloc] initWithSearchQueryDictionary:dict];
 }
 
 - (instancetype)initWithSearchQueryDictionary:(NSDictionary *)dict {

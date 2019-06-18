@@ -489,9 +489,9 @@ CA
                                     <action selector="showSelectedItem:" target="-1" id="mxj-pD-zC3"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Filter Results" keyEquivalent="f" id="t7L-rV-ieg">
+                            <menuItem title="Show Filter" keyEquivalent="f" id="t7L-rV-ieg">
                                 <connections>
-                                    <action selector="toggleFilter:" target="-1" id="gYy-X4-8rU"/>
+                                    <action selector="showFilter:" target="-1" id="6j4-1C-XrZ"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Hide Filter" id="8hj-jN-2Zv">

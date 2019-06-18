@@ -42,6 +42,7 @@
     struct stat *cachedStatPtr;
     
     NSString *cachedName;
+    NSString *cachedLowercaseName;
     NSURL *cachedURL;
     NSImage *cachedIcon;
     
@@ -108,6 +109,13 @@
     return cachedName;
 }
 
+- (NSString *)lowercaseName {
+    if (!cachedLowercaseName) {
+        cachedLowercaseName = [self.name lowercaseString];
+    }
+    return cachedLowercaseName;
+}
+
 - (NSString *)truncatedName:(NSUInteger)maxChars {
     if ([self.name length] <= maxChars) {
         return self.name;
@@ -117,7 +125,7 @@
     NSString *truncStr = [NSString stringWithFormat:@"%@…%@",
                           [self.name substringToIndex:half-1],
                           [self.name substringFromIndex:half+1]];
-    return truncStr;
+    return ([truncStr length] > [self.name length] + 2) ? self.name : truncStr;
 }
 
 - (NSURL *)url {

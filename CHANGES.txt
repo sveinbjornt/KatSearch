@@ -4,18 +4,19 @@
 FUTURE VERSION:
 * Smarter CLT install status (version etc.)
 * Use CoreData & NSArrayController to populate table view
-* Filter search field menu with togglable matching of the various fields
 * Extensive master search filters?
     * Date filters
     * Kind filters
-* Only filter by columns that are enabled
 * Show label color in result list
 * Make label first class sort property. But how to rationally order multiple?
 * Path bar with string option
 * Customize interface size: small (like iTunes), normal (current) and large (w. previews f. images)
-* Regex option for filter
 * Customise drag items from table view (don't drag entire line, just icon w. name)
-* Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
+* Monospace font option
+* Get Share in item contextual menu working
+* Detect when file no longer exists at path
+* Distinction between Alias/Symlink should be clear in "Kind" even if LaunchServices doesn't distinguish between them
+* "Show Original" for aliases/symlinks
 
 FOR 1.0
 
@@ -26,16 +27,12 @@ FOR 1.0
 * Use STPriviledTask when authenticated
 
 * Action menu item titles should alter based on no. selected items etc.
-* Detect when file no longer exists at path
 * Contextual menu logic, use clicked item when one non-selected item is ctx-clicked
 * Show volumes that don't have a catalog in volumes popup menu but visually identify them in some way
-* Versions for multiple identical apps in Open With menu, move that functionality to NSWorkspace additions
+* Move Open With menu functionality to NSWorkspace additions
 * Interpret empty search string as request to find all files (find out how to list ALL files via searchfs function)
-* Distinction between Alias/Symlink should be clear in "Kind" even if LaunchServices doesn't distinguish between them
-* "Show Original" for aliases/symlinks
 * Get Skip Package Contents working
 * Open recent for status item menu
-* Monospace font option
 * Status Item app mode selection image should have a counterpart for non-dark mode
 * Run comparison on searchfs results and those picked up by KatSearch parsing subprocess output
 * Implement Search Filter menu options functionality
@@ -43,9 +40,13 @@ FOR 1.0
 * Clear recent folders option
 * Should selecting folder to search automatically start search matching *all* files in directory structure?
 * Esc should clear filter even if filter text field is not first responder
-* Detect whether volume or folder in recent search menu, show "in" for folder searches and "on" for volumes.
+* Detect whether volume or folder in recent search menu, show "in" for folder searches and "on" for volumes. Mountpoints utility methods. NSWorkspace.
 * Keyboard shortcut for new search window should match hotkey shortcut.
-* Get Share in item contextual menu working
+* Quick Look for items. Mostly nice for images
+* Smarter Show Package Contents (reveal first file within bundle)
+* Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
+* Fix searchfs output parsing issue
+* Fix leak
 
 For next release:
 DONE * "Show Package Contents" option for packages
