@@ -37,7 +37,7 @@
             <rect key="contentRect" x="196" y="240" width="706" height="567"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="706" height="318"/>
-            <view key="contentView" id="se5-gp-TjO">
+            <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="706" height="567"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -73,7 +73,7 @@ DQ
                             <action selector="search:" target="-2" id="7Zi-wf-qxm"/>
                         </connections>
                     </button>
-                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" id="tGM-M2-dAP">
+                    <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" id="tGM-M2-dAP" customClass="OptScrollView">
                         <rect key="frame" x="-1" y="47" width="707" height="478"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" drawsBackground="NO" id="y0c-ed-QWB">

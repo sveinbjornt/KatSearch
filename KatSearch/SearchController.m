@@ -430,6 +430,7 @@
     // Update no. items label
     [self updateStatusMessage];
     
+    [self updateFiltering];
 //    [[[tableView tableColumnWithIdentifier:@"Name"] headerCell] setStringValue:[NSString stringWithFormat:@"Items (%lu)", [results count]]];
     
 //    DLog(@"Task results (%d)", (int)[items count]);
@@ -563,7 +564,6 @@
         }
         
         filteredResults = matchingItems;
-        
     }
     
     [tableView reloadData];
