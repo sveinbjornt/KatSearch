@@ -34,6 +34,7 @@
 
 - (NSArray *)applicationsForFile:(NSString *)filePath;
 - (NSString *)defaultApplicationForFile:(NSString *)filePath;
+- (NSMenu *)openWithMenuForFile:(NSString *)path target:(id)t action:(SEL)s menu:(NSMenu *)menu;
 
 - (NSDictionary *)labelDictionary;
 - (BOOL)setLabelNamed:(NSString *)labelStr forFile:(NSString *)filePath;

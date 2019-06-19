@@ -65,6 +65,109 @@
     return nil;
 }
 
+// Generate Open With menu for a given file. If no target and action are provided, we use our own.
+// If no menu is supplied as parameter, a new menu is created and returned.
+- (NSMenu *)openWithMenuForFile:(NSString *)path target:(id)t action:(SEL)s menu:(NSMenu *)menu {
+    [menu removeAllItems];
+    
+    NSMenuItem *noneMenuItem = [[NSMenuItem alloc] initWithTitle:@"<None>" action:nil keyEquivalent:@""];
+    if (!path || [self canRevealFileAtPath:path] == NO) {
+        [menu addItem:noneMenuItem];
+        return menu;
+    }
+    
+    id target = t ? t : self;
+    SEL selector = s ? s : @selector(openWith:);
+    
+    NSMenu *submenu = menu ? menu : [[NSMenu alloc] init];
+    [submenu setTitle:path]; // Used by selector
+    
+    int numOtherApps = 0;
+    NSString *defaultApp = [self defaultApplicationForFile:path];
+    if (defaultApp) {
+        
+        // Add menu item for default app
+        NSString *defaultAppName = [NSString stringWithFormat:@"%@ (default)", [[NSFileManager defaultManager] displayNameAtPath:defaultApp]];
+        NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:defaultApp];
+        [icon setSize:NSMakeSize(16,16)];
+        
+        NSMenuItem *defaultAppItem = [submenu addItemWithTitle:defaultAppName action:selector keyEquivalent:@""];
+        [defaultAppItem setImage:icon];
+        [defaultAppItem setTarget:target];
+        [defaultAppItem setToolTip:defaultApp];
+        
+        [submenu addItem:[NSMenuItem separatorItem]];
+        
+        // Add items for all other apps that can open this file
+        NSArray *apps = [self applicationsForFile:path];
+        if ([apps count]) {
+            
+            apps = [apps sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+            
+            for (NSString *appPath in apps) {
+                if ([appPath isEqualToString:defaultApp]) {
+                    continue; // Skip previously listed default app
+                }
+                
+                numOtherApps++;
+                NSString *title = [[NSFileManager defaultManager] displayNameAtPath:appPath];
+                
+                NSMenuItem *item = [submenu addItemWithTitle:title action:selector keyEquivalent:@""];
+                [item setTarget:target];
+                [item setToolTip:appPath];
+                
+                NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:appPath];
+                if (icon) {
+                    [icon setSize:NSMakeSize(16,16)];
+                    [item setImage:icon];
+                }
+            }
+            
+        } else {
+            [submenu addItem:noneMenuItem];
+        }
+    }
+    
+    if (numOtherApps) {
+        [submenu addItem:[NSMenuItem separatorItem]];
+    }
+    
+    NSMenuItem *selectItem = [submenu addItemWithTitle:@"Select..." action:selector keyEquivalent:@""];
+    [selectItem setTarget:target];
+    
+    return submenu;
+}
+
+// Handler for when user selects item in Open With menu
+- (void)openWith:(id)sender {
+    NSString *appPath = [sender toolTip];
+    NSString *filePath = [[sender menu] title];
+    
+    if ([[sender title] isEqualToString:@"Select..."]) {
+        // Create open panel
+        NSOpenPanel *oPanel = [NSOpenPanel openPanel];
+        [oPanel setAllowsMultipleSelection:NO];
+        [oPanel setCanChooseDirectories:NO];
+        [oPanel setAllowedFileTypes:@[(NSString *)kUTTypeApplicationBundle]];
+        
+        // Set Applications folder as default directory
+        NSArray *applicationFolderPaths = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationDirectory inDomains:NSLocalDomainMask];
+        if ([applicationFolderPaths count]) {
+            [oPanel setDirectoryURL:applicationFolderPaths[0]];
+        }
+        
+        // Run
+        if ([oPanel runModal] == NSModalResponseOK) {
+            appPath = [[oPanel URLs][0] path];
+        } else {
+            return;
+        }
+    }
+    
+    [self openFile:filePath withApplication:appPath];
+}
+
+
 #pragma mark - Labels
 
 - (NSDictionary *)labelDictionary {
@@ -552,6 +655,10 @@ end tell", path, escapedComment];
     }
     
     return kindStr;
+}
+
+- (BOOL)canRevealFileAtPath:(NSString *)path {
+    return path && [[NSFileManager defaultManager] fileExistsAtPath:path] && ![path hasPrefix:@"/dev/"];
 }
 
 #pragma mark - Services

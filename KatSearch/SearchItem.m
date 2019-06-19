@@ -91,14 +91,13 @@
 
 // This method primes the item's caching mechanism
 // by running stat and generating strings for later display
-- (void)prime {
-    // TODO: Prime specific attributes
-    [self name];
-    [self icon];
-    [self sizeString];
-    [self kind];
-    [self dateModifiedString];
-}
+//- (void)prime {
+//    [self name];
+//    [self icon];
+//    [self sizeString];
+//    [self kind];
+//    [self dateModifiedString];
+//}
 
 #pragma mark - Attributes
 

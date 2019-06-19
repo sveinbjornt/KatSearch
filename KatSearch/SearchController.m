@@ -874,63 +874,12 @@
         [self updateItemContextualMenu:menu];
     }
     else if (menu == openWithSubMenu) {
-    
-        // TODO: Use better code e.g. the NSWorkspace additions stuff incorporated into Vienna
         NSMutableArray *items = [self selectedItems];
-        if ([items count] == 0) {
-            return;
-        }
-        
-        SearchItem *item = items[0];
-
-        [menu removeAllItems];
-        
-        NSString *defaultApp = [item defaultHandlerApplication];
-        
-        if (defaultApp == nil) {
-            [menu addItemWithTitle:@"None" action:nil keyEquivalent:@""];
-        } else {
-            NSString *title = [[defaultApp lastPathComponent] stringByDeletingPathExtension];
-            title = [NSString stringWithFormat:@"%@ (default)", title];
-            
-            NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:title action:@selector(openWith:) keyEquivalent:@""];
-            
-            NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:defaultApp];
-            [icon setSize:NSMakeSize(16, 16)];
-            
-            [menuItem setTarget:self];
-            [menuItem setImage:icon];
-            [menuItem setToolTip:defaultApp];
-            
-            [menu addItem:menuItem];
-        }
-
-        [menu addItem:[NSMenuItem separatorItem]];
-        
-        NSArray *handlerApps = [item handlerApplications];
-        for (NSString *app in handlerApps) {
-            if (defaultApp != nil && [app isEqualToString:defaultApp]) {
-                continue;
-            }
-            
-            NSString *title = [[app lastPathComponent] stringByDeletingPathExtension];
-            NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:title action:@selector(openWith:) keyEquivalent:@""];
-            
-            NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFile:app];
-            [icon setSize:NSMakeSize(16, 16)];
-            
-            [menuItem setTarget:self];
-            [menuItem setImage:icon];
-            [menuItem setToolTip:app];
-            
-            [menu addItem:menuItem];
-        }
-        
-        if ([handlerApps count]) {
-            [menu addItem:[NSMenuItem separatorItem]];
-        }
-        
-        [menu addItemWithTitle:@"Select..." action:@selector(openWith:) keyEquivalent:@""];
+        SearchItem *item = ([items count] == 0) ? items[0] : nil;
+        [[NSWorkspace sharedWorkspace] openWithMenuForFile:item.path
+                                                    target:self
+                                                    action:@selector(openWith:)
+                                                      menu:menu];
     }
     else if (menu == filterOptionsMenu) {
         [[filterOptionsMenu itemWithTitle:@"Case Sensitive"] setState:[DEFAULTS boolForKey:@"FilterCaseSensitive"]];

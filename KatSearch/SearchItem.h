@@ -86,7 +86,6 @@
 
 - (NSString *)truncatedName:(NSUInteger)maxChars;
 
-- (void)prime;
 - (void)open;
 - (void)showInFinder;
 - (void)showPackageContents;
