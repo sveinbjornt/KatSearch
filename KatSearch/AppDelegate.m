@@ -40,12 +40,14 @@
 
 @interface AppDelegate ()
 {
-    NSMutableArray *windowControllers;
+    // Application window controllers
+    NSMutableArray *searchWindowControllers;
     MASPreferencesWindowController *prefsController;
     IntroController *introWindowController;
     
     IBOutlet NSMenu *mainMenu;
     IBOutlet NSMenu *openRecentMenu;
+    IBOutlet NSMenu *statusItemOpenRecentMenu;
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem *newMenuItem;
     IBOutlet NSMenuItem *menuBarItem;
@@ -79,25 +81,25 @@
         [newMenuItem setKeyEquivalent:@"N"];
         [newMenuItem setKeyEquivalentModifierMask:NSCommandKeyMask];
     }
-//    MASShortcut
 }
 
 #pragma mark - NSApplicationDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Transition from LSUIElement to regular app if needed
+    // Application setup
+    
+    // First, transition from LSUIElement (default) to regular app if needed
     [self setAppMode:[DEFAULTS boolForKey:@"StatusItemMode"]];
     
     // Associate the shortcut hotkey combo with a new window / bring to front action
-    NSArray *wc = windowControllers;
+    NSMutableArray *wc = [NSMutableArray new];
+    searchWindowControllers = wc;
     [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:SHORTCUT_DEFAULT_NAME
                                                          toAction:^{
          if ([NSApp isActive] || ![wc count]) {
              [self newWindow:self];
          }
      }];
-    
-    windowControllers = [NSMutableArray new];
     
     // Register to receive authorization change notifications
     [[NSNotificationCenter defaultCenter] addObserverForName:AUTHCHANGE_NOTIFICATION
@@ -125,6 +127,7 @@
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
+    // Called when application dock icon is clicked
     if (flag) {
         return NO;
     }
@@ -134,6 +137,7 @@
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {
+    // Open file handler
     DLog(@"openFile: %@", filename);
     BOOL isDir;
     BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:filename isDirectory:&isDir];
@@ -146,14 +150,34 @@
     return NO;
 }
 
-// Handles multiple files dragged on app icon / opened at once
-//- (void)application:(NSApplication *)theApplication openFiles:(NSArray *)filenames {
-//    DLog(@"%@ dropped", [filenames description]);
-//}
+#pragma mark - App Mode
+
+- (void)setAppMode:(BOOL)backgroundMode {
+    // Transition between foreground and background (LSUIElement) mode
+    ProcessSerialNumber psn = { 0, kCurrentProcess };
+    OSStatus returnCode = noErr;
+    BOOL prefsVisible = [[prefsController window] isVisible];
+    
+    if (backgroundMode) {
+        [self showStatusItem];
+        returnCode = TransformProcessType(&psn, kProcessTransformToUIElementApplication);
+        if (prefsVisible) {
+            [self performSelector:@selector(showPreferences:) withObject:self afterDelay:0.25f];
+        }
+    } else {
+        [self hideStatusItem];
+        returnCode = TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+        [NSApp activateIgnoringOtherApps:YES];
+    }
+    if (returnCode != noErr) {
+        DLog(@"Failed to change application mode. Error %d", (int)returnCode);
+    }
+}
 
 #pragma mark - Key/value observation
 
 - (void)startObservingDefaults {
+    // Watch for changes to these defaults
     NSArray *obsDef = @[@"StatusItemMode", @"GlobalShortcut", @"RememberRecentSearches"];
     for (NSString *def in obsDef) {
         [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
@@ -181,39 +205,16 @@
     }
 }
 
-#pragma mark - App Mode
-
-- (void)setAppMode:(BOOL)backgroundMode {
-    ProcessSerialNumber psn = { 0, kCurrentProcess };
-    OSStatus returnCode = noErr;
-    BOOL prefsVisible = [[prefsController window] isVisible];
-    
-    if (backgroundMode) {
-        [self showStatusItem];
-        returnCode = TransformProcessType(&psn, kProcessTransformToUIElementApplication);
-        if (prefsVisible) {
-            [self performSelector:@selector(showPreferences:) withObject:self afterDelay:0.25f];
-        }        
-    } else {
-        [self hideStatusItem];
-        returnCode = TransformProcessType(&psn, kProcessTransformToForegroundApplication);
-        [NSApp activateIgnoringOtherApps:YES];
-    }
-    if (returnCode != noErr) {
-        DLog(@"Failed to change application mode. Error %d", (int)returnCode);
-    }
-}
-
 #pragma mark - Services
 
 - (void)searchByName:(NSPasteboard *)pb userData:(NSString *)userData error:(NSString **)err {
-    DLog(@"Received search by name request");
+    DLog(@"Received search by name service request");
     [self newWindow:self];
     // TODO: Accept text string
 }
 
 - (void)searchFolder:(NSPasteboard *)pb userData:(NSString *)userData error:(NSString **)err {
-    DLog(@"Received search in folder request");
+    DLog(@"Received search in folder service request");
     if (![[pb types] containsObject:NSFilenamesPboardType]) {
         return;
     }
@@ -234,14 +235,16 @@
 }
 
 - (OSErr)authenticate {
+    // Create and store an authorization reference
     OSStatus err = noErr;
     const char *toolPath = [[[NSBundle mainBundle] pathForResource:@"searchfs" ofType:nil] fileSystemRepresentation];
     
+    // TODO: Tool path is variable, how does that work?
     AuthorizationItem myItems = { kAuthorizationRightExecute, strlen(toolPath), &toolPath, 0 };
     AuthorizationRights myRights = { 1, &myItems };
     AuthorizationFlags flags = kAuthorizationFlagDefaults | kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
     
-    // Create authorization reference
+    // Create auth ref
     err = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
     if (err != errAuthorizationSuccess) {
         authorizationRef = NULL;
@@ -270,22 +273,21 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTHCHANGE_NOTIFICATION object:self];
 }
 
-- (AuthorizationRef)authorization {
-    return authorizationRef;
-}
-
 - (void)authenticationStatusChanged {
     BOOL locked = ![self isAuthenticated];
 
     NSString *title = locked ? @"Authenticate" : @"Deauthenticate";
     SEL action = locked ? @selector(authenticate) : @selector(deauthenticate);
     NSImage *img = [NSImage imageNamed:(locked ? @"NSLockLockedTemplate" : @"NSLockUnlockedTemplate")];
-//    [img setSize:NSMakeSize(9, 12)];
     
     [authenticateMenuItem setTitle:title];
     [authenticateMenuItem setAction:action];
     [authenticateMenuItem setTarget:self];
     [authenticateMenuItem setImage:img];
+}
+
+- (AuthorizationRef)authorization {
+    return authorizationRef;
 }
 
 #pragma mark - Window controllers
@@ -297,14 +299,17 @@
 - (void)newWindowWithQuery:(SearchQuery *)query {
     [self animateStatusItem];
     [NSApp activateIgnoringOtherApps:YES];
+    
     SearchController *controller = [SearchController newControllerWithSearchQuery:query];
-    [windowControllers addObject:controller];
     [controller showWindow:self];
+    [searchWindowControllers addObject:controller];
+    
     [DEFAULTS setBool:YES forKey:@"PreviouslyLaunched"];
 }
 
 - (void)windowDidClose:(id)sender {
-    [windowControllers removeObject:sender];
+    // Called by SearchController when search window is closed
+    [searchWindowControllers removeObject:sender];
 }
 
 - (IBAction)showIntroWindow:(id)sender {
@@ -326,19 +331,35 @@
 #pragma mark - Recent Searches
 
 - (IBAction)openRecentSearch:(id)sender {
-    SearchQuery *sq = [sender representedObject];
-    if (sq) {
-        SearchController *c = [SearchController newControllerWithSearchQuery:sq];
-        [windowControllers addObject:c];
-        [c showWindow:self];
-    }
-    else {
-        DLog(@"No search query associated with item.");
+    id query = [sender representedObject];
+    if ([query isKindOfClass:[SearchQuery class]]) {
+        [self newWindowWithQuery:query];
+    } else {
+        DLog(@"No search query associated with sender.");
     }
 }
 
 - (IBAction)clearRecentSearches:(id)sender {
     [DEFAULTS setObject:@[] forKey:@"RecentSearches"];
+}
+
+- (void)constructOpenRecentMenu:(NSMenu *)menu {
+    // Construct menu with list of recent searches
+    [menu removeAllItems];
+    if ([DEFAULTS boolForKey:@"RememberRecentSearches"]) {
+        NSArray *recent = [DEFAULTS objectForKey:@"RecentSearches"];
+        for (NSDictionary *d in recent) {
+            SearchQuery *sq = [SearchQuery searchQueryFromDictionary:d];
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@""
+                                                          action:@selector(openRecentSearch:)
+                                                   keyEquivalent:@""];
+            [item setRepresentedObject:sq];
+            [item setAttributedTitle:[sq menuItemString]];
+            [menu addItem:item];
+        }
+    }
+    [menu addItem:[NSMenuItem separatorItem]];
+    [menu addItemWithTitle:@"Clear Menu" action:@selector(clearRecentSearches:) keyEquivalent: @""];
 }
 
 #pragma mark - Status Item
@@ -349,14 +370,6 @@
     NSImage *icon = [NSImage imageNamed:@"StatusItemIcon"];
     [icon setSize:NSMakeSize(16, 14)];
     [statusItem.button setImage:icon];
-    
-    // Behaviour can only be set on 10.12+
-//    NSOperatingSystemVersion sysver = [[NSProcessInfo processInfo] operatingSystemVersion];
-//    if (sysver.majorVersion > 10 || sysver.minorVersion >= 12) {
-//        if (@available(macOS 10.12, *)) {
-//            [statusItem setBehavior:NSStatusItemBehaviorRemovalAllowed|NSStatusItemBehaviorTerminationOnRemoval];
-//        }
-//    }
     
     // Duplicate main menu, insert it as submenu in the status item menu
     NSMenu *menuBar = [mainMenu copy];
@@ -395,31 +408,13 @@
 #pragma mark - NSMenuDelegate
 
 - (void)menuWillOpen:(NSMenu *)menu {
-    if (menu == statusMenu) {
-    }
-    // Construct open recent menu
-    else if (menu == openRecentMenu) {
-        [menu removeAllItems];
-        if ([DEFAULTS boolForKey:@"RememberRecentSearches"]) {
-            // Construct menu with list of recent searches
-            NSArray *recent = [DEFAULTS objectForKey:@"RecentSearches"];
-            for (NSDictionary *d in recent) {
-                SearchQuery *sq = [SearchQuery searchQueryFromDictionary:d];
-                NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@""
-                                                              action:@selector(openRecentSearch:)
-                                                       keyEquivalent:@""];
-                [item setRepresentedObject:sq];
-                [item setAttributedTitle:[sq menuItemString]];
-//                NSImage *img = [NSImage imageNamed:@"NSGenericDocument"];
-//                [img setSize:NSMakeSize(16,16)];
-//                [item setImage:img];
-                [menu addItem:item];
-            }
-        }
-        [menu addItem:[NSMenuItem separatorItem]];
-        [menu addItemWithTitle:@"Clear Menu" action:@selector(clearRecentSearches:) keyEquivalent: @""];
+    // Dynamically construct open recent menu
+    if (menu == openRecentMenu || menu == statusItemOpenRecentMenu) {
+        [self constructOpenRecentMenu:menu];
     }
 }
+
+#pragma mark - Menu actions
 
 // Open Documentation.html file within app bundle
 - (IBAction)showHelp:(id)sender {

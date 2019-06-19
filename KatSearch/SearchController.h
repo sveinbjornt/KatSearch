@@ -34,14 +34,13 @@
 
 @class SearchQuery;
 
-@interface SearchController : NSWindowController <  NSTableViewDelegate,
-                                                    NSTableViewDataSource,
-                                                    NSMenuItemValidation,
-                                                    NSMenuDelegate,
-                                                    SearchTaskDelegate,
-                                                    PasteboardDelegate>
+@interface SearchController : NSWindowController <NSTableViewDelegate,
+                                                  NSTableViewDataSource,
+                                                  NSMenuItemValidation,
+                                                  NSMenuDelegate,
+                                                  SearchTaskDelegate,
+                                                  PasteboardDelegate>
 + (instancetype)newController;
 + (instancetype)newControllerWithSearchQuery:(SearchQuery *)sq;
-- (instancetype)initWithSearchQuery:(SearchQuery *)query;
 
 @end

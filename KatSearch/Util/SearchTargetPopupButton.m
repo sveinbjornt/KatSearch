@@ -28,7 +28,7 @@
     POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "STVolumesPopupButton.h"
+#import "SearchTargetPopupButton.h"
 
 #include <sys/attr.h>
 #include <sys/param.h>
@@ -37,7 +37,7 @@
 #include <sys/fsgetpath.h>
 #include <sys/mount.h>
 
-@implementation STVolumesPopupButton
+@implementation SearchTargetPopupButton
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];

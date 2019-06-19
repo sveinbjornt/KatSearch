@@ -598,7 +598,7 @@ DQ
                             <outlet property="searchMenuTemplate" destination="fcC-ke-Mkp" id="lQ7-YW-vlk"/>
                         </connections>
                     </searchField>
-                    <popUpButton verticalHuggingPriority="750" id="D96-yX-Ge6" customClass="STVolumesPopupButton">
+                    <popUpButton verticalHuggingPriority="750" id="D96-yX-Ge6" customClass="SearchTargetPopupButton">
                         <rect key="frame" x="489" y="535" width="141" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="1Bx-SX-NEm">

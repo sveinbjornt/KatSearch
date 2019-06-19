@@ -32,8 +32,8 @@
 
 @implementation LSUIElementApp
 
-// Override to make sure app is brought to the front
-// when About window is shown
+// Override to make sure app is brought to
+// the front when the About window is shown
 - (void)orderFrontStandardAboutPanel:(id)sender {
     [super orderFrontStandardAboutPanel:sender];
     [self activateIgnoringOtherApps:YES];
@@ -44,7 +44,8 @@
     [NSApp hide:self];
 }
 
-// Intercept Cmd-H keyboard shortcut to hide app
+// Intercept Cmd-H keyboard shortcut to hide app.
+// Cmd-H doesn't work in apps without a main menu bar
 - (void)sendEvent:(NSEvent *)event {
     if ([event type] == NSKeyDown) {
         if (([event modifierFlags] & NSDeviceIndependentModifierFlagsMask) == NSCommandKeyMask) {

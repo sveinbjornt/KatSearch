@@ -29,12 +29,12 @@
 */
 
 #import "SearchPreferencesController.h"
-#import "STVolumesPopupButton.h"
+#import "SearchTargetPopupButton.h"
 #import "Common.h"
 
 @interface SearchPreferencesController ()
 {
-    IBOutlet STVolumesPopupButton *volumesPopupButton;
+    IBOutlet SearchTargetPopupButton *volumesPopupButton;
 }
 @end
 

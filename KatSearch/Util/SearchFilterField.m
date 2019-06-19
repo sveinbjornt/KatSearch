@@ -32,9 +32,13 @@
 
 @implementation SearchFilterField
 
+// Override NSResponder's cancelOperation to do our own thing
 - (void)cancelOperation:(id)sender {
+    [super cancelOperation:sender];
     [self setStringValue:@""];
     [self setHidden:YES];
+    // NSSearchFields don't have delegates in OS versions prior to 10.11.
+    // Check if object responds to delegate selector. If it does, we're on 10.11+.
     if (![self respondsToSelector:@selector(delegate)]) {
         return;
     }

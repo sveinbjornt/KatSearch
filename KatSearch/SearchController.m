@@ -34,7 +34,7 @@
 #import "SearchQuery.h"
 #import "NSTableView+PreserveSelection.h"
 #import "NSWorkspace+Additions.h"
-#import "STVolumesPopupButton.h"
+#import "SearchTargetPopupButton.h"
 #import "STPathControl.h"
 #import "SearchFilterField.h"
 #import "Alerts.h"
@@ -46,7 +46,7 @@
     IBOutlet NSPopUpButton *itemTypePopupButton;
     IBOutlet NSPopUpButton *matchCriterionPopupButton;
     IBOutlet NSTextField *searchField;
-    IBOutlet STVolumesPopupButton *volumesPopupButton;
+    IBOutlet SearchTargetPopupButton *volumesPopupButton;
     IBOutlet NSButton *searchOptionsButton;
     IBOutlet NSButton *authenticateButton;
     
@@ -97,7 +97,7 @@
 }
 
 - (void)dealloc {
-    DLog(@"Deallocing window controller %@", [self description]);
+    //DLog(@"Deallocing window controller %@", [self description]);
 }
 
 #pragma mark - NSWindowDelegate
@@ -105,24 +105,24 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
-    [self.window registerForDraggedTypes:@[NSFilenamesPboardType]];
-//    [[self.window contentView] setWantsLayer:YES];
-//    [scrollView setWantsLayer:YES];
-//    [tableView setCanDrawSubviewsIntoLayer:YES];
-//    [tableView setValue:@(0) forKey:@"_animationDuration"];
-    
-    // Put application icon in window title bar
-    [self.window setRepresentedURL:[NSURL URLWithString:@""]];
-    [[self.window standardWindowButton:NSWindowDocumentIconButton] setImage:[NSApp applicationIconImage]];
+    // Configure window properties
+    [[self window] setRepresentedURL:[NSURL URLWithString:@""]];
+    [[[self window] standardWindowButton:NSWindowDocumentIconButton] setImage:[NSApp applicationIconImage]];
+    [[self window] setInitialFirstResponder:searchField];
+    [[self window] makeFirstResponder:searchField];
+    [[self window] setMovableByWindowBackground:YES];
+    [[self window] registerForDraggedTypes:@[NSFilenamesPboardType]];
     
     // Configure table view
     [tableView setRowHeight:18.0f];
     [tableView setDoubleAction:@selector(rowDoubleClicked:)];
     [tableView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
     
-    [pathBar setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
-
-    // Hide columns not enabled in Defaults
+    // Set up initial sort descriptor
+    NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    [tableView setSortDescriptors:@[sortDescriptor]];
+    
+    // Hide columns not enabled in defaults
     for (NSTableColumn *col in [tableView tableColumns]) {
         NSString *identifier = [col identifier];
         if ([COLUMNS containsObject:identifier]) {
@@ -130,45 +130,44 @@
             [col setHidden:![DEFAULTS boolForKey:defKey]];
         }
     }
+    
+    [pathBar setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
+    
+    // Tweak window layout & columns if this is the first search window ever opened..
     if ([DEFAULTS boolForKey:@"PreviouslyLaunched"] == NO) {
         [[tableView tableColumnWithIdentifier:@"Name"] setWidth:200.f];
-        [self.window center];
+        [[self window] center];
     }
-    
     
     // Register to receive authorization change notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticationStatusChanged) name:AUTHCHANGE_NOTIFICATION object:nil];
     
-    // Load system lock image as icon for button
-    NSImage *lockIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kLockedIcon)];
-    [lockIcon setSize:NSMakeSize(16, 16)];
-    [authenticateButton setImage:lockIcon];
-    
+    // Key-value observation of defaults
     [self setObserveDefaults:YES];
     
-    [self.window setInitialFirstResponder:searchField];
-    [self.window makeFirstResponder:searchField];
-    [self.window setMovableByWindowBackground:YES];
-    
-    NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    [tableView setSortDescriptors:@[sortDescriptor]];
-    
+    // Call these to set initial state of controls
     [self authenticationStatusChanged];
     [self adjustBottomControls];
     
+    // Load initial query
     SearchQuery *sq = startingQuery ? startingQuery : [SearchQuery defaultQuery];
     [self loadQuery:sq];
     if (startingQuery) {
+        // If we're handed a starting query, set it off.
         [self search:self];
     }
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
+    // Terminate any ongoing task
     [task stop];
     task = nil;
-    [self.window unregisterDraggedTypes];
+    
+    // Remove ourselves as an observer
     [self setObserveDefaults:NO];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    // Let app delegate know we're done
     [(AppDelegate *)[NSApp delegate] windowDidClose:self];
 }
 
@@ -219,6 +218,8 @@
 #pragma mark - Save to file
 
 - (IBAction)saveDocument:(id)sender {
+    // Invoked by the Save menu item.
+    // Dumps the list of file paths to a saved file
     NSSavePanel *sPanel = [NSSavePanel savePanel];
     [sPanel setPrompt:@"Save"];
     [sPanel setNameFieldStringValue:[NSString stringWithFormat:@"SearchResults-%@.txt", [searchField stringValue]]];
@@ -260,6 +261,7 @@
     else if ([def hasSuffix:@"ShowFullPath"]) {
         [tableView reloadData];
     }
+    // Columns toggled on/off
     else if ([def hasPrefix:COL_DEFAULT_PREFIX]) {
         DLog(@"Default %@ changed", keyPath);
 
@@ -271,6 +273,8 @@
 }
 
 - (void)setObserveDefaults:(BOOL)observeDefaults {
+    // Turn defaults observation on/off
+    
     NSMutableArray *defaults = [@[@"ShowPathBar", @"ShowFilter", @"ShowFullPath"] mutableCopy];
     for (NSString *colString in COLUMNS) {
         [defaults addObject:[NSString stringWithFormat:@"%@%@", COL_DEFAULT_PREFIX, colString]];
@@ -291,16 +295,18 @@
 #pragma mark - Search
 
 - (IBAction)search:(id)sender {
+    // Run a new search
     if ([task isRunning]) {
         DLog(@"Stopping task");
         [task stop];
-        [self.window makeFirstResponder:searchField];
+        [[self window] makeFirstResponder:searchField];
         return;
     }
     
+    // Save as recent query
     [self saveQuery:[self queryFromControls]];
     
-    [self.window setTitle:[NSString stringWithFormat:@"“%@” on %@ - KatSearch", [searchField stringValue], [volumesPopupButton titleOfSelectedItem]]];
+    [[self window] setTitle:[NSString stringWithFormat:@"“%@” on %@ - KatSearch", [searchField stringValue], [volumesPopupButton titleOfSelectedItem]]];
     
     DLog(@"Starting task");
     
@@ -309,8 +315,6 @@
     // Path bar
     [self hidePathBar];
     [pathBar setURL:nil];
-    
-//    [[[tableView tableColumnWithIdentifier:@"Name"] headerCell] setStringValue:@"Name"];
     
     // Configure progress indicator, move to centre of table view and set it off
     [tableView addSubview:progressIndicator];
@@ -335,7 +339,8 @@
     [tableView reloadData];
     
     // Configure task
-    task = [[SearchTask alloc] initWithSearchString:[searchField stringValue] delegate:self];
+    task = [[SearchTask alloc] initWithSearchString:[searchField stringValue]];
+    task.delegate = self;
     task.volume = [[volumesPopupButton selectedItem] toolTip];
     
     if ([itemTypePopupButton selectedTag] == 1) {
@@ -431,7 +436,6 @@
     [self updateStatusMessage];
     
     [self updateFiltering];
-//    [[[tableView tableColumnWithIdentifier:@"Name"] headerCell] setStringValue:[NSString stringWithFormat:@"Items (%lu)", [results count]]];
     
 //    DLog(@"Task results (%d)", (int)[items count]);
 }
@@ -451,7 +455,7 @@
     [self adjustBottomControls];
     [self updateStatusMessage];
     
-    [self.window makeFirstResponder:searchField];
+    [[self window] makeFirstResponder:searchField];
     
     DLog(@"Task finished");
 }
@@ -491,7 +495,7 @@
     } else {
         [APP_DELEGATE deauthenticate];
     }
-    [self.window makeKeyAndOrderFront:sender];
+    [[self window] makeKeyAndOrderFront:sender];
 }
 
 - (void)authenticationStatusChanged {
@@ -564,10 +568,11 @@
         }
         
         filteredResults = matchingItems;
+        
+        [self tableViewSelectionDidChange:[NSNotification notificationWithName:NSTableViewSelectionDidChangeNotification object:nil]];
+        [tableView reloadData];
     }
     
-    [tableView reloadData];
-    [self tableViewSelectionDidChange:[NSNotification notificationWithName:NSTableViewSelectionDidChangeNotification object:nil]];
     [self updateStatusMessage];
 }
 
@@ -601,11 +606,11 @@
 - (IBAction)showFilter:(id)sender {
     [filterTextField setHidden:NO];
     [self adjustBottomControls];
-    [self.window makeFirstResponder:filterTextField];
+    [[self window] makeFirstResponder:filterTextField];
 }
 
 - (IBAction)hideFilter:(id)sender {
-    [self.window makeFirstResponder:searchField];
+    [[self window] makeFirstResponder:searchField];
     [filterTextField setHidden:YES];
     [filterTextField setStringValue:@""];
     [self filterTextChanged:YES];

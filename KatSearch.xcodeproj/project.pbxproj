@@ -43,7 +43,7 @@
 		F498ADF222666D5000CB6A6E /* MASShortcut.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F498ADED22666CDB00CB6A6E /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F498ADF62267988000CB6A6E /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = F498ADF42267988000CB6A6E /* STPrivilegedTask.m */; };
 		F4A5CF0120ED7E15008D0A06 /* searchfs in Resources */ = {isa = PBXBuildFile; fileRef = F4A5CF0020ED7E15008D0A06 /* searchfs */; };
-		F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */; };
+		F4A7BA7F20EBA74C00083B48 /* SearchTargetPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA7E20EBA74C00083B48 /* SearchTargetPopupButton.m */; };
 		F4A7BA8520EC208F00083B48 /* NSTableView+PreserveSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */; };
 		F4CB199D2291064000265CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F462A26020E111D10062B230 /* Assets.xcassets */; };
 		F4CB19A022919A9200265CE8 /* SearchQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB199F22919A9200265CE8 /* SearchQuery.m */; };
@@ -145,8 +145,8 @@
 		F498ADF42267988000CB6A6E /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPrivilegedTask.m; sourceTree = "<group>"; };
 		F498ADF52267988000CB6A6E /* STPrivilegedTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
 		F4A5CF0020ED7E15008D0A06 /* searchfs */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = searchfs; sourceTree = "<group>"; };
-		F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STVolumesPopupButton.h; sourceTree = "<group>"; };
-		F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STVolumesPopupButton.m; sourceTree = "<group>"; };
+		F4A7BA7D20EBA74C00083B48 /* SearchTargetPopupButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchTargetPopupButton.h; sourceTree = "<group>"; };
+		F4A7BA7E20EBA74C00083B48 /* SearchTargetPopupButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchTargetPopupButton.m; sourceTree = "<group>"; };
 		F4A7BA8320EC208F00083B48 /* NSTableView+PreserveSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+PreserveSelection.h"; sourceTree = "<group>"; };
 		F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+PreserveSelection.m"; sourceTree = "<group>"; };
 		F4CB199E22919A9200265CE8 /* SearchQuery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchQuery.h; sourceTree = "<group>"; };
@@ -297,8 +297,8 @@
 				F48451E720F8E4CB005797C1 /* PasteboardTableView.m */,
 				F498ADF52267988000CB6A6E /* STPrivilegedTask.h */,
 				F498ADF42267988000CB6A6E /* STPrivilegedTask.m */,
-				F4A7BA7D20EBA74C00083B48 /* STVolumesPopupButton.h */,
-				F4A7BA7E20EBA74C00083B48 /* STVolumesPopupButton.m */,
+				F4A7BA7D20EBA74C00083B48 /* SearchTargetPopupButton.h */,
+				F4A7BA7E20EBA74C00083B48 /* SearchTargetPopupButton.m */,
 				F4A7BA8320EC208F00083B48 /* NSTableView+PreserveSelection.h */,
 				F4A7BA8420EC208F00083B48 /* NSTableView+PreserveSelection.m */,
 				F471DF5D20F4D7060057E667 /* NSWorkspace+Additions.h */,
@@ -484,7 +484,7 @@
 				F45CA6FB229980EE00D4D6D0 /* Alerts.m in Sources */,
 				F481835122726366002738AE /* SDOpenAtLogin.m in Sources */,
 				F4CB19AD2291A84400265CE8 /* GeneralPreferencesController.m in Sources */,
-				F4A7BA7F20EBA74C00083B48 /* STVolumesPopupButton.m in Sources */,
+				F4A7BA7F20EBA74C00083B48 /* SearchTargetPopupButton.m in Sources */,
 				F462A27A20E134EA0062B230 /* SearchItem.m in Sources */,
 				F4E160FF22AD3DE80019EDE7 /* SearchFilterField.m in Sources */,
 				F497BB2822A17ED800F66BD4 /* LSUIElementWindow.m in Sources */,

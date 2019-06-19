@@ -35,7 +35,6 @@ FOR 1.0
 * Open recent for status item menu
 * Status Item app mode selection image should have a counterpart for non-dark mode
 * Run comparison on searchfs results and those picked up by KatSearch parsing subprocess output
-* Implement Search Filter menu options functionality
 * Text in table view should invert when selected in non-dark-mode
 * Clear recent folders option
 * Should selecting folder to search automatically start search matching *all* files in directory structure?

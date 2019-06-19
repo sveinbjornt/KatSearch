@@ -42,10 +42,9 @@
     AuthorizationRef authorizationRef;
 }
 
-- (instancetype)initWithSearchQuery:(SearchQuery *)query delegate:(id<SearchTaskDelegate>)delegate {
+- (instancetype)initWithSearchQuery:(SearchQuery *)query {
     self = [super init];
     if (self) {
-        self.delegate = delegate;
         authorizationRef = NULL;
         _searchString = query[@"searchstring"];
         // TODO: Configure the search task according to query properties
@@ -53,10 +52,10 @@
     return self;
 }
 
-- (instancetype)initWithSearchString:(NSString *)searchStr delegate:(id<SearchTaskDelegate>)delegate {
+- (instancetype)initWithSearchString:(NSString *)searchStr {
     SearchQuery *query = [SearchQuery defaultQuery];
     query[@"searchstring"] = searchStr;
-    return [self initWithSearchQuery:query delegate:delegate];
+    return [self initWithSearchQuery:query];
 }
 
 #pragma mark -

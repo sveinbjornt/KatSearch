@@ -67,7 +67,10 @@
 
 // Logging
 #ifdef DEBUG
-    #define DLog(...) NSLog(__VA_ARGS__)
+#define DLog(s, ...) NSLog(@"<%@:%d> %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], \
+__LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
+
+
 #else
     #define DLog(...)
 #endif

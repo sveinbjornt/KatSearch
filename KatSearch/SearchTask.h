@@ -58,8 +58,8 @@
 @property (readonly) BOOL wasKilled;
 @property (readonly) BOOL isAuthenticated;
 
-- (instancetype)initWithSearchQuery:(SearchQuery *)query delegate:(id<SearchTaskDelegate>)delegate;
-- (instancetype)initWithSearchString:(NSString *)searchStr delegate:(id<SearchTaskDelegate>)delegate;
+- (instancetype)initWithSearchQuery:(SearchQuery *)query;
+- (instancetype)initWithSearchString:(NSString *)searchStr;
 
 - (void)start;
 - (void)stop;
