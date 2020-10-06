@@ -45,6 +45,7 @@ FOR 1.0
 * Smarter Show Package Contents (reveal first file within bundle)
 * Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
 * Fix searchfs output parsing issue
+* Endswith doesn't seem to work properly
 
 For next release:
 DONE * "Show Package Contents" option for packages

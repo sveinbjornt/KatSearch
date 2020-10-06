@@ -2,7 +2,7 @@
 
 <img src="icon.png" width="192" height="192" align="right" style="float: right; margin-left: 30px; margin-bottom:20px;">
 
-**KatSearch is a work in progress**
+**KatSearch is a work in progress and currently only available as an alpha release. Some things will be broken. _Caveat emptor!_**
 
 Mac power-user app to quickly find files on entire APFS and HFS+ volumes by scanning the file system catalog.
 
