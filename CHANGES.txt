@@ -46,6 +46,8 @@ FOR 1.0
 * Disable Finder actions for hidden files (and suggest showing hidden Files in Finder)
 * Fix searchfs output parsing issue
 * Endswith doesn't seem to work properly
+* Mime type sorting is broken
+* "Show Package Contents" contextual menu item for bundles/apps
 
 For next release:
 DONE * "Show Package Contents" option for packages
